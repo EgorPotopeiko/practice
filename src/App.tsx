@@ -1,9 +1,10 @@
 import React from 'react';
+import Catalog from './components/Catalog/Catalog';
 
 function App() {
   return (
     <div className="App">
-      Work!
+      <Catalog />
     </div>
   );
 }
