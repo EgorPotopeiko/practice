@@ -18,7 +18,7 @@
         padding: 10px 50px;
     }
     &-typography {
-      color: @title-color;
+      color: @header-text-color;
       margin-top: 0;
     }
     &-input {
@@ -28,7 +28,14 @@
     }
     &-btn {
       background-color: inherit;
-      color: @title-color
+      color: @header-text-color;
+      border: none;
+      span {
+        text-decoration: underline;
+      }
+      &:hover {
+        color: @header-color;
+      }
     }
     &-select {
       width: 180px;
@@ -37,11 +44,14 @@
     &-slider {
       max-width: 300px;
       min-width: 150px;
+      &-track {
+        background-color: #1890ff;
+      }
       span {
-        color: @title-color;
+        color: @header-text-color;
       }
     }
-    &-switch-checked {
+    &-switch {
       margin-right: 40px;
     }
   }
