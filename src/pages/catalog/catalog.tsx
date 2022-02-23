@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/header/no-auth/Header';
+import Header from '../../components/header/Header';
 import Menu from '../../components/menu/catalog/Menu';
 
 const Catalog: React.FC = () => {

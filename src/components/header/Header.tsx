@@ -1,6 +1,7 @@
 import { Button, Checkbox, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import React from 'react';
 import './Header.less';
+import { isAuth } from '../../models/model';
 
 const { Title, Text } = Typography;
 
@@ -15,7 +16,7 @@ const Header: React.FC = () => {
                     <Title>Shop</Title>
                     <div className='header__user'>
                         <Input placeholder="input search text" />
-                        <Button>Войти</Button>
+                        <Button>{isAuth ? "Выйти" : "Войти"}</Button>
                     </div>
                 </div>
                 <div className='header__filters'>
