@@ -1,31 +1,52 @@
 @import '../../../vars.less';
 
 .header {
-    .ant {
-      &-page-header-ghost {
-        background-color: @header-color;
-         padding: 10px 50px;
-      }
-      &-typography {
-        color: @title-color;
-        margin-top: 0;
-      }
-      &-input {
-        width: 400px;
-        border-radius: 15px;
-        margin-right: 5px;
-      }
-      &-page-header-content {
-        display: flex;
-        justify-content: space-between;
-      }
-      &-btn {
-        border-radius: 5px;
-      }
-    }
-    &__user {
-      display: flex;
-      max-height: 32px;
-      margin-top: 12px;
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__filters {
+    display: flex;
+    align-items: center;
+    span {
+      margin-right: 10px;
     }
   }
+  .ant {
+    &-page-header-ghost {
+      background-color: @header-color;
+        padding: 10px 50px;
+    }
+    &-typography {
+      color: @title-color;
+      margin-top: 0;
+    }
+    &-input {
+      width: 400px;
+      border-radius: 15px;
+      margin-right: 20px;
+    }
+    &-btn {
+      border-radius: 5px;
+    }
+    &-select {
+      width: 180px;
+      margin-right: 40px;
+    }
+    &-slider {
+      max-width: 300px;
+      min-width: 150px;
+      span {
+        color: @title-color;
+      }
+    }
+    &-switch-checked {
+      margin-right: 40px;
+    }
+  }
+  &__user {
+    display: flex;
+    max-height: 32px;
+    margin-top: 12px;
+  }
+}
