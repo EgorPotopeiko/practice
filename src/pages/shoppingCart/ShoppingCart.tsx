@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ShoppingCart() {
+const ShoppingCart: React.FC = () => {
     return (
         <div className="shoppingCart">
             ShoppingCart

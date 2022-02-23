@@ -1,5 +1,6 @@
 import React from 'react';
-import Catalog from './components/Catalog/Catalog';
+import Catalog from './pages/catalog/catalog';
+import './App.less'
 
 function App() {
   return (
