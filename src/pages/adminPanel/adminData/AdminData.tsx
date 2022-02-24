@@ -27,6 +27,30 @@ const dataSource = [
         status: 'В наличии',
         amount: 20,
     },
+    {
+        key: '4',
+        name: 'Хвост',
+        article: 8800,
+        category: 'Хвост',
+        status: 'В наличии',
+        amount: 7,
+    },
+    {
+        key: '5',
+        name: 'Аквариум',
+        article: 121121112121,
+        category: 'Рыбы',
+        status: 'Нет на складе',
+        amount: 0,
+    },
+    {
+        key: '6',
+        name: 'Муравьиная ферма',
+        article: 700,
+        category: 'Насекомые',
+        status: 'В наличии',
+        amount: 2,
+    },
 ];
 
 const columns = [

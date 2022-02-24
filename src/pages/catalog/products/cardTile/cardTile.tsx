@@ -1,15 +1,15 @@
 import React from 'react';
 import { Card } from 'antd';
-import './card.less';
+import './cardTile.less';
 
 interface Props {
     name: string,
     price: number
 }
 
-const CardProduct: React.FC<Props> = ({ name, price }) => {
+const CardTile: React.FC<Props> = ({ name, price }) => {
     return (
-        <div className='cardProduct'>
+        <div className='cardTile'>
             <Card size="small" title={name}>
                 <p>{price}$</p>
             </Card>
@@ -17,4 +17,4 @@ const CardProduct: React.FC<Props> = ({ name, price }) => {
     );
 }
 
-export default CardProduct;
+export default CardTile;
