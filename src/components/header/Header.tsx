@@ -1,12 +1,14 @@
-import { Button, Checkbox, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
+import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import React from 'react';
 import './Header.less';
 import { isAuth } from '../../models/model';
+import { role } from '../../models/model';
 
 const { Title, Text } = Typography;
 
 const { Option } = Select;
 
+const selectValues = ["РОГА И КОПЫТА", "ZOOPARADISE", "PURINA"]
 
 const Header: React.FC = () => {
     return (
@@ -19,23 +21,28 @@ const Header: React.FC = () => {
                         <Button>{isAuth ? "Выйти" : "Войти"}</Button>
                     </div>
                 </div>
-                <div className='header__filters'>
-                    <>
-                        <Select placeholder="Производитель">
-                            <Option value="Horns and hooves"><Checkbox>Рога и копыта</Checkbox></Option>
-                            <Option value="ZooParadise"><Checkbox>ZooParadise</Checkbox></Option>
-                            <Option value="Purina"><Checkbox>Purina</Checkbox></Option>
-                        </Select>
-                    </>
-                    <>
-                        <Text>В наличии</Text>
-                        <Switch defaultChecked />
-                    </>
-                    <>
-                        <Text>Цена</Text>
-                        <Slider range max={20} defaultValue={[0, 20]} />
-                    </>
-                </div>
+                {role === "USER"
+                    ?
+                    <div className='header__filters'>
+                        <>
+                            <Select placeholder="Производитель" mode="multiple">
+                                {selectValues.map((item) => (
+                                    <Option key={item} value={item}>{item}</Option>
+                                ))}
+                            </Select>
+                        </>
+                        <>
+                            <Text>В наличии</Text>
+                            <Switch defaultChecked />
+                        </>
+                        <>
+                            <Text>Цена</Text>
+                            <Slider range max={20} defaultValue={[0, 20]} />
+                        </>
+                    </div>
+                    :
+                    <></>
+                }
             </PageHeader>
         </div>
     );

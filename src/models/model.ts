@@ -1,3 +1,5 @@
-let isAuth = true;
+let isAuth = false;
 
-export { isAuth }
+let role = "USER";
+
+export { isAuth, role }

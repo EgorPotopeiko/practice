@@ -4,17 +4,15 @@ import './Menu.less';
 
 const { TabPane } = Tabs;
 
-const adminTabs = ["ТОВАРЫ", "КАТЕГОРИИ", "ЗАКАЗЫ"];
+const userTabs = ["ВСЕ КАТЕГОРИИ", "КОШКИ", "СОБАКИ", "РЫБКИ", "ГРЫЗУНЫ", "ЗМЕИ", "НАСЕКОМЫЕ", "ДРУГОЕ"];
 
 const Menu: React.FC = () => {
     return (
         <div className="menu__catalog">
             <Tabs defaultActiveKey="1" type="card">
-                {adminTabs.map((item) => {
-                    return (
-                        <TabPane tab={item} key={item} />
-                    )
-                })}
+                {userTabs.map((item) => (
+                    <TabPane tab={item} key={item} />
+                ))}
             </Tabs>
         </div>
     );

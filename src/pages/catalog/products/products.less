@@ -1,0 +1,32 @@
+.products {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 5px 0px 1px 20px;
+    &__menu {
+        display: flex;
+        justify-content: space-between;
+        &-icons {
+            margin-top: 6px;
+            margin-right: 10px;
+            .anticon {
+                font-size: 25px;
+                &-unordered-list {
+                    margin-right: 10px;
+                    cursor: pointer;
+                }
+                &-appstore {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    &__list {
+        list-style-type: none;
+        padding-left: 0px;
+    }
+    .ant-select {
+        margin-bottom: 10px;
+        width: 200px;
+    }
+}
