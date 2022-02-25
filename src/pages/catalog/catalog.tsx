@@ -3,16 +3,12 @@ import Header from '../../components/header/Header';
 import Menu from '../../components/menu/user/Menu';
 import Products from './products/products';
 
-interface Props {
-    data: Array<Object>
-}
-
-const Catalog: React.FC<Props> = ({ data }) => {
+const Catalog: React.FC = () => {
     return (
         <div className="catalog">
             <Header />
             <Menu />
-            <Products data={data} />
+            <Products />
         </div>
     );
 }

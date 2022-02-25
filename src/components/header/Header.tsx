@@ -1,11 +1,15 @@
 import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import './Header.less';
-import { isAuth } from '../../models/model';
-import { role } from '../../models/model';
 import { useState } from 'react';
+import { login, logout } from '../../store/auth/authorization';
+import { userRole, adminRole, guestRole } from '../../store/roles/roles';
 import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { manufactureFilter, searchFilter } from '../../store/filters/filters';
+import history from '../../history';
+import { PUBLIC_PATH } from '../../routing/names';
 
 const { Title, Text } = Typography;
 
@@ -14,8 +18,12 @@ const { Option } = Select;
 const selectValues = ["РОГА И КОПЫТА", "ZOOPARADISE", "PURINA"];
 
 const Header: React.FC = () => {
-    const [auth, setAuth] = useState(isAuth);
-    const [roleUser, setRoleUser] = useState(role);
+    const { ADMIN } = PUBLIC_PATH;
+    const dispatch = useDispatch();
+    const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
+    const role = useSelector((state: RootStateOrAny) => state.roleReducer.role);
+    // const manufacture = useSelector((state: RootStateOrAny) => state.filterReducer.filterManufacture)
+    const filterSearch = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const [loading, setLoading] = useState(false);
     const [loadingAdmin, setLoadingAdmin] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -24,7 +32,8 @@ const Header: React.FC = () => {
         setModalVisible(true);
         if (auth === true) {
             setModalVisible(false);
-            setAuth(false);
+            dispatch(logout(auth));
+            dispatch(guestRole(role));
         }
     }
 
@@ -33,7 +42,8 @@ const Header: React.FC = () => {
         setTimeout(() => {
             setLoading(false);
             setModalVisible(false);
-            setAuth(true);
+            dispatch(login(auth));
+            dispatch(userRole(role));
         }, 3000)
     };
 
@@ -44,22 +54,24 @@ const Header: React.FC = () => {
     const handleAdmin = () => {
         setLoadingAdmin(true);
         setTimeout(() => {
-            setRoleUser("ADMIN");
-            setAuth(true);
+            dispatch(login(auth));
+            dispatch(adminRole(role));
             setLoadingAdmin(false);
             setModalVisible(false);
+            history.push(ADMIN);
         }, 3000)
     }
-
-    console.log(auth);
-    console.log(roleUser);
     return (
         <div className="header">
             <PageHeader>
                 <div className='header__wrap'>
                     <Title>Shop</Title>
                     <div className='header__user'>
-                        <Input placeholder="input search text" />
+                        <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            dispatch(searchFilter(e.target.value))
+                        }
+                            placeholder="input search text"
+                            value={filterSearch} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Modal title="Authorization" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} footer={[
                             <Button key="back" onClick={handleCancel}>Cancel</Button>,
@@ -77,7 +89,7 @@ const Header: React.FC = () => {
                     &&
                     (<div className='header__filters'>
                         <>
-                            <Select placeholder="Производитель" mode="multiple">
+                            <Select placeholder="Производитель" mode="multiple" onChange={(manufacture: object) => dispatch(manufactureFilter(manufacture))}>
                                 {selectValues.map((item) => (
                                     <Option key={item} value={item}>{item}</Option>
                                 ))}
