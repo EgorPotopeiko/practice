@@ -38,6 +38,11 @@ const filterReducer: Reducer = (state = initialState, action: any) => {
                 ...state,
                 filterAvailable: action.available
             }
+        case "PRICE_FILTER":
+            return {
+                ...state,
+                filterPrice: action.priceRange
+            }
         default:
             return state;
     }

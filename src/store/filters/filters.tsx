@@ -32,3 +32,10 @@ export const availableFilter = (available: boolean) => {
         available
     }
 }
+
+export const priceFilter = (priceRange: Array<Number>) => {
+    return {
+        type: "PRICE_FILTER",
+        priceRange
+    }
+}

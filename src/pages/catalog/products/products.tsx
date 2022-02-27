@@ -23,6 +23,7 @@ const Products: React.FC = () => {
     const sort = useSelector((state: RootStateOrAny) => state.filterReducer.filterSorting);
     const manufacture = useSelector((state: RootStateOrAny) => state.filterReducer.filterManufacture);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
+    const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
     const [view, setView] = useState("LIST");
     let filteredData = data.filter(
         (item: any) =>
@@ -44,6 +45,7 @@ const Products: React.FC = () => {
     }
     if (available === true) filteredData = filteredData.filter((item: any) => item.status === true)
     if (available === false) filteredData = filteredData.filter((item: any) => item.status === false)
+    filteredData = filteredData.filter((item: any) => item.price >= priceRange[0] && item.price <= priceRange[1])
     const list = filteredData.map((product: any) => (
         view === "LIST"
             ?

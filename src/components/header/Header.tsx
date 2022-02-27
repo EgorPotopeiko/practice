@@ -7,7 +7,7 @@ import { userRole, adminRole, guestRole } from '../../store/roles/roles';
 import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { availableFilter, manufactureFilter, searchFilter } from '../../store/filters/filters';
+import { availableFilter, manufactureFilter, priceFilter, searchFilter } from '../../store/filters/filters';
 import history from '../../history';
 import { PUBLIC_PATH } from '../../routing/names';
 
@@ -63,6 +63,7 @@ const Header: React.FC = () => {
             history.push(ADMIN);
         }, 3000)
     }
+    console.log(priceRange)
     return (
         <div className="header">
             <PageHeader>
@@ -103,7 +104,7 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>Цена</Text>
-                            <Slider range max={20} defaultValue={priceRange} />
+                            <Slider range max={20} defaultValue={priceRange} onChange={(priceRange) => dispatch(priceFilter(priceRange))} />
                         </>
                     </div>)
                 }
