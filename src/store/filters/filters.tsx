@@ -25,3 +25,10 @@ export const manufactureFilter = (manufacture: object) => {
         manufacture
     }
 }
+
+export const availableFilter = (available: boolean) => {
+    return {
+        type: "AVAILABLE_FILTER",
+        available
+    }
+}

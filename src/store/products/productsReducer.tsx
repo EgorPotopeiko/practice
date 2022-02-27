@@ -11,7 +11,7 @@ const initialState = {
             price: 10,
             category: 'OTHER',
             date: "5/7/2018",
-            status: "Есть на складе",
+            status: true,
             amount: 30,
             manufacture: "PURINA"
         },
@@ -23,7 +23,7 @@ const initialState = {
             price: 12,
             category: 'OTHER',
             date: "8/7/2018",
-            status: "Есть на складе",
+            status: true,
             amount: 10,
             manufacture: "РОГА И КОПЫТА"
         },
@@ -35,7 +35,7 @@ const initialState = {
             price: 5,
             category: 'BUGS',
             date: "10/3/2018",
-            status: "Есть на складе",
+            status: true,
             amount: 5,
             manufacture: "PURINA"
         },
@@ -47,7 +47,7 @@ const initialState = {
             price: 7,
             category: 'SNAKES',
             date: "3/7/2020",
-            status: "Есть на складе",
+            status: true,
             amount: 7,
             manufacture: "ZOOPARADISE"
         },
@@ -59,7 +59,7 @@ const initialState = {
             price: 20,
             category: 'FISH',
             date: "4/23/2019",
-            status: "Нет на складе",
+            status: false,
             amount: 0,
             manufacture: "ZOOPARADISE"
         },
@@ -71,7 +71,7 @@ const initialState = {
             price: 2,
             category: 'BUGS',
             date: "5/7/2017",
-            status: "Есть на складе",
+            status: true,
             amount: 15,
             manufacture: "PURINA"
         },

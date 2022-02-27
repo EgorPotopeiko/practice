@@ -5,6 +5,8 @@ const initialState = {
     filterCategory: "ALL",
     filterSorting: "DATE",
     filterManufacture: [],
+    filterAvailable: true,
+    filterPrice: [0, 20]
 };
 
 const filterReducer: Reducer = (state = initialState, action: any) => {
@@ -30,6 +32,11 @@ const filterReducer: Reducer = (state = initialState, action: any) => {
                 filterManufacture: {
                     value: action.manufacture
                 }
+            }
+        case "AVAILABLE_FILTER":
+            return {
+                ...state,
+                filterAvailable: action.available
             }
         default:
             return state;

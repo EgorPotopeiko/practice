@@ -7,7 +7,7 @@ import { userRole, adminRole, guestRole } from '../../store/roles/roles';
 import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { manufactureFilter, searchFilter } from '../../store/filters/filters';
+import { availableFilter, manufactureFilter, searchFilter } from '../../store/filters/filters';
 import history from '../../history';
 import { PUBLIC_PATH } from '../../routing/names';
 
@@ -22,8 +22,10 @@ const Header: React.FC = () => {
     const dispatch = useDispatch();
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const role = useSelector((state: RootStateOrAny) => state.roleReducer.role);
+    const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
     // const manufacture = useSelector((state: RootStateOrAny) => state.filterReducer.filterManufacture)
-    const filterSearch = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
+    const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
+    const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
     const [loading, setLoading] = useState(false);
     const [loadingAdmin, setLoadingAdmin] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -71,7 +73,7 @@ const Header: React.FC = () => {
                             dispatch(searchFilter(e.target.value))
                         }
                             placeholder="input search text"
-                            value={filterSearch} />
+                            value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Modal title="Authorization" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} footer={[
                             <Button key="back" onClick={handleCancel}>Cancel</Button>,
@@ -97,11 +99,11 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>В наличии</Text>
-                            <Switch defaultChecked />
+                            <Switch onChange={() => dispatch(availableFilter(!available))} defaultChecked />
                         </>
                         <>
                             <Text>Цена</Text>
-                            <Slider range max={20} defaultValue={[0, 20]} />
+                            <Slider range max={20} defaultValue={priceRange} />
                         </>
                     </div>)
                 }
