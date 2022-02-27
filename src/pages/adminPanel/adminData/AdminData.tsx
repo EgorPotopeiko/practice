@@ -5,8 +5,8 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 const columns = [
     {
         title: 'Название',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: 'title',
+        key: 'title',
     },
     {
         title: 'Артикул',
@@ -20,8 +20,8 @@ const columns = [
     },
     {
         title: 'Статус',
-        dataIndex: 'status',
-        key: 'status',
+        dataIndex: 'available',
+        key: 'available',
     },
     {
         title: 'Количество на складе',

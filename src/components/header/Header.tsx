@@ -7,7 +7,7 @@ import { userRole, adminRole, guestRole } from '../../store/roles/roles';
 import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { availableFilter, manufactureFilter, priceFilter, searchFilter } from '../../store/filters/filters';
+import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/filters';
 import history from '../../history';
 import { PUBLIC_PATH } from '../../routing/names';
 
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const role = useSelector((state: RootStateOrAny) => state.roleReducer.role);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
-    const manufacture = useSelector((state: RootStateOrAny) => state.filterReducer.filterManufacture);
+    const maker = useSelector((state: RootStateOrAny) => state.filterReducer.filterMaker);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
     const [loading, setLoading] = useState(false);
@@ -91,7 +91,7 @@ const Header: React.FC = () => {
                     &&
                     (<div className='header__filters'>
                         <>
-                            <Select value={manufacture} placeholder="Производитель" mode="multiple" onChange={(manufacture: any) => dispatch(manufactureFilter(manufacture))} >
+                            <Select value={maker} placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch(makerFilter(maker))} >
                                 {selectValues.map((item) => (
                                     <Option key={item} value={item}>{item}</Option>
                                 ))}

@@ -4,12 +4,12 @@ const initialState = {
     filterSearch: "",
     filterCategory: "ALL",
     filterSorting: "DATE",
-    filterManufacture: [],
+    filterMaker: [],
     filterAvailable: true,
     filterPrice: [0, 20]
 };
 
-const filterReducer: Reducer = (state = initialState, action: any) => {
+const filterReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
         case "SEARCH_FILTER":
             return {
@@ -26,10 +26,10 @@ const filterReducer: Reducer = (state = initialState, action: any) => {
                 ...state,
                 filterSorting: action.sort
             }
-        case "MANUFACTURE_FILTER":
+        case "MAKER_FILTER":
             return {
                 ...state,
-                filterManufacture: action.manufacture
+                filterMaker: action.maker
             }
         case "AVAILABLE_FILTER":
             return {

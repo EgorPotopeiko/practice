@@ -3,15 +3,15 @@ import { Card } from 'antd';
 import './cardTile.less';
 
 interface Props {
-    name: string,
-    price: number
+    title: string,
+    cost: number
 }
 
-const CardTile: React.FC<Props> = ({ name, price }) => {
+const CardTile: React.FC<Props> = ({ title, cost }) => {
     return (
         <div className='cardTile'>
-            <Card size="small" title={name}>
-                <p>{price}$</p>
+            <Card size="small" title={title}>
+                <p>{cost}$</p>
             </Card>
         </div>
     );

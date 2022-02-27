@@ -4,7 +4,7 @@ const initialState = {
     isAuth: false,
 };
 
-const authReducer: Reducer = (state = initialState, action: any) => {
+const authReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
         case "LOGIN":
             return {

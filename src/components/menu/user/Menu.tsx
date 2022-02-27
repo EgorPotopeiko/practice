@@ -6,7 +6,7 @@ import { categoryFilter } from '../../../store/filters/filters';
 
 const { TabPane } = Tabs;
 
-const userTabs = ["ALL", "CATS", "DOGS", "FISH", "RODENTS", "SNAKES", "BUGS", "OTHER"];
+const userTabs = ["ALL", "CATS", "DOGS", "FISH", "BIRDS", "RODENTS", "OTHER"];
 
 const Menu: React.FC = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Menu: React.FC = () => {
         <div className="menu__catalog">
             <Tabs defaultActiveKey="1" type="card" onChange={(category) => dispatch(categoryFilter(category))}>
                 {userTabs.map((item) => (
-                    <TabPane tab={item} key={item} />
+                    <TabPane tab={item} key={item.toLowerCase()} />
                 ))}
             </Tabs>
         </div>

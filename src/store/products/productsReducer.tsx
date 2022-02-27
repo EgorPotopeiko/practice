@@ -6,79 +6,73 @@ const initialState = {
         {
             key: nanoid(3),
             id: nanoid(5),
-            name: "Мох Павлиний Хвост",
+            title: "Мох Павлиний Хвост",
             description: "Мох",
-            price: 10,
-            category: 'OTHER',
-            date: "5/7/2018",
-            status: true,
-            amount: 30,
-            manufacture: "PURINA"
+            cost: 10,
+            category: 'other',
+            added_date: "5/7/2018",
+            available: true,
+            maker: "PURINA"
         },
         {
             key: nanoid(3),
             id: nanoid(5),
-            name: "Барбус вишневый",
+            title: "Барбус вишневый",
             description: "Барбус",
-            price: 12,
-            category: 'OTHER',
-            date: "8/7/2018",
-            status: true,
-            amount: 10,
-            manufacture: "РОГА И КОПЫТА"
+            cost: 12,
+            category: 'other',
+            added_date: "8/7/2018",
+            available: true,
+            maker: "РОГА И КОПЫТА"
         },
         {
             key: nanoid(3),
             id: nanoid(5),
-            name: "Тетра светлячок",
+            title: "Тетра светлячок",
             description: "Тетра",
-            price: 5,
-            category: 'BUGS',
-            date: "10/3/2018",
-            status: true,
-            amount: 5,
-            manufacture: "PURINA"
+            cost: 5,
+            category: 'birds',
+            added_date: "10/3/2018",
+            available: true,
+            maker: "PURINA"
         },
         {
             key: nanoid(3),
             id: nanoid(5),
-            name: 'Хвост',
+            title: 'Хвост',
             description: 'Хвост',
-            price: 7,
-            category: 'SNAKES',
-            date: "3/7/2020",
-            status: true,
-            amount: 7,
-            manufacture: "ZOOPARADISE"
+            cost: 7,
+            category: 'birds',
+            added_date: "3/7/2020",
+            available: true,
+            maker: "ZOOPARADISE"
         },
         {
             key: nanoid(3),
             id: nanoid(5),
-            name: 'Аквариум',
+            title: 'Аквариум',
             description: 'Рыбы',
-            price: 20,
-            category: 'FISH',
-            date: "4/23/2019",
-            status: false,
-            amount: 0,
-            manufacture: "ZOOPARADISE"
+            cost: 20,
+            category: 'fishes',
+            added_date: "4/23/2019",
+            available: false,
+            maker: "ZOOPARADISE"
         },
         {
             key: nanoid(3),
             id: nanoid(5),
-            name: 'Муравьиная ферма',
+            title: 'Муравьиная ферма',
             description: 'Насекомые',
-            price: 2,
-            category: 'BUGS',
-            date: "5/7/2017",
-            status: true,
-            amount: 15,
-            manufacture: "PURINA"
+            cost: 2,
+            category: 'rodents',
+            added_date: "5/7/2017",
+            available: true,
+            maker: "PURINA"
         },
     ]
 };
 
-const productsReducer: Reducer = (state = initialState, action: any) => {
+const productsReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state;

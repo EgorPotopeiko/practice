@@ -10,6 +10,7 @@ import './products.less';
 import { useState } from 'react';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { sortingFilter } from '../../../store/filters/filters';
+import { TProduct } from '../../../models/product';
 
 const { Title } = Typography;
 
@@ -21,39 +22,39 @@ const Products: React.FC = () => {
     const filterSearch = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const category = useSelector((state: RootStateOrAny) => state.filterReducer.filterCategory);
     const sort = useSelector((state: RootStateOrAny) => state.filterReducer.filterSorting);
-    const manufacture = useSelector((state: RootStateOrAny) => state.filterReducer.filterManufacture);
+    const maker = useSelector((state: RootStateOrAny) => state.filterReducer.filterMaker);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
     const [view, setView] = useState("LIST");
     let filteredData = data.filter(
-        (item: any) =>
-            item.name.toLowerCase().indexOf(filterSearch.toLowerCase()) !== -1
+        (item: TProduct) =>
+            item.title.toLowerCase().indexOf(filterSearch.toLowerCase()) !== -1
     );
     if (category === "ALL") { filteredData = filteredData }
     else {
-        filteredData = filteredData.filter((item: any) => item.category === category);
+        filteredData = filteredData.filter((item: TProduct) => item.category === category);
     }
-    if (sort === "DATE") filteredData = filteredData.sort(function (a: any, b: any) { return new Date(b.date).valueOf() - new Date(a.date).valueOf() });
-    if (sort === "ALPHABET") filteredData = filteredData.sort(function (a: any, b: any) { if (a.name < b.name) { return -1 } });
-    if (sort === "HIGH_PRICE") filteredData = filteredData.sort(function (a: any, b: any) { return b.price - a.price });
-    if (sort === "LOW_PRICE") filteredData = filteredData.sort(function (a: any, b: any) { return a.price - b.price });
-    if (available === true) filteredData = filteredData.filter((item: any) => item.status === true);
-    if (available === false) filteredData = filteredData.filter((item: any) => item.status === false);
-    filteredData = filteredData.filter((item: any) => item.price >= priceRange[0] && item.price <= priceRange[1]);
-    if (manufacture.length === 0) {
+    if (sort === "DATE") filteredData = filteredData.sort(function (a: TProduct, b: TProduct) { return new Date(b.added_date).valueOf() - new Date(a.added_date).valueOf() });
+    if (sort === "ALPHABET") filteredData = filteredData.sort(function (a: TProduct, b: TProduct) { if (a.title < b.title) { return -1 } });
+    if (sort === "HIGH_PRICE") filteredData = filteredData.sort(function (a: TProduct, b: TProduct) { return b.cost - a.cost });
+    if (sort === "LOW_PRICE") filteredData = filteredData.sort(function (a: TProduct, b: TProduct) { return a.cost - b.cost });
+    if (available === true) filteredData = filteredData.filter((item: TProduct) => item.available === true);
+    if (available === false) filteredData = filteredData.filter((item: TProduct) => item.available === false);
+    filteredData = filteredData.filter((item: TProduct) => item.cost >= priceRange[0] && item.cost <= priceRange[1]);
+    if (maker.length === 0) {
         filteredData = filteredData;
     }
     else {
-        filteredData = filteredData.filter((item: any) => manufacture.includes(item.manufacture));
+        filteredData = filteredData.filter((item: TProduct) => maker.includes(item.maker));
     }
-    const list = filteredData.map((product: any) => (
+    const list = filteredData.map((product: TProduct) => (
         view === "LIST"
             ?
             (
                 <CardList
                     key={product.id}
-                    name={product.name}
-                    price={product.price}
+                    title={product.title}
+                    cost={product.cost}
                     desc={product.description}
                 />
             )
@@ -61,8 +62,8 @@ const Products: React.FC = () => {
             (
                 <CardTile
                     key={product.id}
-                    name={product.name}
-                    price={product.price}
+                    title={product.title}
+                    cost={product.cost}
                 />
             )
 

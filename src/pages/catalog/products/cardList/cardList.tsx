@@ -3,16 +3,16 @@ import { Card } from 'antd';
 import './cardList.less';
 
 interface Props {
-    name: string,
-    price: number,
+    title: string,
+    cost: number,
     desc: string,
 }
 
-const CardProduct: React.FC<Props> = ({ name, price, desc }) => {
+const CardProduct: React.FC<Props> = ({ title, cost, desc }) => {
     return (
         <div className='cardList'>
-            <Card title={name}>
-                <p>{price}$</p>
+            <Card title={title}>
+                <p>{cost}$</p>
                 <p>{desc}</p>
             </Card>
         </div>

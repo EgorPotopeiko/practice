@@ -19,10 +19,10 @@ export const sortingFilter = (sort: string) => {
     }
 }
 
-export const manufactureFilter = (manufacture: any) => {
+export const makerFilter = (maker: string) => {
     return {
-        type: "MANUFACTURE_FILTER",
-        manufacture
+        type: "MAKER_FILTER",
+        maker
     }
 }
 

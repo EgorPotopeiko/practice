@@ -4,7 +4,7 @@ const initialState = {
     role: "USER",
 };
 
-const roleReducer: Reducer = (state = initialState, action: any) => {
+const roleReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
         case "USER_ROLE":
             return {
