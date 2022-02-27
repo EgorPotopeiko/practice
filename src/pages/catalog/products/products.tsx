@@ -33,19 +33,19 @@ const Products: React.FC = () => {
     else {
         filteredData = filteredData.filter((item: any) => item.category === category);
     }
-    if (sort === "DATE") filteredData = filteredData.sort(function (a: any, b: any) { return new Date(b.date).valueOf() - new Date(a.date).valueOf() })
-    if (sort === "ALPHABET") filteredData = filteredData.sort(function (a: any, b: any) { if (a.name < b.name) { return -1 } })
-    if (sort === "HIGH_PRICE") filteredData = filteredData.sort(function (a: any, b: any) { return b.price - a.price })
-    if (sort === "LOW_PRICE") filteredData = filteredData.sort(function (a: any, b: any) { return a.price - b.price })
+    if (sort === "DATE") filteredData = filteredData.sort(function (a: any, b: any) { return new Date(b.date).valueOf() - new Date(a.date).valueOf() });
+    if (sort === "ALPHABET") filteredData = filteredData.sort(function (a: any, b: any) { if (a.name < b.name) { return -1 } });
+    if (sort === "HIGH_PRICE") filteredData = filteredData.sort(function (a: any, b: any) { return b.price - a.price });
+    if (sort === "LOW_PRICE") filteredData = filteredData.sort(function (a: any, b: any) { return a.price - b.price });
+    if (available === true) filteredData = filteredData.filter((item: any) => item.status === true);
+    if (available === false) filteredData = filteredData.filter((item: any) => item.status === false);
+    filteredData = filteredData.filter((item: any) => item.price >= priceRange[0] && item.price <= priceRange[1]);
     if (manufacture.length === 0) {
         filteredData = filteredData;
     }
     else {
-        filteredData = filteredData.filter((item: any) => item.manufacture === manufacture)
+        filteredData = filteredData.filter((item: any) => manufacture.includes(item.manufacture));
     }
-    if (available === true) filteredData = filteredData.filter((item: any) => item.status === true)
-    if (available === false) filteredData = filteredData.filter((item: any) => item.status === false)
-    filteredData = filteredData.filter((item: any) => item.price >= priceRange[0] && item.price <= priceRange[1])
     const list = filteredData.map((product: any) => (
         view === "LIST"
             ?

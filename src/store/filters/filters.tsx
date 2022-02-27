@@ -19,7 +19,7 @@ export const sortingFilter = (sort: string) => {
     }
 }
 
-export const manufactureFilter = (manufacture: object) => {
+export const manufactureFilter = (manufacture: any) => {
     return {
         type: "MANUFACTURE_FILTER",
         manufacture

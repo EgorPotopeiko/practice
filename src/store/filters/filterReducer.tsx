@@ -29,9 +29,7 @@ const filterReducer: Reducer = (state = initialState, action: any) => {
         case "MANUFACTURE_FILTER":
             return {
                 ...state,
-                filterManufacture: {
-                    value: action.manufacture
-                }
+                filterManufacture: action.manufacture
             }
         case "AVAILABLE_FILTER":
             return {

@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const role = useSelector((state: RootStateOrAny) => state.roleReducer.role);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
-    // const manufacture = useSelector((state: RootStateOrAny) => state.filterReducer.filterManufacture)
+    const manufacture = useSelector((state: RootStateOrAny) => state.filterReducer.filterManufacture);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
     const [loading, setLoading] = useState(false);
@@ -63,7 +63,6 @@ const Header: React.FC = () => {
             history.push(ADMIN);
         }, 3000)
     }
-    console.log(priceRange)
     return (
         <div className="header">
             <PageHeader>
@@ -92,7 +91,7 @@ const Header: React.FC = () => {
                     &&
                     (<div className='header__filters'>
                         <>
-                            <Select placeholder="Производитель" mode="multiple" onChange={(manufacture: object) => dispatch(manufactureFilter(manufacture))}>
+                            <Select value={manufacture} placeholder="Производитель" mode="multiple" onChange={(manufacture: any) => dispatch(manufactureFilter(manufacture))} >
                                 {selectValues.map((item) => (
                                     <Option key={item} value={item}>{item}</Option>
                                 ))}
