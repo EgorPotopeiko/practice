@@ -2,7 +2,7 @@ import { Reducer } from 'redux';
 
 const initialState = {
     filterSearch: "",
-    filterCategory: "ALL",
+    filterCategory: "all",
     filterSorting: "DATE",
     filterMaker: [],
     filterAvailable: true,

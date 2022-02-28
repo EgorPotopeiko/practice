@@ -30,7 +30,7 @@ const Products: React.FC = () => {
         (item: TProduct) =>
             item.title.toLowerCase().indexOf(filterSearch.toLowerCase()) !== -1
     );
-    if (category === "ALL") { filteredData = filteredData }
+    if (category === "all") { filteredData = filteredData }
     else {
         filteredData = filteredData.filter((item: TProduct) => item.category === category);
     }

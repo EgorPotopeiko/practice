@@ -13,7 +13,7 @@ export const selectItemsBySearch = createSelector(
 
 export const selectItemsByCategory = createSelector(
     [
-        ((state: RootStateOrAny) => state.filterReducer.filterCategory),
+        ((state: RootStateOrAny) => state.productsReducer.products),
         (state: RootStateOrAny, category: string) => category,
     ],
     (items, category) => items.filter((item: TProduct) => item.category === category)
@@ -21,7 +21,7 @@ export const selectItemsByCategory = createSelector(
 
 export const selectItemsSorting = createSelector(
     [
-        ((state: RootStateOrAny) => state.filterReducer.filterSorting),
+        ((state: RootStateOrAny) => state.productsReducer.products),
         (state: RootStateOrAny, sort: string) => sort,
     ],
     (items, sort) => items.sort(function (a: TProduct, b: TProduct) {
@@ -34,7 +34,7 @@ export const selectItemsSorting = createSelector(
 
 export const selectItemsByMaker = createSelector(
     [
-        ((state: RootStateOrAny) => state.filterReducer.filterMaker),
+        ((state: RootStateOrAny) => state.productsReducer.products),
         (state: RootStateOrAny, maker: string) => maker,
     ],
     (items, maker) => items.filter((item: TProduct) => maker.includes(item.maker))
@@ -42,7 +42,7 @@ export const selectItemsByMaker = createSelector(
 
 export const selectItemsByAvailable = createSelector(
     [
-        ((state: RootStateOrAny) => state.filterReducer.filterAvailable),
+        ((state: RootStateOrAny) => state.productsReducer.products),
         (state: RootStateOrAny, available: boolean) => available,
     ],
     (items, available) => items.filter((item: TProduct) => available === true ? item.available === true : item.available === false)
@@ -50,8 +50,8 @@ export const selectItemsByAvailable = createSelector(
 
 export const selectItemsByPrice = createSelector(
     [
-        ((state: RootStateOrAny) => state.filterReducer.filterPrice),
-        (state: any, priceRange: Array<Number>) => priceRange,
+        ((state: RootStateOrAny) => state.productsReducer.products),
+        (state: RootStateOrAny, priceRange: Array<Number>) => priceRange,
     ],
     (items, priceRange) => items.filter((item: TProduct) => item.cost >= priceRange[0] && item.cost <= priceRange[1])
 );
