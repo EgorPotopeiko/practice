@@ -6,7 +6,7 @@ import { categoryFilter } from '../../../store/filters/actions';
 
 const { TabPane } = Tabs;
 
-const userTabs = ["ALL", "CATS", "DOGS", "FISH", "BIRDS", "RODENTS", "OTHER"];
+const userTabs = ["ALL", "CATS", "DOGS", "FISHES", "BIRDS", "RODENTS", "OTHER"];
 
 const Menu: React.FC = () => {
     const dispatch = useDispatch();

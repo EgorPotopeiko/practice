@@ -6,7 +6,16 @@ export default class ProductsDB {
     });
 
     getAllProducts = async () => {
-        const res = await axios.get(`db/products.json`)
-        return res;
+        await axios.get(`db/products.json`)
+            .then(function (response) {
+                console.log(response.data)
+            })
+    }
+
+    getProduct = async (id: number) => {
+        await axios.get(`db/products.json`)
+            .then(function (response) {
+                console.log(response.data[id])
+            })
     }
 }

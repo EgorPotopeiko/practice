@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { sortingFilter } from '../../../store/filters/actions';
 import { TProduct } from '../../../models/product';
-import api from '../../../services';
 import ProductsDB from '../../../services';
 
 const { Title } = Typography;
@@ -71,7 +70,8 @@ const Products: React.FC = () => {
 
     ));
     const database = new ProductsDB();
-    console.log(database.getAllProducts())
+    console.log(database.getAllProducts());
+    console.log(database.getProduct(5));
     return (
         <div className="products">
             <div className="products__menu">
