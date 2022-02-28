@@ -103,7 +103,7 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>Цена</Text>
-                            <Slider range max={20} defaultValue={priceRange} onChange={(priceRange) => dispatch(priceFilter(priceRange))} />
+                            <Slider range max={100} defaultValue={priceRange} onChange={(priceRange) => dispatch(priceFilter(priceRange))} />
                         </>
                     </div>)
                 }

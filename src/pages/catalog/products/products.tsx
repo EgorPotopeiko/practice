@@ -12,6 +12,7 @@ import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { sortingFilter } from '../../../store/filters/actions';
 import { TProduct } from '../../../models/product';
 import ProductsDB from '../../../services';
+import { useEffect } from 'react';
 
 const { Title } = Typography;
 
@@ -19,6 +20,7 @@ const { Option } = Select;
 
 const Products: React.FC = () => {
     const dispatch = useDispatch();
+    const database = new ProductsDB();
     const data = useSelector((state: RootStateOrAny) => state.productsReducer.products);
     const filterSearch = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const category = useSelector((state: RootStateOrAny) => state.filterReducer.filterCategory);
@@ -69,9 +71,11 @@ const Products: React.FC = () => {
             )
 
     ));
-    const database = new ProductsDB();
-    console.log(database.getAllProducts());
-    console.log(database.getProduct(5));
+    // useEffect(() => {
+    //     const result = database.getAllProducts();
+    //     setTestData(result)
+    // }, [])
+    // console.log(testData)
     return (
         <div className="products">
             <div className="products__menu">

@@ -8,14 +8,14 @@ export default class ProductsDB {
     getAllProducts = async () => {
         await axios.get(`db/products.json`)
             .then(function (response) {
-                console.log(response.data)
+                return response.data
             })
     }
 
-    getProduct = async (id: number) => {
+    getProduct = async (id: string) => {
         await axios.get(`db/products.json`)
             .then(function (response) {
-                console.log(response.data[id])
+                return response.data[id]
             })
     }
 }

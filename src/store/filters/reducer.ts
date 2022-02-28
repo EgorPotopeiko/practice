@@ -6,7 +6,7 @@ const initialState = {
     filterSorting: "DATE",
     filterMaker: [],
     filterAvailable: true,
-    filterPrice: [0, 20]
+    filterPrice: [0, 100]
 };
 
 const filterReducer: Reducer = (state = initialState, action) => {
