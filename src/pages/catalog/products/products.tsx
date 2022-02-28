@@ -9,8 +9,10 @@ import { Select } from 'antd';
 import './products.less';
 import { useState } from 'react';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
-import { sortingFilter } from '../../../store/filters/filters';
+import { sortingFilter } from '../../../store/filters/actions';
 import { TProduct } from '../../../models/product';
+import api from '../../../services';
+import ProductsDB from '../../../services';
 
 const { Title } = Typography;
 
@@ -68,6 +70,8 @@ const Products: React.FC = () => {
             )
 
     ));
+    const database = new ProductsDB();
+    console.log(database.getAllProducts())
     return (
         <div className="products">
             <div className="products__menu">

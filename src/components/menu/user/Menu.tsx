@@ -2,7 +2,7 @@ import { Tabs } from 'antd';
 import React from 'react';
 import './Menu.less';
 import { useDispatch } from 'react-redux';
-import { categoryFilter } from '../../../store/filters/filters';
+import { categoryFilter } from '../../../store/filters/actions';
 
 const { TabPane } = Tabs;
 

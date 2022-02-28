@@ -2,12 +2,12 @@ import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'a
 import React, { ChangeEvent } from 'react';
 import './Header.less';
 import { useState } from 'react';
-import { login, logout } from '../../store/auth/authorization';
-import { userRole, adminRole, guestRole } from '../../store/roles/roles';
+import { login, logout } from '../../store/auth/actions';
+import { userRole, adminRole, guestRole } from '../../store/roles/actions';
 import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/filters';
+import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/actions';
 import history from '../../history';
 import { PUBLIC_PATH } from '../../routing/names';
 
@@ -15,7 +15,7 @@ const { Title, Text } = Typography;
 
 const { Option } = Select;
 
-const selectValues = ["РОГА И КОПЫТА", "ZOOPARADISE", "PURINA"];
+const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
 const Header: React.FC = () => {
     const { ADMIN } = PUBLIC_PATH;
@@ -93,7 +93,7 @@ const Header: React.FC = () => {
                         <>
                             <Select value={maker} placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch(makerFilter(maker))} >
                                 {selectValues.map((item) => (
-                                    <Option key={item} value={item}>{item}</Option>
+                                    <Option key={item} value={item}>{item.toUpperCase()}</Option>
                                 ))}
                             </Select>
                         </>
