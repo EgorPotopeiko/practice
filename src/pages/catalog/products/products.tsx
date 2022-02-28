@@ -15,6 +15,8 @@ import { TProduct } from '../../../models/product';
 import ProductsDB from '../../../services';
 import { useEffect } from 'react';
 import { setProducts } from '../../../store/products/actions';
+import Loader from '../../../components/loader/loader';
+import { changeLoading } from '../../../store/loading/actions';
 
 const { Title } = Typography;
 
@@ -30,7 +32,9 @@ const Products: React.FC = () => {
     const maker = useSelector((state: RootStateOrAny) => state.filterReducer.filterMaker);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
+    const loading = useSelector((state: RootStateOrAny) => state.loadingReducer.loading);
     const [view, setView] = useState("LIST");
+    const spinner = loading ? <Loader /> : null;
     let filteredData = data.filter(
         (item: TProduct) =>
             item.title.toLowerCase().indexOf(filterSearch.toLowerCase()) !== -1
@@ -52,31 +56,36 @@ const Products: React.FC = () => {
     else {
         filteredData = filteredData.filter((item: TProduct) => maker.includes(item.maker));
     }
-    const list = filteredData.map((product: TProduct) => (
-        view === "LIST"
-            ?
-            (
-                <CardList
-                    key={product.id}
-                    title={product.title}
-                    cost={product.cost}
-                    desc={product.description}
-                />
-            )
-            :
-            (
-                <CardTile
-                    key={product.id}
-                    title={product.title}
-                    cost={product.cost}
-                />
-            )
+    const list = loading
+        ?
+        null
+        :
+        filteredData.map((product: TProduct) => (
+            view === "LIST"
+                ?
+                (
+                    <CardList
+                        key={product.id}
+                        title={product.title}
+                        cost={product.cost}
+                        desc={product.description}
+                    />
+                )
+                :
+                (
+                    <CardTile
+                        key={product.id}
+                        title={product.title}
+                        cost={product.cost}
+                    />
+                )
 
-    ));
+        ));
     useEffect(() => {
         database.getAllProducts()
             .then(response => { dispatch(setProducts(response)) }
             )
+            .then(() => dispatch(changeLoading(false)))
     }, [])
     return (
         <div className="products">
@@ -95,9 +104,9 @@ const Products: React.FC = () => {
             </Select>
             {view === "LIST"
                 ?
-                <ul className="products__list">{list}</ul>
+                <ul className="products__list">{spinner} {list}</ul>
                 :
-                <div className="products__tile">{list}</div>
+                <div className="products__tile">{spinner} {list}</div>
             }
         </div>
     );
