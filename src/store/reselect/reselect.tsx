@@ -31,3 +31,27 @@ export const selectItemsSorting = createSelector(
         if (sort === "LOW_PRICE") { return a.cost - b.cost }
     })
 );
+
+export const selectItemsByMaker = createSelector(
+    [
+        ((state: RootStateOrAny) => state.filterReducer.filterMaker),
+        (state: RootStateOrAny, maker: string) => maker,
+    ],
+    (items, maker) => items.filter((item: TProduct) => maker.includes(item.maker))
+);
+
+export const selectItemsByAvailable = createSelector(
+    [
+        ((state: RootStateOrAny) => state.filterReducer.filterAvailable),
+        (state: RootStateOrAny, available: boolean) => available,
+    ],
+    (items, available) => items.filter((item: TProduct) => available === true ? item.available === true : item.available === false)
+);
+
+export const selectItemsByPrice = createSelector(
+    [
+        ((state: RootStateOrAny) => state.filterReducer.filterPrice),
+        (state: any, priceRange: Array<Number>) => priceRange,
+    ],
+    (items, priceRange) => items.filter((item: TProduct) => item.cost >= priceRange[0] && item.cost <= priceRange[1])
+);
