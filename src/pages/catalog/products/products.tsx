@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-self-assign */
 import React from 'react';
@@ -13,6 +14,7 @@ import { sortingFilter } from '../../../store/filters/actions';
 import { TProduct } from '../../../models/product';
 import ProductsDB from '../../../services';
 import { useEffect } from 'react';
+import { setProducts } from '../../../store/products/actions';
 
 const { Title } = Typography;
 
@@ -22,7 +24,6 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const database = new ProductsDB();
     const data = useSelector((state: RootStateOrAny) => state.productsReducer.products);
-    const [testData, setTestData] = useState(data);
     const filterSearch = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const category = useSelector((state: RootStateOrAny) => state.filterReducer.filterCategory);
     const sort = useSelector((state: RootStateOrAny) => state.filterReducer.filterSorting);
@@ -74,7 +75,7 @@ const Products: React.FC = () => {
     ));
     useEffect(() => {
         database.getAllProducts()
-            .then(response => { setTestData(response) }
+            .then(response => { dispatch(setProducts(response)) }
             )
     }, [])
     return (
