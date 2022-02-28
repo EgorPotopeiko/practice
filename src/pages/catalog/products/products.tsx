@@ -22,6 +22,7 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const database = new ProductsDB();
     const data = useSelector((state: RootStateOrAny) => state.productsReducer.products);
+    const [testData, setTestData] = useState(data);
     const filterSearch = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const category = useSelector((state: RootStateOrAny) => state.filterReducer.filterCategory);
     const sort = useSelector((state: RootStateOrAny) => state.filterReducer.filterSorting);
@@ -71,11 +72,11 @@ const Products: React.FC = () => {
             )
 
     ));
-    // useEffect(() => {
-    //     const result = database.getAllProducts();
-    //     setTestData(result)
-    // }, [])
-    // console.log(testData)
+    useEffect(() => {
+        database.getAllProducts()
+            .then(response => { setTestData(response) }
+            )
+    }, [])
     return (
         <div className="products">
             <div className="products__menu">
