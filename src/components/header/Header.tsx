@@ -10,6 +10,7 @@ import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/actions';
 import history from '../../history';
 import { PUBLIC_PATH } from '../../routing/names';
+import ProductsDB from '../../services';
 
 const { Title, Text } = Typography;
 
@@ -18,7 +19,8 @@ const { Option } = Select;
 const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
 const Header: React.FC = () => {
-    const { ADMIN } = PUBLIC_PATH;
+    const { APP, ADMIN } = PUBLIC_PATH;
+    const database = new ProductsDB();
     const dispatch = useDispatch();
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const role = useSelector((state: RootStateOrAny) => state.roleReducer.role);
@@ -36,6 +38,7 @@ const Header: React.FC = () => {
             setModalVisible(false);
             dispatch(logout(auth));
             dispatch(guestRole(role));
+            history.push(APP);
         }
     }
 
@@ -63,6 +66,7 @@ const Header: React.FC = () => {
             history.push(ADMIN);
         }, 3000)
     }
+
     return (
         <div className="header">
             <PageHeader>
@@ -75,6 +79,7 @@ const Header: React.FC = () => {
                             placeholder="input search text"
                             value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
+                        <Title level={4}>{role && `${role}`}</Title>
                         <Modal title="Authorization" visible={modalVisible} onOk={handleOk} onCancel={handleCancel} footer={[
                             <Button key="back" onClick={handleCancel}>Cancel</Button>,
                             <Button key="submit" type="primary" loading={loading} onClick={handleOk}>Login</Button>,
@@ -87,8 +92,8 @@ const Header: React.FC = () => {
                         </Modal>
                     </div>
                 </div>
-                {role === "USER"
-                    &&
+                {role === "USER" || role === "GUEST"
+                    ?
                     (<div className='header__filters'>
                         <>
                             <Select value={maker} placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch(makerFilter(maker))} >
@@ -106,6 +111,8 @@ const Header: React.FC = () => {
                             <Slider range max={100} defaultValue={priceRange} onChange={(priceRange) => dispatch(priceFilter(priceRange))} />
                         </>
                     </div>)
+                    :
+                    null
                 }
             </PageHeader>
         </div>

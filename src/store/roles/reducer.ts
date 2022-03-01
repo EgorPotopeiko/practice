@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 
 const initialState = {
-    role: "USER",
+    role: "GUEST",
 };
 
 const roleReducer: Reducer = (state = initialState, action) => {
