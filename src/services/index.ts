@@ -10,21 +10,23 @@ export default class ProductsDB {
     getAllProducts = async () => {
         const res = await axios.get(`db/products.json`);
         return res.data.map(this._transformProduct);
-    }
+    };
 
     getProduct = async (id: number) => {
         const res = await axios.get(`db/products.json`);
         return res.data[id];
-    }
+    };
+
     getAllUsers = async () => {
         const res = await axios.get(`db/users.json`);
         return res.data.map(this._transformUser);
-    }
+    };
 
     getUser = async (id: number) => {
         const res = await axios.get(`db/users.json`);
         return res.data[id];
-    }
+    };
+
     _transformProduct = (product: TProduct) => {
         return {
             id: product.id,
@@ -37,6 +39,7 @@ export default class ProductsDB {
             category: product.category
         };
     };
+
     _transformUser = (user: TUser) => {
         return {
             id: user.id,

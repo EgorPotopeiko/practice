@@ -4,7 +4,7 @@
 import React from 'react';
 import CardList from './cardList/cardList';
 import CardTile from './cardTile/cardTile';
-import { Typography } from 'antd';
+import { Pagination, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
 import './products.less';
@@ -25,6 +25,9 @@ const { Option } = Select;
 const Products: React.FC = () => {
     const dispatch = useDispatch();
     const database = new ProductsDB();
+    const [minValue, setMinValue] = useState(0);
+    const [size, setSize] = useState(6);
+    const [maxValue, setMaxValue] = useState(size);
     const data = useSelector((state: RootStateOrAny) => state.productsReducer.products);
     const filterSearch = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const category = useSelector((state: RootStateOrAny) => state.filterReducer.filterCategory);
@@ -60,7 +63,7 @@ const Products: React.FC = () => {
         ?
         null
         :
-        filteredData.map((product: TProduct) => (
+        filteredData.slice(minValue, maxValue).map((product: TProduct) => (
             view === "LIST"
                 ?
                 (
@@ -81,6 +84,13 @@ const Products: React.FC = () => {
                 )
 
         ));
+    const hangleChange = (value: any) => {
+        setMinValue((value - 1) * size)
+        setMaxValue((value) * size)
+    }
+    const showSizeChange = (current: any, size: any) => {
+        setSize(size)
+    }
     useEffect(() => {
         database.getAllProducts()
             .then(response => { dispatch(setProducts(response)) }
@@ -108,6 +118,7 @@ const Products: React.FC = () => {
                 :
                 <div className="products__tile">{spinner} {list}</div>
             }
+            <Pagination defaultCurrent={1} pageSize={size} onShowSizeChange={showSizeChange} pageSizeOptions={[6, 10, 20]} total={filteredData.length} onChange={hangleChange} />
         </div>
     );
 }
