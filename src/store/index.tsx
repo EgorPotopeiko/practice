@@ -4,6 +4,7 @@ import roleReducer from "./roles/reducer";
 import productsReducer from "./products/reducer";
 import filterReducer from "./filters/reducer";
 import loadingReducer from "./loading/reducer";
+import userReducer from "./user/reducer";
 import { connectRouter } from "connected-react-router";
 import history from "../history";
 
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     roleReducer,
     productsReducer,
     filterReducer,
-    loadingReducer
+    loadingReducer,
+    userReducer
 })
 
 export default rootReducer;

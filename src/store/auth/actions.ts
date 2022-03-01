@@ -12,3 +12,17 @@ export const logout = (isAuth: boolean) => {
         isAuth
     }
 }
+
+export const setEmail = (email: string) => {
+    return {
+        type: "SET_EMAIL",
+        email
+    }
+}
+
+export const setPassword = (password: string) => {
+    return {
+        type: "SET_PASSWORD",
+        password
+    }
+}
