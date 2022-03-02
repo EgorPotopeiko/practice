@@ -71,7 +71,8 @@ const Products: React.FC = () => {
                         key={product.id}
                         title={product.title}
                         cost={product.cost}
-                        desc={product.description}
+                        maker={product.maker}
+                        category={product.category}
                     />
                 )
                 :
