@@ -21,7 +21,7 @@ const Header: React.FC = () => {
     const database = new ProductsDB();
     const dispatch = useDispatch();
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
-    const authEmail = useSelector((state: RootStateOrAny) => state.authReducer.email);
+    let authEmail = useSelector((state: RootStateOrAny) => state.authReducer.email);
     const authPassword = useSelector((state: RootStateOrAny) => state.authReducer.password);
     const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
@@ -61,31 +61,34 @@ const Header: React.FC = () => {
         setModalAuthVisible(true);
     };
     const authProcess = () => {
+        const even = (element: any) => element.email === authEmail;
         database.getAllUsers()
-            .then((response) => response.map((item: any) => {
-                if (authEmail === item.email) {
-                    if (authPassword === item.password) {
+            .then((response) => response.find(even))
+            .then((value) => value.id)
+            .then((id) => {
+                database.getUser(id)
+                    .then((response) => response)
+                    .then((item) => {
                         const { id, firstName, lastName, password, email, role } = item;
-                        setModalErrorVisible(false);
-                        setLoading(false);
-                        dispatch(login(true));
-                        const authUser = {
-                            id,
-                            firstName,
-                            lastName,
-                            password,
-                            email,
-                            role
+                        if (password === authPassword) {
+                            setModalErrorVisible(false);
+                            dispatch(login(true));
+                            const authUser = {
+                                id,
+                                firstName,
+                                lastName,
+                                password,
+                                email,
+                                role
+                            }
+                            dispatch(userData(authUser));
                         }
-                        dispatch(userData(authUser));
-                        setModalAuthVisible(false);
-                    }
-                    else {
-                        setLoading(false);
-                        setModalAuthVisible(false);
-                    }
-                }
-            }))
+                        else {
+                            setModalAuthVisible(false);
+                            setModalErrorVisible(true);
+                        }
+                    })
+            })
     }
     return (
         <div className="header">
