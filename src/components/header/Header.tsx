@@ -8,8 +8,6 @@ import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/actions';
-import history from '../../history';
-import { PUBLIC_PATH } from '../../routing/names';
 import ProductsDB from '../../services';
 import { userData } from '../../store/user/actions';
 
@@ -20,7 +18,6 @@ const { Option } = Select;
 const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
 const Header: React.FC = () => {
-    const { APP, ADMIN } = PUBLIC_PATH;
     const database = new ProductsDB();
     const dispatch = useDispatch();
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
@@ -43,7 +40,6 @@ const Header: React.FC = () => {
             setModalAuthVisible(false);
             dispatch(logout(auth));
             dispatch(userData({ role: "guest" }))
-            history.push(APP);
         }
     }
 
@@ -64,7 +60,6 @@ const Header: React.FC = () => {
         setModalErrorVisible(false);
         setModalAuthVisible(true);
     };
-
     const authProcess = () => {
         database.getAllUsers()
             .then((response) => response.map((item: any) => {
@@ -83,9 +78,6 @@ const Header: React.FC = () => {
                             role
                         }
                         dispatch(userData(authUser));
-                        if (role === "admin") {
-                            history.push(ADMIN)
-                        }
                         setModalAuthVisible(false);
                     }
                     else {

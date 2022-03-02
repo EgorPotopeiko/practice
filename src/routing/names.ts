@@ -4,3 +4,4 @@ export enum PUBLIC_PATH {
     ADMIN = '/admin',
     NOTFOUND = '/404',
 }
+

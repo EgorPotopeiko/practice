@@ -1,19 +1,15 @@
 import React from 'react';
-import Catalog from './pages/catalog/catalog';
 import './App.less';
-import AdminPanel from './pages/adminPanel/AdminPanel';
-import { Redirect, Route, Switch } from 'react-router';
-import { PUBLIC_PATH } from "./routing/names";
+import { useRoutes } from './routing/routes';
+import { RootStateOrAny, useSelector } from 'react-redux';
 
 function App() {
-  const { APP, ADMIN } = PUBLIC_PATH;
+  const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
+  const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
+  const routes = useRoutes(auth, role)
   return (
     <div className="App">
-      <Switch>
-        <Route exact path={APP} component={Catalog} />
-        <Route path={ADMIN} component={AdminPanel} />
-        <Redirect to={APP} />
-      </Switch>
+      {routes}
     </div>
   );
 }
