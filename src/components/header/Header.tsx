@@ -4,12 +4,14 @@ import React, { ChangeEvent } from 'react';
 import './Header.less';
 import { useState } from 'react';
 import { login, logout, setEmail, setPassword } from '../../store/auth/actions';
+import { Form, FormItem, Input as FormInput, ResetButton, SubmitButton } from 'formik-antd';
 import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/actions';
 import ProductsDB from '../../services';
 import { userData } from '../../store/user/actions';
+import { Formik } from 'formik';
 
 const { Title, Text } = Typography;
 
@@ -32,7 +34,6 @@ const Header: React.FC = () => {
     const lastName = useSelector((state: RootStateOrAny) => state.userReducer.user.lastName);
     const [loading, setLoading] = useState(false);
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
-    const [modalErrorVisible, setModalErrorVisible] = useState(false);
 
     const showModal = () => {
         setModalAuthVisible(true);
@@ -51,15 +52,20 @@ const Header: React.FC = () => {
         }, 3000)
     };
 
-    const handleCancel = () => {
-        setModalAuthVisible(false);
-        setModalErrorVisible(false);
-    };
+    const validateRequired = (value: string) => {
+        if (!value) {
+            return "Required!";
+        } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+            return "Invalid email address!";
+        }
+    }
 
-    const handleBack = () => {
-        setModalErrorVisible(false);
-        setModalAuthVisible(true);
-    };
+    const validatePassword = (value: string) => {
+        if (!value) {
+            return "Required!";
+        }
+    }
+
     const authProcess = () => {
         const even = (element: any) => element.email === authEmail;
         database.getAllUsers()
@@ -71,7 +77,6 @@ const Header: React.FC = () => {
                     .then((item) => {
                         const { id, firstName, lastName, password, email, role } = item;
                         if (password === authPassword) {
-                            setModalErrorVisible(false);
                             dispatch(login(true));
                             const authUser = {
                                 id,
@@ -85,7 +90,6 @@ const Header: React.FC = () => {
                         }
                         else {
                             setModalAuthVisible(false);
-                            setModalErrorVisible(true);
                         }
                     })
             })
@@ -103,20 +107,34 @@ const Header: React.FC = () => {
                             value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Title level={4}>{firstName && `${firstName} ${lastName}`}</Title>
-                        <Modal title="Authorization" visible={modalAuthVisible} onOk={handleOk} onCancel={handleCancel} footer={[
-                            <Button key="back" onClick={handleCancel}>Cancel</Button>,
-                            <Button key="submit" type="primary" loading={loading} onClick={handleOk}>Login</Button>,
-                        ]}>
-                            <div className='modal__inputs'>
-                                <Input type="email" onChange={(e) => dispatch(setEmail(e.target.value))} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="email" />
-                                <Input.Password onChange={(e) => dispatch(setPassword(e.target.value))} placeholder="password" />
-                            </div>
-                        </Modal>
-                        <Modal title="Error" visible={modalErrorVisible} footer={[
-                            <Button key="back" onClick={handleCancel}>Close</Button>,
-                            <Button key="submit" type="primary" onClick={handleBack}>Go back</Button>,
-                        ]}>
-                            <Title level={3}>Incorrect email or password</Title>
+                        <Modal title="Authorization" visible={modalAuthVisible} onOk={handleOk} footer={null}>
+                            <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
+                                {() => (
+                                    <Form >
+                                        <FormItem name='email' validate={validateRequired}>
+                                            <FormInput
+                                                name='email'
+                                                required={true}
+                                                placeholder='email'
+                                                onChange={(e) => dispatch(setEmail(e.target.value))}
+                                                prefix={<UserOutlined className="site-form-item-icon" />}
+                                            />
+                                        </FormItem>
+                                        <FormItem name='password' validate={validatePassword}>
+                                            <FormInput.Password
+                                                name='password'
+                                                required={true}
+                                                placeholder='Password'
+                                                onChange={(e) => dispatch(setPassword(e.target.value))}
+                                            />
+                                        </FormItem>
+                                        <Button.Group>
+                                            <ResetButton>Reset</ResetButton>
+                                            <SubmitButton loading={loading} onClick={handleOk}>Submit</SubmitButton>
+                                        </Button.Group>
+                                    </Form>
+                                )}
+                            </Formik>
                         </Modal>
                     </div>
                 </div>
