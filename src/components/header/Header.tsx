@@ -92,11 +92,16 @@ const Header: React.FC = () => {
                 <div className='header__wrap'>
                     <Title>Shop</Title>
                     <div className='header__user'>
-                        <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                            dispatch(searchFilter(e.target.value))
+                        {role === "user" || role === "guest"
+                            ?
+                            <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                dispatch(searchFilter(e.target.value))
+                            }
+                                placeholder="input search text"
+                                value={search} />
+                            :
+                            null
                         }
-                            placeholder="input search text"
-                            value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Title level={4}>{firstName && `${firstName} ${lastName}`}</Title>
                         <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} onCancel={closeAuthForm} />
