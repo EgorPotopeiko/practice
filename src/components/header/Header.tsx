@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     const database = new ProductsDB();
     const dispatch = useDispatch();
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
-    let authEmail = useSelector((state: RootStateOrAny) => state.authReducer.email);
+    const authEmail = useSelector((state: RootStateOrAny) => state.authReducer.email);
     const authPassword = useSelector((state: RootStateOrAny) => state.authReducer.password);
     const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
@@ -34,6 +34,7 @@ const Header: React.FC = () => {
     const lastName = useSelector((state: RootStateOrAny) => state.userReducer.user.lastName);
     const [loading, setLoading] = useState(false);
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
+    const [modalRegVisible, setModalRegVisible] = useState(false);
 
     const showModal = () => {
         setModalAuthVisible(true);
@@ -55,6 +56,11 @@ const Header: React.FC = () => {
                 setLoading(false)
             }
         }, 3000)
+    };
+
+    const changeForm = () => {
+        setModalAuthVisible(false)
+        setModalRegVisible(true)
     };
 
     const validateRequired = (value: string) => {
@@ -120,7 +126,7 @@ const Header: React.FC = () => {
                                             <FormInput
                                                 name='email'
                                                 required={true}
-                                                placeholder='email'
+                                                placeholder='Email'
                                                 onChange={(e) => dispatch(setEmail(e.target.value))}
                                                 prefix={<UserOutlined className="site-form-item-icon" />}
                                             />
@@ -134,9 +140,51 @@ const Header: React.FC = () => {
                                             />
                                         </FormItem>
                                         <Button.Group>
-                                            <ResetButton>Reset</ResetButton>
-                                            <SubmitButton loading={loading} onClick={handleOk}>Submit</SubmitButton>
+                                            <SubmitButton loading={loading} onClick={handleOk}>Войти</SubmitButton>
+                                            <Button onClick={changeForm}>Регистрация</Button>
                                         </Button.Group>
+                                    </Form>
+                                )}
+                            </Formik>
+                        </Modal>
+                        <Modal title="Registration" visible={modalRegVisible} footer={null}>
+                            <Formik initialValues={{ first_name: '', last_name: '', email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
+                                {() => (
+                                    <Form >
+                                        <FormItem name='first_name'>
+                                            <FormInput
+                                                name='first_name'
+                                                required={true}
+                                                placeholder='First Name'
+                                                //    onChange={(e) => dispatch(setEmail(e.target.value))}
+                                                prefix={<UserOutlined className="site-form-item-icon" />}
+                                            />
+                                        </FormItem>
+                                        <FormItem name='last_name'>
+                                            <FormInput
+                                                name='last_name'
+                                                required={true}
+                                                placeholder='Last Name'
+                                            //   onChange={(e) => dispatch(setPassword(e.target.value))}
+                                            />
+                                        </FormItem>
+                                        <FormItem name='email'>
+                                            <FormInput
+                                                name='email'
+                                                required={true}
+                                                placeholder='Email'
+                                            //       onChange={(e) => dispatch(setPassword(e.target.value))}
+                                            />
+                                        </FormItem>
+                                        <FormItem name='password'>
+                                            <FormInput.Password
+                                                name='password'
+                                                required={true}
+                                                placeholder='Password'
+                                            //      onChange={(e) => dispatch(setPassword(e.target.value))}
+                                            />
+                                        </FormItem>
+                                        <Button>Регистрация</Button>
                                     </Form>
                                 )}
                             </Formik>
