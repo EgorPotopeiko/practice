@@ -66,7 +66,7 @@ const ModalRegistration: React.FC<Props> = ({ modalRegVisible, onOk }) => {
                                 onChange={(e) => dispatch(setPassword(e.target.value))}
                             />
                         </FormItem>
-                        <Button onClick={onOk}>Регистрация</Button>
+                        <Button type='primary' className='registration__button' onClick={onOk}>Регистрация</Button>
                     </Form>
                 )}
             </Formik>
