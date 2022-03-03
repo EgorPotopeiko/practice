@@ -47,8 +47,13 @@ const Header: React.FC = () => {
     const handleOk = () => {
         setLoading(true);
         setTimeout(() => {
-            authProcess()
-            setLoading(false)
+            if (authEmail.length === 0 && authPassword.length === 0) {
+                setLoading(false)
+            }
+            else {
+                authProcess()
+                setLoading(false)
+            }
         }, 3000)
     };
 
