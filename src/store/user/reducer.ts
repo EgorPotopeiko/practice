@@ -6,7 +6,7 @@ const initialState = {
     }
 };
 
-const userReducer: Reducer = (state = initialState, action: any) => {
+const userReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
         case "USER_DATA":
             return {

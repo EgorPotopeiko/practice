@@ -9,6 +9,7 @@ import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../s
 import ProductsDB from '../../services';
 import { userData } from '../../store/user/actions';
 import ModalAuth from './ModalAuth/ModalAuth';
+import { TUser } from '../../models/user';
 
 const { Title, Text } = Typography;
 
@@ -59,7 +60,7 @@ const Header: React.FC = () => {
     };
 
     const authProcess = () => {
-        const even = (element: any) => element.email === authEmail;
+        const even = (element: TUser) => element.email === authEmail;
         database.getAllUsers()
             .then((response) => response.find(even))
             .then((value) => value.id)

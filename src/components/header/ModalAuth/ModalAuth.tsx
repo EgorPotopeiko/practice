@@ -9,9 +9,9 @@ import './ModalAuth.less';
 
 interface Props {
     modalAuthVisible: boolean,
-    onOk: any,
+    onOk: () => void,
     loading: boolean,
-    onCancel: any
+    onCancel: () => void
 }
 
 const validateEmail = (value: string) => {

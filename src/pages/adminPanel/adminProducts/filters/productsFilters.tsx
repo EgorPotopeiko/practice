@@ -1,19 +1,19 @@
 import { Input, Select } from 'antd';
 import React from 'react';
-import './adminFilters.less';
+import './productsFilters.less';
 
 interface Props {
-    setSearchName: any,
-    setSearchArticle: any,
-    setSearchCategory: any,
-    setSearchStatus: any
+    setSearchName: React.Dispatch<React.SetStateAction<string>>,
+    setSearchArticle: React.Dispatch<React.SetStateAction<string>>,
+    setSearchCategory: React.Dispatch<React.SetStateAction<string>>,
+    setSearchStatus: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const selectValues = ["ALL", "CATS", "DOGS", "FISHES", "BIRDS", "RODENTS", "OTHER"];
 
 const { Option } = Select;
 
-const AdminFilters: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory, setSearchStatus }) => {
+const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory, setSearchStatus }) => {
     return (
         <div className="admin__filters">
             <Input placeholder="Название" onChange={(e) => setSearchName(e.target.value)} />
@@ -31,4 +31,4 @@ const AdminFilters: React.FC<Props> = ({ setSearchName, setSearchArticle, setSea
     );
 }
 
-export default AdminFilters;
+export default ProductsFilter;

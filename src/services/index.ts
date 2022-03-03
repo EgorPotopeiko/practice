@@ -22,8 +22,8 @@ export default class ProductsDB {
         return res.data.map(this._transformUser);
     };
 
-    getUser = async (id: any) => {
-        const even = (element: any) => element.id === id;
+    getUser = async (id: string) => {
+        const even = (element: TUser) => element.id === id;
         const res = await axios.get(`db/users.json`);
         const data = res.data.map(this._transformUser)
         const verifyUser = data.find(even)

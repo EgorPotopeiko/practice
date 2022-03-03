@@ -85,11 +85,11 @@ const Products: React.FC = () => {
                 )
 
         ));
-    const hangleChange = (value: any) => {
+    const hangleChange = (value: number) => {
         setMinValue((value - 1) * size)
         setMaxValue((value) * size)
     }
-    const showSizeChange = (current: any, size: any) => {
+    const showSizeChange = (current: number, size: number) => {
         setSize(size)
     }
     useEffect(() => {
