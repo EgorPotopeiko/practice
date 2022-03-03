@@ -1,0 +1,47 @@
+@import '../../../vars.less';
+
+@border-radius: 6px;
+
+.ant {
+    &-modal-content {
+      max-width: 430px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    &-modal-body {
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    &-btn-group {
+      display: flex;
+      justify-content: space-between;
+      .ant-btn {
+        border-radius: @border-radius;
+        padding: 20px 20px;
+        line-height: 0.01;
+      }
+      .ant-btn-primary + .ant-btn:not(.ant-btn-primary):not([disabled]) {
+        border-left-color: @button-color;
+      }
+      .ant-btn:first-child:not(:last-child) {
+        border-top-left-radius: @border-radius;
+        border-bottom-left-radius: @border-radius;
+      }
+      .ant-btn:last-child:not(:first-child) {
+        border-top-right-radius: @border-radius;
+        border-bottom-right-radius: @border-radius;
+      }
+      .ant-btn-default {
+        background-color: transparent;
+        border: 1px solid @button-color;
+      }
+    }
+    &-input-affix-wrapper {
+      border-radius: 10px;
+      padding: 10px 15px;
+    }
+    &-input-password {
+        margin-bottom: 0;
+    }
+  }

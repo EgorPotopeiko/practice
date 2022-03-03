@@ -18,12 +18,12 @@ const authReducer: Reducer = (state = initialState, action) => {
                 ...state,
                 isAuth: false
             }
-        case "SET_EMAIL":
+        case "CHECK_EMAIL":
             return {
                 ...state,
                 email: action.email
             }
-        case "SET_PASSWORD":
+        case "CHECK_PASSWORD":
             return {
                 ...state,
                 password: action.password

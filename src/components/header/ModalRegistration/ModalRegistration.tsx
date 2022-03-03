@@ -8,10 +8,9 @@ import { checkEmail, checkPassowrd } from '../../../store/auth/actions';
 import './ModalAuth.less';
 
 interface Props {
-    modalAuthVisible: boolean,
+    modalRegVisible: boolean,
     onOk: any,
     loading: boolean,
-    changeForm: any
 }
 
 const validateEmail = (value: string) => {
@@ -28,20 +27,34 @@ const validatePassword = (value: string) => {
     }
 }
 
-const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeForm }) => {
+const ModalRegistration: React.FC<Props> = ({ modalRegVisible, loading, onOk }) => {
     const dispatch = useDispatch();
     return (
-        <Modal title="Authorization" visible={modalAuthVisible} onOk={onOk} footer={null}>
-            <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
+        <Modal title="Authorization" visible={modalRegVisible} onOk={onOk} footer={null}>
+            <Formik initialValues={{ first_name: '', last_name: '', email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
                 {() => (
                     <Form >
+                        <FormItem name='first_name'>
+                            <FormInput
+                                name='first_name'
+                                required={true}
+                                placeholder='First Name'
+                                prefix={<UserOutlined className="site-form-item-icon" />}
+                            />
+                        </FormItem>
+                        <FormItem name='last_name'>
+                            <FormInput
+                                name='last_name'
+                                required={true}
+                                placeholder='Last Name'
+                            />
+                        </FormItem>
                         <FormItem name='email' validate={validateEmail}>
                             <FormInput
                                 name='email'
                                 required={true}
                                 placeholder='Email'
-                                onChange={(e) => dispatch(checkEmail(e.target.value))}
-                                prefix={<UserOutlined className="site-form-item-icon" />}
+                            //       onChange={(e) => dispatch(setPassword(e.target.value))}
                             />
                         </FormItem>
                         <FormItem name='password' validate={validatePassword}>
@@ -49,13 +62,10 @@ const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeFor
                                 name='password'
                                 required={true}
                                 placeholder='Password'
-                                onChange={(e) => dispatch(checkPassowrd(e.target.value))}
+                            //      onChange={(e) => dispatch(setPassword(e.target.value))}
                             />
                         </FormItem>
-                        <Button.Group>
-                            <SubmitButton loading={loading} onClick={onOk}>Войти</SubmitButton>
-                            <Button onClick={changeForm}>Регистрация</Button>
-                        </Button.Group>
+                        <Button>Регистрация</Button>
                     </Form>
                 )}
             </Formik>
@@ -63,4 +73,4 @@ const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeFor
     )
 }
 
-export default ModalAuth
+export default ModalRegistration

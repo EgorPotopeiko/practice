@@ -3,8 +3,8 @@ import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'a
 import React, { ChangeEvent } from 'react';
 import './Header.less';
 import { useState } from 'react';
-import { login, logout, setEmail, setPassword } from '../../store/auth/actions';
-import { Form, FormItem, Input as FormInput, ResetButton, SubmitButton } from 'formik-antd';
+import { login, logout } from '../../store/auth/actions';
+import { Form, FormItem, Input as FormInput } from 'formik-antd';
 import Modal from 'antd/lib/modal/Modal';
 import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../s
 import ProductsDB from '../../services';
 import { userData } from '../../store/user/actions';
 import { Formik } from 'formik';
+import ModalAuth from './ModalAuth/ModalAuth';
 
 const { Title, Text } = Typography;
 
@@ -45,7 +46,7 @@ const Header: React.FC = () => {
         }
     }
 
-    const handleOk = () => {
+    const handleAuth = () => {
         setLoading(true);
         setTimeout(() => {
             if (authEmail.length === 0 && authPassword.length === 0) {
@@ -62,20 +63,6 @@ const Header: React.FC = () => {
         setModalAuthVisible(false)
         setModalRegVisible(true)
     };
-
-    const validateRequired = (value: string) => {
-        if (!value) {
-            return "Required!";
-        } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-            return "Invalid email address!";
-        }
-    }
-
-    const validatePassword = (value: string) => {
-        if (!value) {
-            return "Required!";
-        }
-    }
 
     const authProcess = () => {
         const even = (element: any) => element.email === authEmail;
@@ -118,35 +105,7 @@ const Header: React.FC = () => {
                             value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Title level={4}>{firstName && `${firstName} ${lastName}`}</Title>
-                        <Modal title="Authorization" visible={modalAuthVisible} onOk={handleOk} footer={null}>
-                            <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
-                                {() => (
-                                    <Form >
-                                        <FormItem name='email' validate={validateRequired}>
-                                            <FormInput
-                                                name='email'
-                                                required={true}
-                                                placeholder='Email'
-                                                onChange={(e) => dispatch(setEmail(e.target.value))}
-                                                prefix={<UserOutlined className="site-form-item-icon" />}
-                                            />
-                                        </FormItem>
-                                        <FormItem name='password' validate={validatePassword}>
-                                            <FormInput.Password
-                                                name='password'
-                                                required={true}
-                                                placeholder='Password'
-                                                onChange={(e) => dispatch(setPassword(e.target.value))}
-                                            />
-                                        </FormItem>
-                                        <Button.Group>
-                                            <SubmitButton loading={loading} onClick={handleOk}>Войти</SubmitButton>
-                                            <Button onClick={changeForm}>Регистрация</Button>
-                                        </Button.Group>
-                                    </Form>
-                                )}
-                            </Formik>
-                        </Modal>
+                        <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} changeForm={changeForm} />
                         <Modal title="Registration" visible={modalRegVisible} footer={null}>
                             <Formik initialValues={{ first_name: '', last_name: '', email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
                                 {() => (
