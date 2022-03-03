@@ -4,7 +4,6 @@ import productsReducer from "./products/reducer";
 import filterReducer from "./filters/reducer";
 import loadingReducer from "./loading/reducer";
 import userReducer from "./user/reducer";
-import registrationReducer from "./registration/reducer";
 import { connectRouter } from "connected-react-router";
 import history from "../history";
 
@@ -14,8 +13,7 @@ const rootReducer = combineReducers({
     productsReducer,
     filterReducer,
     loadingReducer,
-    userReducer,
-    registrationReducer
+    userReducer
 })
 
 export default rootReducer;

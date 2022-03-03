@@ -9,7 +9,6 @@ import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../s
 import ProductsDB from '../../services';
 import { userData } from '../../store/user/actions';
 import ModalAuth from './ModalAuth/ModalAuth';
-import ModalRegistration from './ModalRegistration/ModalRegistration';
 
 const { Title, Text } = Typography;
 
@@ -30,10 +29,8 @@ const Header: React.FC = () => {
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
     const firstName = useSelector((state: RootStateOrAny) => state.userReducer.user.firstName);
     const lastName = useSelector((state: RootStateOrAny) => state.userReducer.user.lastName);
-    const registrationUser = useSelector((state: RootStateOrAny) => state.registrationReducer.newUser.email);
     const [loading, setLoading] = useState(false);
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
-    const [modalRegVisible, setModalRegVisible] = useState(false);
 
     const showModal = () => {
         setModalAuthVisible(true);
@@ -57,21 +54,8 @@ const Header: React.FC = () => {
         }, 3000)
     };
 
-    const handleReg = () => {
-        console.log(`New user: ${registrationUser}`)
-    };
-
-    const changeForm = () => {
-        setModalAuthVisible(false)
-        setModalRegVisible(true)
-    };
-
     const closeAuthForm = () => {
         setModalAuthVisible(false)
-    };
-
-    const closeRegForm = () => {
-        setModalRegVisible(false)
     };
 
     const authProcess = () => {
@@ -115,8 +99,7 @@ const Header: React.FC = () => {
                             value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Title level={4}>{firstName && `${firstName} ${lastName}`}</Title>
-                        <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} changeForm={changeForm} onCancel={closeAuthForm} />
-                        <ModalRegistration modalRegVisible={modalRegVisible} onOk={handleReg} onCancel={closeRegForm} />
+                        <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} onCancel={closeAuthForm} />
                     </div>
                 </div>
                 {role === "user" || role === "guest"

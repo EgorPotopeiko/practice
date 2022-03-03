@@ -11,7 +11,6 @@ interface Props {
     modalAuthVisible: boolean,
     onOk: any,
     loading: boolean,
-    changeForm: any,
     onCancel: any
 }
 
@@ -29,7 +28,7 @@ const validatePassword = (value: string) => {
     }
 }
 
-const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeForm, onCancel }) => {
+const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, onCancel }) => {
     const dispatch = useDispatch();
     return (
         <Modal title="Authorization" visible={modalAuthVisible} onOk={onOk} onCancel={onCancel} footer={null}>
@@ -55,7 +54,6 @@ const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeFor
                         </FormItem>
                         <Button.Group>
                             <SubmitButton loading={loading} onClick={onOk}>Войти</SubmitButton>
-                            <Button onClick={changeForm}>Регистрация</Button>
                         </Button.Group>
                     </Form>
                 )}
