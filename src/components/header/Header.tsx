@@ -4,15 +4,12 @@ import React, { ChangeEvent } from 'react';
 import './Header.less';
 import { useState } from 'react';
 import { login, logout } from '../../store/auth/actions';
-import { Form, FormItem, Input as FormInput } from 'formik-antd';
-import Modal from 'antd/lib/modal/Modal';
-import { UserOutlined } from '@ant-design/icons';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/actions';
 import ProductsDB from '../../services';
 import { userData } from '../../store/user/actions';
-import { Formik } from 'formik';
 import ModalAuth from './ModalAuth/ModalAuth';
+import ModalRegistration from './ModalRegistration/ModalRegistration';
 
 const { Title, Text } = Typography;
 
@@ -33,6 +30,7 @@ const Header: React.FC = () => {
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
     const firstName = useSelector((state: RootStateOrAny) => state.userReducer.user.firstName);
     const lastName = useSelector((state: RootStateOrAny) => state.userReducer.user.lastName);
+    const registrationUser = useSelector((state: RootStateOrAny) => state.registrationReducer.newUser.email);
     const [loading, setLoading] = useState(false);
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
     const [modalRegVisible, setModalRegVisible] = useState(false);
@@ -57,6 +55,10 @@ const Header: React.FC = () => {
                 setLoading(false)
             }
         }, 3000)
+    };
+
+    const handleReg = () => {
+        console.log(`New user: ${registrationUser}`)
     };
 
     const changeForm = () => {
@@ -106,48 +108,7 @@ const Header: React.FC = () => {
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Title level={4}>{firstName && `${firstName} ${lastName}`}</Title>
                         <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} changeForm={changeForm} />
-                        <Modal title="Registration" visible={modalRegVisible} footer={null}>
-                            <Formik initialValues={{ first_name: '', last_name: '', email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
-                                {() => (
-                                    <Form >
-                                        <FormItem name='first_name'>
-                                            <FormInput
-                                                name='first_name'
-                                                required={true}
-                                                placeholder='First Name'
-                                                //    onChange={(e) => dispatch(setEmail(e.target.value))}
-                                                prefix={<UserOutlined className="site-form-item-icon" />}
-                                            />
-                                        </FormItem>
-                                        <FormItem name='last_name'>
-                                            <FormInput
-                                                name='last_name'
-                                                required={true}
-                                                placeholder='Last Name'
-                                            //   onChange={(e) => dispatch(setPassword(e.target.value))}
-                                            />
-                                        </FormItem>
-                                        <FormItem name='email'>
-                                            <FormInput
-                                                name='email'
-                                                required={true}
-                                                placeholder='Email'
-                                            //       onChange={(e) => dispatch(setPassword(e.target.value))}
-                                            />
-                                        </FormItem>
-                                        <FormItem name='password'>
-                                            <FormInput.Password
-                                                name='password'
-                                                required={true}
-                                                placeholder='Password'
-                                            //      onChange={(e) => dispatch(setPassword(e.target.value))}
-                                            />
-                                        </FormItem>
-                                        <Button>Регистрация</Button>
-                                    </Form>
-                                )}
-                            </Formik>
-                        </Modal>
+                        <ModalRegistration modalRegVisible={modalRegVisible} onOk={handleReg} />
                     </div>
                 </div>
                 {role === "user" || role === "guest"

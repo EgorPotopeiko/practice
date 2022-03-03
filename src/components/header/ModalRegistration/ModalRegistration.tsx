@@ -1,16 +1,15 @@
 import { UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
-import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
+import { Form, FormItem, Input as FormInput } from 'formik-antd';
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { checkEmail, checkPassowrd } from '../../../store/auth/actions';
-import './ModalAuth.less';
+import { setFirstName, setLastName, setEmail, setPassword } from '../../../store/registration/actions';
+import './ModalRegistration.less';
 
 interface Props {
     modalRegVisible: boolean,
     onOk: any,
-    loading: boolean,
 }
 
 const validateEmail = (value: string) => {
@@ -27,10 +26,10 @@ const validatePassword = (value: string) => {
     }
 }
 
-const ModalRegistration: React.FC<Props> = ({ modalRegVisible, loading, onOk }) => {
+const ModalRegistration: React.FC<Props> = ({ modalRegVisible, onOk }) => {
     const dispatch = useDispatch();
     return (
-        <Modal title="Authorization" visible={modalRegVisible} onOk={onOk} footer={null}>
+        <Modal title="Authorization" visible={modalRegVisible} footer={null}>
             <Formik initialValues={{ first_name: '', last_name: '', email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
                 {() => (
                     <Form >
@@ -40,6 +39,7 @@ const ModalRegistration: React.FC<Props> = ({ modalRegVisible, loading, onOk }) 
                                 required={true}
                                 placeholder='First Name'
                                 prefix={<UserOutlined className="site-form-item-icon" />}
+                                onChange={(e) => dispatch(setFirstName(e.target.value))}
                             />
                         </FormItem>
                         <FormItem name='last_name'>
@@ -47,6 +47,7 @@ const ModalRegistration: React.FC<Props> = ({ modalRegVisible, loading, onOk }) 
                                 name='last_name'
                                 required={true}
                                 placeholder='Last Name'
+                                onChange={(e) => dispatch(setLastName(e.target.value))}
                             />
                         </FormItem>
                         <FormItem name='email' validate={validateEmail}>
@@ -54,7 +55,7 @@ const ModalRegistration: React.FC<Props> = ({ modalRegVisible, loading, onOk }) 
                                 name='email'
                                 required={true}
                                 placeholder='Email'
-                            //       onChange={(e) => dispatch(setPassword(e.target.value))}
+                                onChange={(e) => dispatch(setEmail(e.target.value))}
                             />
                         </FormItem>
                         <FormItem name='password' validate={validatePassword}>
@@ -62,10 +63,10 @@ const ModalRegistration: React.FC<Props> = ({ modalRegVisible, loading, onOk }) 
                                 name='password'
                                 required={true}
                                 placeholder='Password'
-                            //      onChange={(e) => dispatch(setPassword(e.target.value))}
+                                onChange={(e) => dispatch(setPassword(e.target.value))}
                             />
                         </FormItem>
-                        <Button>Регистрация</Button>
+                        <Button onClick={onOk}>Регистрация</Button>
                     </Form>
                 )}
             </Formik>

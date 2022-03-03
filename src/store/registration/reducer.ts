@@ -1,10 +1,12 @@
 import { Reducer } from 'redux';
 
 const initialState = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
+    newUser: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: ""
+    }
 };
 
 const registrationReducer: Reducer = (state = initialState, action) => {
@@ -12,22 +14,34 @@ const registrationReducer: Reducer = (state = initialState, action) => {
         case "SET_FIRSTNAME":
             return {
                 ...state,
-                firstName: action.firstName,
+                newUser: {
+                    ...state.newUser,
+                    firstName: action.firstName
+                }
             }
         case "SET_LASTNAME":
             return {
                 ...state,
-                lastName: action.lastName,
+                newUser: {
+                    ...state.newUser,
+                    lastName: action.lastName,
+                }
             }
         case "SET_EMAIL":
             return {
                 ...state,
-                email: action.email,
+                newUser: {
+                    ...state.newUser,
+                    email: action.email,
+                }
             }
         case "SET_PASSWORD":
             return {
                 ...state,
-                password: action.password,
+                newUser: {
+                    ...state.newUser,
+                    password: action.password,
+                }
             }
         default:
             return state;
