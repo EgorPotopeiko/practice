@@ -20,7 +20,7 @@ export const checkEmail = (email: string) => {
     }
 }
 
-export const checkPassowrd = (password: string) => {
+export const checkPassword = (password: string) => {
     return {
         type: "CHECK_PASSWORD",
         password

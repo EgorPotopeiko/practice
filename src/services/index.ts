@@ -30,6 +30,14 @@ export default class ProductsDB {
         return verifyUser
     };
 
+    registerUser = async () => {
+        const res = await axios.post(`db/users.json`, {
+            firstName: 'Test',
+            lastname: 'Test'
+        })
+        console.log(res)
+    }
+
     _transformProduct = (product: TProduct) => {
         return {
             id: product.id,

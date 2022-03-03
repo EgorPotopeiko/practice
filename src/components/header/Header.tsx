@@ -66,6 +66,14 @@ const Header: React.FC = () => {
         setModalRegVisible(true)
     };
 
+    const closeAuthForm = () => {
+        setModalAuthVisible(false)
+    };
+
+    const closeRegForm = () => {
+        setModalRegVisible(false)
+    };
+
     const authProcess = () => {
         const even = (element: any) => element.email === authEmail;
         database.getAllUsers()
@@ -107,8 +115,8 @@ const Header: React.FC = () => {
                             value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
                         <Title level={4}>{firstName && `${firstName} ${lastName}`}</Title>
-                        <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} changeForm={changeForm} />
-                        <ModalRegistration modalRegVisible={modalRegVisible} onOk={handleReg} />
+                        <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} changeForm={changeForm} onCancel={closeAuthForm} />
+                        <ModalRegistration modalRegVisible={modalRegVisible} onOk={handleReg} onCancel={closeRegForm} />
                     </div>
                 </div>
                 {role === "user" || role === "guest"

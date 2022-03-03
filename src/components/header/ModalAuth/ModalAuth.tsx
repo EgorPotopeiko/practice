@@ -4,14 +4,15 @@ import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { checkEmail, checkPassowrd } from '../../../store/auth/actions';
+import { checkEmail, checkPassword } from '../../../store/auth/actions';
 import './ModalAuth.less';
 
 interface Props {
     modalAuthVisible: boolean,
     onOk: any,
     loading: boolean,
-    changeForm: any
+    changeForm: any,
+    onCancel: any
 }
 
 const validateEmail = (value: string) => {
@@ -28,10 +29,10 @@ const validatePassword = (value: string) => {
     }
 }
 
-const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeForm }) => {
+const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeForm, onCancel }) => {
     const dispatch = useDispatch();
     return (
-        <Modal title="Authorization" visible={modalAuthVisible} onOk={onOk} footer={null}>
+        <Modal title="Authorization" visible={modalAuthVisible} onOk={onOk} onCancel={onCancel} footer={null}>
             <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
                 {() => (
                     <Form >
@@ -49,7 +50,7 @@ const ModalAuth: React.FC<Props> = ({ modalAuthVisible, onOk, loading, changeFor
                                 name='password'
                                 required={true}
                                 placeholder='Password'
-                                onChange={(e) => dispatch(checkPassowrd(e.target.value))}
+                                onChange={(e) => dispatch(checkPassword(e.target.value))}
                             />
                         </FormItem>
                         <Button.Group>
