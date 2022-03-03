@@ -5,15 +5,31 @@
         margin-top: 5px;
         margin-bottom: 10px;
         width: 350px;
-        &-head-title span {
-            font-weight: 400;
-            color: #918c8cd8
+        &-head-title {
+            position: relative;
+            span {
+                font-weight: 400;
+                color: #918c8cd8
+            }
+        }
+        &:hover {
+            .anticon {
+                display: block;
+            }
         }
         &-body {
             padding: 15px 15px 15px 25px;
-        p {
-            font-weight: 600;
+            p {
+                font-weight: 600;
+            }
         }
-    }
+        .anticon {
+            color: black;
+            font-size: 30px;
+            position: absolute;
+            right: 0;
+            top: 45px;
+            display: none;
+        }
     }
 }

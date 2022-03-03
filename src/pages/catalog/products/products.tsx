@@ -69,6 +69,7 @@ const Products: React.FC = () => {
                 (
                     <CardList
                         key={product.id}
+                        id={product.id}
                         title={product.title}
                         cost={product.cost}
                         maker={product.maker}
