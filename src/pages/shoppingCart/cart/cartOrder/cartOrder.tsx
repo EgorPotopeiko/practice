@@ -14,13 +14,8 @@ interface Props {
 }
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
-    let total = useSelector((state: RootStateOrAny) => state.cartReducer.orderTotal);
+    const total = useSelector((state: RootStateOrAny) => state.cartReducer.orderTotal);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
-    const prices = cartItems.map((item: any) => {
-        return item.cost
-    })
-    const sumTotal = prices.reduce((prev: any, cur: any) => prev + cur,
-        total)
     const onClose = () => {
         setVisible(false)
     };
@@ -43,7 +38,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                             </Col>
                             <Col span={6}>
                                 <Form.Item>
-                                    <Text>{sumTotal} руб</Text>
+                                    <Text>{total} руб</Text>
                                 </Form.Item>
                             </Col>
                         </Row>
