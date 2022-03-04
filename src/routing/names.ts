@@ -1,7 +1,11 @@
 export enum PUBLIC_PATH {
     APP = '/',
-    AUTH = '/auth',
     ADMIN = '/admin',
     NOTFOUND = '/404',
+}
+
+export enum AUTH_PATH {
+    AUTH = '/auth',
+    CART = '/auth/cart'
 }
 

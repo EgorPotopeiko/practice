@@ -12,9 +12,12 @@ export default class ProductsDB {
         return res.data.map(this._transformProduct);
     };
 
-    getProduct = async (id: number) => {
+    getProduct = async (id: string) => {
+        const even = (element: TProduct) => element.id === id;
         const res = await axios.get(`db/products.json`);
-        return res.data[id];
+        const data = res.data.map(this._transformProduct);
+        const findProduct = data.find(even);
+        return findProduct;
     };
 
     getAllUsers = async () => {
@@ -25,8 +28,8 @@ export default class ProductsDB {
     getUser = async (id: string) => {
         const even = (element: TUser) => element.id === id;
         const res = await axios.get(`db/users.json`);
-        const data = res.data.map(this._transformUser)
-        const verifyUser = data.find(even)
+        const data = res.data.map(this._transformUser);
+        const verifyUser = data.find(even);
         return verifyUser
     };
 
@@ -39,7 +42,8 @@ export default class ProductsDB {
             available: product.available,
             date: product.added_date,
             maker: product.maker,
-            category: product.category
+            category: product.category,
+            subcategory: product.subcategory
         };
     };
 

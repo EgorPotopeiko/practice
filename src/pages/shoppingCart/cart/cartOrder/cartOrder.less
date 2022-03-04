@@ -1,0 +1,24 @@
+@padding-block: 5px 10px;
+
+.cart__order {
+    background-color: white;
+    .order {
+        &__header {
+            padding: @padding-block;
+            display: flex;
+            justify-content: space-between;
+            span {
+                line-height: 2.35;
+            }
+        }
+        &__delivery {
+            display: table-caption;
+            padding: @padding-block;
+        }
+    }
+    .ant-divider-horizontal {
+        margin: 0;
+        padding: 0px;
+        background-color: red;
+    }
+}

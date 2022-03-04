@@ -10,10 +10,15 @@ import ProductsDB from '../../services';
 import { userData } from '../../store/user/actions';
 import ModalAuth from './ModalAuth/ModalAuth';
 import { TUser } from '../../models/user';
+import { UserOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { AUTH_PATH } from '../../routing/names';
 
 const { Title, Text } = Typography;
 
 const { Option } = Select;
+
+const { CART } = AUTH_PATH;
 
 const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
@@ -23,13 +28,10 @@ const Header: React.FC = () => {
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const authEmail = useSelector((state: RootStateOrAny) => state.authReducer.email);
     const authPassword = useSelector((state: RootStateOrAny) => state.authReducer.password);
-    const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
     const maker = useSelector((state: RootStateOrAny) => state.filterReducer.filterMaker);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
-    const firstName = useSelector((state: RootStateOrAny) => state.userReducer.user.firstName);
-    const lastName = useSelector((state: RootStateOrAny) => state.userReducer.user.lastName);
     const [loading, setLoading] = useState(false);
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
 
@@ -93,43 +95,33 @@ const Header: React.FC = () => {
                 <div className='header__wrap'>
                     <Title>Shop</Title>
                     <div className='header__user'>
-                        {role === "user" || role === "guest"
-                            ?
-                            <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                                dispatch(searchFilter(e.target.value))
-                            }
-                                placeholder="input search text"
-                                value={search} />
-                            :
-                            null
+                        <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            dispatch(searchFilter(e.target.value))
                         }
+                            placeholder="input search text"
+                            value={search} />
                         <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
-                        <Title level={4}>{firstName && `${firstName} ${lastName}`}</Title>
+                        <Link to={CART}>{auth ? <UserOutlined /> : null}</Link>
                         <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} onCancel={closeAuthForm} />
                     </div>
                 </div>
-                {role === "user" || role === "guest"
-                    ?
-                    (<div className='header__filters'>
-                        <>
-                            <Select value={maker} placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch(makerFilter(maker))} >
-                                {selectValues.map((item) => (
-                                    <Option key={item} value={item}>{item.toUpperCase()}</Option>
-                                ))}
-                            </Select>
-                        </>
-                        <>
-                            <Text>В наличии</Text>
-                            <Switch onChange={() => dispatch(availableFilter(!available))} defaultChecked />
-                        </>
-                        <>
-                            <Text>Цена</Text>
-                            <Slider range max={100} defaultValue={priceRange} onChange={(priceRange) => dispatch(priceFilter(priceRange))} />
-                        </>
-                    </div>)
-                    :
-                    null
-                }
+                <div className='header__filters'>
+                    <>
+                        <Select value={maker} placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch(makerFilter(maker))} >
+                            {selectValues.map((item) => (
+                                <Option key={item} value={item}>{item.toUpperCase()}</Option>
+                            ))}
+                        </Select>
+                    </>
+                    <>
+                        <Text>В наличии</Text>
+                        <Switch onChange={() => dispatch(availableFilter(!available))} defaultChecked />
+                    </>
+                    <>
+                        <Text>Цена</Text>
+                        <Slider range max={100} defaultValue={priceRange} onChange={(priceRange) => dispatch(priceFilter(priceRange))} />
+                    </>
+                </div>
             </PageHeader>
         </div>
     );
