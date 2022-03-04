@@ -4,19 +4,15 @@ import React, { ChangeEvent } from 'react';
 import { logout } from '../../../store/auth/actions';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { searchFilter } from '../../../store/filters/actions';
-import ProductsDB from '../../../services';
 import { userData } from '../../../store/user/actions';
 import "./CartHeader.less"
 
 const { Title } = Typography;
 
 const CartHeader: React.FC = () => {
-    const database = new ProductsDB();
     const dispatch = useDispatch();
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
-    const firstName = useSelector((state: RootStateOrAny) => state.userReducer.user.firstName);
-    const lastName = useSelector((state: RootStateOrAny) => state.userReducer.user.lastName);
 
     const showModal = () => {
         if (auth === true) {

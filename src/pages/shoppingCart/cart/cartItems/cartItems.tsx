@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { Checkbox, List, Table, Typography } from 'antd';
+import { Table } from 'antd';
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import './cartItems.less';
