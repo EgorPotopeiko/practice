@@ -27,8 +27,8 @@ export const useRoutes = (isAuth: boolean, role: string) => {
     }
     return (
         <Switch>
-            <Route path={CART} exact component={ShoppingCart} />
-            <Redirect to={CART} />
+            <Route path={APP} exact component={Catalog} />
+            <Redirect to={APP} />
         </Switch>
     )
 }

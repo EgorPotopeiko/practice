@@ -4,6 +4,7 @@ import MaskedInput from 'antd-mask-input';
 import "./cartOrder.less"
 import { SubmitButton } from 'formik-antd';
 import { Formik } from 'formik';
+import { RootStateOrAny, useSelector } from 'react-redux';
 
 const { Title, Text } = Typography;
 
@@ -13,15 +14,20 @@ interface Props {
 }
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
-
+    let total = useSelector((state: RootStateOrAny) => state.cartReducer.orderTotal);
+    const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
+    const prices = cartItems.map((item: any) => {
+        return item.cost
+    })
+    const sumTotal = prices.reduce((prev: any, cur: any) => prev + cur,
+        total)
     const onClose = () => {
         setVisible(false)
     };
-
     return (
         <Drawer
             title="Create a order"
-            width={600}
+            width={610}
             onClose={onClose}
             visible={visible}
             bodyStyle={{ paddingBottom: 80 }}
@@ -32,12 +38,12 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Row gutter={16}>
                             <Col span={18}>
                                 <Form.Item>
-                                    <Title level={4}>Выбрано 0 товаров</Title>
+                                    <Title level={4}>Выбрано {cartItems.length} товара(-ов)</Title>
                                 </Form.Item>
                             </Col>
                             <Col span={6}>
                                 <Form.Item>
-                                    <Text>0 руб</Text>
+                                    <Text>{sumTotal} руб</Text>
                                 </Form.Item>
                             </Col>
                         </Row>
