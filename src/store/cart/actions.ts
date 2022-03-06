@@ -5,16 +5,9 @@ export const addedToCart = (item: any) => {
     }
 }
 
-export const removedToCart = (id: string) => {
+export const removedToCart = (item: any) => {
     return {
         type: "REMOVED_TO_CART",
-        id
-    }
-}
-
-export const allRemovedToCart = (id: string) => {
-    return {
-        type: "ALL_REMOVED_TO_CART",
-        id
+        item
     }
 }
