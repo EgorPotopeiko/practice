@@ -1,5 +1,5 @@
 import { Col, Drawer, Form, Input, Row, Typography } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
 import "./cartOrder.less"
 import { SubmitButton } from 'formik-antd';
@@ -14,11 +14,22 @@ interface Props {
 }
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
-    const total = useSelector((state: RootStateOrAny) => state.cartReducer.orderTotal);
+    const [total, setTotal] = useState(0);
+    const [length, setLength] = useState(0);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
     const onClose = () => {
         setVisible(false)
     };
+    useEffect(() => {
+        let ttl = 0;
+        let len = 0;
+        cartItems.forEach((el: any) => {
+            ttl += +el.total;
+            len += +el.amount;
+        });
+        setTotal(ttl);
+        setLength(len)
+    }, [cartItems]);
     return (
         <Drawer
             title="Create a order"
@@ -33,7 +44,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Row gutter={16}>
                             <Col span={18}>
                                 <Form.Item>
-                                    <Title level={4}>Выбрано {cartItems.length} товара(-ов)</Title>
+                                    <Title level={4}>Выбрано {length} товара(-ов)</Title>
                                 </Form.Item>
                             </Col>
                             <Col span={6}>

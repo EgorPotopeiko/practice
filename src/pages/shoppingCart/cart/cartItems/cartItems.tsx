@@ -22,8 +22,8 @@ const columns = [
     },
     {
         title: 'Цена',
-        dataIndex: 'cost',
-        key: 'cost',
+        dataIndex: 'total',
+        key: 'total',
     }
 ];
 

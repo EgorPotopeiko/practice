@@ -26,13 +26,9 @@ const CardProduct: React.FC<Props> = ({ id, title, cost, maker, category }) => {
                 const newCartItem = {
                     id: response.id,
                     title: response.title,
-                    desc: response.description,
                     cost: response.cost,
-                    date: response.date,
-                    maker: response.maker,
                     category: response.category,
                     subcategory: response.subcategory,
-                    amount: 1
                 }
                 dispatch(addedToCart(newCartItem))
             })

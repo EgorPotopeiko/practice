@@ -22,32 +22,25 @@ const updateCartItems = (cartProducts: any, item: any, idx: any) => {
     ]
 };
 
-const updateCartItem = (product: any, item: any, quantity: any) => {
-    const { id = product.id, title = product.title, desc = product.desc, date = product.date, maker = product.maker, category = product.category, subcategory = product.subcategory, amount = 0, cost = 0 } = item
+const updateCartItem = (product: any, item: any = {}, quantity: any) => {
+    const { total = 0, amount = 0 } = item
     return {
-        id,
-        title,
-        desc,
-        date,
-        maker,
-        category,
-        subcategory,
+        id: product.id,
+        title: product.title,
+        subcategory: product.subcategory,
+        cost: product.cost,
         amount: amount + quantity,
-        cost: cost + quantity * (+product.cost)
+        total: total + quantity * (product.cost)
     }
 };
 
 const updateOrder = (state: any, productId: any, action: any, quantity: any) => {
     const newItem = action.item;
-    const testMas = [
-        ...state.cartProducts,
-        newItem
-    ]
-    const itemIndex = testMas.findIndex(({ id }) => id === productId);
+    const testMas = state.cartProducts
+    const itemIndex = testMas.findIndex((product: any) => product.id === productId);
     const item = testMas[itemIndex];
     const finallyItem = updateCartItem(newItem, item, quantity);
     return {
-        orderTotal: 0,
         cartProducts: updateCartItems(testMas, finallyItem, itemIndex)
     }
 };
@@ -55,8 +48,7 @@ const updateOrder = (state: any, productId: any, action: any, quantity: any) => 
 const cartReducer: Reducer = (state, action) => {
     if (state === undefined) {
         return {
-            cartProducts: [],
-            orderTotal: 0
+            cartProducts: []
         }
     }
     switch (action.type) {
