@@ -5,6 +5,7 @@ import filterReducer from "./filters/reducer";
 import loadingReducer from "./loading/reducer";
 import userReducer from "./user/reducer";
 import cartReducer from "./cart/reducer";
+import orderReducer from "./orders/reducer";
 import { connectRouter } from "connected-react-router";
 import history from "../history";
 
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     filterReducer,
     loadingReducer,
     userReducer,
-    cartReducer
+    cartReducer,
+    orderReducer
 })
 
 export default rootReducer;

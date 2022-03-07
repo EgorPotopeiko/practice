@@ -4,6 +4,8 @@ import MaskedInput from 'antd-mask-input';
 import "./cartOrder.less"
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { createOrder } from '../../../../store/orders/actions';
 
 interface Props {
     visible: any,
@@ -13,6 +15,7 @@ interface Props {
 const { Title, Text } = Typography;
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
+    const dispatch = useDispatch()
     const [total, setTotal] = useState(0);
     const [length, setLength] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -36,7 +39,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             setLoading(true)
             setSubmitting(true)
             setTimeout(() => {
-                console.log(values)
+                dispatch(createOrder(values))
                 setLoading(false)
                 setSubmitting(false)
                 resetForm()
