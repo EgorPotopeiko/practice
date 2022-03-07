@@ -50,19 +50,18 @@ const CartItems: React.FC = () => {
         {
             title: 'Action',
             key: 'action',
-            render: (text: any, record: any) => (
+            render: (record: any) => (
                 <Space size="middle">
-                    <DeleteOutlined onClick={() => cartItems.map((item: any) => dispatch(removedToCart(item.id)))} />
+                    <DeleteOutlined onClick={() => loadProduct(record.id)} />
                 </Space>
             ),
         },
     ];
-
     cartItems.map((item: any) => {
         item['key'] = item.id.split('-')[0];
     })
     return (
-        <Table dataSource={cartItems} columns={columns} rowSelection={{ type: "checkbox" }} />
+        <Table dataSource={cartItems} columns={columns} />
     )
 }
 

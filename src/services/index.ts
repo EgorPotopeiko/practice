@@ -3,31 +3,28 @@ import { TProduct } from './../models/product';
 import axios from "axios";
 
 export default class ProductsDB {
-    api = axios.create({
-        baseURL: "http://localhost:3000/"
-    });
 
     getAllProducts = async () => {
-        const res = await axios.get(`db/products.json`);
+        const res = await axios.get(`http://localhost:3000/db/products.json`);
         return res.data.map(this._transformProduct);
     };
 
     getProduct = async (id: string) => {
         const even = (element: TProduct) => element.id === id;
-        const res = await axios.get(`db/products.json`);
+        const res = await axios.get(`http://localhost:3000/db/products.json`);
         const data = res.data.map(this._transformProduct);
         const findProduct = data.find(even);
         return findProduct;
     };
 
     getAllUsers = async () => {
-        const res = await axios.get(`db/users.json`);
+        const res = await axios.get(`http://localhost:3000/db/users.json`);
         return res.data.map(this._transformUser);
     };
 
     getUser = async (id: string) => {
         const even = (element: TUser) => element.id === id;
-        const res = await axios.get(`db/users.json`);
+        const res = await axios.get(`http://localhost:3000/db/users.json`);
         const data = res.data.map(this._transformUser);
         const verifyUser = data.find(even);
         return verifyUser

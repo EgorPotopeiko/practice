@@ -53,10 +53,9 @@ const cartReducer: Reducer = (state, action) => {
     }
     switch (action.type) {
         case "ADDED_TO_CART":
-            const newItem = action.item;
-            return updateOrder(state, newItem.id, action, 1);
+            return updateOrder(state, action.item.id, action, 1);
         case "REMOVED_TO_CART":
-            return updateOrder(state, newItem.id, action, -1);
+            return updateOrder(state, action.item.id, action, -1);
         case "ALL_REMOVED_TO_CART":
             return {
                 ...state,
