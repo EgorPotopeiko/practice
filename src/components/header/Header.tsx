@@ -12,13 +12,14 @@ import ModalAuth from './ModalAuth/ModalAuth';
 import { TUser } from '../../models/user';
 import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { AUTH_PATH } from '../../routing/names';
+import { AUTH_PATH, PUBLIC_PATH } from '../../routing/names';
 
 const { Title, Text } = Typography;
 
 const { Option } = Select;
 
-const { CART } = AUTH_PATH;
+const { CART, AUTH } = AUTH_PATH;
+const { ADMIN, APP, NOTFOUND } = PUBLIC_PATH
 
 const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
@@ -32,6 +33,7 @@ const Header: React.FC = () => {
     const maker = useSelector((state: RootStateOrAny) => state.filterReducer.filterMaker);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
+    const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
     const [loading, setLoading] = useState(false);
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
 
@@ -93,7 +95,7 @@ const Header: React.FC = () => {
         <div className="header">
             <PageHeader>
                 <div className='header__wrap'>
-                    <Title>Shop</Title>
+                    <Title><Link to={role === 'guest' ? APP : role === 'user' ? AUTH : role === 'admin' ? ADMIN : NOTFOUND}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
                             dispatch(searchFilter(e.target.value))

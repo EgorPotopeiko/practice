@@ -6,14 +6,19 @@ import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { searchFilter } from '../../../store/filters/actions';
 import { userData } from '../../../store/user/actions';
 import "./CartHeader.less"
+import { Link } from 'react-router-dom';
+import { AUTH_PATH, PUBLIC_PATH } from '../../../routing/names';
 
 const { Title } = Typography;
+
+const { AUTH } = AUTH_PATH;
+const { NOTFOUND } = PUBLIC_PATH;
 
 const CartHeader: React.FC = () => {
     const dispatch = useDispatch();
     const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
-
+    const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
     const showModal = () => {
         if (auth === true) {
             dispatch(logout(auth));
@@ -25,7 +30,7 @@ const CartHeader: React.FC = () => {
         <div className="cart__header">
             <PageHeader>
                 <div className='header__wrap'>
-                    <Title>Shop</Title>
+                    <Title><Link to={role === 'user' && auth ? AUTH : NOTFOUND}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
                             dispatch(searchFilter(e.target.value))
