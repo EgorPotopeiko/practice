@@ -30,14 +30,15 @@ const OrdersList: React.FC = () => {
         },
         {
             title: 'Цена',
-            dataIndex: 'total',
-            key: 'total',
+            dataIndex: 'payment',
+            key: 'payment',
         },
     ];
     ordersItems.map((item: any) => {
         item['key'] = item.id;
-        item['address'] = `${item.town}, ${item.street}, ${item.house}`
+        item['address'] = `${item.town}, ул.${item.street}, ${item.house}`
         item['delivery'] = item.delivery === 'courier' ? "курьером" : item.delivery === 'mail' ? "почтой" : item.delivery === 'self' ? "самовывоз" : null
+        item['payment'] = `${item.payment} руб.`
     })
     return (
         <>

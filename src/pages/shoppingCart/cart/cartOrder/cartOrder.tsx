@@ -55,6 +55,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             setTimeout(() => {
                 values.id = nanoid()
                 values.delivery = delivery
+                values.count = length
+                values.payment = total
                 const newOrder = values;
                 dispatch(createOrder(newOrder))
                 setLoading(false)
@@ -147,7 +149,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Input
                             name="town"
                             placeholder="Город"
-                            value={values.town || ''}
+                            value={values.town}
                             onChange={handleChange}
                         />
                     </Form.Item>
@@ -283,7 +285,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         </Col>
                         <Col span={6}>
                             <Form.Item>
-                                <Text>{total} руб</Text>
+                                <Text>{values.payment} руб</Text>
                             </Form.Item>
                         </Col>
                     </Row>
