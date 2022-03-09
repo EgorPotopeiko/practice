@@ -16,12 +16,11 @@ const { NOTFOUND } = PUBLIC_PATH;
 
 const CartHeader: React.FC = () => {
     const dispatch = useDispatch();
-    const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
-    const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
+    const user = useSelector((state: RootStateOrAny) => state.userReducer.user);
     const showModal = () => {
-        if (auth === true) {
-            dispatch(logout(auth));
+        if (user.isAuth === true) {
+            dispatch(logout(user.isAuth));
             dispatch(userData({ role: "guest" }))
         }
     }
@@ -30,14 +29,14 @@ const CartHeader: React.FC = () => {
         <div className="cart__header">
             <PageHeader>
                 <div className='header__wrap'>
-                    <Title><Link to={role === 'user' && auth ? AUTH : NOTFOUND}>Shop</Link></Title>
+                    <Title><Link to={user.role === 'user' && user.isAuth ? AUTH : NOTFOUND}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
                             dispatch(searchFilter(e.target.value))
                         }
                             placeholder="input search text"
                             value={search} />
-                        <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
+                        <Button onClick={showModal}>{user.isAuth ? "Выйти" : "Войти"}</Button>
                     </div>
                 </div>
             </PageHeader>

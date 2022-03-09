@@ -1,13 +1,12 @@
 /* eslint-disable array-callback-return */
 import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import './Header.less';
 import { useState } from 'react';
 import { login, logout } from '../../store/auth/actions';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { availableFilter, makerFilter, priceFilter, searchFilter } from '../../store/filters/actions';
 import ProductsDB from '../../services';
-import { userData } from '../../store/user/actions';
 import ModalAuth from './ModalAuth/ModalAuth';
 import { TUser } from '../../models/user';
 import { UserOutlined } from '@ant-design/icons';
@@ -26,23 +25,22 @@ const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "Roya
 const Header: React.FC = () => {
     const database = new ProductsDB();
     const dispatch = useDispatch();
-    const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
     const authEmail = useSelector((state: RootStateOrAny) => state.authReducer.email);
     const authPassword = useSelector((state: RootStateOrAny) => state.authReducer.password);
     const available = useSelector((state: RootStateOrAny) => state.filterReducer.filterAvailable);
     const maker = useSelector((state: RootStateOrAny) => state.filterReducer.filterMaker);
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const priceRange = useSelector((state: RootStateOrAny) => state.filterReducer.filterPrice);
-    const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
+    const user = useSelector((state: RootStateOrAny) => state.userReducer.user);
     const [loading, setLoading] = useState(false);
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
 
     const showModal = () => {
         setModalAuthVisible(true);
-        if (auth === true) {
+        if (user.isAuth === true) {
             setModalAuthVisible(false);
-            dispatch(logout(auth));
-            dispatch(userData({ role: "guest" }))
+            dispatch(logout(user.isAuth));
+            localStorage.setItem("user", JSON.stringify({ isAuth: false, role: "guest" }))
         }
     }
 
@@ -83,7 +81,8 @@ const Header: React.FC = () => {
                                 email,
                                 role
                             }
-                            dispatch(userData(authUser));
+                            localStorage.setItem("user", JSON.stringify({ isAuth: true, ...authUser }))
+                            setModalAuthVisible(false)
                         }
                         else {
                             setModalAuthVisible(false);
@@ -91,19 +90,26 @@ const Header: React.FC = () => {
                     })
             })
     }
+    useEffect(() => {
+        localStorage.getItem("user");
+    }, [])
+    useEffect(() => {
+        localStorage.setItem("user", JSON.stringify(user));
+    }, [user])
+    console.log(user)
     return (
         <div className="header">
             <PageHeader>
                 <div className='header__wrap'>
-                    <Title><Link to={role === 'guest' ? APP : role === 'user' ? AUTH : role === 'admin' ? ADMIN : NOTFOUND}>Shop</Link></Title>
+                    <Title><Link to={user.role === 'guest' ? APP : user.role === 'user' ? AUTH : user.role === 'admin' ? ADMIN : NOTFOUND}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input onChange={(e: ChangeEvent<HTMLInputElement>) =>
                             dispatch(searchFilter(e.target.value))
                         }
                             placeholder="input search text"
                             value={search} />
-                        <Button onClick={showModal}>{auth ? "Выйти" : "Войти"}</Button>
-                        <Link to={CART}>{auth ? <UserOutlined /> : null}</Link>
+                        <Button onClick={showModal}>{user.isAuth ? "Выйти" : "Войти"}</Button>
+                        <Link to={CART}>{user.isAuth ? <UserOutlined /> : null}</Link>
                         <ModalAuth modalAuthVisible={modalAuthVisible} onOk={handleAuth} loading={loading} onCancel={closeAuthForm} />
                     </div>
                 </div>

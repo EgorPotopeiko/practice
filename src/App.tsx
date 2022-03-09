@@ -4,9 +4,8 @@ import { useRoutes } from './routing/routes';
 import { RootStateOrAny, useSelector } from 'react-redux';
 
 function App() {
-  const auth = useSelector((state: RootStateOrAny) => state.authReducer.isAuth);
-  const role = useSelector((state: RootStateOrAny) => state.userReducer.user.role);
-  const routes = useRoutes(auth, role)
+  const user = useSelector((state: RootStateOrAny) => state.userReducer.user);
+  const routes = useRoutes(user.isAuth, user.role)
   return (
     <div className="App">
       {routes}

@@ -1,8 +1,9 @@
 import { Reducer } from 'redux';
 
 const initialState = {
-    user: {
-        role: "guest"
+    user: JSON.parse(localStorage.getItem("user")!) || {
+        role: 'guest',
+        isAuth: false
     }
 };
 
