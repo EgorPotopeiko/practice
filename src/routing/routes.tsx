@@ -1,11 +1,12 @@
 import { Redirect, Route, Switch } from "react-router";
 import AdminPanel from "../pages/adminPanel/AdminPanel";
 import Catalog from "../pages/catalog/catalog";
+import OrdersList from "../pages/shoppingCart/cart/ordersList/ordersList";
 import ShoppingCart from "../pages/shoppingCart/ShoppingCart";
 import { AUTH_PATH, PUBLIC_PATH } from "./names"
 
 const { APP, ADMIN } = PUBLIC_PATH;
-const { AUTH, CART } = AUTH_PATH;
+const { AUTH, CART, ORDERS } = AUTH_PATH;
 
 export const useRoutes = (isAuth: boolean, role: string) => {
     if (isAuth && role === "user") {
@@ -13,6 +14,7 @@ export const useRoutes = (isAuth: boolean, role: string) => {
             <Switch>
                 <Route path={AUTH} exact component={Catalog} />
                 <Route path={CART} component={ShoppingCart} />
+                <Route path={ORDERS} component={OrdersList} />
                 <Redirect to={AUTH} />
             </Switch>
         )

@@ -6,6 +6,7 @@ export enum PUBLIC_PATH {
 
 export enum AUTH_PATH {
     AUTH = '/auth',
-    CART = '/auth/cart'
+    CART = '/auth/cart',
+    ORDERS = '/auth/orders'
 }
 
