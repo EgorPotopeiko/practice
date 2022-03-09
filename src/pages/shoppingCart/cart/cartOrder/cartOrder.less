@@ -1,31 +1,11 @@
-@padding-block: 5px 10px;
-
-.cart__order {
-    background-color: white;
-    .order {
-        &__header {
-            padding: @padding-block;
-            display: flex;
-            justify-content: space-between;
-            span {
-                line-height: 2.35;
-            }
-        }
-        &__delivery {
-            display: table-caption;
-            padding: @padding-block;
-        }
-        &__address {
-            padding: @padding-block;
-            .address__info {
-                display: flex;
-            }
-        }
-        
+.ant {
+    &-row &-form-item {
+        margin-bottom: 0px;
     }
-    .ant-divider-horizontal {
-        margin: 0;
-        padding: 0px;
-        background-color: red;
+    &-divider-horizontal {
+        margin: 10px 0px 20px 0px;
+    }
+    &-radio-group {
+        display: grid;
     }
 }

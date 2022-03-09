@@ -1,4 +1,4 @@
-import { Button, Col, Drawer, Form, Input, Row, Typography } from 'antd';
+import { Button, Col, Divider, Drawer, Form, Input, Radio, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
 import "./cartOrder.less"
@@ -20,8 +20,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [length, setLength] = useState(0);
     const [loading, setLoading] = useState(false);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
+    const [delivery, setDelivery] = useState('courier');
     const formik = useFormik({
         initialValues: {
+            delivery: delivery,
             town: '',
             street: '',
             house: '',
@@ -42,15 +44,23 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 dispatch(createOrder(values))
                 setLoading(false)
                 setSubmitting(false)
-                resetForm()
+                setVisible(false)
+                resetForm({})
             }, 3000)
         }
+
     });
 
     const { handleSubmit, handleChange, isSubmitting, values } = formik;
+
     const onClose = () => {
         setVisible(false)
     };
+
+    const onChange = (e: any) => {
+        setDelivery(e.target.value);
+    };
+
     useEffect(() => {
         let ttl = 0;
         let len = 0;
@@ -63,7 +73,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     }, [cartItems]);
     return (
         <Drawer
-            title="Create a order"
+            title="Заявка на заказ"
             width={610}
             onClose={onClose}
             visible={visible}
@@ -82,6 +92,14 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         </Form.Item>
                     </Col>
                 </Row>
+                <Divider />
+                <Text>Способ доставки</Text>
+                <Radio.Group defaultValue="courier" onChange={onChange} value={delivery}>
+                    <Radio value="courier">Курьером</Radio>
+                    <Radio value="mail">Почтой</Radio>
+                    <Radio value="self">Самовывоз</Radio>
+                </Radio.Group>
+                <Divider />
                 <Form.Item
                     name="town"
                     hasFeedback
@@ -91,7 +109,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                     <Input
                         name="town"
                         placeholder="Город"
-                        value={values.town}
+                        value={values.town || ''}
                         onChange={handleChange}
                     />
                 </Form.Item>
@@ -108,7 +126,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         onChange={handleChange}
                     />
                 </Form.Item>
-                <Row gutter={16}>
+                <Row gutter={16} style={{ marginBottom: "24px" }}>
                     <Col span={6}>
                         <Form.Item
                             name="house"
@@ -210,7 +228,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                     htmlType="submit"
                     disabled={isSubmitting}
                     loading={loading}
-                >Submit</Button>
+                >Оформить заказ</Button>
             </Form>
         </Drawer>
     );
