@@ -11,3 +11,10 @@ export const removedToCart = (item: any) => {
         item
     }
 }
+
+export const clearCart = (empty: any) => {
+    return {
+        type: "CLEAR_CART",
+        empty
+    }
+}

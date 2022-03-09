@@ -56,13 +56,10 @@ const cartReducer: Reducer = (state, action) => {
             return updateOrder(state, action.item.id, action, 1);
         case "REMOVED_TO_CART":
             return updateOrder(state, action.item.id, action, -1);
-        case "ALL_REMOVED_TO_CART":
+        case "CLEAR_CART":
             return {
                 ...state,
-                cartProducts: [
-                    ...state.cartProducts,
-                    action.id
-                ]
+                cartProducts: action.empty
             }
         default:
             return state;
