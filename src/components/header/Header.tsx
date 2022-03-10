@@ -41,6 +41,7 @@ const Header: React.FC = () => {
             setModalAuthVisible(false);
             dispatch(logout(user.isAuth));
             localStorage.setItem("user", JSON.stringify({ isAuth: false, role: "guest" }))
+
         }
     }
 
@@ -82,6 +83,7 @@ const Header: React.FC = () => {
                                 role
                             }
                             localStorage.setItem("user", JSON.stringify({ isAuth: true, ...authUser }))
+                            localStorage.setItem("orders", JSON.stringify([]))
                             setModalAuthVisible(false)
                         }
                         else {
@@ -92,6 +94,7 @@ const Header: React.FC = () => {
     }
     useEffect(() => {
         localStorage.getItem("user");
+        localStorage.getItem("orders");
     }, [])
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user));

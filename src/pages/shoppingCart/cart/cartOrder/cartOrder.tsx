@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Button, Col, Divider, Drawer, Form, Input, Radio, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
@@ -32,7 +33,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [successVisible, setSuccessVisible] = useState(false);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
     const [delivery, setDelivery] = useState('courier');
-    const user = localStorage.getItem("user");
+    const orders = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
     const formik = useFormik({
         initialValues: {
             id: '',
@@ -60,6 +61,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 values.payment = total
                 const newOrder = values;
                 dispatch(createOrder(newOrder))
+                const orders = JSON.parse(localStorage.getItem("orders")!)
+                localStorage.setItem("orders", JSON.stringify([...orders, { ...newOrder }]))
                 setLoading(false)
                 setSubmitting(false)
                 setVisible(false)
@@ -100,6 +103,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         setOrderVisible(false)
         setVisible(true)
     }
+
+    useEffect(() => {
+        localStorage.setItem("orders", JSON.stringify(orders));
+    }, [orders])
 
     useEffect(() => {
         let ttl = 0;

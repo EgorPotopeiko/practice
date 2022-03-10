@@ -39,7 +39,7 @@ const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, ca
     return (
         <div className='cardTile'>
             <Card size="small" title={title}>
-                <p>{cost}$</p>
+                <p>{cost} руб.</p>
                 <ShoppingCartOutlined onClick={() => loadProduct(id)} />
             </Card>
         </div>

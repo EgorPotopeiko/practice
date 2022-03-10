@@ -6,7 +6,6 @@ import CartHeader from '../../../../components/header/CartHeader/CartHeader';
 
 const OrdersList: React.FC = () => {
     const ordersItems = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
-    console.log(ordersItems)
     const columns = [
         {
             title: 'Номер заказа',

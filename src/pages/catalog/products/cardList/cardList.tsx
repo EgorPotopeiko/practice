@@ -44,8 +44,8 @@ const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker,
                 <Text>{category}</Text>
                 <ShoppingCartOutlined onClick={() => loadProduct(id)} />
             </>}>
-                <p>Cost: {cost}$</p>
-                <p>Maker: {maker}</p>
+                <p>Стоимость: {cost} руб.</p>
+                <p>Производитель: {maker}</p>
             </Card>
         </div>
     );

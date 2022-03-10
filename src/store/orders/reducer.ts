@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 const initialState = {
-    orders: []
+    orders: JSON.parse(localStorage.getItem("orders")!) || []
 };
 
 const removeOrder = (state: any, id: any) => {
