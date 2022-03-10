@@ -1,5 +1,3 @@
-import React from "react";
-
 export type TUser = {
     id: string,
     firstName: string,

@@ -1,5 +1,3 @@
-import React from "react";
-
 export type TProduct = {
     id: string,
     title: string,

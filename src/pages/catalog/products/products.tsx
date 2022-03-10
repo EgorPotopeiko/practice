@@ -71,17 +71,26 @@ const Products: React.FC = () => {
                         key={product.id}
                         id={product.id}
                         title={product.title}
+                        desc={product.description}
                         cost={product.cost}
+                        available={product.available}
                         maker={product.maker}
                         category={product.category}
+                        subcategory={product.subcategory}
                     />
                 )
                 :
                 (
                     <CardTile
                         key={product.id}
+                        id={product.id}
                         title={product.title}
+                        desc={product.description}
                         cost={product.cost}
+                        available={product.available}
+                        maker={product.maker}
+                        category={product.category}
+                        subcategory={product.subcategory}
                     />
                 )
 

@@ -32,6 +32,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [successVisible, setSuccessVisible] = useState(false);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
     const [delivery, setDelivery] = useState('courier');
+    const user = localStorage.getItem("user");
     const formik = useFormik({
         initialValues: {
             id: '',

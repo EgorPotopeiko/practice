@@ -96,7 +96,6 @@ const Header: React.FC = () => {
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user));
     }, [user])
-    console.log(user)
     return (
         <div className="header">
             <PageHeader>

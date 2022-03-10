@@ -9,14 +9,17 @@ import ProductsDB from '../../../../services';
 interface Props {
     id: string,
     title: string,
+    desc: string,
     cost: number,
+    available: boolean,
     maker: string,
-    category: string
+    category: string,
+    subcategory: string | undefined
 }
 
 const { Title, Text } = Typography;
 
-const CardProduct: React.FC<Props> = ({ id, title, cost, maker, category }) => {
+const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory }) => {
     const dispatch = useDispatch();
     const database = new ProductsDB();
 
