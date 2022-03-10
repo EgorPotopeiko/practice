@@ -2,43 +2,11 @@
 /* eslint-disable array-callback-return */
 import { Table } from 'antd';
 import React from 'react';
-
-const dataSource = [
-    {
-        key: "500",
-        id: "500",
-        user: "test",
-        sum_order: 500,
-        num_order: "№1294",
-        status: "Оплачен",
-        delivery: "Курьером",
-        email: "test@mail.ru"
-    },
-    {
-        key: "430",
-        id: "430",
-        user: "one more",
-        sum_order: 125,
-        num_order: "№127",
-        status: "Оплачен",
-        delivery: "Почтой",
-        email: "oneone@mail.ru"
-    },
-    {
-        key: "29",
-        id: "29",
-        user: "mari",
-        sum_order: 42,
-        num_order: "№297",
-        status: "В пути",
-        delivery: "Самовывоз",
-        email: "mari@mail.ru"
-    },
-];
+import { RootStateOrAny, useSelector } from 'react-redux';
 
 const columns = [
     {
-        title: 'ID',
+        title: 'Номер заказа',
         dataIndex: 'id',
         key: 'id',
     },
@@ -49,13 +17,8 @@ const columns = [
     },
     {
         title: 'Сумма заказа',
-        dataIndex: 'sum_order',
-        key: 'sum_order',
-    },
-    {
-        title: 'Номер заказа',
-        dataIndex: 'num_order',
-        key: 'num_order',
+        dataIndex: 'payment',
+        key: 'payment',
     },
     {
         title: 'Статус',
@@ -75,6 +38,13 @@ const columns = [
 ];
 
 const OrderData: React.FC = () => {
+    const dataSource = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
+    console.log(dataSource)
+    dataSource.map((item: any) => {
+        item['key'] = item.id;
+        item['payment'] = `${item.payment} руб.`;
+        item['delivery'] = item.delivery === 'courier' ? "курьером" : item.delivery === 'mail' ? "почтой" : item.delivery === 'self' ? "самовывоз" : "";
+    })
     return (
         <div className="adminData">
             <Table dataSource={dataSource} columns={columns} rowSelection={{ type: "checkbox" }} />;

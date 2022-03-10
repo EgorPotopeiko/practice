@@ -34,6 +34,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
     const [delivery, setDelivery] = useState('courier');
     const orders = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
+    const authUser = useSelector((state: RootStateOrAny) => state.userReducer.user);
     const formik = useFormik({
         initialValues: {
             id: '',
@@ -46,6 +47,9 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             level: '',
             number: '',
             name: '',
+            status: 'оплачен',
+            email: authUser.email,
+            user: `${authUser.firstName} ${authUser.lastName}`,
             comment: '',
             count: length,
             payment: total

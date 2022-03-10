@@ -18,10 +18,12 @@ const CartHeader: React.FC = () => {
     const dispatch = useDispatch();
     const search = useSelector((state: RootStateOrAny) => state.filterReducer.filterSearch);
     const user = useSelector((state: RootStateOrAny) => state.userReducer.user);
+    const orders = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
     const showModal = () => {
         if (user.isAuth === true) {
             dispatch(logout(user.isAuth));
-            dispatch(userData({ role: "guest" }))
+            dispatch(userData({ isAuth: false, role: "guest" }))
+            localStorage.setItem("orders", JSON.stringify(orders))
         }
     }
 

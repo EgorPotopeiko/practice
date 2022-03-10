@@ -83,7 +83,6 @@ const Header: React.FC = () => {
                                 role
                             }
                             localStorage.setItem("user", JSON.stringify({ isAuth: true, ...authUser }))
-                            localStorage.setItem("orders", JSON.stringify([]))
                             setModalAuthVisible(false)
                         }
                         else {
