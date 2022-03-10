@@ -41,6 +41,16 @@ const filterReducer: Reducer = (state = initialState, action) => {
                 ...state,
                 filterPrice: action.priceRange
             }
+        case "REMOVE_FILTERS":
+            return {
+                ...state,
+                filterSearch: "",
+                filterCategory: "all",
+                filterSorting: "DATE",
+                filterMaker: [],
+                filterAvailable: true,
+                filterPrice: [0, 100]
+            }
         default:
             return state;
     }

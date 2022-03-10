@@ -39,3 +39,9 @@ export const priceFilter = (priceRange: Array<Number>) => {
         priceRange
     }
 }
+
+export const removeAllFilters = () => {
+    return {
+        type: "REMOVE_FILTERS",
+    }
+}

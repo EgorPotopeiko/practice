@@ -10,7 +10,7 @@ import { Select } from 'antd';
 import './products.less';
 import { useState } from 'react';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
-import { sortingFilter } from '../../../store/filters/actions';
+import { removeAllFilters, sortingFilter } from '../../../store/filters/actions';
 import { TProduct } from '../../../models/product';
 import ProductsDB from '../../../services';
 import { useEffect } from 'react';
@@ -108,6 +108,9 @@ const Products: React.FC = () => {
             )
             .then(() => dispatch(changeLoading(false)))
     }, [])
+    useEffect(() => {
+        dispatch(removeAllFilters())
+    }, [data])
     return (
         <div className="products">
             <div className="products__menu">

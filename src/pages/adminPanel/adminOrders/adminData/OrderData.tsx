@@ -39,7 +39,6 @@ const columns = [
 
 const OrderData: React.FC = () => {
     const dataSource = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
-    console.log(dataSource)
     dataSource.map((item: any) => {
         item['key'] = item.id;
         item['payment'] = `${item.payment} руб.`;

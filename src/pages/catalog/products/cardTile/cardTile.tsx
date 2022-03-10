@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Typography } from 'antd';
+import { Card } from 'antd';
 import './cardTile.less';
 import { addedToCart } from '../../../../store/cart/actions';
 import { useDispatch } from 'react-redux';
@@ -16,8 +16,6 @@ interface Props {
     category: string,
     subcategory: string | undefined
 }
-
-const { Title, Text } = Typography;
 
 const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory }) => {
     const dispatch = useDispatch();
