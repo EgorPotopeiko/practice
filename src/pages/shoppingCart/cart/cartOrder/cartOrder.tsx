@@ -32,7 +32,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [orderVisible, setOrderVisible] = useState(false);
     const [successVisible, setSuccessVisible] = useState(false);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
-    const [delivery, setDelivery] = useState('courier');
+    const [delivery, setDelivery] = useState('курьером');
     const orders = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
     const authUser = useSelector((state: RootStateOrAny) => state.userReducer.user);
     const formik = useFormik({
@@ -146,10 +146,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                     </Row>
                     <Divider />
                     <Text>Способ доставки</Text>
-                    <Radio.Group defaultValue="courier" onChange={onChange} value={delivery}>
-                        <Radio value="courier">Курьером</Radio>
-                        <Radio value="mail">Почтой</Radio>
-                        <Radio value="self">Самовывоз</Radio>
+                    <Radio.Group defaultValue="курьером" onChange={onChange} value={delivery}>
+                        <Radio value="курьером">Курьером</Radio>
+                        <Radio value="почтой">Почтой</Radio>
+                        <Radio value="самовывоз">Самовывоз</Radio>
                     </Radio.Group>
                     <Divider />
                     <Form.Item
@@ -303,7 +303,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                     </Row>
                     <Divider />
                     <Form.Item>
-                        <Text><b>Способ доставки:</b> {values.delivery === 'courier' ? "курьером" : values.delivery === 'mail' ? "почтой" : values.delivery === 'self' ? "самовывоз" : null}</Text>
+                        <Text><b>Способ доставки:</b> {values.delivery}</Text>
                     </Form.Item>
                     <Form.Item>
                         <Text><b>По адресу:</b> {values.town}, {values.street}, {values.house}</Text>

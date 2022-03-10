@@ -36,7 +36,6 @@ const OrdersList: React.FC = () => {
     ordersItems.map((item: any) => {
         item['key'] = item.id;
         item['address'] = `${item.town}, ул.${item.street}, ${item.house}`
-        item['delivery'] = item.delivery === 'courier' ? "курьером" : item.delivery === 'mail' ? "почтой" : item.delivery === 'self' ? "самовывоз" : null
         item['payment'] = `${item.payment} руб.`
     })
     return (
