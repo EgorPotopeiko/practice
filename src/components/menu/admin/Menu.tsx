@@ -14,6 +14,9 @@ const Menu: React.FC = () => {
     const [searchArticle, setSearchArticle] = useState('');
     const [searchCategory, setSearchCategory] = useState('ALL');
     const [searchStatus, setSearchStatus] = useState(true);
+    const [chooseStatus, setChooseStatus] = useState("оплачен");
+    const [searchUser, setSearchUser] = useState('');
+    const [searchNumber, setSearchNumber] = useState('');
     return (
         <div className="menu__catalog">
             <Tabs defaultActiveKey="1" type="card">
@@ -24,8 +27,8 @@ const Menu: React.FC = () => {
                 <TabPane tab="КАТЕГОРИИ" key="category">
                 </TabPane>
                 <TabPane tab="ЗАКАЗЫ" key="orders">
-                    <OrderFilters />
-                    <OrderData />
+                    <OrderFilters setChooseStatus={setChooseStatus} setSearchUser={setSearchUser} setSearchNumber={setSearchNumber} />
+                    <OrderData chooseStatus={chooseStatus} searchUser={searchUser} searchNumber={searchNumber} />
                 </TabPane>
             </Tabs>
         </div>
