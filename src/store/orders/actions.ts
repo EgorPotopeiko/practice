@@ -5,7 +5,7 @@ export const createOrder = (order: any) => {
     }
 }
 
-export const removeOrder = (id: any) => {
+export const removeOrder = (id: string) => {
     return {
         type: "REMOVE_ORDER",
         id

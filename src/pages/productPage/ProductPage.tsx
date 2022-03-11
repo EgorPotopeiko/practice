@@ -19,7 +19,7 @@ const ProductPage: React.FC<Props> = ({ itemId, product }) => {
     const database = new ProductsDB();
     const dispatch = useDispatch();
 
-    const loadProduct = (id: any) => {
+    const loadProduct = (id: string) => {
         database.getProduct(id)
             .then((response) => {
                 const newCartItem = {
@@ -46,8 +46,8 @@ const ProductPage: React.FC<Props> = ({ itemId, product }) => {
                         <Text>Подкатегория: {subcategory}</Text>
                     </div>
                     <div className='productPage__info-add'>
-                        <Text>{cost} руб.</Text>
-                        <Button type='primary' onClick={() => loadProduct(itemId)}>Добавить в корзину</Button>
+                        <Text strong >{cost} руб.</Text>
+                        <Button disabled={available ? false : true} type='primary' onClick={() => loadProduct(itemId)}>Добавить в корзину</Button>
                     </div>
                 </div>
                 <Divider />

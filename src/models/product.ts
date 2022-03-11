@@ -1,4 +1,5 @@
 export type TProduct = {
+    key: string,
     id: string,
     title: string,
     description: string,
@@ -7,5 +8,6 @@ export type TProduct = {
     added_date: string,
     maker: string,
     category: string,
-    subcategory?: string
+    subcategory?: string,
+    status: string
 }

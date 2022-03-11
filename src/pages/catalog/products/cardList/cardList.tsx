@@ -25,7 +25,7 @@ const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker,
     const database = new ProductsDB();
     const user = useSelector((state: RootStateOrAny) => state.userReducer.user);
 
-    const loadProduct = (id: any) => {
+    const loadProduct = (id: string) => {
         database.getProduct(id)
             .then((response) => {
                 const newCartItem = {

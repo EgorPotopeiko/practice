@@ -1,8 +1,8 @@
 /* eslint-disable array-callback-return */
-import { Button, Col, Divider, Drawer, Form, Input, Radio, Row, Typography } from 'antd';
+import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
-import "./cartOrder.less"
+import "./cartOrder.less";
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
@@ -14,8 +14,8 @@ import { customAlphabet } from "nanoid"
 import Modal from 'antd/lib/modal/Modal';
 
 interface Props {
-    visible: any,
-    setVisible: any
+    visible: boolean,
+    setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const { Title, Text } = Typography;
@@ -83,7 +83,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         setOrderVisible(false)
     };
 
-    const onChange = (e: any) => {
+    const onChange = (e: RadioChangeEvent) => {
         setDelivery(e.target.value);
     };
 

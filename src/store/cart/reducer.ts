@@ -1,8 +1,10 @@
+import { RootStateOrAny } from 'react-redux';
 /* eslint-disable array-callback-return */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { Reducer } from 'redux';
+import { AnyAction, Reducer } from 'redux';
+import { TProduct } from '../../models/product';
 
-const updateCartItems = (cartProducts: any, item: any, idx: any) => {
+const updateCartItems = (cartProducts: Array<Object>, item: any, idx: number) => {
     if (item.amount === 0) {
         return [
             ...cartProducts.slice(0, idx),
@@ -22,7 +24,7 @@ const updateCartItems = (cartProducts: any, item: any, idx: any) => {
     ]
 };
 
-const updateCartItem = (product: any, item: any = {}, quantity: any) => {
+const updateCartItem = (product: any, item: any = {}, quantity: number) => {
     const { total = 0, amount = 0 } = item
     return {
         id: product.id,
@@ -34,10 +36,10 @@ const updateCartItem = (product: any, item: any = {}, quantity: any) => {
     }
 };
 
-const updateOrder = (state: any, productId: any, action: any, quantity: any) => {
+const updateOrder = (state: RootStateOrAny, productId: string, action: AnyAction, quantity: number) => {
     const newItem = action.item;
     const testMas = state.cartProducts
-    const itemIndex = testMas.findIndex((product: any) => product.id === productId);
+    const itemIndex = testMas.findIndex((product: TProduct) => product.id === productId);
     const item = testMas[itemIndex];
     const finallyItem = updateCartItem(newItem, item, quantity);
     return {

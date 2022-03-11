@@ -1,11 +1,13 @@
+import { RootStateOrAny } from 'react-redux';
 import { Reducer } from 'redux';
+import { TOrder } from '../../models/order';
 const initialState = {
     orders: JSON.parse(localStorage.getItem("orders")!) || []
 };
 
-const removeOrder = (state: any, id: any) => {
+const removeOrder = (state: RootStateOrAny, id: string) => {
     const orders = state.orders;
-    return orders.filter((order: any) => order.id !== id)
+    return orders.filter((order: TOrder) => order.id !== id)
 }
 
 const orderReducer: Reducer = (state = initialState, action) => {

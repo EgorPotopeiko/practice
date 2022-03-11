@@ -47,12 +47,12 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const dispatch = useDispatch();
     const database = new ProductsDB();
     const dataSource = useSelector((state: RootStateOrAny) => state.productsReducer.products);
-    dataSource.map((item: any) => {
+    dataSource.map((item: TProduct) => {
         item['key'] = item.id.split('-')[0];
         item['status'] = item.available ? "Есть на складе" : "Нет на складе";
     })
     let newData = dataSource.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()))
-    newData = newData.filter((item: any) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
+    newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
     if (searchCategory.toLowerCase() === "all") {
         newData = newData
     }

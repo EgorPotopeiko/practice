@@ -1,6 +1,7 @@
 import { Tabs } from 'antd';
 import React from 'react';
 import { useState } from 'react';
+import AdminCategory from '../../../pages/adminPanel/adminCategory/adminCategory';
 import OrderData from '../../../pages/adminPanel/adminOrders/adminData/OrderData';
 import OrderFilters from '../../../pages/adminPanel/adminOrders/filters/orderFilters';
 import ProductsData from '../../../pages/adminPanel/adminProducts/adminData/ProductsData';
@@ -25,6 +26,7 @@ const Menu: React.FC = () => {
                     <ProductsData searchName={searchName} searchArticle={searchArticle} searchCategory={searchCategory} searchStatus={searchStatus} />
                 </TabPane>
                 <TabPane tab="КАТЕГОРИИ" key="category">
+                    <AdminCategory />
                 </TabPane>
                 <TabPane tab="ЗАКАЗЫ" key="orders">
                     <OrderFilters setChooseStatus={setChooseStatus} setSearchUser={setSearchUser} setSearchNumber={setSearchNumber} />

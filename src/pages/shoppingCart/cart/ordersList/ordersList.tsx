@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import CartHeader from '../../../../components/header/CartHeader/CartHeader';
+import { TOrder } from '../../../../models/order';
 
 const OrdersList: React.FC = () => {
     const ordersItems = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
@@ -33,7 +34,7 @@ const OrdersList: React.FC = () => {
             key: 'payment',
         },
     ];
-    ordersItems.map((item: any) => {
+    ordersItems.map((item: TOrder) => {
         item['key'] = item.id;
         item['address'] = `${item.town}, ул.${item.street}, ${item.house}`
         item['payment'] = `${item.payment} руб.`

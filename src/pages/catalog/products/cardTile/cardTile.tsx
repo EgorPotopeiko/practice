@@ -21,7 +21,7 @@ const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, ca
     const dispatch = useDispatch();
     const database = new ProductsDB();
     const user = useSelector((state: RootStateOrAny) => state.userReducer.user);
-    const loadProduct = (id: any) => {
+    const loadProduct = (id: string) => {
         database.getProduct(id)
             .then((response) => {
                 const newCartItem = {

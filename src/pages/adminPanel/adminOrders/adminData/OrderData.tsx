@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { EditOutlined } from '@ant-design/icons';
+import { TOrder } from '../../../../models/order';
 
 const { Option } = Select;
 
@@ -27,7 +28,7 @@ interface Props {
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     editing: boolean;
     dataIndex: string;
-    title: any;
+    title: 'text';
     selectType: 'text';
     record: Item;
     index: number;
@@ -76,15 +77,16 @@ const EditableCell: React.FC<EditableCellProps> = ({
 const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) => {
     const [form] = Form.useForm();
     const dataSource = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
-    dataSource.map((item: any) => {
+    dataSource.map((item: TOrder) => {
+        console.log(item)
         item['key'] = item.id;
         item['payment'] = `${item.payment}`;
     })
     const [data, setData] = useState(dataSource);
     const [editingKey, setEditingKey] = useState('');
-    let filteredData = data.filter((item: any) => item.user.toLowerCase().includes(searchUser.toLowerCase()))
-    filteredData = filteredData.filter((item: any) => item.id.toLowerCase().includes(searchNumber.toLowerCase()))
-    filteredData = filteredData.filter((item: any) => item.status === chooseStatus)
+    let filteredData = data.filter((item: TOrder) => item.user.toLowerCase().includes(searchUser.toLowerCase()))
+    filteredData = filteredData.filter((item: TOrder) => item.id.toLowerCase().includes(searchNumber.toLowerCase()))
+    filteredData = filteredData.filter((item: TOrder) => item.status === chooseStatus)
     const isEditing = (record: Item) => record.key === editingKey;
 
     const edit = (record: Partial<Item> & { key: React.Key }) => {

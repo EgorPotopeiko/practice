@@ -7,13 +7,14 @@ import './cartItems.less';
 import { useDispatch } from 'react-redux';
 import ProductsDB from '../../../../services';
 import { removedToCart } from '../../../../store/cart/actions';
+import { TProduct } from '../../../../models/product';
 
 const CartItems: React.FC = () => {
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
     const dispatch = useDispatch();
     const database = new ProductsDB();
 
-    const loadProduct = (id: any) => {
+    const loadProduct = (id: string) => {
         database.getProduct(id)
             .then((response) => {
                 const newCartItem = {
@@ -50,14 +51,14 @@ const CartItems: React.FC = () => {
         {
             title: 'Action',
             key: 'action',
-            render: (record: any) => (
+            render: (record: TProduct) => (
                 <Space size="middle">
                     <DeleteOutlined onClick={() => loadProduct(record.id)} />
                 </Space>
             ),
         },
     ];
-    cartItems.map((item: any) => {
+    cartItems.map((item: TProduct) => {
         item['key'] = item.id.split('-')[0];
     })
     return (
