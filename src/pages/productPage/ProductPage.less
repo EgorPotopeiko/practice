@@ -1,0 +1,33 @@
+@import '../../vars.less';
+
+.productPage {
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        &-desc {
+            display: grid;
+        }
+        &-add {
+            display: grid;
+            span {
+                text-align: end;
+            }
+        }
+    }
+    .ant {
+        &-card {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        &-card-head-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h4 {
+                margin-top: 0;
+                color: @button-color;
+            }
+        }
+    }
+}
