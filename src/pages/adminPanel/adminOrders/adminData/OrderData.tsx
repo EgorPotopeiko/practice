@@ -157,7 +157,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
             key: 'email',
         },
         {
-            title: 'operation',
+            title: 'Изменение',
             dataIndex: 'operation',
             render: (_: any, record: Item) => {
                 const editable = isEditing(record);

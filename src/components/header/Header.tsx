@@ -12,6 +12,7 @@ import { TUser } from '../../models/user';
 import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { AUTH_PATH, PUBLIC_PATH } from '../../routing/names';
+import { userData } from '../../store/user/actions';
 
 const { Title, Text } = Typography;
 
@@ -40,6 +41,7 @@ const Header: React.FC = () => {
         if (user.isAuth === true) {
             setModalAuthVisible(false);
             dispatch(logout(user.isAuth));
+            dispatch(userData({ isAuth: false, role: "guest" }))
             localStorage.setItem("user", JSON.stringify({ isAuth: false, role: "guest" }))
 
         }
@@ -82,6 +84,7 @@ const Header: React.FC = () => {
                                 email,
                                 role
                             }
+                            dispatch(userData({ isAuth: true, ...authUser }))
                             localStorage.setItem("user", JSON.stringify({ isAuth: true, ...authUser }))
                             setModalAuthVisible(false)
                         }

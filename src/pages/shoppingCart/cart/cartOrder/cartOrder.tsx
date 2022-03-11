@@ -33,7 +33,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [successVisible, setSuccessVisible] = useState(false);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
     const [delivery, setDelivery] = useState('курьером');
-    const [status, setStatus] = useState('оформлен')
     const orders = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
     const authUser = useSelector((state: RootStateOrAny) => state.userReducer.user);
     const formik = useFormik({

@@ -2,33 +2,58 @@ import { Button, Card, Divider } from 'antd';
 import React from 'react';
 import CartHeader from '../../components/header/CartHeader/CartHeader';
 import { Typography } from 'antd';
-import './ProductPage.less'
+import './ProductPage.less';
+import ProductsDB from '../../services';
+import { useDispatch } from 'react-redux';
+import { addedToCart } from '../../store/cart/actions';
 
-const { Title, Text } = Typography
+interface Props {
+    itemId: string,
+    product: any,
+}
 
-const ProductPage: React.FC = () => {
+const { Title, Text } = Typography;
+
+const ProductPage: React.FC<Props> = ({ itemId, product }) => {
+    const { title, description, cost, maker, category, subcategory, available } = product;
+    const database = new ProductsDB();
+    const dispatch = useDispatch();
+
+    const loadProduct = (id: any) => {
+        database.getProduct(id)
+            .then((response) => {
+                const newCartItem = {
+                    id: response.id,
+                    title: response.title,
+                    cost: response.cost,
+                    category: response.category,
+                    subcategory: response.subcategory,
+                }
+                dispatch(addedToCart(newCartItem))
+            })
+    }
     return (
         <div className='productPage'>
             <CartHeader />
-            <Card title={<>
-                <Title level={3}>Name</Title>
-                <Title level={4}>В наличии</Title>
+            <Card key={itemId} title={<>
+                <Title level={3}>{title}</Title>
+                <Title level={4}>{available ? "Есть в наличии" : "Нет в наличии"}</Title>
             </>}>
                 <div className='productPage__info'>
                     <div className='productPage__info-desc'>
-                        <Text>Изготовитель: PURINA</Text>
-                        <Text>Категория: DOGS</Text>
-                        <Text>Подкатегория: Корма</Text>
+                        <Text>Изготовитель: {maker}</Text>
+                        <Text>Категория: {category}</Text>
+                        <Text>Подкатегория: {subcategory}</Text>
                     </div>
                     <div className='productPage__info-add'>
-                        <Text>10 руб.</Text>
-                        <Button type='primary'>Добавить в корзину</Button>
+                        <Text>{cost} руб.</Text>
+                        <Button type='primary' onClick={() => loadProduct(itemId)}>Добавить в корзину</Button>
                     </div>
                 </div>
                 <Divider />
                 <div className='productPage__description'>
                     <Title level={4}>Полное описание</Title>
-                    <Text>Подходит для слабо освещенных аквариумов без подачи СО2, но при этом скорость роста низкая, с вытекающими проблемами. При использовании СО2 и мощного света скорость роста существенно увеличивается.</Text>
+                    <Text>{description}</Text>
                 </div>
             </Card>
         </div>
