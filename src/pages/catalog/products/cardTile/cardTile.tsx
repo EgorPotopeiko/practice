@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'antd';
 import './cardTile.less';
 import { addedToCart } from '../../../../store/cart/actions';
-import { useDispatch } from 'react-redux';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import ProductsDB from '../../../../services';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
@@ -20,7 +20,7 @@ interface Props {
 const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory }) => {
     const dispatch = useDispatch();
     const database = new ProductsDB();
-
+    const user = useSelector((state: RootStateOrAny) => state.userReducer.user);
     const loadProduct = (id: any) => {
         database.getProduct(id)
             .then((response) => {
@@ -38,7 +38,7 @@ const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, ca
         <div className='cardTile'>
             <Card size="small" title={title}>
                 <p>{cost} руб.</p>
-                <ShoppingCartOutlined onClick={() => loadProduct(id)} />
+                <ShoppingCartOutlined hidden={user.role === "user" ? false : true} onClick={() => loadProduct(id)} />
             </Card>
         </div>
     );
