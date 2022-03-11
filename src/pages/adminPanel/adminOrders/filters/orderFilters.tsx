@@ -15,7 +15,7 @@ const { Option } = Select;
 const OrderFilters: React.FC<Props> = ({ setChooseStatus, setSearchNumber, setSearchUser }) => {
     return (
         <div className="admin__filters">
-            <Select placeholder="Статус" defaultValue="оплачен" onChange={(status) => setChooseStatus(status)}>
+            <Select placeholder="Статус" onChange={(status) => setChooseStatus(status)}>
                 {selectValues.map((item) => (
                     <Option key={item} value={item}>{item}</Option>
                 ))}

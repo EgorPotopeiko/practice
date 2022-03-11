@@ -33,6 +33,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [successVisible, setSuccessVisible] = useState(false);
     const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
     const [delivery, setDelivery] = useState('курьером');
+    const [status, setStatus] = useState('оформлен')
     const orders = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
     const authUser = useSelector((state: RootStateOrAny) => state.userReducer.user);
     const formik = useFormik({
@@ -47,7 +48,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             level: '',
             number: '',
             name: '',
-            status: 'оплачен',
+            status: 'оформлен',
             email: authUser.email,
             user: `${authUser.firstName} ${authUser.lastName}`,
             comment: '',
@@ -80,6 +81,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
 
     const onClose = () => {
         setVisible(false)
+        setOrderVisible(false)
     };
 
     const onChange = (e: any) => {
@@ -89,6 +91,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const finishOrder = () => {
         setLoading(true)
         setTimeout(() => {
+            values.status = "оплачен"
+            const newOrder = values;
+            dispatch(removeOrder(values.id))
+            dispatch(createOrder(newOrder))
             dispatch(clearCart([]))
             setLoading(false)
             setOrderVisible(false)
@@ -287,6 +293,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 title="Заказ"
                 width={610}
                 visible={orderVisible}
+                closable={false}
                 bodyStyle={{ paddingBottom: 80 }}>
                 <Form>
                     <Row gutter={16}>
