@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-self-assign */
 /* eslint-disable array-callback-return */
 import { Table } from 'antd';
-import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { TProduct } from '../../../../models/product';
+import ProductsDB from '../../../../services';
+import { setProducts } from '../../../../store/products/actions';
 
 interface Props {
     searchName: string,
@@ -41,6 +44,8 @@ const columns = [
 ];
 
 const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName, searchStatus }) => {
+    const dispatch = useDispatch();
+    const database = new ProductsDB();
     const dataSource = useSelector((state: RootStateOrAny) => state.productsReducer.products);
     dataSource.map((item: any) => {
         item['key'] = item.id.split('-')[0];
@@ -55,6 +60,12 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
         newData = newData.filter((item: TProduct) => item.category === searchCategory.toLowerCase())
     }
     newData = newData.filter((item: TProduct) => item.available === searchStatus);
+
+    useEffect(() => {
+        database.getAllProducts()
+            .then(response => { dispatch(setProducts(response)) }
+            )
+    }, [])
     return (
         <div className="adminData">
             <Table dataSource={newData} columns={columns} rowSelection={{ type: "checkbox" }} />;
