@@ -1,3 +1,4 @@
+import { RootStateOrAny } from 'react-redux';
 import { Reducer } from 'redux';
 
 const initialState = {
@@ -9,6 +10,11 @@ const initialState = {
     filterPrice: [0, 100],
     listCategories: JSON.parse(localStorage.getItem("categories")!) || ["all", "cats", "dogs", "fishes", "birds", "rodents", "other"]
 };
+
+const removeCategory = (state: RootStateOrAny, category: string) => {
+    const categories = state.listCategories;
+    return categories.filter((item: string) => item !== category)
+}
 
 const filterReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -60,7 +66,7 @@ const filterReducer: Reducer = (state = initialState, action) => {
         case "REMOVED_CATEGORY":
             return {
                 ...state,
-                listCategories: [...state.listCategories, action.category]
+                listCategories: removeCategory(state, action.category)
             }
         default:
             return state;

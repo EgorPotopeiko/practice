@@ -53,9 +53,9 @@ export const addedCategory = (category: any) => {
     }
 }
 
-export const removedCategory = (category: string) => {
+export const removedCategory = (category: any) => {
     return {
         type: "REMOVED_CATEGORY",
-        category
+        category,
     }
 }
