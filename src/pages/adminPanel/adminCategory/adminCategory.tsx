@@ -1,18 +1,20 @@
 import { Button, Col, Form, Input, List, Row, Typography } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { addedCategory } from '../../../store/filters/actions';
 import './adminCategory.less'
 
 const { Title } = Typography;
 
-const data = [
-    'Racing car sprays.',
-    'Japanese princess.',
-    'Australian walks.',
-    'Man charged.',
-    'Los Angeles.',
-];
-
 const AdminCategory: React.FC = () => {
+    const listCategories = useSelector((state: RootStateOrAny) => state.filterReducer.listCategories);
+    const [categoryName, setCategoryName] = useState('');
+    const dispatch = useDispatch();
+
+    const addCategory = () => {
+        dispatch(addedCategory(categoryName))
+        setCategoryName('')
+    }
     return (
         <div className='adminCategory'>
             <Form>
@@ -21,11 +23,11 @@ const AdminCategory: React.FC = () => {
                 </Form.Item>
                 <Row>
                     <Col span={12}>
-                        <Input placeholder='Название новой категории' />
-                        <Button type='primary'>Создать категорию</Button>
+                        <Input placeholder='Название новой категории' value={categoryName} onChange={(e: any) => setCategoryName(e.target.value)} />
+                        <Button type='primary' onClick={addCategory}>Создать категорию</Button>
                     </Col>
                     <Col span={12}>
-                        <List header={<div>Существующие категории</div>} bordered dataSource={data} renderItem={item => <List.Item>{item}</List.Item>} />
+                        <List header={<div>Существующие категории</div>} bordered dataSource={listCategories} renderItem={(item: any) => <List.Item>{item}</List.Item>} />
                     </Col>
                 </Row>
             </Form>

@@ -6,7 +6,8 @@ const initialState = {
     filterSorting: "DATE",
     filterMaker: [],
     filterAvailable: true,
-    filterPrice: [0, 100]
+    filterPrice: [0, 100],
+    listCategories: JSON.parse(localStorage.getItem("categories")!) || ["all", "cats", "dogs", "fishes", "birds", "rodents", "other"]
 };
 
 const filterReducer: Reducer = (state = initialState, action) => {
@@ -50,6 +51,16 @@ const filterReducer: Reducer = (state = initialState, action) => {
                 filterMaker: [],
                 filterAvailable: true,
                 filterPrice: [0, 100]
+            }
+        case "ADDED_CATEGORY":
+            return {
+                ...state,
+                listCategories: [...state.listCategories, action.category]
+            }
+        case "REMOVED_CATEGORY":
+            return {
+                ...state,
+                listCategories: [...state.listCategories, action.category]
             }
         default:
             return state;

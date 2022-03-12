@@ -45,3 +45,17 @@ export const removeAllFilters = () => {
         type: "REMOVE_FILTERS",
     }
 }
+
+export const addedCategory = (category: any) => {
+    return {
+        type: "ADDED_CATEGORY",
+        category
+    }
+}
+
+export const removedCategory = (category: string) => {
+    return {
+        type: "REMOVED_CATEGORY",
+        category
+    }
+}
