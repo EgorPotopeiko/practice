@@ -99,7 +99,6 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                     ...row,
                 });
                 setData(newData);
-                console.log(newData)
                 localStorage.removeItem("orders")
                 localStorage.setItem("orders", JSON.stringify(newData))
                 setEditingKey('');

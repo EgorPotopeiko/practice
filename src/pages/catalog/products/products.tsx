@@ -103,12 +103,6 @@ const Products: React.FC = () => {
         setSize(size)
     }
     useEffect(() => {
-        database.getAllProducts()
-            .then(response => { dispatch(setProducts(response)) }
-            )
-            .then(() => dispatch(changeLoading(false)))
-    }, [])
-    useEffect(() => {
         dispatch(removeAllFilters())
     }, [data])
     return (

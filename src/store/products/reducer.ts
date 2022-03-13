@@ -1,7 +1,14 @@
 import { Reducer } from 'redux';
 const initialState = {
-    products: []
+    products: JSON.parse(localStorage.getItem("products")!) || []
 };
+
+const editProduct = (state: any, id: any, title: any, category: any) => {
+    const products = state.products;
+    return products.map((product: any) =>
+        product.id.split('-')[0] === id ? { ...product, title: title, category: category } : product
+    )
+}
 
 const productsReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -9,6 +16,11 @@ const productsReducer: Reducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: action.products
+            }
+        case "EDIT_PRODUCT":
+            return {
+                ...state,
+                products: editProduct(state, action.id, action.title, action.category)
             }
         default:
             return state;

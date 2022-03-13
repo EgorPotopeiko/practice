@@ -4,3 +4,12 @@ export const setProducts = (products: Array<Object>) => {
         products
     };
 };
+
+export const editProduct = (id: string, title: string, category: string) => {
+    return {
+        type: "EDIT_PRODUCT",
+        id,
+        title,
+        category
+    }
+}

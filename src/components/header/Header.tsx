@@ -96,7 +96,6 @@ const Header: React.FC = () => {
     }
     useEffect(() => {
         localStorage.getItem("user");
-        localStorage.getItem("orders");
     }, [])
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user));
