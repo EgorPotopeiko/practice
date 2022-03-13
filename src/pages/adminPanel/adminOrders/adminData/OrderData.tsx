@@ -9,16 +9,6 @@ import { TOrder } from '../../../../models/order';
 
 const { Option } = Select;
 
-interface Item {
-    key: string;
-    number: string;
-    user: string;
-    payment: number;
-    status: string;
-    delivery: string;
-    email: string
-}
-
 interface Props {
     chooseStatus: string,
     searchUser: string,
@@ -30,7 +20,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     dataIndex: string;
     title: 'text';
     selectType: 'text';
-    record: Item;
+    record: TOrder;
     index: number;
     children: React.ReactNode;
 }
@@ -78,7 +68,6 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
     const [form] = Form.useForm();
     const dataSource = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
     dataSource.map((item: TOrder) => {
-        console.log(item)
         item['key'] = item.id;
         item['payment'] = `${item.payment}`;
     })
@@ -87,9 +76,9 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
     let filteredData = data.filter((item: TOrder) => item.user.toLowerCase().includes(searchUser.toLowerCase()))
     filteredData = filteredData.filter((item: TOrder) => item.id.toLowerCase().includes(searchNumber.toLowerCase()))
     filteredData = filteredData.filter((item: TOrder) => item.status === chooseStatus)
-    const isEditing = (record: Item) => record.key === editingKey;
+    const isEditing = (record: TOrder) => record.key === editingKey;
 
-    const edit = (record: Partial<Item> & { key: React.Key }) => {
+    const edit = (record: Partial<TOrder> & { key: React.Key }) => {
         form.setFieldsValue({ status: 'оплачен', ...record });
         setEditingKey(record.key);
     };
@@ -100,7 +89,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
 
     const save = async (key: React.Key) => {
         try {
-            const row = (await form.validateFields()) as Item;
+            const row = (await form.validateFields()) as TOrder;
             const newData = [...data];
             const index = newData.findIndex(item => key === item.key);
             if (index > -1) {
@@ -161,7 +150,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         {
             title: 'Изменение',
             dataIndex: 'operation',
-            render: (_: any, record: Item) => {
+            render: (_: any, record: TOrder) => {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
@@ -187,7 +176,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         }
         return {
             ...col,
-            onCell: (record: Item) => ({
+            onCell: (record: TOrder) => ({
                 record,
                 selectType: 'text',
                 dataIndex: col.dataIndex,
