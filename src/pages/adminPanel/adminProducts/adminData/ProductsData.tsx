@@ -26,6 +26,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     dataIndex: string;
     title: 'text';
     inputType: 'number' | 'text';
+    selectType: 'text';
     record: TProduct;
     index: number;
     children: React.ReactNode;
@@ -36,13 +37,24 @@ const EditableCell: React.FC<EditableCellProps> = ({
     dataIndex,
     title,
     inputType,
+    selectType,
     record,
     index,
     children,
     ...restProps
 }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
-
+    const listCategories = useSelector((state: RootStateOrAny) => state.filterReducer.listCategories);
+    const filterCategories = listCategories.filter((item: any) => item !== 'all')
+    const categoryNode = <Select>
+        {filterCategories.map((item: any) => (
+            <Option key={item} value={item}>{item}</Option>
+        ))}
+    </Select>
+    const statusNode = <Select>
+        <Option key="true" value={true}>Есть на складе</Option>
+        <Option key="false" value={false}>Нет на складе</Option>
+    </Select>
     return (
         <td {...restProps}>
             {editing ? (
@@ -56,7 +68,8 @@ const EditableCell: React.FC<EditableCellProps> = ({
                         },
                     ]}
                 >
-                    {inputNode}
+                    {dataIndex === 'title' || dataIndex === 'key' ? inputNode :
+                        dataIndex === 'category' ? categoryNode : statusNode}
                 </Form.Item>
             ) : (
                 children
@@ -72,7 +85,6 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
     const dataSource = useSelector((state: RootStateOrAny) => state.productsReducer.products);
     dataSource.map((item: TProduct) => {
         item['key'] = item.id.split('-')[0];
-        item['status'] = item.available ? "Есть на складе" : "Нет на складе";
     })
     const [data, setData] = useState(dataSource);
     const [editingKey, setEditingKey] = useState('');
@@ -108,13 +120,13 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                     ...row,
                 });
                 setData(newData);
-                dispatch(editProduct(row.key, row.title, row.category))
+                dispatch(editProduct(row.key, row.title, row.category, row.available))
                 localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             } else {
                 newData.push(row);
                 setData(newData);
-                dispatch(editProduct(row.key, row.title, row.category))
+                dispatch(editProduct(row.key, row.title, row.category, row.available))
                 localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             }
@@ -138,7 +150,6 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
             title: 'Артикул',
             dataIndex: 'key',
             key: 'article',
-            editable: true
         },
         {
             title: 'Категория',
@@ -148,8 +159,11 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
         },
         {
             title: 'Статус',
-            dataIndex: 'status',
-            key: 'status',
+            dataIndex: 'available',
+            key: 'available',
+            render: (available: boolean) => (
+                <span>{available ? "Есть на складе" : "Нет на складе"}</span>
+            ),
             editable: true
         },
         {
@@ -193,6 +207,7 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
             ...col,
             onCell: (record: TProduct) => ({
                 record,
+                inputType: 'text',
                 selectType: 'text',
                 dataIndex: col.dataIndex,
                 title: col.title,

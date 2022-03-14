@@ -3,10 +3,10 @@ const initialState = {
     products: JSON.parse(localStorage.getItem("products")!) || []
 };
 
-const editProduct = (state: any, id: any, title: any, category: any) => {
+const editProduct = (state: any, id: any, title: any, category: any, available: any) => {
     const products = state.products;
     return products.map((product: any) =>
-        product.id.split('-')[0] === id ? { ...product, title: title, category: category } : product
+        product.id.split('-')[0] === id ? { ...product, title: title, category: category, available: available } : product
     )
 }
 
@@ -25,7 +25,7 @@ const productsReducer: Reducer = (state = initialState, action) => {
         case "EDIT_PRODUCT":
             return {
                 ...state,
-                products: editProduct(state, action.id, action.title, action.category)
+                products: editProduct(state, action.id, action.title, action.category, action.available)
             }
         case "DELETE_PRODUCT":
             return {
