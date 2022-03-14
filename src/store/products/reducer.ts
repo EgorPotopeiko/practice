@@ -6,7 +6,7 @@ const initialState = {
 const editProduct = (state: any, id: any, title: any, category: any, available: any) => {
     const products = state.products;
     return products.map((product: any) =>
-        product.id.split('-')[0] === id ? { ...product, title: title, category: category, available: available } : product
+        product.id === id ? { ...product, title: title, category: category, available: available } : product
     )
 }
 

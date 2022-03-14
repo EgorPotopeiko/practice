@@ -120,13 +120,11 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                     ...row,
                 });
                 setData(newData);
-                //   dispatch(editProduct(row.key, row.title, row.category, row.available))
                 localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             } else {
                 newData.push(row);
                 setData(newData);
-                //    dispatch(editProduct(row.key, row.title, row.category, row.available))
                 localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             }
@@ -174,7 +172,10 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
-                        <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
+                        <Typography.Link onClick={() => {
+                            save(record.key)
+                            dispatch(editProduct(record.id, record.title, record.category, record.available))
+                        }} style={{ marginRight: 8 }}>
                             Save
                         </Typography.Link>
                         <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
@@ -211,6 +212,9 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
             }),
         };
     });
+    useEffect(() => {
+        dispatch(setProducts(data))
+    }, [data])
     return (
         <div className='products__data'>
             <Form form={form} component={false}>
