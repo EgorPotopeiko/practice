@@ -33,13 +33,16 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
         setVisible(false)
     }
     const createProduct = (values: any) => {
-        const nanoid_8 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 8)
-        const nanoid_4 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 4)
-        const nanoid_12 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 12)
-        values.id = `${nanoid_8()}-${nanoid_4()}-${nanoid_4()}-${nanoid_4()}-${nanoid_12()}`
-        values.date = new Date().toLocaleDateString()
-        values.available = values.available === 'true' ? true : false
-        dispatch(addProduct(values))
+        setTimeout(() => {
+            const nanoid_8 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 8)
+            const nanoid_4 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 4)
+            const nanoid_12 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 12)
+            values.id = `${nanoid_8()}-${nanoid_4()}-${nanoid_4()}-${nanoid_4()}-${nanoid_12()}`
+            values.date = new Date().toLocaleDateString()
+            values.available = values.available === 'true' ? true : false
+            dispatch(addProduct(values))
+            setVisible(false)
+        }, 3000)
     }
     return (
         <div className="admin__filters">

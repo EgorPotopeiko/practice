@@ -214,7 +214,12 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
     });
     useEffect(() => {
         dispatch(setProducts(data))
+        setData(data)
     }, [data])
+    useEffect(() => {
+        dispatch(setProducts(dataSource))
+        setData(dataSource)
+    }, [dataSource])
     return (
         <div className='products__data'>
             <Form form={form} component={false}>
