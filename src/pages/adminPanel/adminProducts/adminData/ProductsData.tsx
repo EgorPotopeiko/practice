@@ -6,10 +6,11 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input } from 'antd';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
 import ProductsDB from '../../../../services';
-import { editProduct, setProducts } from '../../../../store/products/actions';
+import { deleteProduct, editProduct, setProducts } from '../../../../store/products/actions';
+import "./ProductsData.less";
 
 const { Option } = Select;
 
@@ -122,6 +123,10 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
         }
     };
 
+    useEffect(() => {
+        setData(dataSource)
+    }, [dataSource])
+
     const columns = [
         {
             title: 'Название',
@@ -167,9 +172,14 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                         </Popconfirm>
                     </span>
                 ) : (
-                    <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        Edit
-                    </EditOutlined>
+                    <>
+                        <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>
+                            Edit
+                        </EditOutlined>
+                        <DeleteOutlined onClick={() => {
+                            dispatch(deleteProduct(record.key))
+                        }} />
+                    </>
                 );
             },
         },
@@ -191,22 +201,24 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
         };
     });
     return (
-        <Form form={form} component={false}>
-            <Table
-                components={{
-                    body: {
-                        cell: EditableCell,
-                    },
-                }}
-                bordered
-                dataSource={newData}
-                columns={mergedColumns}
-                rowClassName="editable-row"
-                pagination={{
-                    onChange: cancel,
-                }}
-            />
-        </Form>
+        <div className='products__data'>
+            <Form form={form} component={false}>
+                <Table
+                    components={{
+                        body: {
+                            cell: EditableCell,
+                        },
+                    }}
+                    bordered
+                    dataSource={newData}
+                    columns={mergedColumns}
+                    rowClassName="editable-row"
+                    pagination={{
+                        onChange: cancel,
+                    }}
+                />
+            </Form>
+        </div>
     );
 };
 

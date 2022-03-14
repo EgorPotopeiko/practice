@@ -10,6 +10,11 @@ const editProduct = (state: any, id: any, title: any, category: any) => {
     )
 }
 
+const deleteProduct = (state: any, id: any) => {
+    const products = state.products;
+    return products.filter((product: any) => product.id.split('-')[0] !== id)
+}
+
 const productsReducer: Reducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_PRODUCTS":
@@ -21,6 +26,11 @@ const productsReducer: Reducer = (state = initialState, action) => {
             return {
                 ...state,
                 products: editProduct(state, action.id, action.title, action.category)
+            }
+        case "DELETE_PRODUCT":
+            return {
+                ...state,
+                products: deleteProduct(state, action.id)
             }
         default:
             return state;

@@ -13,3 +13,10 @@ export const editProduct = (id: string, title: string, category: string) => {
         category
     }
 }
+
+export const deleteProduct = (id: string) => {
+    return {
+        type: "DELETE_PRODUCT",
+        id
+    };
+};

@@ -12,11 +12,8 @@ import { useState } from 'react';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { removeAllFilters, sortingFilter } from '../../../store/filters/actions';
 import { TProduct } from '../../../models/product';
-import ProductsDB from '../../../services';
 import { useEffect } from 'react';
-import { setProducts } from '../../../store/products/actions';
 import Loader from '../../../components/loader/loader';
-import { changeLoading } from '../../../store/loading/actions';
 
 const { Title } = Typography;
 
@@ -24,7 +21,6 @@ const { Option } = Select;
 
 const Products: React.FC = () => {
     const dispatch = useDispatch();
-    const database = new ProductsDB();
     const [minValue, setMinValue] = useState(0);
     const [size, setSize] = useState(6);
     const [maxValue, setMaxValue] = useState(size);
