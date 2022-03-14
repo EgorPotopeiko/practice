@@ -11,8 +11,9 @@ export default class ProductsDB {
 
     getProduct = async (id: string) => {
         const even = (element: TProduct) => element.id === id;
-        const res = await axios.get(`http://localhost:3000/db/products.json`);
-        const data = res.data.map(this._transformProduct);
+        // const res = await axios.get(`http://localhost:3000/db/products.json`);
+        const res = JSON.parse(localStorage.getItem("products")!);
+        const data = res.map(this._transformProduct);
         const findProduct = data.find(even);
         return findProduct;
     };

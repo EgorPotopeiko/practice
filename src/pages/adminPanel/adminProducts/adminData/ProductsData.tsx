@@ -120,13 +120,13 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                     ...row,
                 });
                 setData(newData);
-                dispatch(editProduct(row.key, row.title, row.category, row.available))
+                //   dispatch(editProduct(row.key, row.title, row.category, row.available))
                 localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             } else {
                 newData.push(row);
                 setData(newData);
-                dispatch(editProduct(row.key, row.title, row.category, row.available))
+                //    dispatch(editProduct(row.key, row.title, row.category, row.available))
                 localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             }
@@ -134,10 +134,6 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
             console.log('Validate Failed:', errInfo);
         }
     };
-
-    useEffect(() => {
-        setData(dataSource)
-    }, [dataSource])
 
     const columns = [
         {
