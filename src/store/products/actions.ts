@@ -5,6 +5,13 @@ export const setProducts = (products: Array<Object>) => {
     };
 };
 
+export const addProduct = (product: any) => {
+    return {
+        type: "ADD_PRODUCT",
+        product
+    }
+}
+
 export const editProduct = (id: string, title: string, category: string, available: boolean) => {
     return {
         type: "EDIT_PRODUCT",

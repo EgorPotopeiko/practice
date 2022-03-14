@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
-import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input } from 'antd';
+import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input, Button } from 'antd';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';

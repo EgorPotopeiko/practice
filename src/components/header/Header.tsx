@@ -21,7 +21,7 @@ const { Option } = Select;
 const { CART, AUTH } = AUTH_PATH;
 const { ADMIN, APP, NOTFOUND } = PUBLIC_PATH
 
-const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
+export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
 const Header: React.FC = () => {
     const database = new ProductsDB();

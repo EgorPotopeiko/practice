@@ -1,9 +1,36 @@
 .admin__filters {
+    display: flex;
+    justify-content: space-between;
+    &-block {
+        max-width: 600px;
+        width: 100%;
+    }
+    &-btns {
+        .ant-btn-default {
+            margin-right: 5px;
+        }
+    }
     .ant-input {
         max-width: 150px;
     }
     .ant-select {
         max-width: 150px;
         width: 100%;
+    }
+    .ant-modal-content {
+        max-width: 600px;
+    }
+}
+.admin__createModal {
+    .ant-input-number {
+        width: 100%;
+    }
+    select {
+        width: 100%;
+        padding: 5px 8px;
+        border: 1px solid #d9d9d9;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
