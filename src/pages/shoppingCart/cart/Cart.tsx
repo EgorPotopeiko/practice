@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import "./Cart.less"
 import CartItems from './cartItems/cartItems';
 import CartOrder from './cartOrder/cartOrder';
-import { AUTH_PATH } from '../../../routing/names';
+import { USER_PATH } from '../../../routing/names';
 
-const { ORDERS } = AUTH_PATH
+const { ORDERS } = USER_PATH
 
 const Cart: React.FC = () => {
     const [visible, setVisible] = useState(false);

@@ -7,11 +7,11 @@ import { searchFilter } from '../../../store/filters/actions';
 import { userData } from '../../../store/user/actions';
 import "./CartHeader.less"
 import { Link } from 'react-router-dom';
-import { AUTH_PATH, PUBLIC_PATH } from '../../../routing/names';
+import { USER_PATH, PUBLIC_PATH } from '../../../routing/names';
 
 const { Title } = Typography;
 
-const { AUTH } = AUTH_PATH;
+const { AUTH } = USER_PATH;
 const { NOTFOUND } = PUBLIC_PATH;
 
 const CartHeader: React.FC = () => {

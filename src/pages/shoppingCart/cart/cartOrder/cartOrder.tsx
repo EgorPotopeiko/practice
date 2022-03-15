@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { createOrder, removeOrder } from '../../../../store/orders/actions';
 import { clearCart } from '../../../../store/cart/actions';
 import history from '../../../../history';
-import { AUTH_PATH } from '../../../../routing/names';
+import { USER_PATH } from '../../../../routing/names';
 import { customAlphabet } from "nanoid"
 import Modal from 'antd/lib/modal/Modal';
 
@@ -20,7 +20,7 @@ interface Props {
 
 const { Title, Text } = Typography;
 
-const { AUTH } = AUTH_PATH;
+const { AUTH } = USER_PATH;
 
 const nanoid = customAlphabet('1234567890', 10)
 

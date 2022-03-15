@@ -5,5 +5,5 @@ export type TRoutes = {
     Component: React.ComponentType;
     name?: string;
     showInMenu?: boolean;
-    exact?: boolean
+    exact?: boolean;
 }
