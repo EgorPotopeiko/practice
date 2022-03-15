@@ -11,7 +11,7 @@ import ModalAuth from './ModalAuth/ModalAuth';
 import { TUser } from '../../models/user';
 import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { AUTH_PATH, PUBLIC_PATH } from '../../routing/names';
+import { USER_PATH, PUBLIC_PATH, ADMIN_PATH } from '../../routing/names';
 import { userData } from '../../store/user/actions';
 import { clearCart } from '../../store/cart/actions';
 
@@ -19,8 +19,9 @@ const { Title, Text } = Typography;
 
 const { Option } = Select;
 
-const { CART, AUTH } = AUTH_PATH;
-const { ADMIN, APP, NOTFOUND } = PUBLIC_PATH
+const { CART, AUTH } = USER_PATH;
+const { APP, NOTFOUND } = PUBLIC_PATH
+const { ADMIN } = ADMIN_PATH
 
 export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
