@@ -38,7 +38,7 @@ const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, ca
         <div className='cardTile'>
             <Card size="small" title={title}>
                 <p>{cost} руб.</p>
-                <ShoppingCartOutlined hidden={user.role === "user" ? false : true} onClick={() => loadProduct(id)} />
+                <ShoppingCartOutlined hidden={user.role === "user" && available ? false : true} onClick={() => loadProduct(id)} />
             </Card>
         </div>
     );

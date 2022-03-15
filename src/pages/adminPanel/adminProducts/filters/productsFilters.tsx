@@ -26,6 +26,15 @@ const validate = (value: any) => {
     }
 }
 
+const createDate = () => {
+    const date = new Date();
+    const yyyy = date.getFullYear()
+    let mm = date.getMonth() + 1;
+    let dd = date.getDate();
+    const finishDate = mm + '/' + dd + '/' + yyyy
+    return finishDate
+}
+
 const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory, setSearchStatus }) => {
     const products = useSelector((state: RootStateOrAny) => state.productsReducer.products);
     const [visible, setVisible] = useState(false);
@@ -44,7 +53,7 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             const nanoid_4 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 4)
             const nanoid_12 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 12)
             values.id = `${nanoid_8()}-${nanoid_4()}-${nanoid_4()}-${nanoid_4()}-${nanoid_12()}`
-            values.date = new Date().toLocaleString()
+            values.date = createDate()
             values.available = values.available === 'true' ? true : false
             dispatch(addProduct(values))
             setVisible(false)

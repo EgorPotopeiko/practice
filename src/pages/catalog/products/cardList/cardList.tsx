@@ -44,7 +44,7 @@ const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker,
             <Card title={<>
                 <Title level={3}><Link to={`/auth/${id}`}>{title}</Link></Title>
                 <Text>{category}</Text>
-                <ShoppingCartOutlined hidden={user.role === "user" ? false : true} onClick={() => loadProduct(id)} />
+                <ShoppingCartOutlined hidden={user.role === "user" && available ? false : true} onClick={() => loadProduct(id)} />
             </>}>
                 <p>Стоимость: {cost} руб.</p>
                 <p>Производитель: {maker}</p>
