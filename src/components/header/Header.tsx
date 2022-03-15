@@ -13,6 +13,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { AUTH_PATH, PUBLIC_PATH } from '../../routing/names';
 import { userData } from '../../store/user/actions';
+import { clearCart } from '../../store/cart/actions';
 
 const { Title, Text } = Typography;
 
@@ -39,11 +40,10 @@ const Header: React.FC = () => {
     const showModal = () => {
         setModalAuthVisible(true);
         if (user.isAuth === true) {
-            setModalAuthVisible(false);
             dispatch(logout(user.isAuth));
             dispatch(userData({ isAuth: false, role: "guest" }))
-            localStorage.setItem("user", JSON.stringify({ isAuth: false, role: "guest" }))
-
+            dispatch(clearCart([]))
+            setModalAuthVisible(false);
         }
     }
 
