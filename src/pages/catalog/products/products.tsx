@@ -10,8 +10,8 @@ import CardList from './cardList/cardList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProductsLoading, selectProducts } from '../../../store/products/selectors';
 import Loader from '../../../components/loader/loader';
-import { selectPage, selectPageSize } from '../../../store/pagination/selectors';
-import { PaginationActionTypes } from '../../../store/pagination/action-types';
+import { selectPage, selectPageSize } from '../../../store/products/selectors';
+import { ProductsActionTypes } from '../../../store/products/action-types';
 import CardTile from './cardTile/cardTile';
 
 const { Title } = Typography;
@@ -27,7 +27,7 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
     const pagination = (page: any, pageSize: any) => dispatch({
-        type: PaginationActionTypes.SET_PAGE,
+        type: ProductsActionTypes.SET_PAGE,
         page,
         pageSize
     })

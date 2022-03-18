@@ -7,6 +7,16 @@ import { ProductsActionTypes } from '../../store/products/action-types';
 
 const database = new ProductsDB();
 
+export interface ResponseGenerator {
+    [x: string]: any,
+    config?: any,
+    data?: any,
+    headers?: any,
+    request?: any,
+    status?: number,
+    statusText?: string
+}
+
 export function* loadProductList() {
     try {
         const data: AxiosResponse = yield call(database.getAllProducts);
