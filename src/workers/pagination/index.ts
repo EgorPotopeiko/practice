@@ -13,12 +13,12 @@ export interface ResponseGenerator {
     statusText?: string
 }
 
-export function* loadPage() {
+export function* loadPagination() {
     const page: ResponseGenerator = yield select(selectPage)
     const pageSize: ResponseGenerator = yield select(selectPageSize)
     yield put(GetPage(page, pageSize))
 }
 
 export function* paginationSaga() {
-    yield takeLatest(PaginationActionTypes.SET_PAGE, loadPage)
+    yield takeLatest(PaginationActionTypes.SET_PAGE, loadPagination)
 }
