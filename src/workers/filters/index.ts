@@ -1,5 +1,5 @@
 import { FiltersActionTypes } from './../../store/filters/action-types';
-import { filterSearch, filterMaker, filterAvailable, filterPriceRange } from './../../store/filters/selectors';
+import { selectFilterAvailable, selectFilterMaker, selectFilterPriceRange, selectFilterSearch } from './../../store/filters/selectors';
 import { put, select, takeLatest } from 'redux-saga/effects';
 import { GetFilters } from '../../store/filters/actions';
 
@@ -14,10 +14,10 @@ export interface ResponseGenerator {
 }
 
 export function* loadFilters() {
-    const search: ResponseGenerator = yield select(filterSearch)
-    const maker: ResponseGenerator = yield select(filterMaker)
-    const available: ResponseGenerator = yield select(filterAvailable)
-    const priceRange: ResponseGenerator = yield select(filterPriceRange)
+    const search: ResponseGenerator = yield select(selectFilterSearch)
+    const maker: ResponseGenerator = yield select(selectFilterMaker)
+    const available: ResponseGenerator = yield select(selectFilterAvailable)
+    const priceRange: ResponseGenerator = yield select(selectFilterPriceRange)
     yield put(GetFilters(search, maker, available, priceRange))
 }
 

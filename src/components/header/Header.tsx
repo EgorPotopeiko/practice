@@ -4,7 +4,7 @@ import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'a
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiltersActionTypes } from '../../store/filters/action-types';
-import { filters } from '../../store/filters/selectors';
+import { selectFilters } from '../../store/filters/selectors';
 import './Header.less';
 import ModalAuth from './ModalAuth/ModalAuth';
 
@@ -18,7 +18,7 @@ const Header: React.FC = () => {
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
-    const selectFilters = useSelector(filters)
+    const filters = useSelector(selectFilters)
     const showModal = () => {
         setModalAuthVisible(true);
     }
@@ -30,7 +30,7 @@ const Header: React.FC = () => {
                     <div className='header__user'>
                         <Input suffix={<SearchOutlined onClick={() => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
-                            ...selectFilters,
+                            ...filters,
                             search: searchInput
                         })} />} placeholder="input search text" onChange={(e: any) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>Войти</Button>
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
                     <>
                         <Select placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
-                            ...selectFilters,
+                            ...filters,
                             maker: maker
                         })}>
                             {selectValues.map((item) => (
@@ -53,7 +53,7 @@ const Header: React.FC = () => {
                         <Text>В наличии</Text>
                         <Switch defaultChecked onChange={(checked: boolean) => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
-                            ...selectFilters,
+                            ...filters,
                             available: checked,
                         })} />
                     </>
@@ -61,7 +61,7 @@ const Header: React.FC = () => {
                         <Text>Цена</Text>
                         <Slider range max={100} defaultValue={[0, 100]} onChange={(priceRange: any) => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
-                            ...selectFilters,
+                            ...filters,
                             priceRange: priceRange
                         })} />
                     </>
