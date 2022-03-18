@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-self-assign */
-import React from 'react';
+import React, { useState } from 'react';
 import { List, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
@@ -12,6 +12,7 @@ import { selectProductsLoading, selectProducts } from '../../../store/products/s
 import Loader from '../../../components/loader/loader';
 import { selectPage, selectPageSize } from '../../../store/pagination/selectors';
 import { PaginationActionTypes } from '../../../store/pagination/action-types';
+import CardTile from './cardTile/cardTile';
 
 const { Title } = Typography;
 
@@ -22,6 +23,7 @@ const Products: React.FC = () => {
     const pageNumber = useSelector(selectPage);
     const pageSize = useSelector(selectPageSize);
     const loading = useSelector(selectProductsLoading);
+    const [view, setView] = useState("list");
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
     const pagination = (page: any, pageSize: any) => dispatch({
@@ -34,8 +36,8 @@ const Products: React.FC = () => {
             <div className="products__menu">
                 <Title level={3}>Найдено {products.length} товара(-ов)</Title>
                 <div className='products__menu-icons'>
-                    <UnorderedListOutlined />
-                    <AppstoreOutlined />
+                    <UnorderedListOutlined onClick={() => setView("list")} />
+                    <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
             <Select defaultValue="по дате добавления">
@@ -49,18 +51,32 @@ const Products: React.FC = () => {
                     {spinner}
                 </List>
                 :
-                <List dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: products.length, onChange: (page: any, pageSize: any) => pagination(page, pageSize) }} renderItem={(item: any) => (
-                    <CardList
-                        key={item.id}
-                        id={item.id}
-                        title={item.title}
-                        desc={item.description}
-                        cost={item.cost}
-                        available={item.available}
-                        maker={item.maker}
-                        category={item.category}
-                        subcategory={item.subcategory}
-                    />
+                <List grid={view === "tile" ? { gutter: 16, column: 3 } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: products.length, onChange: (page: any, pageSize: any) => pagination(page, pageSize) }} renderItem={(item: any) => (
+                    view === "list"
+                        ?
+                        <CardList
+                            key={item.id}
+                            id={item.id}
+                            title={item.title}
+                            desc={item.description}
+                            cost={item.cost}
+                            available={item.available}
+                            maker={item.maker}
+                            category={item.category}
+                            subcategory={item.subcategory}
+                        />
+                        :
+                        <CardTile
+                            key={item.id}
+                            id={item.id}
+                            title={item.title}
+                            desc={item.description}
+                            cost={item.cost}
+                            available={item.available}
+                            maker={item.maker}
+                            category={item.category}
+                            subcategory={item.subcategory}
+                        />
                 )}>
                 </List>}
         </div>
