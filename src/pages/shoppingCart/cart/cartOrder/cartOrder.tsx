@@ -5,11 +5,6 @@ import MaskedInput from 'antd-mask-input';
 import "./cartOrder.less";
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { createOrder, removeOrder } from '../../../../store/orders/actions';
-import { clearCart } from '../../../../store/cart/actions';
-import history from '../../../../history';
-import { USER_PATH } from '../../../../routing/names';
 import { customAlphabet } from "nanoid"
 import Modal from 'antd/lib/modal/Modal';
 
@@ -20,12 +15,9 @@ interface Props {
 
 const { Title, Text } = Typography;
 
-const { AUTH } = USER_PATH;
-
 const nanoid = customAlphabet('1234567890', 10)
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
-    const dispatch = useDispatch()
     const [total, setTotal] = useState(0);
     const [length, setLength] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -63,10 +55,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 values.delivery = delivery
                 values.count = length
                 values.payment = total
-                const newOrder = values;
-                dispatch(createOrder(newOrder))
-                const orders = JSON.parse(localStorage.getItem("orders")!)
-                localStorage.setItem("orders", JSON.stringify([...orders, { ...newOrder }]))
                 setLoading(false)
                 setSubmitting(false)
                 setVisible(false)
@@ -91,10 +79,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         setLoading(true)
         setTimeout(() => {
             values.status = "оплачен"
-            const newOrder = values;
-            dispatch(removeOrder(values.id))
-            dispatch(createOrder(newOrder))
-            dispatch(clearCart([]))
             setLoading(false)
             setOrderVisible(false)
             setSuccessVisible(true)
@@ -103,12 +87,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
 
     const backToMain = () => {
         setSuccessVisible(false)
-        history.push(AUTH)
         resetForm({})
     }
 
     const backToOrder = () => {
-        dispatch(removeOrder(values.id))
         setOrderVisible(false)
         setVisible(true)
     }

@@ -1,21 +1,21 @@
+import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { ConnectedRouter } from "connected-react-router";
-
-import store from './store';
 import { Provider } from 'react-redux';
-import history from './history';
-import { ConfigProvider } from 'antd';
+import App from './App';
+import { createBrowserHistory } from "history";
+import configureStore from './configureStore';
+
+export const history = createBrowserHistory();
+
+const { store } = configureStore({}, history);
 
 ReactDOM.render(
-  <ConfigProvider>
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-    </Provider>
-  </ConfigProvider>,
-  document.getElementById('root')
+        <ConnectedRouter history={history}>
+            <App />
+        </ConnectedRouter>
+    </Provider>,
+    document.getElementById('root')
 );
 

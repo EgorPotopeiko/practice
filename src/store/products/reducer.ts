@@ -1,45 +1,34 @@
-import { Reducer } from 'redux';
-const initialState = {
-    products: JSON.parse(localStorage.getItem("products")!) || []
+import { InferValueTypes } from '../../models/common';
+import * as actions from './actions'
+import { ErrorActionState, StartActionState, SuccessActionState } from '../helpers';
+import { ProductsActionTypes } from './action-types';
+
+const initialState: TProductsState = {
+    products: [],
+    error: null,
+    isLoading: false
 };
 
-const editProduct = (state: any, id: any, title: any, category: any, available: any) => {
-    const products = state.products;
-    return products.map((product: any) =>
-        product.id === id ? { ...product, title: title, category: category, available: available } : product
-    )
+type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
+
+export type TProductsState = {
+    products: []
+    isLoading: boolean
+    error: any
 }
 
-const deleteProduct = (state: any, id: any) => {
-    const products = state.products;
-    return products.filter((product: any) => product.id.split('-')[0] !== id)
-}
-
-const productsReducer: Reducer = (state = initialState, action) => {
+export default function productsReducer(state: TProductsState = initialState, action: ActionTypes): TProductsState {
     switch (action.type) {
-        case "SET_PRODUCTS":
+        case ProductsActionTypes.LOAD_PRODUCTS_START:
+            return StartActionState(state)
+        case ProductsActionTypes.LOAD_PRODUCTS_SUCCESS:
             return {
-                ...state,
-                products: action.products
+                ...SuccessActionState(state),
+                products: action.data,
             }
-        case "ADD_PRODUCT":
-            return {
-                ...state,
-                products: [...state.products, action.product]
-            }
-        case "EDIT_PRODUCT":
-            return {
-                ...state,
-                products: editProduct(state, action.id, action.title, action.category, action.available)
-            }
-        case "DELETE_PRODUCT":
-            return {
-                ...state,
-                products: deleteProduct(state, action.id)
-            }
+        case ProductsActionTypes.LOAD_PRODUCTS_ERROR:
+            return ErrorActionState(state, action.error)
         default:
-            return state;
+            return state
     }
 }
-
-export default productsReducer

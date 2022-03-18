@@ -1,30 +1,13 @@
-export const setProducts = (products: Array<Object>) => {
-    return {
-        type: "SET_PRODUCTS",
-        products
-    };
-};
+import { ProductsActionTypes } from "./action-types"
 
-export const addProduct = (product: any) => {
-    return {
-        type: "ADD_PRODUCT",
-        product
-    }
-}
-
-export const editProduct = (id: string, title: string, category: string, available: boolean) => {
-    return {
-        type: "EDIT_PRODUCT",
-        id,
-        title,
-        category,
-        available
-    }
-}
-
-export const deleteProduct = (id: string) => {
-    return {
-        type: "DELETE_PRODUCT",
-        id
-    };
-};
+export const GetProductsStartAction = () => ({
+    type: ProductsActionTypes.LOAD_PRODUCTS_START
+})
+export const GetProductsSuccessAction = (data: any) => ({
+    type: ProductsActionTypes.LOAD_PRODUCTS_SUCCESS,
+    data
+})
+export const GetProductsErrorAction = (error: any) => ({
+    type: ProductsActionTypes.LOAD_PRODUCTS_ERROR,
+    error
+})

@@ -1,15 +1,13 @@
 import { Redirect, Route, Switch } from "react-router";
-import history from "../history";
 import { TRoutes } from "../models/routes";
 import AdminPanel from "../pages/adminPanel/AdminPanel";
 import Catalog from "../pages/catalog/catalog";
-import ProductPage from "../pages/productPage/ProductPage";
 import OrdersList from "../pages/shoppingCart/cart/ordersList/ordersList";
 import ShoppingCart from "../pages/shoppingCart/ShoppingCart";
 import { USER_PATH, PUBLIC_PATH, ADMIN_PATH } from "./names"
 
 const { APP } = PUBLIC_PATH;
-const { AUTH, CART, ORDERS, PRODUCT } = USER_PATH;
+const { AUTH, CART, ORDERS } = USER_PATH;
 const { ADMIN } = ADMIN_PATH;
 
 export const userRoutes: TRoutes[] = [
@@ -26,7 +24,7 @@ export const guestRoutes: TRoutes[] = [
     { path: APP, Component: Catalog, name: 'Гость', exact: true },
 ]
 
-export const useRoutes = (isAuth: boolean, role: string, products: Array<Object>) => {
+export const useRoutes = (isAuth: boolean, role: string) => {
     if (isAuth && role === "user") {
         return (
             <Switch>
@@ -36,17 +34,6 @@ export const useRoutes = (isAuth: boolean, role: string, products: Array<Object>
                     exact = true }) => (
                     <Route key={path} path={path} component={Component} strict exact={exact}></Route>
                 ))}
-                <Route path={PRODUCT} render={({ match }) => {
-                    const { id } = match.params;
-                    const even = (element: any) => element.id === id;
-                    const generateProduct = products.find(even);
-                    if (generateProduct === undefined) {
-                        history.push(AUTH)
-                    }
-                    else {
-                        return <ProductPage itemId={id} product={generateProduct} />
-                    }
-                }} />
                 <Redirect to={AUTH} />
             </Switch>
         )

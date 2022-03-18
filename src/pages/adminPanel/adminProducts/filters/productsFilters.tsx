@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable array-callback-return */
 import { Button, Input, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
@@ -8,15 +9,8 @@ import Modal from 'antd/lib/modal/Modal';
 import { customAlphabet } from 'nanoid';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { selectValues } from '../../../../components/header/Header'
-import { addProduct, setProducts } from '../../../../store/products/actions';
 import axios from 'axios';
 
-interface Props {
-    setSearchName: React.Dispatch<React.SetStateAction<string>>,
-    setSearchArticle: React.Dispatch<React.SetStateAction<string>>,
-    setSearchCategory: React.Dispatch<React.SetStateAction<string>>,
-    setSearchStatus: React.Dispatch<React.SetStateAction<boolean>>
-}
 
 const { Option } = Select;
 
@@ -35,7 +29,7 @@ const createDate = () => {
     return finishDate
 }
 
-const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory, setSearchStatus }) => {
+const ProductsFilter: React.FC = () => {
     const products = useSelector((state: RootStateOrAny) => state.productsReducer.products);
     const [visible, setVisible] = useState(false);
     const [fileList, setFileList]: any = useState([]);
@@ -55,7 +49,6 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             values.id = `${nanoid_8()}-${nanoid_4()}-${nanoid_4()}-${nanoid_4()}-${nanoid_12()}`
             values.date = createDate()
             values.available = values.available === 'true' ? true : false
-            dispatch(addProduct(values))
             setVisible(false)
         }, 3000)
     }
@@ -89,7 +82,6 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
         },
         beforeUpload: async (file: any) => {
             const res = await axios.get(`http://localhost:3000/db/${file.name}`);
-            dispatch(setProducts(res.data))
             setFileList([...fileList, file]);
             return false;
         },
@@ -101,14 +93,14 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>
-                <Input placeholder="Название" onChange={(e) => setSearchName(e.target.value)} />
-                <Input placeholder="Артикул" onChange={(e) => setSearchArticle(e.target.value)} />
-                <Select placeholder="Категория" onChange={(category) => setSearchCategory(category)}>
+                <Input placeholder="Название" />
+                <Input placeholder="Артикул" />
+                <Select placeholder="Категория">
                     {categoryValues.map((item: any) => (
                         <Option key={item} value={item}>{item}</Option>
                     ))}
                 </Select>
-                <Select placeholder="Статус" onChange={(status) => setSearchStatus(status)}>
+                <Select placeholder="Статус">
                     <Option key="true" value={true}>{"Есть на складе"}</Option>
                     <Option key="false" value={false}>{"Нет на складе"}</Option>
                 </Select>

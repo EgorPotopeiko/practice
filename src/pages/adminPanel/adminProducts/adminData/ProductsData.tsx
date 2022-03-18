@@ -9,7 +9,6 @@ import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
 import ProductsDB from '../../../../services';
-import { deleteProduct, editProduct, setProducts } from '../../../../store/products/actions';
 import "./ProductsData.less";
 
 const { Option } = Select;
@@ -174,7 +173,6 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                     <span>
                         <Typography.Link onClick={() => {
                             save(record.key)
-                            dispatch(editProduct(record.id, record.title, record.category, record.available))
                         }} style={{ marginRight: 8 }}>
                             Save
                         </Typography.Link>
@@ -187,9 +185,7 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                         <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>
                             Edit
                         </EditOutlined>
-                        <DeleteOutlined onClick={() => {
-                            dispatch(deleteProduct(record.key))
-                        }} />
+                        <DeleteOutlined />
                     </>
                 );
             },
@@ -212,14 +208,6 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
             }),
         };
     });
-    useEffect(() => {
-        dispatch(setProducts(data))
-        setData(data)
-    }, [data])
-    useEffect(() => {
-        dispatch(setProducts(dataSource))
-        setData(dataSource)
-    }, [dataSource])
     return (
         <div className='products__data'>
             <Form form={form} component={false}>
