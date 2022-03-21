@@ -1,6 +1,6 @@
 import { FiltersActionTypes } from './../../store/filters/action-types';
 import { selectFilters } from './../../store/filters/selectors';
-import { takeLatest, select, takeEvery } from 'redux-saga/effects';
+import { takeLatest, select } from 'redux-saga/effects';
 import { call, put } from "redux-saga/effects";
 import FilteredDB from '../../services/filterData';
 import { GetProductsErrorAction, GetProductsSuccessAction } from "../../store/products/actions";
@@ -32,5 +32,5 @@ export function* loadProductList() {
 
 export function* productsSaga() {
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCTS_START, loadProductList)
-    yield takeEvery(FiltersActionTypes.SET_FILTERS, loadProductList)
+    yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList)
 }

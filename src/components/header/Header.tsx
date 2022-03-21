@@ -22,6 +22,9 @@ const Header: React.FC = () => {
     const showModal = () => {
         setModalAuthVisible(true);
     }
+    const cancelModal = () => {
+        setModalAuthVisible(false)
+    }
     return (
         <div className="header">
             <PageHeader>
@@ -34,7 +37,7 @@ const Header: React.FC = () => {
                             search: searchInput
                         })} />} placeholder="input search text" onChange={(e: any) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>Войти</Button>
-                        <ModalAuth visible={modalAuthVisible} />
+                        <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} />
                     </div>
                 </div>
                 <div className='header__filters'>

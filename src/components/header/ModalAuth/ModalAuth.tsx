@@ -6,12 +6,13 @@ import { Button } from 'antd';
 import './ModalAuth.less';
 
 interface Props {
-    visible: boolean
+    visible: boolean,
+    onCancel: () => void
 }
 
-const ModalAuth: React.FC<Props> = ({ visible }) => {
+const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     return (
-        <Modal width={430} title="Authorization" visible={visible} footer={null}>
+        <Modal width={430} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
             <div className='modal__auth'>
                 <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
                     {() => (
