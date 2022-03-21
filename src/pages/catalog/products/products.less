@@ -1,8 +1,8 @@
 .products {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     background-color: white;
-    padding: 5px 5px 1px 15px;
+    padding: 5px 5px 5px 15px;
     &__menu {
         display: flex;
         justify-content: space-between;
@@ -34,10 +34,18 @@
         grid-template-columns: 1fr 1fr 1fr;
     }
     .ant-select {
-        margin-bottom: 10px;
         width: 200px;
     }
     .ant-pagination {
         text-align: left;
+    }
+}
+
+@media (max-width: 400px) {
+    .products {
+        padding: 5px 15px 1px 15px;
+        &__menu-icons {
+            display: none;
+        }
     }
 }

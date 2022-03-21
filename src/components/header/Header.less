@@ -3,6 +3,11 @@
 @border-radius: 6px;
 
 .header {
+  .ant-page-header-content {
+    max-width: 1350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   &__wrap {
     display: flex;
     justify-content: space-between;
@@ -10,8 +15,12 @@
   &__filters {
     display: flex;
     align-items: center;
+    .ant-input-affix-wrapper {
+      display: none;
+    }
     span {
       margin-right: 10px;
+      font-size: 17px;
     }
   }
   .ant {
@@ -21,11 +30,12 @@
     }
     &-typography {
       color: @header-text-color;
-      margin-top: 0;
+      padding-top: 3px;
     }
     &-input {
       width: 400px;
       border-radius: 15px;
+      font-size: 18px;
       &-suffix {
         font-size: 18px;
       }
@@ -36,7 +46,10 @@
     }
     &-btn {
       border-radius: 5px;
-      width: 70px;
+      max-width: 80px;
+      font-size: 17px;
+      line-height: 0;
+      padding: 18px 15px;
     }
     &-select {
       width: 330px;
@@ -58,10 +71,13 @@
   }
   &__user {
     display: flex;
-    max-height: 32px;
+    max-height: 38px;
     margin-top: 12px;
     h4.ant-typography {
       margin-left: 10px;
+    }
+    .ant-input-affix-wrapper > input.ant-input {
+      padding-left: 3px;
     }
   }
 }
@@ -75,5 +91,78 @@
   }
   &-input-password {
     margin-bottom: 5px
+  }
+}
+
+@media (max-width: 750px) {
+  .header {
+    .ant {
+      &-input-affix-wrapper {
+        max-width: 300px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .header {
+    &__filters {
+      display: inline-grid;
+      max-width: 330px;
+      width: 100%;
+    }
+    .ant {
+      &-switch {
+        max-width: 50px;
+        width: 100%;
+        margin-right: 0;
+      }
+      &-slider {
+        max-width: 320px;
+        width: 96%;
+        margin: 4px 6px 10px;
+      }
+      &-select {
+        margin-right: 0;
+        max-width: 330px;
+        width: 100%;
+      }
+      &-input {
+        max-width: 200px;
+        width: 100%;
+        &-affix-wrapper {
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) { 
+  .header {
+    &__user {
+      .ant-input-affix-wrapper {
+        display: none;
+      }
+    }
+    &__filters {
+      .ant-input-affix-wrapper {
+        display: flex;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 8px;
+        max-width: 400px;
+        width: 100%;
+      }
+      .ant-input {
+        max-width: 300px;
+        &-suffix {
+          margin-right: 0;
+          margin-left: 0;
+        }
+      }
+    }
   }
 }

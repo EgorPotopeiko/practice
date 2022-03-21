@@ -42,6 +42,11 @@ const Header: React.FC = () => {
                 </div>
                 <div className='header__filters'>
                     <>
+                        <Input suffix={<SearchOutlined onClick={() => dispatch({
+                            type: FiltersActionTypes.SET_FILTERS,
+                            ...filters,
+                            search: searchInput
+                        })} />} placeholder="input search text" onChange={(e: any) => setSearchInput(e.target.value)} />
                         <Select placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
                             ...filters,

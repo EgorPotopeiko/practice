@@ -19,7 +19,7 @@ export interface ResponseGenerator {
     statusText?: string
 }
 
-export function* loadProductList() {
+function* loadProductList() {
     try {
         const filters: AxiosResponse = yield select(selectFilters)
         const data: AxiosResponse = yield call(database.getFilteredProducts, filters);

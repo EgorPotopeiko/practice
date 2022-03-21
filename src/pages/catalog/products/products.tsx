@@ -37,7 +37,7 @@ const Products: React.FC = () => {
     return (
         <div className="products">
             <div className="products__menu">
-                <Title level={3}>Найдено {products.length} товара(-ов)</Title>
+                <Title level={2}>Найдено {products.length} товара(-ов)</Title>
                 <div className='products__menu-icons'>
                     <UnorderedListOutlined onClick={() => setView("list")} />
                     <AppstoreOutlined onClick={() => setView("tile")} />
