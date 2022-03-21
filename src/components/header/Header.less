@@ -3,11 +3,6 @@
 @border-radius: 6px;
 
 .header {
-  .ant-page-header-content {
-    max-width: 1350px;
-    margin-left: auto;
-    margin-right: auto;
-  }
   &__wrap {
     display: flex;
     justify-content: space-between;
@@ -24,13 +19,30 @@
     }
   }
   .ant {
-    &-page-header-ghost {
-      background-color: @header-color;
-        padding: 10px 50px;
+    &-modal-body {
+      .modal__inputs {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 250px;
+      }
+    }
+    &-input-password {
+      margin-bottom: 5px
+    }
+    &-page {
+      &-header-content {
+        max-width: 1350px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      &-header-ghost {
+        background-color: @header-color;
+          padding: 10px 50px;
+      }
     }
     &-typography {
       color: @header-text-color;
-      padding-top: 3px;
+      margin-top: 3px;
     }
     &-input {
       width: 400px;
@@ -79,18 +91,6 @@
     .ant-input-affix-wrapper > input.ant-input {
       padding-left: 3px;
     }
-  }
-}
-.ant {
-  &-modal-body {
-    .modal__inputs {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 250px;
-    }
-  }
-  &-input-password {
-    margin-bottom: 5px
   }
 }
 
@@ -148,19 +148,28 @@
       }
     }
     &__filters {
-      .ant-input-affix-wrapper {
-        display: flex;
-        margin-left: 0;
-        margin-right: 0;
-        margin-bottom: 8px;
-        max-width: 400px;
-        width: 100%;
-      }
-      .ant-input {
-        max-width: 300px;
-        &-suffix {
-          margin-right: 0;
+      max-width: 500px;
+      .ant {
+        &-input-affix-wrapper {
+          display: flex;
           margin-left: 0;
+          margin-right: 0;
+          margin-bottom: 8px;
+          max-width: 400px;
+          width: 100%;
+        }
+        &-input {
+          max-width: 500px;
+          &-suffix {
+            margin-right: 0;
+            margin-left: 0;
+          }
+        }
+        &-select {
+          max-width: 500px;
+        }
+        &-slider {
+          max-width: 500px;
         }
       }
     }

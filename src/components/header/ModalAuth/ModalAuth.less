@@ -5,19 +5,16 @@
   max-width: 350px;
   margin-left: auto;
   margin-right: auto;
-  .ant-modal-body {
-    padding: 40px !important;
-  }
   .ant {
+    &-btn {
+      border-radius: @border-radius;
+      padding: 18px 15px;
+      line-height: 0;
+      font-size: 17px;
+    }
     &-btn-group {
       display: flex;
       justify-content: space-between;
-      .ant-btn {
-        border-radius: @border-radius;
-        padding: 18px 15px;
-        line-height: 0;
-        font-size: 17px;
-      }
       .ant-btn-primary + .ant-btn:not(.ant-btn-primary):not([disabled]) {
         border-left-color: @button-color;
       }
@@ -34,12 +31,14 @@
         border: 1px solid @button-color;
       }
     }
-    &-input-affix-wrapper {
-      border-radius: 10px;
-      padding: 10px 15px;
-    }
-    &-input-password {
+    &-input {
+      &-affix-wrapper {
+        border-radius: 10px;
+        padding: 10px 15px;
+      }
+      &-password {
         margin-bottom: 0;
+      }
     }
   }
   .ant-btn-group > .ant-btn:only-child {

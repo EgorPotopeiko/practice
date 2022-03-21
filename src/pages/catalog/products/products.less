@@ -2,7 +2,7 @@
     max-width: 900px;
     margin: 0 auto;
     background-color: white;
-    padding: 5px 5px 5px 15px;
+    padding: 5px 15px;
     &__menu {
         display: flex;
         justify-content: space-between;
@@ -10,7 +10,8 @@
             margin-top: 6px;
             margin-right: 10px;
             .anticon {
-                font-size: 25px;
+                font-size: 30px;
+                margin-top: 3px;
                 &-unordered-list {
                     margin-right: 10px;
                     &:hover {
@@ -25,28 +26,37 @@
             }
         }
     }
-    &__list {
-        list-style-type: none;
-        padding-left: 0px;
+    .ant {
+        &-select {
+            width: 200px;
+        }
+        &-pagination {
+            text-align: left;
+        }
     }
-    &__tile {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-    .ant-select {
-        width: 200px;
-    }
-    .ant-pagination {
-        text-align: left;
+}
+.ant-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 10px;
+}
+
+@media (max-width: 850px) {
+    .products {
+        &__tile {
+            grid-template-columns: 1fr 1fr;
+        }
     }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 500px) {
     .products {
-        padding: 5px 15px;
+        text-align: -webkit-center;
         &__menu {
             h2 {
                 font-size: 25px;
+                margin-left: auto;
+                margin-right: auto;
             }
             &-icons {
                 display: none;

@@ -1,4 +1,5 @@
 /* eslint-disable array-callback-return */
+import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, PageHeader, Typography } from 'antd';
 import React from 'react';
 import "./CartHeader.less"
@@ -12,7 +13,7 @@ const CartHeader: React.FC = () => {
                 <div className='header__wrap'>
                     <Title>Shop</Title>
                     <div className='header__user'>
-                        <Input placeholder="input search text" />
+                        <Input suffix={<SearchOutlined />} placeholder="input search text" />
                         <Button>Выйти</Button>
                     </div>
                 </div>

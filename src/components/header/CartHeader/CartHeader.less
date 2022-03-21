@@ -12,25 +12,51 @@
     align-items: center;
     span {
       margin-right: 10px;
+      font-size: 17px;
     }
   }
   .ant {
-    &-page-header-ghost {
-      background-color: @header-color;
-        padding: 10px 50px;
+    &-modal-body {
+      .modal__inputs {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 250px;
+      }
     }
+    &-page {
+      &-header-content {
+        max-width: 1350px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      &-header-ghost {
+        background-color: @header-color;
+          padding: 10px 50px;
+      }
+    }
+    
     &-typography {
       color: @header-text-color;
-      margin-top: 0;
+      margin-top: 3px;
     }
     &-input {
       width: 400px;
-      border-radius: 15px;
-      margin-right: 20px;
+      font-size: 18px;
+      &-suffix {
+        font-size: 18px;
+      }
+      &-affix-wrapper {
+        padding: 5px 10px;
+        margin-right: 15px;
+        border-radius: 10px;
+      }
     }
     &-btn {
       border-radius: 5px;
-      width: 70px;
+      max-width: 80px;
+      font-size: 17px;
+      line-height: 0;
+      padding: 18px 15px;
     }
     &-select {
       width: 330px;
@@ -57,17 +83,5 @@
     h4.ant-typography {
       margin-left: 10px;
     }
-  }
-}
-.ant {
-  &-modal-body {
-    .modal__inputs {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 250px;
-    }
-  }
-  &-input-password {
-    margin-bottom: 5px
   }
 }

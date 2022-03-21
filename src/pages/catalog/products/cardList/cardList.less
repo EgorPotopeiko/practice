@@ -1,39 +1,41 @@
 .cardList {
-    .ant-card {
-        background-color: #FAFAFA;
-        filter: drop-shadow(3px 5px 4px rgba(8, 8, 8, 0.151));
-        margin-top: 10px;
-        margin-bottom: 10px;
-        max-width: 350px;
-        width: 100%;
-        &-head-title {
-            position: relative;
-            span {
-                font-weight: 400;
-                color: #918c8cd8
+    .ant {
+        &-card {
+            background-color: #FAFAFA;
+            filter: drop-shadow(3px 5px 4px rgba(8, 8, 8, 0.151));
+            margin-top: 10px;
+            margin-bottom: 10px;
+            max-width: 350px;
+            width: 100%;
+            &-head-title {
+                position: relative;
+                span {
+                    font-weight: 400;
+                    color: #918c8cd8
+                }
             }
-        }
-        &:hover {
+            &:hover {
+                .anticon {
+                    display: block;
+                }
+            }
+            &-body {
+                padding: 15px 15px 15px 25px;
+                p {
+                    font-weight: 600;
+                }
+            }
             .anticon {
-                display: block;
+                color: black;
+                font-size: 30px;
+                position: absolute;
+                right: 0;
+                top: 45px;
+                display: none;
             }
         }
-        &-body {
-            padding: 15px 15px 15px 25px;
-            p {
-                font-weight: 600;
-            }
-        }
-        .anticon {
+        &-typography a {
             color: black;
-            font-size: 30px;
-            position: absolute;
-            right: 0;
-            top: 45px;
-            display: none;
         }
-    }
-    .ant-typography a {
-        color: black;
     }
 }
