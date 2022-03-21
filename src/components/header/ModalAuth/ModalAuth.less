@@ -2,25 +2,21 @@
 
 @border-radius: 6px;
 .modal__auth {
-  max-width: 280px;
+  max-width: 350px;
   margin-left: auto;
   margin-right: auto;
-}
-.ant {
-    &-modal-content {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    &-modal-body {
-      margin-left: auto;
-      margin-right: auto;
-    }
+  .ant-modal-body {
+    padding: 40px !important;
+  }
+  .ant {
     &-btn-group {
       display: flex;
       justify-content: space-between;
       .ant-btn {
         border-radius: @border-radius;
-        padding: 0px 20px;
+        padding: 18px 15px;
+        line-height: 0;
+        font-size: 17px;
       }
       .ant-btn-primary + .ant-btn:not(.ant-btn-primary):not([disabled]) {
         border-left-color: @button-color;
@@ -51,3 +47,4 @@
     border-radius: @border-radius;
     margin-top: 10px;
   }
+}

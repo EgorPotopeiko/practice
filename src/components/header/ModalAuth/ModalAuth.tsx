@@ -12,7 +12,7 @@ interface Props {
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     return (
-        <Modal width={430} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
+        <Modal width={530} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
             <div className='modal__auth'>
                 <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
                     {() => (
