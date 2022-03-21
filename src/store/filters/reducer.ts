@@ -6,7 +6,8 @@ const initialState: TFiltersState = {
     search: "",
     maker: [],
     available: true,
-    priceRange: [0, 100]
+    priceRange: [0, 100],
+    sort: "date"
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -15,7 +16,8 @@ export type TFiltersState = {
     search: string,
     maker: Array<string>,
     available: boolean,
-    priceRange: Array<number>
+    priceRange: Array<number>,
+    sort: string
 }
 
 export default function filtersReducer(state: TFiltersState = initialState, action: ActionTypes): TFiltersState {
@@ -26,7 +28,8 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
                 search: action.search,
                 maker: [...action.maker],
                 available: action.available,
-                priceRange: action.priceRange
+                priceRange: action.priceRange,
+                sort: action.sort
             }
         default:
             return state

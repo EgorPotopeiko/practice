@@ -13,6 +13,8 @@ import Loader from '../../../components/loader/loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
 import { ProductsActionTypes } from '../../../store/products/action-types';
 import CardTile from './cardTile/cardTile';
+import { selectFilters } from '../../../store/filters/selectors';
+import { FiltersActionTypes } from '../../../store/filters/action-types';
 
 const { Title } = Typography;
 
@@ -26,6 +28,7 @@ const Products: React.FC = () => {
     const [view, setView] = useState("list");
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
+    const filters = useSelector(selectFilters)
     const pagination = (page: any, pageSize: any) => dispatch({
         type: ProductsActionTypes.SET_PAGE,
         page,
@@ -40,11 +43,15 @@ const Products: React.FC = () => {
                     <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
-            <Select defaultValue="по дате добавления">
-                <Option key="DATE" value="DATE">по дате добавления</Option>
-                <Option key="ALPHABET" value="ALPHABET">по алфавиту</Option>
-                <Option key="LOW_PRICE" value="LOW_PRICE">по возрастанию цены</Option>
-                <Option key="HIGH_PRICE" value="HIGH_PRICE">по убыванию цены</Option>
+            <Select defaultValue="date" onChange={(sort: any) => dispatch({
+                type: FiltersActionTypes.SET_FILTERS,
+                ...filters,
+                sort: sort
+            })}>
+                <Option key="date" value="date">по дате добавления</Option>
+                <Option key="alphabet" value="alphabet">по алфавиту</Option>
+                <Option key="low_price" value="low_price">по возрастанию цены</Option>
+                <Option key="high_price" value="high_price">по убыванию цены</Option>
             </Select>
             {loading ?
                 <List>
