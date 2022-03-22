@@ -6,8 +6,7 @@
         filter: drop-shadow(3px 5px 4px rgba(8, 8, 8, 0.082));
         margin-top: 5px;
         margin-bottom: 15px;
-        max-width: 270px;
-        width: 100%;
+        width: 270px;
     }
     .ant-card-small > .ant-card-body {
         position: relative;
@@ -16,6 +15,46 @@
             right: 14px;
             top: 12px;
             font-size: 23px;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .cardTile {
+        .ant-card {
+            width: 250px;
+        }
+    }
+}
+
+@media (max-width: 825px) {
+    .cardTile {
+        .ant-card {
+            width: 230px;
+        }
+    }
+}
+
+@media (max-width: 770px) {
+    .cardTile {
+        .ant-card {
+            width: 270px;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .cardTile {
+        .ant-card {
+            max-width: 270px;
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .cardTile {
+        .ant-card {
+            max-width: 240px;
         }
     }
 }

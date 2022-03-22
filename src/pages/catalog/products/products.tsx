@@ -59,7 +59,10 @@ const Products: React.FC = () => {
                     {spinner}
                 </List>
                 :
-                <List grid={view === "tile" ? { gutter: 16, column: 3 } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: products.length, onChange: (page: number, pageSize: number) => pagination(page, pageSize) }} renderItem={(item: TProduct) => (
+                <List grid={view === "tile" ? {
+                    gutter: 8,
+
+                } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: products.length, onChange: (page: number, pageSize: number) => pagination(page, pageSize) }} renderItem={(item: TProduct) => (
                     view === "list"
                         ?
                         <CardList

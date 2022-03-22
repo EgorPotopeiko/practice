@@ -41,6 +41,13 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin-top: 10px;
+    column-gap: 25px;
+}
+
+@media (max-width: 900px) {
+    .ant-row {
+        column-gap: 20px;
+    }
 }
 
 @media (max-width: 850px) {
@@ -48,6 +55,18 @@
         &__tile {
             grid-template-columns: 1fr 1fr;
         }
+    }
+}
+
+@media (max-width: 825px) {
+    .ant-row {
+        column-gap: 15px;
+    }
+}
+
+@media (max-width: 770px) {
+    .ant-row {
+        column-gap: 30px;
     }
 }
 
@@ -66,8 +85,11 @@
         }
         .ant {
             &-pagination {
-                text-align: center;
+                text-align: left;
             }
         }
+    }
+    .ant-row {
+        display: grid;
     }
 }
