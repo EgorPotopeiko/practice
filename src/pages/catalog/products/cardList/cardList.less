@@ -1,7 +1,9 @@
+@import '../../../../vars.less';
+
 .cardList {
     .ant {
         &-card {
-            background-color: #FAFAFA;
+            background-color: @card-background;
             filter: drop-shadow(3px 5px 4px rgba(8, 8, 8, 0.151));
             margin-top: 10px;
             margin-bottom: 10px;
@@ -26,7 +28,7 @@
                 }
             }
             .anticon {
-                color: black;
+                color: @header-color;
                 font-size: 30px;
                 position: absolute;
                 right: 0;
@@ -35,7 +37,7 @@
             }
         }
         &-typography a {
-            color: black;
+            color: @header-color;
         }
     }
 }
