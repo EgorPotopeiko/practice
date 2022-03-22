@@ -35,7 +35,7 @@ const Header: React.FC = () => {
                             type: FiltersActionTypes.SET_FILTERS,
                             ...filters,
                             search: searchInput
-                        })} />} placeholder="input search text" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>Войти</Button>
                         <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} />
                     </div>
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
                     </>
                     <>
                         <Text>Цена</Text>
-                        <Slider range max={100} defaultValue={[0, 100]} onChange={(priceRange: Array<Number>) => dispatch({
+                        <Slider range max={100} defaultValue={[0, 100]} onAfterChange={(priceRange: Array<Number>) => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
                             ...filters,
                             priceRange: priceRange
