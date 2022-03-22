@@ -2,14 +2,13 @@ import { Tabs } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiltersActionTypes } from '../../store/filters/action-types';
-import { selectAdminMenu, selectFilters, selectUserMenu } from '../../store/filters/selectors';
+import { selectFilters, selectUserMenu } from '../../store/filters/selectors';
 import './Menu.less';
 
 const { TabPane } = Tabs;
 
 const Menu: React.FC = () => {
     const userTabs = useSelector(selectUserMenu)
-    const adminTabs = useSelector(selectAdminMenu)
     const dispatch = useDispatch();
     const filters = useSelector(selectFilters)
     return (

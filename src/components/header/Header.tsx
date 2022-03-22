@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                             type: FiltersActionTypes.SET_FILTERS,
                             ...filters,
                             search: searchInput
-                        })} />} placeholder="input search text" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Select placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
                             ...filters,
