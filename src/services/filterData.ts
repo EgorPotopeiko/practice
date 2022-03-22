@@ -1,6 +1,6 @@
-import { TProduct } from './../models/product';
 /* eslint-disable array-callback-return */
 /* eslint-disable no-self-assign */
+import { TProduct } from './../models/product';
 import ProductsDB from ".";
 
 const database = new ProductsDB()
