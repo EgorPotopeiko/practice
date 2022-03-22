@@ -7,7 +7,7 @@ const database = new ProductsDB()
 
 export default class FilteredDB {
     getFilteredProducts = async (filters?: any) => {
-        const { available, search, maker, priceRange, sort } = filters
+        const { available, search, maker, priceRange, sort, category } = filters
         const data = database.getAllProducts()
         return data.then(res => {
             let newData = res.filter((item: TProduct) => item.available === available)
@@ -23,6 +23,12 @@ export default class FilteredDB {
             if (sort === "alphabet") newData = newData.sort(function (a: TProduct, b: TProduct) { if (a.title < b.title) { return -1 } })
             if (sort === "high_price") newData = newData.sort(function (a: TProduct, b: TProduct) { return b.cost - a.cost })
             if (sort === "low_price") newData = newData.sort(function (a: TProduct, b: TProduct) { return a.cost - b.cost })
+            if (category === "all") {
+                newData = newData
+            }
+            else {
+                newData = newData.filter((item: TProduct) => item.category === category)
+            }
             return newData
         })
     }

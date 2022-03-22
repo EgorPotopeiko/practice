@@ -1,6 +1,6 @@
 import React from 'react';
 import CartHeader from '../../components/header/CartHeader/CartHeader';
-import Menu from '../../components/menu/admin/Menu';
+import Menu from '../../components/menu/Menu';
 
 const AdminPanel: React.FC = () => {
     return (

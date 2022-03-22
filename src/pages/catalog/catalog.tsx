@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/header/Header';
-import Menu from '../../components/menu/user/Menu';
+import Menu from '../../components/menu/Menu';
 import Products from './products/products';
 
 const Catalog: React.FC = () => {
