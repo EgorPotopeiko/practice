@@ -11,7 +11,7 @@ export const GetProductsErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_ERROR,
     error
 })
-export const GetPage = (page: any, pageSize: any) => ({
+export const GetPage = (page: number, pageSize: number) => ({
     type: ProductsActionTypes.SET_PAGE,
     page,
     pageSize

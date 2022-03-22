@@ -15,6 +15,7 @@ import { ProductsActionTypes } from '../../../store/products/action-types';
 import CardTile from './cardTile/cardTile';
 import { selectFilters } from '../../../store/filters/selectors';
 import { FiltersActionTypes } from '../../../store/filters/action-types';
+import { TProduct } from '../../../models/product';
 
 const { Title } = Typography;
 
@@ -29,7 +30,7 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
     const filters = useSelector(selectFilters)
-    const pagination = (page: any, pageSize: any) => dispatch({
+    const pagination = (page: Number, pageSize: Number) => dispatch({
         type: ProductsActionTypes.SET_PAGE,
         page,
         pageSize
@@ -43,7 +44,7 @@ const Products: React.FC = () => {
                     <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
-            <Select defaultValue="date" onChange={(sort: any) => dispatch({
+            <Select defaultValue="date" onChange={(sort: string) => dispatch({
                 type: FiltersActionTypes.SET_FILTERS,
                 ...filters,
                 sort: sort
@@ -58,7 +59,7 @@ const Products: React.FC = () => {
                     {spinner}
                 </List>
                 :
-                <List grid={view === "tile" ? { gutter: 16, column: 3 } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: products.length, onChange: (page: any, pageSize: any) => pagination(page, pageSize) }} renderItem={(item: any) => (
+                <List grid={view === "tile" ? { gutter: 16, column: 3 } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: products.length, onChange: (page: number, pageSize: number) => pagination(page, pageSize) }} renderItem={(item: TProduct) => (
                     view === "list"
                         ?
                         <CardList

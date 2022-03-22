@@ -1,7 +1,6 @@
-export const selectProducts = (state: any) => state.products.products;
+import { RootStateOrAny } from 'react-redux';
 
-export const selectProductsLoading = (state: any) => state.products.isLoading;
-
-export const selectPage = (state: any) => state.products.page;
-
-export const selectPageSize = (state: any) => state.products.pageSize;
+export const selectProducts = (state: RootStateOrAny) => state.products.products;
+export const selectProductsLoading = (state: RootStateOrAny) => state.products.isLoading;
+export const selectPage = (state: RootStateOrAny) => state.products.page;
+export const selectPageSize = (state: RootStateOrAny) => state.products.pageSize;

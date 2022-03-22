@@ -1,4 +1,5 @@
 import axios from "axios";
+import { TProduct } from "../models/product";
 
 export default class ProductsDB {
 
@@ -8,14 +9,14 @@ export default class ProductsDB {
     };
 
     getProduct = async (id: string) => {
-        const even = (element: any) => element.id === id;
+        const even = (element: TProduct) => element.id === id;
         const res = await axios.get(`http://localhost:3000/db/generated.json`);
         const data = res.data.map(this._transformProduct);
         const findProduct = data.find(even);
         return findProduct;
     };
 
-    _transformProduct = (product: any) => {
+    _transformProduct = (product: TProduct) => {
         return {
             id: product.id,
             title: product.title,
