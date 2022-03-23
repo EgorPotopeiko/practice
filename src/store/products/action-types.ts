@@ -3,5 +3,9 @@ export const ProductsActionTypes = {
     LOAD_PRODUCTS_SUCCESS: '[Products] LOAD_PRODUCTS_SUCCESS',
     LOAD_PRODUCTS_ERROR: '[Products] LOAD_PRODUCTS_ERROR',
 
+    LOAD_PRODUCT_START: '[Products] LOAD_PRODUCT_START',
+    LOAD_PRODUCT_SUCCESS: '[Products] LOAD_PRODUCT_SUCCESS',
+    LOAD_PRODUCT_ERROR: '[Products] LOAD_PRODUCT_ERROR',
+
     SET_PAGE: '[Pagination] SET_PAGE'
 } as const;

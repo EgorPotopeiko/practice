@@ -8,7 +8,8 @@ const initialState: TProductsState = {
     error: null,
     isLoading: false,
     page: 1,
-    pageSize: 6
+    pageSize: 6,
+    data: null
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -19,6 +20,7 @@ export type TProductsState = {
     error: any
     page: number
     pageSize: number
+    data: null
 }
 
 export default function productsReducer(state: TProductsState = initialState, action: ActionTypes): TProductsState {
@@ -31,6 +33,15 @@ export default function productsReducer(state: TProductsState = initialState, ac
                 products: action.data,
             }
         case ProductsActionTypes.LOAD_PRODUCTS_ERROR:
+            return ErrorActionState(state, action.error)
+        case ProductsActionTypes.LOAD_PRODUCT_START:
+            return StartActionState(state)
+        case ProductsActionTypes.LOAD_PRODUCT_SUCCESS:
+            return {
+                ...SuccessActionState(state),
+                data: action.data,
+            }
+        case ProductsActionTypes.LOAD_PRODUCT_ERROR:
             return ErrorActionState(state, action.error)
         case ProductsActionTypes.SET_PAGE:
             return {

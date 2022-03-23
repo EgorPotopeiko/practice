@@ -8,11 +8,11 @@ export default class ProductsDB {
         return res.data.map(this._transformProduct);
     };
 
-    getProduct = async (id: string) => {
+    getProduct = async (id: any) => {
         const even = (element: TProduct) => element.id === id;
         const res = await axios.get(`http://localhost:3000/db/generated.json`);
         const data = res.data.map(this._transformProduct);
-        const findProduct = data.find(even);
+        const findProduct = await data.find(even);
         return findProduct;
     };
 

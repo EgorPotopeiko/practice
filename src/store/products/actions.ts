@@ -11,6 +11,18 @@ export const GetProductsErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_ERROR,
     error
 })
+export const GetProductStartAction = (id: any) => ({
+    type: ProductsActionTypes.LOAD_PRODUCT_START,
+    id
+})
+export const GetProductSuccessAction = (data: any) => ({
+    type: ProductsActionTypes.LOAD_PRODUCT_SUCCESS,
+    data
+})
+export const GetProductErrorAction = (error: any) => ({
+    type: ProductsActionTypes.LOAD_PRODUCT_ERROR,
+    error
+})
 export const GetPage = (page: number, pageSize: number) => ({
     type: ProductsActionTypes.SET_PAGE,
     page,

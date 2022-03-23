@@ -4,7 +4,7 @@ import { productsSaga } from "./products";
 
 export default function* rootSaga() {
     yield all([
-        fork(pageLoader),
-        fork(productsSaga)
+        fork(productsSaga),
+        fork(pageLoader)
     ])
 }
