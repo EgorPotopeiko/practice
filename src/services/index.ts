@@ -26,7 +26,8 @@ export default class ProductsDB {
             date: product.added_date,
             maker: product.maker,
             category: product.category,
-            subcategory: product.subcategory
+            subcategory: product.subcategory,
+            img: product.img
         };
     };
 }

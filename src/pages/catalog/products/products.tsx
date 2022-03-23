@@ -75,6 +75,7 @@ const Products: React.FC = () => {
                             maker={item.maker}
                             category={item.category}
                             subcategory={item.subcategory}
+                            img={item.img}
                         />
                         :
                         <CardTile

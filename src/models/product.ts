@@ -9,5 +9,6 @@ export type TProduct = {
     maker: string,
     category: string,
     subcategory?: string,
-    status: string
+    status: string,
+    img: string
 }

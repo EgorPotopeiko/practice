@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Typography } from 'antd';
+import { Card, Divider, Typography } from 'antd';
 import './cardList.less';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
@@ -13,17 +13,20 @@ interface Props {
     available: boolean,
     maker: string,
     category: string,
-    subcategory: string | undefined
+    subcategory: string | undefined,
+    img: string
 }
 
-const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory }) => {
+const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory, img }) => {
     return (
         <div className='cardList'>
             <Card title={<>
                 <Title level={3}>{title}</Title>
                 <Text>{category}</Text>
                 <ShoppingCartOutlined />
-            </>}>
+            </>}
+                cover={<img alt="example" src={img} />}>
+                <Divider />
                 <p>Стоимость: {cost} руб.</p>
                 <p>Производитель: {maker}</p>
             </Card>
