@@ -2,15 +2,17 @@ import { Tabs } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiltersActionTypes } from '../../store/filters/action-types';
-import { selectFilters, selectUserMenu } from '../../store/filters/selectors';
+import { selectAdminMenu, selectFilters, selectUserMenu } from '../../store/filters/selectors';
 import './Menu.less';
 
 const { TabPane } = Tabs;
 
 const Menu: React.FC = () => {
-    const userTabs = useSelector(selectUserMenu)
+    const user = JSON.parse(localStorage.getItem("user")!)
+    const userTabs = useSelector(selectUserMenu);
+    const adminTabs = useSelector(selectAdminMenu);
     const dispatch = useDispatch();
-    const filters = useSelector(selectFilters)
+    const filters = useSelector(selectFilters);
     return (
         <div className="menu__catalog">
             <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => dispatch({
@@ -18,9 +20,16 @@ const Menu: React.FC = () => {
                 ...filters,
                 category: category
             })}>
-                {userTabs.map((item: any) => (
-                    <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
-                ))}
+                {user.role === "admin"
+                    ?
+                    adminTabs.map((item: any) => (
+                        <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
+                    ))
+                    :
+                    userTabs.map((item: any) => (
+                        <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
+                    ))
+                }
             </Tabs>
         </div>
     );
