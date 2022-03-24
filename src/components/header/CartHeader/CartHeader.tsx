@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
-import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, PageHeader, Typography } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { Button, PageHeader, Typography } from 'antd';
 import React from 'react';
 import "./CartHeader.less"
 
@@ -10,11 +10,11 @@ const CartHeader: React.FC = () => {
     return (
         <div className="cart__header">
             <PageHeader>
-                <div className='header__wrap'>
+                <div className='cart__header-wrap'>
                     <Title>Shop</Title>
-                    <div className='header__user'>
-                        <Input suffix={<SearchOutlined />} placeholder="input search text" />
+                    <div className='cart__header-user'>
                         <Button>Выйти</Button>
+                        <UserOutlined />
                     </div>
                 </div>
             </PageHeader>
