@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
-import './cardTile.less';
+import './CardTile.less';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 
 interface Props {

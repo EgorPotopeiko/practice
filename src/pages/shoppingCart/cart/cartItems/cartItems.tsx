@@ -3,7 +3,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { Space, Table } from 'antd';
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import './cartItems.less';
+import './CartItems.less';
 import { TProduct } from '../../../../models/product';
 
 const CartItems: React.FC = () => {

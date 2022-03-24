@@ -5,7 +5,7 @@ import './ProductPage.less';
 import Header from '../../components/header/Header';
 import { useSelector } from 'react-redux';
 import { selectProduct } from '../../store/products/selectors';
-import Loader from '../../components/loader/loader';
+import Loader from '../../components/loader/Loader';
 
 const { Title, Text } = Typography;
 

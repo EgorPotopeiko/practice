@@ -2,8 +2,8 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import "./Cart.less"
-import CartItems from './cartItems/cartItems';
-import CartOrder from './cartOrder/cartOrder';
+import CartItems from './cartItems/CartItems';
+import CartOrder from './cartOrder/CartOrder';
 
 const Cart: React.FC = () => {
     const [visible, setVisible] = useState(false);

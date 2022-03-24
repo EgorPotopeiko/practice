@@ -1,7 +1,7 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, List, Row, Typography } from 'antd';
 import React from 'react';
-import './adminCategory.less'
+import './AdminCategory.less'
 
 const { Title } = Typography;
 
