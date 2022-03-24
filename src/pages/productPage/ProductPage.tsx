@@ -1,6 +1,5 @@
-import { Button, Card, Divider } from 'antd';
+import { Button, Card, Divider, Image, Typography } from 'antd';
 import React from 'react';
-import { Typography } from 'antd';
 import './ProductPage.less';
 import Header from '../../components/header/Header';
 import { useSelector } from 'react-redux';
@@ -22,13 +21,16 @@ const ProductPage: React.FC = () => {
             </div>
         )
     }
-    const { title, available, maker, category, subcategory, cost, description } = product
+    const { title, available, maker, category, subcategory, cost, description, img } = product
     return (
         <div className='productPage'>
             <Header />
             <Card title={<>
-                <Title level={3}>{title}</Title>
-                <Title level={4}>{available ? "Есть в наличии" : "Нет в наличии"}</Title>
+                <Image width={400} src={img} />
+                <div className='productPage__title'>
+                    <Title level={3}>{title}</Title>
+                    <Title level={4}>{available ? "Есть в наличии" : "Нет в наличии"}</Title>
+                </div>
             </>}>
                 <div className='productPage__info'>
                     <div className='productPage__info-desc'>

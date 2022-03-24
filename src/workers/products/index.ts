@@ -24,28 +24,28 @@ export interface ResponseGenerator {
 
 function* loadProductList() {
     try {
-        const filters: AxiosResponse = yield select(selectFilters)
+        const filters: AxiosResponse = yield select(selectFilters);
         const data: AxiosResponse = yield call(database.getFilteredProducts, filters);
-        yield put(GetProductsSuccessAction(data))
+        yield put(GetProductsSuccessAction(data));
     }
     catch (error) {
-        yield put(GetProductsErrorAction(error))
+        yield put(GetProductsErrorAction(error));
     }
 }
 
-function* loadProduct(idX: any) {
-    const { id } = idX
+function* loadProduct(payload: any) {
+    const { id } = payload;
     try {
         const data: AxiosResponse = yield call(productDatabase.getProduct, id);
-        yield put(GetProductSuccessAction(data))
+        yield put(GetProductSuccessAction(data));
     }
     catch (error) {
-        yield put(GetProductErrorAction(error))
+        yield put(GetProductErrorAction(error));
     }
 }
 
 export function* productsSaga() {
-    yield takeLatest(ProductsActionTypes.LOAD_PRODUCTS_START, loadProductList)
-    yield takeLatest(ProductsActionTypes.LOAD_PRODUCT_START, loadProduct)
-    yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList)
+    yield takeLatest(ProductsActionTypes.LOAD_PRODUCTS_START, loadProductList);
+    yield takeLatest(ProductsActionTypes.LOAD_PRODUCT_START, loadProduct);
+    yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList);
 }
