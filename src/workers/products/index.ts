@@ -37,7 +37,6 @@ function* loadProduct(idX: any) {
     const { id } = idX
     try {
         const data: AxiosResponse = yield call(productDatabase.getProduct, id);
-        console.log(data)
         yield put(GetProductSuccessAction(data))
     }
     catch (error) {

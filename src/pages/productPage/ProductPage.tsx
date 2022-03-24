@@ -5,18 +5,30 @@ import './ProductPage.less';
 import Header from '../../components/header/Header';
 import { useSelector } from 'react-redux';
 import { selectProduct } from '../../store/products/selectors';
+import Loader from '../../components/loader/loader';
 
 const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
     const product = useSelector(selectProduct)
-    const { title, available, maker, category, subcategory } = product
+
+    if (product === null) {
+        return (
+            <div className='productPage'>
+                <Header />
+                <Card>
+                    <Loader />
+                </Card>
+            </div>
+        )
+    }
+    const { title, available, maker, category, subcategory, cost, description } = product
     return (
         <div className='productPage'>
             <Header />
             <Card title={<>
                 <Title level={3}>{title}</Title>
-                <Title level={4}>{available ? "Есть на складе" : "Нет на складе"}</Title>
+                <Title level={4}>{available ? "Есть в наличии" : "Нет в наличии"}</Title>
             </>}>
                 <div className='productPage__info'>
                     <div className='productPage__info-desc'>
@@ -25,14 +37,14 @@ const ProductPage: React.FC = () => {
                         <Text>Подкатегория: {subcategory}</Text>
                     </div>
                     <div className='productPage__info-add'>
-                        <Text strong >руб.</Text>
-                        <Button type='primary'>Добавить в корзину</Button>
+                        <Text strong >{cost} руб.</Text>
+                        <Button disabled={available ? false : true} type='primary'>Добавить в корзину</Button>
                     </div>
                 </div>
                 <Divider />
                 <div className='productPage__description'>
                     <Title level={4}>Полное описание</Title>
-                    <Text>description</Text>
+                    <Text>{description}</Text>
                 </div>
             </Card>
         </div>
