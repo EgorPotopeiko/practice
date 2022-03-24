@@ -19,7 +19,7 @@ export interface ResponseGenerator {
 function* loaderWorker({ payload }: LocationChangeAction) {
     try {
         const pathname = payload.location.pathname;
-        if (pathname === '/') {
+        if (pathname === '/' || pathname === '/auth') {
             yield put(GetProductsStartAction())
         }
     } catch (error: any) {

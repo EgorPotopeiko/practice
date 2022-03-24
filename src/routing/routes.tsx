@@ -7,13 +7,13 @@ import OrdersList from "../pages/shoppingCart/cart/ordersList/OrdersList";
 import ShoppingCart from "../pages/shoppingCart/ShoppingCart";
 import { USER_PATH, PUBLIC_PATH, ADMIN_PATH } from "./names"
 
-const { APP, PRODUCT } = PUBLIC_PATH;
-const { AUTH, CART, ORDERS } = USER_PATH;
+const { APP } = PUBLIC_PATH;
+const { AUTH, CART, ORDERS, PRODUCT } = USER_PATH;
 const { ADMIN } = ADMIN_PATH;
 
 export const userRoutes: TRoutes[] = [
     { path: AUTH, Component: Catalog, name: 'Пользователь', exact: true },
-    // { path: PRODUCT, Component: ProductPage, name: 'Страница товара' },
+    { path: PRODUCT, Component: ProductPage, name: 'Страница товара' },
     { path: CART, Component: ShoppingCart, name: 'Корзина покупок' },
     { path: ORDERS, Component: OrdersList, name: 'Список заказов' },
 ]
@@ -24,7 +24,6 @@ export const adminRoutes: TRoutes[] = [
 
 export const guestRoutes: TRoutes[] = [
     { path: APP, Component: Catalog, name: 'Гость', exact: true },
-    { path: PRODUCT, Component: ProductPage, name: 'Страница товара' },
 ]
 
 export const useRoutes = (isAuth: boolean, role: string) => {

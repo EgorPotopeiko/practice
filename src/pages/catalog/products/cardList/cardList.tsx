@@ -22,15 +22,18 @@ interface Props {
 
 const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory, img }) => {
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem("user")!)
     return (
         <div className='cardList'>
             <Card title={<>
-                <Title onClick={() => dispatch({
+                <Title onClick={user.isAuth ? () => dispatch({
                     type: ProductsActionTypes.LOAD_PRODUCT_START,
                     id: id
-                })} level={3}><Link to={`/${id}`}>{title}</Link></Title>
+                })
+                    :
+                    undefined} level={3}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
                 <Text>{category}</Text>
-                <ShoppingCartOutlined />
+                <ShoppingCartOutlined hidden={user.isAuth ? false : true} />
             </>}
                 cover={<img alt="example" src={img} />}>
                 <Divider />

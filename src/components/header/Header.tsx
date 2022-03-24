@@ -3,6 +3,8 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+import { PUBLIC_PATH } from "../../routing/names";
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectFilters } from '../../store/filters/selectors';
 import './Header.less';
@@ -11,6 +13,8 @@ import ModalAuth from './ModalAuth/ModalAuth';
 const { Title, Text } = Typography;
 
 const { Option } = Select;
+
+const { APP } = PUBLIC_PATH
 
 export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
@@ -29,7 +33,7 @@ const Header: React.FC = () => {
         <div className="header">
             <PageHeader>
                 <div className='header__wrap'>
-                    <Title>Shop</Title>
+                    <Title><Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input suffix={<SearchOutlined onClick={() => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
