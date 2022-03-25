@@ -1,14 +1,11 @@
+import { selectPage, selectPageSize } from './../../store/products/selectors';
 import { FiltersActionTypes } from './../../store/filters/action-types';
-import { selectFilters } from './../../store/filters/selectors';
 import { takeLatest, select } from 'redux-saga/effects';
 import { call, put } from "redux-saga/effects";
-import FilteredDB from '../../services/filterData';
 import ProductsDB from '../../services';
 import { GetProductErrorAction, GetProductsErrorAction, GetProductsSuccessAction, GetProductSuccessAction } from "../../store/products/actions";
 import { AxiosResponse } from "axios";
 import { ProductsActionTypes } from '../../store/products/action-types';
-
-const database = new FilteredDB();
 
 const productDatabase = new ProductsDB();
 
@@ -24,8 +21,9 @@ export interface ResponseGenerator {
 
 function* loadProductList() {
     try {
-        const filters: AxiosResponse = yield select(selectFilters);
-        const data: AxiosResponse = yield call(database.getFilteredProducts, filters);
+        const page: AxiosResponse = yield select(selectPage);
+        const pageSize: AxiosResponse = yield select(selectPageSize)
+        const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize);
         yield put(GetProductsSuccessAction(data));
     }
     catch (error) {

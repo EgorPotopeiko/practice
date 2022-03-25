@@ -4,11 +4,21 @@ import { TProduct } from "../models/product";
 
 export default class ProductsDB {
 
-    static getAllProductWithDatabase() {
+    static getAllProducts(page: any, pageSize: any, filters?: any) {
         return $api.post(`/product/search`, {
-            page: 0,
-            pageSize: 40
+            page: page - 1,
+            pageSize: pageSize,
         })
+            .then((req) => req.data)
+            .then((products) => products.content.map((product: any) => {
+                return {
+                    id: product.id,
+                    title: product.title,
+                    img: product.imgCart,
+                    category: product.category,
+                    cost: product.price
+                }
+            }))
     }
 
     getAllProducts = async () => {
@@ -36,6 +46,16 @@ export default class ProductsDB {
             category: product.category,
             subcategory: product.subcategory,
             img: product.img
+        };
+    };
+
+    _transformProductDatabase = (prod: any) => {
+        return {
+            id: prod.id,
+            img: prod.imgCart,
+            title: prod.title,
+            category: prod.category,
+            price: prod.price
         };
     };
 }
