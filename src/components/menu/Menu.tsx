@@ -22,11 +22,11 @@ const Menu: React.FC = () => {
             })}>
                 {user.role === "admin"
                     ?
-                    adminTabs.map((item: any) => (
+                    adminTabs.map((item: string) => (
                         <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
                     ))
                     :
-                    userTabs.map((item: any) => (
+                    userTabs.map((item: string) => (
                         <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
                     ))
                 }

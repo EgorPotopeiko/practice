@@ -3,10 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
-import { createBrowserHistory } from "history";
 import configureStore from './configureStore';
-
-export const history = createBrowserHistory();
+import history from './history';
 
 const { store } = configureStore({}, history);
 
