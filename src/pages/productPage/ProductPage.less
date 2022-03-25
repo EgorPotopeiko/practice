@@ -9,6 +9,10 @@
         justify-content: space-between;
         &-desc {
             display: grid;
+            padding-right: 5px;
+            span {
+                font-size: 16px;
+            }
         }
         &-add {
             display: grid;
@@ -42,6 +46,13 @@
 
 @media (max-width: 500px) { 
     .productPage {
+        &__info {
+            &-desc {
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
         .ant {
             &-card {
                 &-head-title {
