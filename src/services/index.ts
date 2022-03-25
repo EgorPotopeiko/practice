@@ -1,7 +1,15 @@
 import axios from "axios";
+import $api from "../http";
 import { TProduct } from "../models/product";
 
 export default class ProductsDB {
+
+    static getAllProductWithDatabase() {
+        return $api.post(`/product/search`, {
+            page: 0,
+            pageSize: 40
+        })
+    }
 
     getAllProducts = async () => {
         const res = await axios.get(`http://localhost:3000/db/generated.json`);
