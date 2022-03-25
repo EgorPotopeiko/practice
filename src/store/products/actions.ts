@@ -23,6 +23,9 @@ export const GetProductErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCT_ERROR,
     error
 })
+export const RemoveProductAction = () => ({
+    type: ProductsActionTypes.REMOVE_PRODUCT,
+})
 export const GetPage = (page: number, pageSize: number) => ({
     type: ProductsActionTypes.SET_PAGE,
     page,

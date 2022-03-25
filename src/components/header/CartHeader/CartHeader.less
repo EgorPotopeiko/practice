@@ -6,6 +6,15 @@
   &-wrap {
     display: flex;
     justify-content: space-between;
+    h1 {
+      font-size: 40px;
+      a {
+        color: @light-text-color;
+        &:hover {
+          color: @light-text-color;
+        }
+      }
+    }
   }
   .ant {
     &-modal-body {
@@ -16,14 +25,16 @@
       }
     }
     &-page {
-      &-header-content {
-        max-width: 1350px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      &-header-ghost {
-        background-color: @header-color;
-          padding: 10px 50px;
+      &-header {
+        &-content {
+          max-width: 1350px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        &-ghost {
+          background-color: @header-color;
+            padding: 25px 50px;
+        }
       }
     }
     

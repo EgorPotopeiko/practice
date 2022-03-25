@@ -43,6 +43,11 @@ export default function productsReducer(state: TProductsState = initialState, ac
             }
         case ProductsActionTypes.LOAD_PRODUCT_ERROR:
             return ErrorActionState(state, action.error)
+        case ProductsActionTypes.REMOVE_PRODUCT:
+            return {
+                ...state,
+                data: null
+            }
         case ProductsActionTypes.SET_PAGE:
             return {
                 ...state,

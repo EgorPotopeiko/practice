@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { PUBLIC_PATH } from "../../routing/names";
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectFilters } from '../../store/filters/selectors';
+import { ProductsActionTypes } from '../../store/products/action-types';
 import './Header.less';
 import ModalAuth from './ModalAuth/ModalAuth';
 
@@ -33,7 +34,9 @@ const Header: React.FC = () => {
         <div className="header">
             <PageHeader>
                 <div className='header__wrap'>
-                    <Title><Link to={APP}>Shop</Link></Title>
+                    <Title onClick={() => dispatch({
+                        type: ProductsActionTypes.REMOVE_PRODUCT
+                    })}><Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input suffix={<SearchOutlined onClick={() => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,

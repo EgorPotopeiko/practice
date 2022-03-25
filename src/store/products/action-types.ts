@@ -7,5 +7,7 @@ export const ProductsActionTypes = {
     LOAD_PRODUCT_SUCCESS: '[Products] LOAD_PRODUCT_SUCCESS',
     LOAD_PRODUCT_ERROR: '[Products] LOAD_PRODUCT_ERROR',
 
+    REMOVE_PRODUCT: '[Products] REMOVE_PRODUCT',
+
     SET_PAGE: '[Pagination] SET_PAGE'
 } as const;

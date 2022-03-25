@@ -1,10 +1,10 @@
 import { Button, Card, Divider, Image, Typography } from 'antd';
 import React from 'react';
 import './ProductPage.less';
-import Header from '../../components/header/Header';
 import { useSelector } from 'react-redux';
 import { selectProduct } from '../../store/products/selectors';
 import Loader from '../../components/loader/Loader';
+import CartHeader from '../../components/header/CartHeader/CartHeader';
 
 const { Title, Text } = Typography;
 
@@ -14,7 +14,7 @@ const ProductPage: React.FC = () => {
     if (product === null) {
         return (
             <div className='productPage'>
-                <Header />
+                <CartHeader />
                 <Card>
                     <Loader />
                 </Card>
@@ -24,7 +24,7 @@ const ProductPage: React.FC = () => {
     const { title, available, maker, category, subcategory, cost, description, img } = product
     return (
         <div className='productPage'>
-            <Header />
+            <CartHeader />
             <Card title={<>
                 <Image width={400} src={img} />
                 <div className='productPage__title'>
