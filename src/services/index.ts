@@ -9,22 +9,7 @@ export default class ProductsDB {
             page: page - 1,
             pageSize: pageSize,
         })
-            .then((req) => req.data)
-            .then((products) => products.content.map((product: any) => {
-                return {
-                    id: product.id,
-                    title: product.title,
-                    img: product.imgCart,
-                    category: product.category,
-                    cost: product.price
-                }
-            }))
     }
-
-    getAllProducts = async () => {
-        const res = await axios.get(`http://localhost:3000/db/generated.json`);
-        return res.data.map(this._transformProduct);
-    };
 
     getProduct = async (id: any) => {
         const even = (element: TProduct) => element.id === id;

@@ -9,7 +9,8 @@ const initialState: TProductsState = {
     isLoading: false,
     page: 1,
     pageSize: 6,
-    data: null
+    data: null,
+    totalCount: 0
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -20,7 +21,8 @@ export type TProductsState = {
     error: any
     page: number
     pageSize: number
-    data: null
+    data: null,
+    totalCount: number
 }
 
 export default function productsReducer(state: TProductsState = initialState, action: ActionTypes): TProductsState {
@@ -53,6 +55,11 @@ export default function productsReducer(state: TProductsState = initialState, ac
                 ...state,
                 page: action.page,
                 pageSize: action.pageSize
+            }
+        case ProductsActionTypes.SET_TOTAL_COUNT:
+            return {
+                ...state,
+                totalCount: action.total
             }
         default:
             return state

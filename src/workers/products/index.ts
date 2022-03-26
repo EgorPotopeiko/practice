@@ -1,3 +1,4 @@
+import { GetProductTotal } from './../../store/products/actions';
 import { selectPage, selectPageSize } from './../../store/products/selectors';
 import { FiltersActionTypes } from './../../store/filters/action-types';
 import { takeLatest, select } from 'redux-saga/effects';
@@ -12,7 +13,7 @@ const productDatabase = new ProductsDB();
 export interface ResponseGenerator {
     [x: string]: any,
     config?: any,
-    data?: any,
+    content?: any,
     headers?: any,
     request?: any,
     status?: number,
@@ -24,7 +25,17 @@ function* loadProductList() {
         const page: AxiosResponse = yield select(selectPage);
         const pageSize: AxiosResponse = yield select(selectPageSize)
         const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize);
-        yield put(GetProductsSuccessAction(data));
+        const newData = data.data.content.map((product: any) => {
+            return {
+                id: product.id,
+                title: product.title,
+                img: product.imgCart,
+                category: product.category,
+                cost: product.price
+            }
+        })
+        yield put(GetProductsSuccessAction(newData))
+        yield put(GetProductTotal(data.data.totalCount));
     }
     catch (error) {
         yield put(GetProductsErrorAction(error));

@@ -8,7 +8,7 @@ import { Select } from 'antd';
 import './products.less';
 import CardList from './cardList/CardList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProductsLoading, selectProducts } from '../../../store/products/selectors';
+import { selectProductsLoading, selectProducts, selectTotal } from '../../../store/products/selectors';
 import Loader from '../../../components/loader/Loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
 import { ProductsActionTypes } from '../../../store/products/action-types';
@@ -26,6 +26,7 @@ const Products: React.FC = () => {
     const pageNumber = useSelector(selectPage);
     const pageSize = useSelector(selectPageSize);
     const loading = useSelector(selectProductsLoading);
+    const totalCount = useSelector(selectTotal);
     const [view, setView] = useState("list");
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
@@ -62,7 +63,7 @@ const Products: React.FC = () => {
                 <List grid={view === "tile" ? {
                     gutter: 8,
 
-                } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: products.length, onChange: (page: number, pageSize: number) => pagination(page, pageSize) }} renderItem={(item: TProduct) => (
+                } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: totalCount, onChange: (page: number, pageSize: number) => pagination(page, pageSize) }} renderItem={(item: TProduct) => (
                     view === "list"
                         ?
                         <CardList
