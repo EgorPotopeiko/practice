@@ -54,11 +54,13 @@ const Header: React.FC = () => {
                             ...filters,
                             search: searchInput
                         })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
-                        <Select placeholder="Производитель" mode="multiple" onChange={(maker: string) => dispatch({
-                            type: FiltersActionTypes.SET_FILTERS,
-                            ...filters,
-                            maker: maker
-                        })}>
+                        <Select placeholder="Производитель" mode="multiple"
+                        // onChange={(maker: string) => dispatch({
+                        //     type: FiltersActionTypes.SET_FILTERS,
+                        //     ...filters,
+                        //     maker: maker
+                        // })}
+                        >
                             {selectValues.map((item) => (
                                 <Option key={item} value={item}>{item.toUpperCase()}</Option>
                             ))}
@@ -66,15 +68,17 @@ const Header: React.FC = () => {
                     </>
                     <>
                         <Text>В наличии</Text>
-                        <Switch defaultChecked onChange={(checked: boolean) => dispatch({
-                            type: FiltersActionTypes.SET_FILTERS,
-                            ...filters,
-                            available: checked,
-                        })} />
+                        <Switch defaultChecked
+                        //  onChange={(checked: boolean) => dispatch({
+                        //     type: FiltersActionTypes.SET_FILTERS,
+                        //     ...filters,
+                        //     available: checked,
+                        // })} 
+                        />
                     </>
                     <>
                         <Text>Цена</Text>
-                        <Slider range max={50000} defaultValue={[10, 50000]} onAfterChange={(priceRange: Array<Number>) => dispatch({
+                        <Slider range max={100000} defaultValue={[10, 100000]} onAfterChange={(priceRange: Array<Number>) => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,
                             ...filters,
                             priceRange: priceRange

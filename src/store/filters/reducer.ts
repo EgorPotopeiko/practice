@@ -4,7 +4,7 @@ import { FiltersActionTypes } from "./action-types";
 
 const initialState: TFiltersState = {
     search: "",
-    priceRange: [10, 50000],
+    priceRange: [10, 100000],
     sort: "date",
     category: "all",
     listCategories: ["all", "mobile", "electron", "pc", "home", "sport"],
