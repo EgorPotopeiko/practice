@@ -10,7 +10,6 @@ const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
     const product = useSelector(selectProduct)
-
     if (product === null) {
         return (
             <div className='productPage'>
@@ -21,7 +20,8 @@ const ProductPage: React.FC = () => {
             </div>
         )
     }
-    const { title, available, maker, category, subcategory, cost, description, img } = product
+    const { title, category, subcategory, cost, description, imgCart: img } = product.data
+    console.log(img)
     return (
         <div className='productPage'>
             <CartHeader />
@@ -29,18 +29,18 @@ const ProductPage: React.FC = () => {
                 <Image width={400} src={img} />
                 <div className='productPage__title'>
                     <Title level={3}>{title}</Title>
-                    <Title level={4}>{available ? "Есть в наличии" : "Нет в наличии"}</Title>
+                    <Title level={4}>Есть в наличии</Title>
                 </div>
             </>}>
                 <div className='productPage__info'>
                     <div className='productPage__info-desc'>
-                        <Text>Изготовитель: {maker}</Text>
+                        <Text>Изготовитель:</Text>
                         <Text>Категория: {category}</Text>
                         <Text>Подкатегория: {subcategory}</Text>
                     </div>
                     <div className='productPage__info-add'>
                         <Text strong >{cost} руб.</Text>
-                        <Button disabled={available ? false : true} type='primary'>Добавить в корзину</Button>
+                        <Button>Добавить в корзину</Button>
                     </div>
                 </div>
                 <Divider />

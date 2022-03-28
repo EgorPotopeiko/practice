@@ -1,15 +1,13 @@
 import { selectFilters } from './../../store/filters/selectors';
-import { GetProductTotal } from './../../store/products/actions';
+import { GetProductTotal, GetProductErrorAction, GetProductSuccessAction } from './../../store/products/actions';
 import { selectPage, selectPageSize } from './../../store/products/selectors';
 import { FiltersActionTypes } from './../../store/filters/action-types';
 import { takeLatest, select } from 'redux-saga/effects';
 import { call, put } from "redux-saga/effects";
 import ProductsDB from '../../services';
-import { GetProductErrorAction, GetProductsErrorAction, GetProductsSuccessAction, GetProductSuccessAction } from "../../store/products/actions";
+import { GetProductsErrorAction, GetProductsSuccessAction } from "../../store/products/actions";
 import { AxiosResponse } from "axios";
 import { ProductsActionTypes } from '../../store/products/action-types';
-
-const productDatabase = new ProductsDB();
 
 export interface ResponseGenerator {
     [x: string]: any,
@@ -45,9 +43,9 @@ function* loadProductList() {
 }
 
 function* loadProduct(payload: any) {
-    const { id } = payload;
+    const { id } = payload
     try {
-        const data: AxiosResponse = yield call(productDatabase.getProduct, id);
+        const data: AxiosResponse = yield call(ProductsDB.getProduct, id);
         yield put(GetProductSuccessAction(data));
     }
     catch (error) {
