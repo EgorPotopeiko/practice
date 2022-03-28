@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { List, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
-import './products.less';
+import './Products.less';
 import CardList from './cardList/CardList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProductsLoading, selectProducts, selectTotal } from '../../../store/products/selectors';

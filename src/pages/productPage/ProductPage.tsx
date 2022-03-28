@@ -3,7 +3,7 @@ import React from 'react';
 import './ProductPage.less';
 import { useSelector } from 'react-redux';
 import { selectProduct } from '../../store/products/selectors';
-import Loader from '../../components/loader/Loader';
+import Loader from "../../components/loader/Loader"
 import CartHeader from '../../components/header/CartHeader/CartHeader';
 
 const { Title, Text } = Typography;

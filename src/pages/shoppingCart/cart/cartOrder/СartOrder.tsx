@@ -2,7 +2,7 @@
 import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
-import "./CartOrder.less";
+import "./СartOrder.less";
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { customAlphabet } from "nanoid"
