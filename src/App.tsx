@@ -1,11 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import "./App.less";
 import { useRoutes } from './routing/routes';
+import { selectUser } from './store/login/selectors';
 
 function App() {
-    const user = JSON.parse(localStorage.getItem("user")!)
+    const user = useSelector(selectUser)
     const routes = useRoutes(user.isAuth, user.role);
-    localStorage.setItem("user", JSON.stringify({ role: "user", isAuth: true }))
     return (
         <div className="App">
             {routes}

@@ -5,28 +5,51 @@ import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button } from 'antd';
 import './ModalAuth.less';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { LoginActionTypes } from '../../../store/login/action-types';
 
 interface Props {
     visible: boolean,
     onCancel: () => void
 }
 
+const validateEmail = (value: string) => {
+    if (!value) {
+        return "Required!";
+    }
+    else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+        return "Invalid email address!"
+    }
+}
+
+const validatePassword = (value: string) => {
+    if (!value) {
+        return "Required!"
+    }
+}
+
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
+    const dispatch = useDispatch()
     const [loading, setLoading] = useState(false);
     const load = () => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
             onCancel()
-        }, 3000)
+        }, 1000)
     }
     return (
         <Modal width={530} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
             <div className='modal__auth'>
-                <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={(values) => console.log(values)}>
+                <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={async (values: any) =>
+                    dispatch({
+                        type: LoginActionTypes.LOAD_AUTHORIZATION_START,
+                        email: values.email,
+                        password: values.password
+                    })}>
                     {() => (
                         <Form >
-                            <FormItem name='email'>
+                            <FormItem name='email' validate={validateEmail}>
                                 <FormInput
                                     name='email'
                                     required={true}
@@ -34,7 +57,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                     prefix={<UserOutlined className="site-form-item-icon" />}
                                 />
                             </FormItem>
-                            <FormItem name='password'>
+                            <FormItem name='password' validate={validatePassword}>
                                 <FormInput.Password
                                     name='password'
                                     required={true}
@@ -48,7 +71,6 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                     )}
                 </Formik>
             </div>
-
         </Modal>
     )
 }

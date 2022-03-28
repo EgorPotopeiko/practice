@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { PUBLIC_PATH } from "../../routing/names";
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectFilters } from '../../store/filters/selectors';
+import { LoginActionTypes } from '../../store/login/action-types';
+import { selectUser } from '../../store/login/selectors';
 import { ProductsActionTypes } from '../../store/products/action-types';
 import './Header.less';
 import ModalAuth from './ModalAuth/ModalAuth';
@@ -24,8 +26,20 @@ const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
     const filters = useSelector(selectFilters)
+    const user = useSelector(selectUser)
     const showModal = () => {
-        setModalAuthVisible(true);
+        if (user.role === "guest" && user.isAuth === false) {
+            setModalAuthVisible(true);
+        }
+        else {
+            dispatch({
+                type: LoginActionTypes.LOGOUT,
+                user: {
+                    role: "guest",
+                    isAuth: false
+                }
+            })
+        }
     }
     const cancelModal = () => {
         setModalAuthVisible(false)
@@ -43,7 +57,8 @@ const Header: React.FC = () => {
                             ...filters,
                             search: searchInput
                         })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
-                        <Button onClick={showModal}>Войти</Button>
+                        <Button onClick={showModal}>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
+                        <UserOutlined hidden={user.isAuth ? false : true} />
                         <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} />
                     </div>
                 </div>

@@ -2,9 +2,10 @@ import React from 'react';
 import { Card, Typography } from 'antd';
 import './CardTile.less';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { Link } from 'react-router-dom';
+import { selectUser } from '../../../../store/login/selectors';
 
 const { Title } = Typography;
 
@@ -21,7 +22,7 @@ interface Props {
 
 const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory }) => {
     const dispatch = useDispatch();
-    const user = JSON.parse(localStorage.getItem("user")!)
+    const user = useSelector(selectUser)
     return (
         <div className='cardTile'>
             <Card size="small" title={
@@ -35,7 +36,7 @@ const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, ca
                 </>
             }>
                 <p>{cost} руб.</p>
-                <ShoppingCartOutlined />
+                <ShoppingCartOutlined hidden={user.isAuth ? false : true} />
             </Card>
         </div>
     );
