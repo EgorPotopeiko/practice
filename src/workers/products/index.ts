@@ -1,3 +1,4 @@
+import { selectFilters } from './../../store/filters/selectors';
 import { GetProductTotal } from './../../store/products/actions';
 import { selectPage, selectPageSize } from './../../store/products/selectors';
 import { FiltersActionTypes } from './../../store/filters/action-types';
@@ -23,8 +24,9 @@ export interface ResponseGenerator {
 function* loadProductList() {
     try {
         const page: AxiosResponse = yield select(selectPage);
-        const pageSize: AxiosResponse = yield select(selectPageSize)
-        const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize);
+        const pageSize: AxiosResponse = yield select(selectPageSize);
+        const filters: AxiosResponse = yield select(selectFilters);
+        const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize, filters);
         const newData = data.data.content.map((product: any) => {
             return {
                 id: product.id,
@@ -34,8 +36,8 @@ function* loadProductList() {
                 cost: product.price
             }
         })
-        yield put(GetProductsSuccessAction(newData))
         yield put(GetProductTotal(data.data.totalCount));
+        yield put(GetProductsSuccessAction(newData));
     }
     catch (error) {
         yield put(GetProductsErrorAction(error));
@@ -56,5 +58,6 @@ function* loadProduct(payload: any) {
 export function* productsSaga() {
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCTS_START, loadProductList);
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCT_START, loadProduct);
-    yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList);
+    yield takeLatest(ProductsActionTypes.SET_PAGE, loadProductList);
+    yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList)
 }

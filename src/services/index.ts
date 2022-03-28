@@ -8,6 +8,11 @@ export default class ProductsDB {
         return $api.post(`/product/search`, {
             page: page - 1,
             pageSize: pageSize,
+            filterData: {
+                searchString: filters.search,
+                category: filters.category === "all" ? [] : [filters.category],
+                price: filters.priceRange
+            }
         })
     }
 
