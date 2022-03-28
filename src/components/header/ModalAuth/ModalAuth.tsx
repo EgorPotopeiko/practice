@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button } from 'antd';
 import './ModalAuth.less';
+import { useState } from 'react';
 
 interface Props {
     visible: boolean,
@@ -11,6 +12,14 @@ interface Props {
 }
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
+    const [loading, setLoading] = useState(false);
+    const load = () => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+            onCancel()
+        }, 3000)
+    }
     return (
         <Modal width={530} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
             <div className='modal__auth'>
@@ -33,7 +42,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                 />
                             </FormItem>
                             <Button.Group>
-                                <SubmitButton>Войти</SubmitButton>
+                                <SubmitButton loading={loading} onClick={load}>Войти</SubmitButton>
                             </Button.Group>
                         </Form>
                     )}

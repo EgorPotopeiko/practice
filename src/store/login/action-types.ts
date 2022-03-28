@@ -1,0 +1,5 @@
+export const LoginActionTypes = {
+    LOAD_AUTHORIZATION_START: '[Authorization] LOAD_AUTHORIZATION_START',
+    LOAD_AUTHORIZATION_SUCCESS: '[Authorization] LOAD_AUTHORIZATION_SUCCESS',
+    LOAD_AUTHORIZATION_ERROR: '[Authorization] LOAD_AUTHORIZATION_ERROR',
+} as const;
