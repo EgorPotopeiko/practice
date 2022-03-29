@@ -19,4 +19,13 @@ export default class ProductsDB {
             id
         })
     };
+
+    static createProduct = async (prise: any, title: any, category: any, img: any) => {
+        return $api.post(`/product/create`, {
+            prise,
+            title,
+            category,
+            img
+        })
+    };
 }
