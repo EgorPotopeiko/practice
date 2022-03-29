@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Divider, Typography } from 'antd';
-import './CardList.less';
+import './СardList.less';
 import { Link } from 'react-router-dom';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';

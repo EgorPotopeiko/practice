@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Typography } from 'antd';
-import './CardTile.less';
+import './СardTile.less';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
