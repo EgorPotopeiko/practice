@@ -21,7 +21,7 @@ interface Props {
     img: string
 }
 
-const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory, img }) => {
+const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser)
     return (
@@ -33,7 +33,7 @@ const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker,
                 })
                     :
                     undefined} level={3}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
-                <Text>{category}</Text>
+                <Text>{category[0]} {category[1]}</Text>
                 <ShoppingCartOutlined hidden={user.isAuth ? false : true} />
             </>}
                 cover={<img alt="example" src={img} />}>

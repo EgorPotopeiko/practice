@@ -20,7 +20,7 @@ const ProductPage: React.FC = () => {
             </div>
         )
     }
-    const { title, category, price: cost, description, imgCart } = product.data
+    const { title, category, price, description, imgCart } = product.data
     const img = window.location.href.split('auth')[0] + imgCart
     return (
         <div className='productPage'>
@@ -39,7 +39,7 @@ const ProductPage: React.FC = () => {
                         <Text>Подкатегория: {category[1]}</Text>
                     </div>
                     <div className='productPage__info-add'>
-                        <Text strong >{cost} руб.</Text>
+                        <Text strong >{price} руб.</Text>
                         <Button>Добавить в корзину</Button>
                     </div>
                 </div>
