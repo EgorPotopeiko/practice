@@ -5,6 +5,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { USER_PATH } from '../../../routing/names';
+import { LoginActionTypes } from '../../../store/login/action-types';
 import { ProductsActionTypes } from '../../../store/products/action-types';
 import "./CartHeader.less"
 
@@ -22,7 +23,13 @@ const CartHeader: React.FC = () => {
                         type: ProductsActionTypes.REMOVE_PRODUCT
                     })}><Link to={AUTH}>Shop</Link></Title>
                     <div className='cart__header-user'>
-                        <Button>Выйти</Button>
+                        <Button onClick={() => dispatch({
+                            type: LoginActionTypes.LOGOUT,
+                            user: {
+                                role: "guest",
+                                isAuth: false
+                            }
+                        })}>Выйти</Button>
                         <UserOutlined />
                     </div>
                 </div>

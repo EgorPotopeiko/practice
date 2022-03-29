@@ -20,8 +20,7 @@ const ProductPage: React.FC = () => {
             </div>
         )
     }
-    const { title, category, subcategory, cost, description, imgCart: img } = product.data
-    console.log(img)
+    const { title, category, price: cost, description, imgCart: img } = product.data
     return (
         <div className='productPage'>
             <CartHeader />
@@ -35,8 +34,8 @@ const ProductPage: React.FC = () => {
                 <div className='productPage__info'>
                     <div className='productPage__info-desc'>
                         <Text>Изготовитель:</Text>
-                        <Text>Категория: {category}</Text>
-                        <Text>Подкатегория: {subcategory}</Text>
+                        <Text>Категория: {category[0]}</Text>
+                        <Text>Подкатегория: {category[1]}</Text>
                     </div>
                     <div className='productPage__info-add'>
                         <Text strong >{cost} руб.</Text>

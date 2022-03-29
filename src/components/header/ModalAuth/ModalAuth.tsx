@@ -36,17 +36,19 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
         setTimeout(() => {
             setLoading(false)
             onCancel()
-        }, 1000)
+        }, 3000)
     }
     return (
         <Modal width={530} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
             <div className='modal__auth'>
                 <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={async (values: any) =>
-                    dispatch({
-                        type: LoginActionTypes.LOAD_AUTHORIZATION_START,
-                        email: values.email,
-                        password: values.password
-                    })}>
+                    setTimeout(() => {
+                        dispatch({
+                            type: LoginActionTypes.LOAD_AUTHORIZATION_START,
+                            email: values.email,
+                            password: values.password
+                        })
+                    }, 3000)}>
                     {() => (
                         <Form >
                             <FormItem name='email' validate={validateEmail}>
