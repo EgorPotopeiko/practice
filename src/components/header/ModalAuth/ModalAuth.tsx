@@ -5,11 +5,13 @@ import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button } from 'antd';
 import './ModalAuth.less';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginActionTypes } from '../../../store/login/action-types';
+import { selectError } from '../../../store/login/selectors';
 
 interface Props {
     visible: boolean,
+    setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
     onCancel: () => void
 }
 
@@ -28,14 +30,21 @@ const validatePassword = (value: string) => {
     }
 }
 
-const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
+const ModalAuth: React.FC<Props> = ({ visible, onCancel, setErrorVisible }) => {
     const dispatch = useDispatch()
+    const error = useSelector(selectError)
     const [loading, setLoading] = useState(false);
-    const load = () => {
+    const load = async () => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            onCancel()
+            if (error) {
+                onCancel()
+                setErrorVisible(true)
+            }
+            else {
+                onCancel()
+            }
         }, 3000)
     }
     return (

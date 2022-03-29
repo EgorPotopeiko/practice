@@ -12,6 +12,7 @@ import { selectUser } from '../../store/login/selectors';
 import { ProductsActionTypes } from '../../store/products/action-types';
 import './Header.less';
 import ModalAuth from './ModalAuth/ModalAuth';
+import ModalError from './ModalError/ModalError';
 
 const { Title, Text } = Typography;
 
@@ -23,6 +24,7 @@ export const selectValues = ["Рога и копыта", "ZooParadise", "Purina"
 
 const Header: React.FC = () => {
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
+    const [modalErrorVisible, setModalErrorVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
     const filters = useSelector(selectFilters)
@@ -59,7 +61,8 @@ const Header: React.FC = () => {
                         })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
                         <UserOutlined hidden={user.isAuth ? false : true} />
-                        <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} />
+                        <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} setErrorVisible={setModalErrorVisible} />
+                        <ModalError onCancel={cancelModal} visible={modalErrorVisible} />
                     </div>
                 </div>
                 <div className='header__filters'>
