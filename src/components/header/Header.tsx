@@ -4,7 +4,7 @@ import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'a
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { PUBLIC_PATH } from "../../routing/names";
+import { PUBLIC_PATH, USER_PATH } from "../../routing/names";
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectFilters } from '../../store/filters/selectors';
 import { LoginActionTypes } from '../../store/login/action-types';
@@ -19,6 +19,8 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const { APP } = PUBLIC_PATH
+
+const { CART } = USER_PATH
 
 export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
@@ -60,7 +62,7 @@ const Header: React.FC = () => {
                             search: searchInput
                         })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
-                        <UserOutlined hidden={user.isAuth ? false : true} />
+                        <Link to={CART}><UserOutlined hidden={user.isAuth ? false : true} /></Link>
                         <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} setErrorVisible={setModalErrorVisible} />
                         <ModalError onCancel={cancelModal} visible={modalErrorVisible} />
                     </div>

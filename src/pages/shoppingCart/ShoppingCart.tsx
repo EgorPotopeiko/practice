@@ -6,7 +6,7 @@ const ShoppingCart: React.FC = () => {
     return (
         <div className="shoppingCart">
             <CartHeader />
-            <Cart />
+            {/* <Cart /> */}
         </div>
     );
 }
