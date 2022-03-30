@@ -10,9 +10,9 @@ const Cart: React.FC = () => {
     return (
         <div className="cart">
             <CartItems />
-            {/* <Button type='primary' onClick={() => setVisible(true)}>Перейти к оформлению заказа</Button>
+            <Button type='primary' onClick={() => setVisible(true)}>Перейти к оформлению заказа</Button>
             <Button type='default'>Мои заказы</Button>
-            <CartOrder visible={visible} setVisible={setVisible} /> */}
+            {/* <CartOrder visible={visible} setVisible={setVisible} /> */}
         </div>
     );
 }

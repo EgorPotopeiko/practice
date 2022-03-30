@@ -3,12 +3,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectAdminMenu, selectFilters, selectUserMenu } from '../../store/filters/selectors';
+import { selectUser } from '../../store/login/selectors';
 import './Menu.less';
 
 const { TabPane } = Tabs;
 
 const Menu: React.FC = () => {
-    const user = JSON.parse(localStorage.getItem("user")!)
+    const user = useSelector(selectUser)
     const userTabs = useSelector(selectUserMenu);
     const adminTabs = useSelector(selectAdminMenu);
     const dispatch = useDispatch();

@@ -31,7 +31,8 @@ function* loadInfo() {
     const user: AxiosResponse = yield select(selectUser);
     if (user.status === 200) {
         const takeData: AxiosResponse = yield call(Authorization.getUser, user.data.jwt)
-        yield put(GetAuthorizationSuccessAction({ ...takeData.data, role: "user", isAuth: true }))
+        const role = takeData.data.name === "admin" ? "admin" : "user"
+        yield put(GetAuthorizationSuccessAction({ ...takeData.data, role: role, isAuth: true }))
     }
 }
 
