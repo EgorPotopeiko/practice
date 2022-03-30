@@ -31,7 +31,7 @@ function* loadProductList() {
                 title: product.title,
                 img: product.imgCart,
                 category: product.category,
-                cost: product.price
+                price: product.price
             }
         })
         yield put(GetProductTotal(data.data.totalCount));

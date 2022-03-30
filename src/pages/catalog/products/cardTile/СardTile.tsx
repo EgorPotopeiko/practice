@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { Link } from 'react-router-dom';
 import { selectUser } from '../../../../store/login/selectors';
+import { CartActionTypes } from '../../../../store/cart/action-types';
 
 const { Title } = Typography;
 
@@ -13,14 +14,15 @@ interface Props {
     id: string,
     title: string,
     desc: string,
-    cost: number,
+    price: number,
     available: boolean,
     maker: string,
     category: string,
-    subcategory: string | undefined
+    subcategory: string | undefined,
+    img: string
 }
 
-const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, subcategory }) => {
+const CardTile: React.FC<Props> = ({ id, title, desc, price, available, maker, category, subcategory, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser)
     return (
@@ -35,8 +37,11 @@ const CardTile: React.FC<Props> = ({ id, title, desc, cost, available, maker, ca
                         undefined} level={4}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
                 </>
             }>
-                <p>{cost} руб.</p>
-                <ShoppingCartOutlined hidden={user.isAuth ? false : true} />
+                <p>{price} руб.</p>
+                <ShoppingCartOutlined hidden={user.isAuth ? false : true} onClick={() => dispatch({
+                    type: CartActionTypes.PRODUCT_ADDED,
+                    item: { id, title, category, price, img }
+                })} />
             </Card>
         </div>
     );

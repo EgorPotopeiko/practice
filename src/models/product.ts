@@ -3,7 +3,7 @@ export type TProduct = {
     id: string,
     title: string,
     description: string,
-    cost: number,
+    price: number,
     available: boolean,
     added_date: string,
     maker: string,

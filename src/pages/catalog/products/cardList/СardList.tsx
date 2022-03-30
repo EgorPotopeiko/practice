@@ -6,6 +6,7 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { selectUser } from '../../../../store/login/selectors';
+import { CartActionTypes } from '../../../../store/cart/action-types';
 
 const { Title, Text } = Typography;
 
@@ -13,7 +14,7 @@ interface Props {
     id: string,
     title: string,
     desc: string,
-    cost: number,
+    price: number,
     available: boolean,
     maker: string,
     category: string,
@@ -21,7 +22,7 @@ interface Props {
     img: string
 }
 
-const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker, category, img }) => {
+const CardProduct: React.FC<Props> = ({ id, title, desc, price, available, maker, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser)
     return (
@@ -34,11 +35,14 @@ const CardProduct: React.FC<Props> = ({ id, title, desc, cost, available, maker,
                     :
                     undefined} level={3}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
                 <Text>{category[0]} {category[1]}</Text>
-                <ShoppingCartOutlined hidden={user.isAuth ? false : true} />
+                <ShoppingCartOutlined hidden={user.isAuth ? false : true} onClick={() => dispatch({
+                    type: CartActionTypes.PRODUCT_ADDED,
+                    item: { id, title, category, price, img }
+                })} />
             </>}
                 cover={<img alt="example" src={img} />}>
                 <Divider />
-                <p>Стоимость: {cost} руб.</p>
+                <p>Стоимость: {price} руб.</p>
                 <p>Производитель: {maker}</p>
             </Card>
         </div>

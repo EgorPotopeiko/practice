@@ -71,7 +71,7 @@ const Products: React.FC = () => {
                             id={item.id}
                             title={item.title}
                             desc={item.description}
-                            cost={item.cost}
+                            price={item.price}
                             available={item.available}
                             maker={item.maker}
                             category={item.category}
@@ -84,11 +84,12 @@ const Products: React.FC = () => {
                             id={item.id}
                             title={item.title}
                             desc={item.description}
-                            cost={item.cost}
+                            price={item.price}
                             available={item.available}
                             maker={item.maker}
                             category={item.category}
                             subcategory={item.subcategory}
+                            img={item.img}
                         />
                 )}>
                 </List>}

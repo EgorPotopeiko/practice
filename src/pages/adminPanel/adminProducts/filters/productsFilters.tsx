@@ -113,7 +113,7 @@ const ProductsFilter: React.FC = () => {
             </div>
             <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={600}>
                 <div className='admin__createModal'>
-                    <Formik initialValues={{ title: '', description: '', cost: '', available: 'true', maker: '', category: '', subcategory: '' }} validateOnBlur onSubmit={(values) => createProduct(values)}>
+                    <Formik initialValues={{ title: '', description: '', price: '', available: 'true', maker: '', category: '', subcategory: '' }} validateOnBlur onSubmit={(values) => createProduct(values)}>
                         {() => (
                             <Form>
                                 <Form.Item name='title' validate={validate}>
@@ -123,11 +123,11 @@ const ProductsFilter: React.FC = () => {
                                         placeholder='Название товара'
                                     />
                                 </Form.Item>
-                                <Form.Item name='cost' validate={validate}>
+                                <Form.Item name='price' validate={validate}>
                                     <FormInput
                                         type='number'
                                         required={true}
-                                        name='cost'
+                                        name='price'
                                         placeholder='Стоимость'
                                     />
                                 </Form.Item>

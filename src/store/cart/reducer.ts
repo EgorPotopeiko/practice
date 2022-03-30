@@ -41,6 +41,7 @@ const updateCartItem = (product: any, item: any = {}, quantity: number) => {
         title: product.title,
         category: product.category,
         price: product.price,
+        img: product.img,
         amount: amount + quantity,
         total: total + quantity * (product.price)
     }
