@@ -5,7 +5,6 @@ export type TProduct = {
     description: string,
     price: number,
     available: boolean,
-    added_date: string,
     maker: string,
     category: string,
     subcategory?: string,

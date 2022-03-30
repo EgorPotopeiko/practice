@@ -20,9 +20,15 @@ const CartHeader: React.FC = () => {
         <div className="cart__header">
             <PageHeader>
                 <div className='cart__header-wrap'>
-                    <Title onClick={() => dispatch({
-                        type: ProductsActionTypes.REMOVE_PRODUCT
-                    })}><Link to={AUTH}>Shop</Link></Title>
+                    <Title onClick={() => {
+                        dispatch({
+                            type: ProductsActionTypes.REMOVE_PRODUCT
+                        })
+                        dispatch({
+                            type: FiltersActionTypes.REMOVE_ALL_FILTERS
+                        })
+                    }
+                    }><Link to={AUTH}>Shop</Link></Title>
                     <div className='cart__header-user'>
                         <Button onClick={() => {
                             dispatch({

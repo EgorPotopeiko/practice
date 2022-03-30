@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginActionTypes } from '../../../store/login/action-types';
 import { selectError } from '../../../store/login/selectors';
+import { FiltersActionTypes } from '../../../store/filters/action-types';
 
 interface Props {
     visible: boolean,
@@ -40,6 +41,9 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel, setErrorVisible }) => {
             setLoading(false)
             onCancel()
         }, 3000)
+        dispatch({
+            type: FiltersActionTypes.REMOVE_ALL_FILTERS
+        })
     }
     return (
         <Modal width={530} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
