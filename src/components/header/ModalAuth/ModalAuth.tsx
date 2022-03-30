@@ -38,13 +38,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel, setErrorVisible }) => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            if (error) {
-                onCancel()
-                setErrorVisible(true)
-            }
-            else {
-                onCancel()
-            }
+            onCancel()
         }, 3000)
     }
     return (

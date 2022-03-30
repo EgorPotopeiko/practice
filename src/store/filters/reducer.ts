@@ -32,6 +32,14 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
                 sort: action.sort,
                 category: action.category
             }
+        case FiltersActionTypes.REMOVE_ALL_FILTERS:
+            return {
+                ...state,
+                search: "",
+                priceRange: [10, 100000],
+                sort: "date",
+                category: "all",
+            }
         default:
             return state
     }

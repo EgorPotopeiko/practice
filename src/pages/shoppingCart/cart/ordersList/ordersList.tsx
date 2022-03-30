@@ -1,12 +1,14 @@
 /* eslint-disable array-callback-return */
 import { Table } from 'antd';
 import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CartHeader from '../../../../components/header/CartHeader/CartHeader';
 import { TOrder } from '../../../../models/order';
+import { selectUser } from '../../../../store/login/selectors';
 
 const OrdersList: React.FC = () => {
-    const ordersItems = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
+    const user = useSelector(selectUser)
+    const ordersItems = JSON.parse(localStorage.getItem(`orders ${user.name}`)!)
     const columns = [
         {
             title: 'Номер заказа',

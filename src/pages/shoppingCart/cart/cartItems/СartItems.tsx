@@ -7,9 +7,11 @@ import './CartItems.less';
 import { TProduct } from '../../../../models/product';
 import { selectCart } from '../../../../store/cart/selectors';
 import { CartActionTypes } from '../../../../store/cart/action-types';
+import { selectUser } from '../../../../store/login/selectors';
 
 const CartItems: React.FC = () => {
     const cartItems = useSelector(selectCart);
+    const user = useSelector(selectUser);
     const dispatch = useDispatch()
     const columns = [
         {
@@ -50,8 +52,14 @@ const CartItems: React.FC = () => {
     cartItems.map((item: TProduct) => {
         item['key'] = item.id;
     })
+    if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) {
+        localStorage.setItem(`orders ${user.name}`, JSON.stringify([]))
+    }
+    else {
+        localStorage.getItem(`orders ${user.name}`)
+    }
     return (
-        <Table dataSource={cartItems} columns={columns} />
+        <Table bordered dataSource={cartItems} columns={columns} />
     )
 }
 

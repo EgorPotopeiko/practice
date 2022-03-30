@@ -9,3 +9,7 @@ export const GetFilters = (search: any, maker: any, available: any, priceRange: 
     sort,
     category
 })
+
+export const RemoveAllFilters = () => ({
+    type: FiltersActionTypes.REMOVE_ALL_FILTERS
+})

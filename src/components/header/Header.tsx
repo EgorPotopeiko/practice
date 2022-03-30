@@ -43,6 +43,9 @@ const Header: React.FC = () => {
                     isAuth: false
                 }
             })
+            dispatch({
+                type: FiltersActionTypes.REMOVE_ALL_FILTERS
+            })
         }
     }
     const cancelModal = () => {

@@ -4,6 +4,10 @@ import React, { useState } from 'react';
 import "./Cart.less"
 import CartItems from './cartItems/СartItems';
 import CartOrder from './cartOrder/СartOrder';
+import { USER_PATH } from '../../../routing/names';
+import { Link } from 'react-router-dom';
+
+const { ORDERS } = USER_PATH
 
 const Cart: React.FC = () => {
     const [visible, setVisible] = useState(false);
@@ -11,8 +15,8 @@ const Cart: React.FC = () => {
         <div className="cart">
             <CartItems />
             <Button type='primary' onClick={() => setVisible(true)}>Перейти к оформлению заказа</Button>
-            <Button type='default'>Мои заказы</Button>
-            {/* <CartOrder visible={visible} setVisible={setVisible} /> */}
+            <Button type='default'><Link to={ORDERS}>Мои заказы</Link></Button>
+            <CartOrder visible={visible} setVisible={setVisible} />
         </div>
     );
 }

@@ -3,15 +3,22 @@ import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row
 import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
 import "./СartOrder.less";
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { customAlphabet } from "nanoid"
 import Modal from 'antd/lib/modal/Modal';
+import { selectCart } from '../../../../store/cart/selectors';
+import { selectUser } from '../../../../store/login/selectors';
+import { CartActionTypes } from '../../../../store/cart/action-types';
+import history from '../../../../history';
+import { USER_PATH } from '../../../../routing/names'
 
 interface Props {
     visible: boolean,
     setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
+
+const { AUTH } = USER_PATH
 
 const { Title, Text } = Typography;
 
@@ -23,10 +30,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [loading, setLoading] = useState(false);
     const [orderVisible, setOrderVisible] = useState(false);
     const [successVisible, setSuccessVisible] = useState(false);
-    const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
+    const cartItems = useSelector(selectCart);
     const [delivery, setDelivery] = useState('курьером');
-    const orders = useSelector((state: RootStateOrAny) => state.orderReducer.orders);
-    const authUser = useSelector((state: RootStateOrAny) => state.userReducer.user);
+    const authUser = useSelector(selectUser);
+    const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
             id: '',
@@ -41,7 +48,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             name: '',
             status: 'оформлен',
             email: authUser.email,
-            user: `${authUser.firstName} ${authUser.lastName}`,
+            user: `${authUser.name}`,
             comment: '',
             count: length,
             payment: total
@@ -55,6 +62,9 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 values.delivery = delivery
                 values.count = length
                 values.payment = total
+                const newOrder = values
+                const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
+                localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
                 setLoading(false)
                 setSubmitting(false)
                 setVisible(false)
@@ -79,6 +89,14 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         setLoading(true)
         setTimeout(() => {
             values.status = "оплачен"
+            const newOrder = values
+            const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
+            orders.pop()
+            localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
+            dispatch({
+                type: CartActionTypes.CLEAR_CART,
+                empty: []
+            })
             setLoading(false)
             setOrderVisible(false)
             setSuccessVisible(true)
@@ -88,16 +106,16 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const backToMain = () => {
         setSuccessVisible(false)
         resetForm({})
+        history.push(AUTH)
     }
 
     const backToOrder = () => {
+        const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
+        orders.pop()
+        localStorage.setItem(`orders ${authUser.name}`, JSON.stringify(orders))
         setOrderVisible(false)
         setVisible(true)
     }
-
-    useEffect(() => {
-        localStorage.setItem("orders", JSON.stringify(orders));
-    }, [orders])
 
     useEffect(() => {
         let ttl = 0;
@@ -106,7 +124,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             ttl += +el.total;
             len += +el.amount;
         });
-        setTotal(ttl);
+        setTotal(+ttl.toFixed(2));
         setLength(len)
     }, [cartItems]);
     return (
@@ -165,8 +183,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                             onChange={handleChange}
                         />
                     </Form.Item>
-                    <Row gutter={16} style={{ marginBottom: "24px" }}>
-                        <Col span={6}>
+                    <Row gutter={0} style={{ marginBottom: "24px" }}>
+                        <Col span={5}>
                             <Form.Item
                                 name="house"
                                 hasFeedback
@@ -182,7 +200,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={6}>
+                        <Col span={5}>
                             <Form.Item
                                 name="flat"
                                 hasFeedback
@@ -198,7 +216,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={6}>
+                        <Col span={5}>
                             <Form.Item
                                 name="entrance"
                                 hasFeedback
@@ -213,7 +231,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={6}>
+                        <Col span={5}>
                             <Form.Item
                                 name="level"
                                 hasFeedback
