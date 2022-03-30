@@ -8,7 +8,6 @@ const initialState: TFiltersState = {
     sort: "date",
     category: "all",
     listCategories: ["all", "mobile", "electron", "pc", "home", "sport"],
-    listAdmin: ["товары", "категории", "заказы"]
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -18,8 +17,7 @@ export type TFiltersState = {
     priceRange: Array<number>,
     sort: string,
     category: string,
-    listCategories: Array<string>,
-    listAdmin: Array<string>
+    listCategories: Array<string>
 }
 
 export default function filtersReducer(state: TFiltersState = initialState, action: ActionTypes): TFiltersState {

@@ -8,4 +8,3 @@ export const selectFilterPriceRange = (state: RootStateOrAny) => state.filters.p
 export const selectFilterSort = (state: RootStateOrAny) => state.filters.sort
 export const selectFilterCategory = (state: RootStateOrAny) => state.filters.category
 export const selectUserMenu = (state: RootStateOrAny) => state.filters.listCategories
-export const selectAdminMenu = (state: RootStateOrAny) => state.filters.listAdmin
