@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable array-callback-return */
 import { Button, Input, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
@@ -7,9 +6,7 @@ import React, { useState } from 'react';
 import './ProductsFilters.less';
 import Modal from 'antd/lib/modal/Modal';
 import { nanoid } from 'nanoid';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { selectProducts } from '../../../../store/products/selectors';
+import { useSelector } from 'react-redux';
 import { selectUserMenu } from '../../../../store/filters/selectors';
 import ImgCrop from 'antd-img-crop';
 
@@ -28,23 +25,12 @@ const validate = (value: any) => {
     }
 }
 
-const createDate = () => {
-    const date = new Date();
-    const yyyy = date.getFullYear()
-    let mm = date.getMonth() + 1;
-    let dd = date.getDate();
-    const finishDate = mm + '/' + dd + '/' + yyyy
-    return finishDate
-}
-
-const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory, setSearchStatus }) => {
-    const products = useSelector(selectProducts);
+const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
     const [visible, setVisible] = useState(false);
     const [fileList, setFileList]: any = useState([]);
     const [fileListProduct, setFileListProduct]: any = useState([]);
     const formData = new FormData();
     const [upLoading, setUpLoading] = useState(false);
-    const dispatch = useDispatch()
     const categoryValues = useSelector(selectUserMenu);
     const filterCategories = categoryValues.filter((item: any) => item !== 'all');
     const onCancel = () => {
@@ -102,7 +88,6 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             setFileList(newFileList)
         },
         beforeUpload: async (file: any) => {
-            const res = await axios.get(`http://localhost:3000/db/${file.name}`);
             setFileList([...fileList, file]);
             return false;
         },
@@ -171,6 +156,7 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                             }}
                                             onChange={onChange}
                                             onPreview={onPreview}
+                                            disabled={fileListProduct.length > 0 ? true : false}
                                         >
                                             {fileList.length < 5 && '+ Upload'}
                                         </Upload>
