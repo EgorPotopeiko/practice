@@ -27,32 +27,34 @@ const Menu: React.FC = () => {
     const filters = useSelector(selectFilters);
     return (
         <div className="menu__catalog">
-            <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => dispatch({
-                type: FiltersActionTypes.SET_FILTERS,
-                ...filters,
-                category: category
-            })}>
-                {user.role === "admin"
-                    ?
-                    <>
-                        <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
-                            <ProductsFilter setSearchName={setSearchName} setSearchArticle={setSearchArticle} setSearchCategory={setSearchCategory} setSearchStatus={setSearchStatus} />
-                            <ProductsData searchName={searchName} searchArticle={searchArticle} searchCategory={searchCategory} searchStatus={searchStatus} />
-                        </TabPane>
-                        <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ">
-                            <AdminCategory />
-                        </TabPane>
-                        <TabPane tab="ЗАКАЗЫ" key="ЗАКАЗЫ">
-                            <OrderFilters setChooseStatus={setChooseStatus} setSearchUser={setSearchUser} setSearchNumber={setSearchNumber} />
-                            <OrderData chooseStatus={chooseStatus} searchUser={searchUser} searchNumber={searchNumber} />
-                        </TabPane>
-                    </>
-                    :
-                    userTabs.map((item: string) => (
-                        <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
-                    ))
-                }
-            </Tabs>
+            {user.role === "admin"
+                ?
+                <Tabs defaultActiveKey="1" type="card">
+                    <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
+                        <ProductsFilter setSearchName={setSearchName} setSearchArticle={setSearchArticle} setSearchCategory={setSearchCategory} setSearchStatus={setSearchStatus} />
+                        <ProductsData searchName={searchName} searchArticle={searchArticle} searchCategory={searchCategory} searchStatus={searchStatus} />
+                    </TabPane>
+                    <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ">
+                        <AdminCategory />
+                    </TabPane>
+                    <TabPane tab="ЗАКАЗЫ" key="ЗАКАЗЫ">
+                        <OrderFilters setChooseStatus={setChooseStatus} setSearchUser={setSearchUser} setSearchNumber={setSearchNumber} />
+                        <OrderData chooseStatus={chooseStatus} searchUser={searchUser} searchNumber={searchNumber} />
+                    </TabPane>
+                </Tabs>
+                :
+                <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => dispatch({
+                    type: FiltersActionTypes.SET_FILTERS,
+                    ...filters,
+                    category: category
+                })}>
+                    {
+                        userTabs.map((item: string) => (
+                            <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
+                        ))
+                    }
+                </Tabs>
+            }
         </div>
     );
 }
