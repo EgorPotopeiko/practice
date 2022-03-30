@@ -2,12 +2,15 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { Space, Table } from 'antd';
 import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './CartItems.less';
 import { TProduct } from '../../../../models/product';
+import { selectCart } from '../../../../store/cart/selectors';
+import { CartActionTypes } from '../../../../store/cart/action-types';
 
 const CartItems: React.FC = () => {
-    const cartItems = useSelector((state: RootStateOrAny) => state.cartReducer.cartProducts);
+    const cartItems = useSelector(selectCart);
+    const dispatch = useDispatch()
     const columns = [
         {
             title: 'Название',
@@ -16,8 +19,8 @@ const CartItems: React.FC = () => {
         },
         {
             title: 'Категория',
-            dataIndex: 'subcategory',
-            key: 'subcategory',
+            dataIndex: 'category',
+            key: 'category',
         },
         {
             title: 'Количество',
@@ -34,13 +37,18 @@ const CartItems: React.FC = () => {
             key: 'action',
             render: (record: TProduct) => (
                 <Space size="middle">
-                    <DeleteOutlined />
+                    <DeleteOutlined onClick={() =>
+                        dispatch({
+                            type: CartActionTypes.PRODUCT_REMOVED,
+                            item: record
+                        })
+                    } />
                 </Space>
             ),
         },
     ];
     cartItems.map((item: TProduct) => {
-        item['key'] = item.id.split('-')[0];
+        item['key'] = item.id;
     })
     return (
         <Table dataSource={cartItems} columns={columns} />
