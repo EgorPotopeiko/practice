@@ -1,8 +1,11 @@
 import { Tabs } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import AdminCategory from '../../pages/adminPanel/adminCategory/AdminCategory';
 import OrderData from '../../pages/adminPanel/adminOrders/adminData/OrderData';
 import OrderFilters from '../../pages/adminPanel/adminOrders/filters/OrderFilters';
+import ProductsData from '../../pages/adminPanel/adminProducts/adminData/ProductsData';
+import ProductsFilter from '../../pages/adminPanel/adminProducts/filters/ProductsFilters';
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectFilters, selectUserMenu } from '../../store/filters/selectors';
 import { selectUser } from '../../store/login/selectors';
@@ -32,8 +35,13 @@ const Menu: React.FC = () => {
                 {user.role === "admin"
                     ?
                     <>
-                        <TabPane tab="ТОВАРЫ" key="ТОВАРЫ"></TabPane>
-                        <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ"></TabPane>
+                        <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
+                            <ProductsFilter setSearchName={setSearchName} setSearchArticle={setSearchArticle} setSearchCategory={setSearchCategory} setSearchStatus={setSearchStatus} />
+                            <ProductsData searchName={searchName} searchArticle={searchArticle} searchCategory={searchCategory} searchStatus={searchStatus} />
+                        </TabPane>
+                        <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ">
+                            <AdminCategory />
+                        </TabPane>
                         <TabPane tab="ЗАКАЗЫ" key="ЗАКАЗЫ">
                             <OrderFilters setChooseStatus={setChooseStatus} setSearchUser={setSearchUser} setSearchNumber={setSearchNumber} />
                             <OrderData chooseStatus={chooseStatus} searchUser={searchUser} searchNumber={searchNumber} />

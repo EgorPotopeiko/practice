@@ -6,11 +6,19 @@ import { Field, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import './ProductsFilters.less';
 import Modal from 'antd/lib/modal/Modal';
-import { customAlphabet } from 'nanoid';
+import { customAlphabet, nanoid } from 'nanoid';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { selectValues } from '../../../../components/header/Header'
 import axios from 'axios';
+import { selectProducts } from '../../../../store/products/selectors';
+import { selectUserMenu } from '../../../../store/filters/selectors';
 
+interface Props {
+    setSearchName: React.Dispatch<React.SetStateAction<string>>,
+    setSearchArticle: React.Dispatch<React.SetStateAction<string>>,
+    setSearchCategory: React.Dispatch<React.SetStateAction<string>>,
+    setSearchStatus: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const { Option } = Select;
 
@@ -29,26 +37,21 @@ const createDate = () => {
     return finishDate
 }
 
-const ProductsFilter: React.FC = () => {
-    const products = useSelector((state: RootStateOrAny) => state.productsReducer.products);
+const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory, setSearchStatus }) => {
+    const products = useSelector(selectProducts);
     const [visible, setVisible] = useState(false);
     const [fileList, setFileList]: any = useState([]);
     const formData = new FormData();
     const [upLoading, setUpLoading] = useState(false);
     const dispatch = useDispatch()
-    const categoryValues = useSelector((state: RootStateOrAny) => state.filterReducer.listCategories);
+    const categoryValues = useSelector(selectUserMenu);
     const filterCategories = categoryValues.filter((item: any) => item !== 'all')
     const onCancel = () => {
         setVisible(false)
     }
     const createProduct = (values: any) => {
         setTimeout(() => {
-            const nanoid_8 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 8)
-            const nanoid_4 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 4)
-            const nanoid_12 = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 12)
-            values.id = `${nanoid_8()}-${nanoid_4()}-${nanoid_4()}-${nanoid_4()}-${nanoid_12()}`
-            values.date = createDate()
-            values.available = values.available === 'true' ? true : false
+            values.id = nanoid(8)
             setVisible(false)
         }, 3000)
     }
@@ -87,22 +90,15 @@ const ProductsFilter: React.FC = () => {
         },
         fileList,
     };
-    useEffect(() => {
-        localStorage.setItem("products", JSON.stringify(products))
-    }, [products])
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>
-                <Input placeholder="Название" />
-                <Input placeholder="Артикул" />
-                <Select placeholder="Категория">
+                <Input placeholder="Название" onChange={(e) => setSearchName(e.target.value)} />
+                <Input placeholder="Артикул" onChange={(e) => setSearchArticle(e.target.value)} />
+                <Select placeholder="Категория" onChange={(category) => setSearchCategory(category)}>
                     {categoryValues.map((item: any) => (
                         <Option key={item} value={item}>{item}</Option>
                     ))}
-                </Select>
-                <Select placeholder="Статус">
-                    <Option key="true" value={true}>{"Есть на складе"}</Option>
-                    <Option key="false" value={false}>{"Нет на складе"}</Option>
                 </Select>
             </div>
             <div className='admin__filters-btns'>

@@ -5,9 +5,8 @@ import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button } from 'antd';
 import './ModalAuth.less';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { LoginActionTypes } from '../../../store/login/action-types';
-import { selectError } from '../../../store/login/selectors';
 import { FiltersActionTypes } from '../../../store/filters/action-types';
 
 interface Props {
@@ -33,7 +32,6 @@ const validatePassword = (value: string) => {
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel, setErrorVisible }) => {
     const dispatch = useDispatch()
-    const error = useSelector(selectError)
     const [loading, setLoading] = useState(false);
     const load = async () => {
         setLoading(true)

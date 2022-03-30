@@ -13,3 +13,13 @@ export const GetFilters = (search: any, maker: any, available: any, priceRange: 
 export const RemoveAllFilters = () => ({
     type: FiltersActionTypes.REMOVE_ALL_FILTERS
 })
+
+export const addedCategory = (category: any) => ({
+    type: FiltersActionTypes.ADDED_CATEGORY,
+    category
+})
+
+export const removedCategory = (category: any) => ({
+    type: FiltersActionTypes.DELETED_CATEGORY,
+    category
+})

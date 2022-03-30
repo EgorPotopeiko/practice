@@ -1,12 +1,25 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, List, Row, Typography } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FiltersActionTypes } from '../../../store/filters/action-types';
+import { selectUserMenu } from '../../../store/filters/selectors';
 import './AdminCategory.less'
 
 const { Title } = Typography;
 
 const AdminCategory: React.FC = () => {
-
+    const categories = useSelector(selectUserMenu);
+    const [categoryName, setCategoryName] = useState('');
+    console.log(categoryName)
+    const dispatch = useDispatch();
+    const addCategory = () => {
+        dispatch({
+            type: FiltersActionTypes.ADDED_CATEGORY,
+            category: categoryName
+        })
+        setCategoryName('')
+    }
     return (
         <div className='adminCategory'>
             <Form>
@@ -15,11 +28,16 @@ const AdminCategory: React.FC = () => {
                 </Form.Item>
                 <Row>
                     <Col span={12}>
-                        <Input placeholder='Название новой категории' />
-                        <Button type='primary'>Создать категорию</Button>
+                        <Input value={categoryName} onChange={(e: any) => setCategoryName(e.target.value)} placeholder='Название новой категории' />
+                        <Button type='primary' onClick={addCategory}>Создать категорию</Button>
                     </Col>
                     <Col span={12}>
-                        <List header={<div>Существующие категории</div>} bordered renderItem={(item: any) => <List.Item actions={[<DeleteOutlined />]}>{item}</List.Item>} />
+                        <List header={<div>Существующие категории</div>} bordered dataSource={categories} renderItem={(item: any) => <List.Item actions={[<DeleteOutlined onClick={() =>
+                            dispatch({
+                                type: FiltersActionTypes.DELETED_CATEGORY,
+                                category: item
+                            })
+                        } />]}>{item}</List.Item>} />
                     </Col>
                 </Row>
             </Form>

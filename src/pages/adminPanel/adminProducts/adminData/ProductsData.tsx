@@ -1,15 +1,15 @@
 /* eslint-disable no-self-assign */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
-import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input, Button } from 'antd';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
-import ProductsDB from '../../../../services';
 import "./ProductsData.less";
+import { selectProducts, selectTotal } from '../../../../store/products/selectors';
+import { selectUserMenu } from '../../../../store/filters/selectors';
+import { ProductsActionTypes } from '../../../../store/products/action-types';
 
 const { Option } = Select;
 
@@ -43,16 +43,12 @@ const EditableCell: React.FC<EditableCellProps> = ({
     ...restProps
 }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
-    const listCategories = useSelector((state: RootStateOrAny) => state.filterReducer.listCategories);
+    const listCategories = useSelector(selectUserMenu);
     const filterCategories = listCategories.filter((item: string) => item !== 'all')
     const categoryNode = <Select>
         {filterCategories.map((item: string) => (
             <Option key={item} value={item}>{item}</Option>
         ))}
-    </Select>
-    const statusNode = <Select>
-        <Option key="true" value={true}>Есть на складе</Option>
-        <Option key="false" value={false}>Нет на складе</Option>
     </Select>
     return (
         <td {...restProps}>
@@ -68,7 +64,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
                     ]}
                 >
                     {dataIndex === 'title' || dataIndex === 'key' ? inputNode :
-                        dataIndex === 'category' ? categoryNode : statusNode}
+                        dataIndex === 'category' ? categoryNode : null}
                 </Form.Item>
             ) : (
                 children
@@ -77,15 +73,15 @@ const EditableCell: React.FC<EditableCellProps> = ({
     );
 };
 
-const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchName, searchStatus }) => {
+const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName, searchStatus }) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const database = new ProductsDB();
-    const dataSource = useSelector((state: RootStateOrAny) => state.productsReducer.products);
-    dataSource.map((item: TProduct) => {
-        item['key'] = item.id.split('-')[0];
+    const products = useSelector(selectProducts);
+    const totalCount = useSelector(selectTotal)
+    products.map((item: TProduct) => {
+        item['key'] = item.id;
     })
-    const [data, setData] = useState(dataSource);
+    const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()))
     newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
@@ -95,7 +91,6 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
     else {
         newData = newData.filter((item: TProduct) => item.category === searchCategory.toLowerCase())
     }
-    newData = newData.filter((item: TProduct) => item.available === searchStatus);
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {
@@ -119,12 +114,10 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                     ...row,
                 });
                 setData(newData);
-                localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             } else {
                 newData.push(row);
                 setData(newData);
-                localStorage.setItem("products", JSON.stringify(newData))
                 setEditingKey('');
             }
         } catch (errInfo) {
@@ -155,9 +148,8 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
             dataIndex: 'available',
             key: 'available',
             render: (available: boolean) => (
-                <span>{available ? "Есть на складе" : "Нет на складе"}</span>
-            ),
-            editable: true
+                <span>Есть на складе</span>
+            )
         },
         {
             title: 'Количество на складе',
@@ -192,6 +184,12 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
         },
     ];
 
+    const pagination = (page: Number, pageSize: Number) => dispatch({
+        type: ProductsActionTypes.SET_PAGE,
+        page,
+        pageSize
+    })
+
     const mergedColumns = columns.map(col => {
         if (!col.editable) {
             return col;
@@ -208,6 +206,9 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
             }),
         };
     });
+    useEffect(() => {
+        setData(products)
+    }, [products])
     return (
         <div className='products__data'>
             <Form form={form} component={false}>
@@ -222,7 +223,8 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
                     columns={mergedColumns}
                     rowClassName="editable-row"
                     pagination={{
-                        onChange: cancel,
+                        onChange: (page: number) => pagination(page, 6),
+                        total: totalCount,
                     }}
                 />
             </Form>
@@ -230,4 +232,4 @@ const ProductData: React.FC<Props> = ({ searchArticle, searchCategory, searchNam
     );
 };
 
-export default ProductData
+export default ProductsData
