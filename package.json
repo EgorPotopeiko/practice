@@ -61,6 +61,7 @@
   "devDependencies": {
     "@types/react-highlight-words": "^0.16.4",
     "@types/react-router-dom": "^5.3.3",
+    "antd-img-crop": "^4.2.0",
     "react-highlight-words": "^0.17.0"
   }
 }
