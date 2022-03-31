@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { LoginActionTypes } from '../../../store/login/action-types';
 import { FiltersActionTypes } from '../../../store/filters/action-types';
+import { ProductsActionTypes } from '../../../store/products/action-types';
 
 interface Props {
     visible: boolean,
@@ -38,6 +39,11 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel, setErrorVisible }) => {
         setTimeout(() => {
             setLoading(false)
             onCancel()
+            dispatch({
+                type: ProductsActionTypes.SET_PAGE,
+                page: 1,
+                pageSize: 6
+            })
         }, 3000)
         dispatch({
             type: FiltersActionTypes.REMOVE_ALL_FILTERS

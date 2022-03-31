@@ -46,6 +46,11 @@ const Header: React.FC = () => {
             dispatch({
                 type: FiltersActionTypes.REMOVE_ALL_FILTERS
             })
+            dispatch({
+                type: ProductsActionTypes.SET_PAGE,
+                page: 1,
+                pageSize: 6
+            })
         }
     }
     const cancelModal = () => {
@@ -55,9 +60,20 @@ const Header: React.FC = () => {
         <div className="header">
             <PageHeader>
                 <div className='header__wrap'>
-                    <Title onClick={() => dispatch({
-                        type: ProductsActionTypes.REMOVE_PRODUCT
-                    })}><Link to={APP}>Shop</Link></Title>
+                    <Title onClick={() => {
+                        dispatch({
+                            type: ProductsActionTypes.REMOVE_PRODUCT
+                        })
+                        dispatch({
+                            type: FiltersActionTypes.REMOVE_ALL_FILTERS
+                        })
+                        dispatch({
+                            type: ProductsActionTypes.SET_PAGE,
+                            page: 1,
+                            pageSize: 6
+                        })
+                    }
+                    }><Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input suffix={<SearchOutlined onClick={() => dispatch({
                             type: FiltersActionTypes.SET_FILTERS,

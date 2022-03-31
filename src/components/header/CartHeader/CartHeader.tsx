@@ -27,6 +27,11 @@ const CartHeader: React.FC = () => {
                         dispatch({
                             type: FiltersActionTypes.REMOVE_ALL_FILTERS
                         })
+                        dispatch({
+                            type: ProductsActionTypes.SET_PAGE,
+                            page: 1,
+                            pageSize: 6
+                        })
                     }
                     }><Link to={AUTH}>Shop</Link></Title>
                     <div className='cart__header-user'>
@@ -40,6 +45,11 @@ const CartHeader: React.FC = () => {
                             })
                             dispatch({
                                 type: FiltersActionTypes.REMOVE_ALL_FILTERS
+                            })
+                            dispatch({
+                                type: ProductsActionTypes.SET_PAGE,
+                                page: 1,
+                                pageSize: 6
                             })
                         }}>Выйти</Button>
                         <UserOutlined />

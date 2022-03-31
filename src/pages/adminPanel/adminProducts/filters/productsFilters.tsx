@@ -9,7 +9,6 @@ import { selectUserMenu } from '../../../../store/filters/selectors';
 import ImgCrop from 'antd-img-crop';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { getBase64 } from '../../../../services/getBase64';
-import { customAlphabet } from 'nanoid';
 
 interface Props {
     setSearchName: React.Dispatch<React.SetStateAction<string>>,
@@ -27,6 +26,7 @@ const validate = (value: any) => {
 }
 
 const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [img64, setImg64] = useState(null);
     const [visible, setVisible] = useState(false);
@@ -40,16 +40,15 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
         setVisible(false)
     }
     const createProduct = (values: any) => {
-        console.log(values)
+        setLoading(true)
         setTimeout(() => {
-            const nanoid = customAlphabet('1234567890', 6)
-            values.id = nanoid()
-            values.key = values.id
             values.img = img64
             dispatch({
                 type: ProductsActionTypes.CREATE_PRODUCT,
                 product: values
             })
+            setLoading(false)
+            setVisible(false)
         }, 3000)
     }
     const handleUpload = async () => {
@@ -173,7 +172,7 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                     </ImgCrop>
 
                                 </Form.Item>
-                                <SubmitButton>Создать</SubmitButton>
+                                <SubmitButton loading={loading}>Создать</SubmitButton>
                             </Form>
                         )}
                     </Formik>

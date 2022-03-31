@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-self-assign */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable array-callback-return */
@@ -84,7 +85,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     })
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
-    // let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()))
+    let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()))
     // newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
     // if (searchCategory.toLowerCase() === "all") {
     //     newData = newData
@@ -225,7 +226,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                         },
                     }}
                     bordered
-                    dataSource={products}
+                    dataSource={newData}
                     columns={mergedColumns}
                     rowClassName="editable-row"
                     pagination={{

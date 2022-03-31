@@ -39,7 +39,6 @@ export const GetPage = (page: number, pageSize: number) => ({
     page,
     pageSize
 })
-
 export const GetProductTotal = (total: any) => ({
     type: ProductsActionTypes.SET_TOTAL_COUNT,
     total
