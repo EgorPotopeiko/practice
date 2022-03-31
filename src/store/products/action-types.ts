@@ -8,6 +8,7 @@ export const ProductsActionTypes = {
     LOAD_PRODUCT_ERROR: '[Products] LOAD_PRODUCT_ERROR',
 
     REMOVE_PRODUCT: '[Products] REMOVE_PRODUCT',
+    DELETE_PRODUCT: '[Products] DELETE_PRODUCT',
 
     SET_PAGE: '[Pagination] SET_PAGE',
     SET_TOTAL_COUNT: '[Pagination] SET_TOTAL_COUNT'

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
 import "./ProductsData.less";
-import { selectProducts, selectTotal } from '../../../../store/products/selectors';
+import { selectPage, selectProducts, selectTotal } from '../../../../store/products/selectors';
 import { selectUserMenu } from '../../../../store/filters/selectors';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 
@@ -77,20 +77,21 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
+    const page = useSelector(selectPage);
     const totalCount = useSelector(selectTotal)
     products.map((item: TProduct) => {
         item['key'] = item.id;
     })
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
-    let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()))
-    newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
-    if (searchCategory.toLowerCase() === "all") {
-        newData = newData
-    }
-    else {
-        newData = newData.filter((item: TProduct) => item.category === searchCategory.toLowerCase())
-    }
+    // let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()))
+    // newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
+    // if (searchCategory.toLowerCase() === "all") {
+    //     newData = newData
+    // }
+    // else {
+    //     newData = newData.filter((item: TProduct) => item.category === searchCategory.toLowerCase())
+    // }
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {
@@ -177,7 +178,10 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                         <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>
                             Edit
                         </EditOutlined>
-                        <DeleteOutlined />
+                        <DeleteOutlined onClick={() => dispatch({
+                            type: ProductsActionTypes.DELETE_PRODUCT,
+                            id: record.id
+                        })} />
                     </>
                 );
             },
@@ -209,6 +213,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     useEffect(() => {
         setData(products)
     }, [products])
+    console.log(totalCount)
     return (
         <div className='products__data'>
             <Form form={form} component={false}>
@@ -219,12 +224,14 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                         },
                     }}
                     bordered
-                    dataSource={newData}
+                    dataSource={products}
                     columns={mergedColumns}
                     rowClassName="editable-row"
                     pagination={{
                         onChange: (page: number) => pagination(page, 6),
                         total: totalCount,
+                        defaultCurrent: page,
+                        pageSize: 6
                     }}
                 />
             </Form>

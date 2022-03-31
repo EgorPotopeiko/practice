@@ -25,6 +25,11 @@ export type TProductsState = {
     totalCount: number
 }
 
+const deleteProduct = (state: any, id: any) => {
+    const products = state.products;
+    return products.filter((product: any) => product.id !== id)
+}
+
 export default function productsReducer(state: TProductsState = initialState, action: ActionTypes): TProductsState {
     switch (action.type) {
         case ProductsActionTypes.LOAD_PRODUCTS_START:
@@ -49,6 +54,11 @@ export default function productsReducer(state: TProductsState = initialState, ac
             return {
                 ...state,
                 data: null
+            }
+        case ProductsActionTypes.DELETE_PRODUCT:
+            return {
+                ...state,
+                products: deleteProduct(state, action.id)
             }
         case ProductsActionTypes.SET_PAGE:
             return {
