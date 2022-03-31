@@ -53,9 +53,15 @@ function* loadProduct(payload: any) {
     }
 }
 
+function* deleteProduct(payload: any) {
+    const { id } = payload
+    yield call(ProductsDB.deleteProduct, id);
+}
+
 export function* productsSaga() {
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCTS_START, loadProductList);
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCT_START, loadProduct);
     yield takeLatest(ProductsActionTypes.SET_PAGE, loadProductList);
+    yield takeLatest(ProductsActionTypes.DELETE_PRODUCT, deleteProduct)
     yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList)
 }

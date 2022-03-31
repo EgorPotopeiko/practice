@@ -28,4 +28,10 @@ export default class ProductsDB {
             img
         })
     };
+
+    static deleteProduct = async (id: any) => {
+        return $api.delete(`/product/delete`, {
+            data: { id: id }
+        })
+    };
 }

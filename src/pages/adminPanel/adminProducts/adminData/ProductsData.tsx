@@ -178,10 +178,12 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                         <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>
                             Edit
                         </EditOutlined>
-                        <DeleteOutlined onClick={() => dispatch({
-                            type: ProductsActionTypes.DELETE_PRODUCT,
-                            id: record.id
-                        })} />
+                        <DeleteOutlined onClick={() =>
+                            dispatch({
+                                type: ProductsActionTypes.DELETE_PRODUCT,
+                                id: record.id
+                            })
+                        } />
                     </>
                 );
             },
@@ -213,7 +215,6 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     useEffect(() => {
         setData(products)
     }, [products])
-    console.log(totalCount)
     return (
         <div className='products__data'>
             <Form form={form} component={false}>
