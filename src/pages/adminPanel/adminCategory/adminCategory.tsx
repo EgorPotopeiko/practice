@@ -11,7 +11,6 @@ const { Title } = Typography;
 const AdminCategory: React.FC = () => {
     const categories = useSelector(selectUserMenu);
     const [categoryName, setCategoryName] = useState('');
-    console.log(categoryName)
     const dispatch = useDispatch();
     const addCategory = () => {
         dispatch({

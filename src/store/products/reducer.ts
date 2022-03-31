@@ -16,7 +16,7 @@ const initialState: TProductsState = {
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TProductsState = {
-    products: []
+    products: any[]
     isLoading: boolean
     error: any
     page: number
@@ -50,6 +50,11 @@ export default function productsReducer(state: TProductsState = initialState, ac
             }
         case ProductsActionTypes.LOAD_PRODUCT_ERROR:
             return ErrorActionState(state, action.error)
+        case ProductsActionTypes.CREATE_PRODUCT:
+            return {
+                ...state,
+                products: [...state.products, action.product]
+            }
         case ProductsActionTypes.REMOVE_PRODUCT:
             return {
                 ...state,

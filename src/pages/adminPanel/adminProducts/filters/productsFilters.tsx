@@ -1,14 +1,14 @@
-/* eslint-disable array-callback-return */
 import { Button, Input, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
-import { Field, Formik } from 'formik';
+import { Formik } from 'formik';
 import React, { useState } from 'react';
 import './ProductsFilters.less';
 import Modal from 'antd/lib/modal/Modal';
-import { nanoid } from 'nanoid';
-import { useSelector } from 'react-redux';
+import { customAlphabet } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUserMenu } from '../../../../store/filters/selectors';
 import ImgCrop from 'antd-img-crop';
+import { ProductsActionTypes } from '../../../../store/products/action-types';
 
 interface Props {
     setSearchName: React.Dispatch<React.SetStateAction<string>>,
@@ -26,6 +26,7 @@ const validate = (value: any) => {
 }
 
 const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
+    const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);
     const [fileList, setFileList]: any = useState([]);
     const [fileListProduct, setFileListProduct]: any = useState([]);
@@ -38,8 +39,13 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
     }
     const createProduct = (values: any) => {
         setTimeout(() => {
-            values.id = nanoid(8)
-            setVisible(false)
+            const nanoid = customAlphabet('1234567890', 6)
+            values.id = nanoid()
+            console.log(values)
+            dispatch({
+                type: ProductsActionTypes.CREATE_PRODUCT,
+                product: values
+            })
         }, 3000)
     }
     const handleUpload = async () => {
@@ -112,8 +118,8 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             </div>
             <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={600}>
                 <div className='admin__createModal'>
-                    <Formik initialValues={{ title: '', description: '', price: '', category: '', subcategory: '' }} validateOnBlur onSubmit={(values) => createProduct(values)}>
-                        {() => (
+                    <Formik initialValues={{ title: '', description: '', prise: '', category: [], img: `${fileListProduct}` }} validateOnBlur onSubmit={(values) => createProduct(values)}>
+                        {({ values, setFieldValue }) => (
                             <Form>
                                 <Form.Item name='title' validate={validate}>
                                     <FormInput
@@ -122,20 +128,22 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                         placeholder='Название товара'
                                     />
                                 </Form.Item>
-                                <Form.Item name='price' validate={validate}>
+                                <Form.Item name='prise' validate={validate}>
                                     <FormInput
                                         type='number'
                                         required={true}
-                                        name='price'
+                                        name='prise'
                                         placeholder='Стоимость'
                                     />
                                 </Form.Item>
-                                <Form.Item name='category' validate={validate}>
-                                    <Field as="select" name="category">
+                                <Form.Item name='category'>
+                                    <Select onChange={(item) => {
+                                        setFieldValue('category', [item])
+                                    }}>
                                         {filterCategories.map((item: any) => (
-                                            <option key={item} value={item}>{item}</option>
+                                            <Option key={item} value={item}>{item}</Option>
                                         ))}
-                                    </Field>
+                                    </Select>
                                 </Form.Item>
                                 <Form.Item name='description' validate={validate}>
                                     <FormInput.TextArea
@@ -152,8 +160,10 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                             listType="picture-card"
                                             fileList={fileListProduct}
                                             beforeUpload={(file) => {
+                                                setFieldValue("img", file.name)
                                                 return false
                                             }}
+
                                             onChange={onChange}
                                             onPreview={onPreview}
                                             disabled={fileListProduct.length > 0 ? true : false}

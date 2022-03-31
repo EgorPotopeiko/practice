@@ -7,6 +7,7 @@ export const ProductsActionTypes = {
     LOAD_PRODUCT_SUCCESS: '[Products] LOAD_PRODUCT_SUCCESS',
     LOAD_PRODUCT_ERROR: '[Products] LOAD_PRODUCT_ERROR',
 
+    CREATE_PRODUCT: '[Products] CREATE_PRODUCT',
     REMOVE_PRODUCT: '[Products] REMOVE_PRODUCT',
     DELETE_PRODUCT: '[Products] DELETE_PRODUCT',
 
