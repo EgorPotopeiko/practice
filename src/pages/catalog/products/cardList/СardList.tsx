@@ -13,16 +13,12 @@ const { Title, Text } = Typography;
 interface Props {
     id: string,
     title: string,
-    desc: string,
     price: number,
-    available: boolean,
-    maker: string,
     category: string,
-    subcategory: string | undefined,
     img: string
 }
 
-const CardProduct: React.FC<Props> = ({ id, title, desc, price, available, maker, category, img }) => {
+const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser)
     return (
@@ -43,7 +39,6 @@ const CardProduct: React.FC<Props> = ({ id, title, desc, price, available, maker
                 cover={<img alt="example" src={img} />}>
                 <Divider />
                 <p>Стоимость: {price} руб.</p>
-                <p>Производитель: {maker}</p>
             </Card>
         </div>
     );

@@ -20,13 +20,13 @@ const ProductPage: React.FC = () => {
             </div>
         )
     }
-    const { title, category, price, description, imgCart } = product.data
-    const img = window.location.href.split('auth')[0] + imgCart
+    const { title, category, price, img } = product.data
+    const finallyImg = window.location.href.split('auth')[0] + img
     return (
         <div className='productPage'>
             <CartHeader />
             <Card title={<>
-                <Image width={400} src={img} />
+                <Image width={400} src={finallyImg} />
                 <div className='productPage__title'>
                     <Title level={3}>{title}</Title>
                     <Title level={4}>Есть в наличии</Title>
@@ -46,7 +46,6 @@ const ProductPage: React.FC = () => {
                 <Divider />
                 <div className='productPage__description'>
                     <Title level={4}>Полное описание</Title>
-                    <Text>{description}</Text>
                 </div>
             </Card>
         </div>

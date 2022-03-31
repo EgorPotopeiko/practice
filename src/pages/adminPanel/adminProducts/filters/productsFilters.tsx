@@ -4,11 +4,12 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import './ProductsFilters.less';
 import Modal from 'antd/lib/modal/Modal';
-import { customAlphabet } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserMenu } from '../../../../store/filters/selectors';
 import ImgCrop from 'antd-img-crop';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
+import { getBase64 } from '../../../../services/getBase64';
+import { customAlphabet } from 'nanoid';
 
 interface Props {
     setSearchName: React.Dispatch<React.SetStateAction<string>>,
@@ -27,6 +28,7 @@ const validate = (value: any) => {
 
 const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
     const dispatch = useDispatch();
+    const [img64, setImg64] = useState(null);
     const [visible, setVisible] = useState(false);
     const [fileList, setFileList]: any = useState([]);
     const [fileListProduct, setFileListProduct]: any = useState([]);
@@ -38,10 +40,12 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
         setVisible(false)
     }
     const createProduct = (values: any) => {
+        console.log(values)
         setTimeout(() => {
             const nanoid = customAlphabet('1234567890', 6)
             values.id = nanoid()
-            console.log(values)
+            values.key = values.id
+            values.img = img64
             dispatch({
                 type: ProductsActionTypes.CREATE_PRODUCT,
                 product: values
@@ -71,6 +75,10 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
     }
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
         setFileListProduct(newFileList);
+        const newFile = newFileList[newFileList.length - 1]
+        getBase64(newFile.originFileObj, (imageURL: any) => {
+            setImg64(imageURL)
+        })
     };
     const onPreview = async (file: any) => {
         let src = file.url;
@@ -118,8 +126,8 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             </div>
             <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={600}>
                 <div className='admin__createModal'>
-                    <Formik initialValues={{ title: '', description: '', prise: '', category: [], img: `${fileListProduct}` }} validateOnBlur onSubmit={(values) => createProduct(values)}>
-                        {({ values, setFieldValue }) => (
+                    <Formik initialValues={{ title: '', prise: '', category: [] }} validateOnBlur onSubmit={(values) => createProduct(values)}>
+                        {({ setFieldValue }) => (
                             <Form>
                                 <Form.Item name='title' validate={validate}>
                                     <FormInput
@@ -145,22 +153,14 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                         ))}
                                     </Select>
                                 </Form.Item>
-                                <Form.Item name='description' validate={validate}>
-                                    <FormInput.TextArea
-                                        name='description'
-                                        required={true}
-                                        placeholder='Описание'
-                                    />
-                                </Form.Item>
                                 <Form.Item name='img'>
                                     <ImgCrop rotate>
                                         <Upload
                                             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                            accept='.png'
+                                            accept='.jpg'
                                             listType="picture-card"
                                             fileList={fileListProduct}
-                                            beforeUpload={(file) => {
-                                                setFieldValue("img", file.name)
+                                            beforeUpload={() => {
                                                 return false
                                             }}
 

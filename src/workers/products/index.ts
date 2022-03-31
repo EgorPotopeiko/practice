@@ -29,9 +29,9 @@ function* loadProductList() {
             return {
                 id: product.id,
                 title: product.title,
-                img: product.imgCart,
+                img: product.imgCart || product.img,
                 category: product.category,
-                price: product.price
+                price: product.price,
             }
         })
         yield put(GetProductTotal(data.data.totalCount));

@@ -13,16 +13,12 @@ const { Title } = Typography;
 interface Props {
     id: string,
     title: string,
-    desc: string,
     price: number,
-    available: boolean,
-    maker: string,
     category: string,
-    subcategory: string | undefined,
     img: string
 }
 
-const CardTile: React.FC<Props> = ({ id, title, desc, price, available, maker, category, subcategory, img }) => {
+const CardTile: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser)
     return (
