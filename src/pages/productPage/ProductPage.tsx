@@ -20,8 +20,14 @@ const ProductPage: React.FC = () => {
             </div>
         )
     }
-    const { title, category, price, img } = product.data
-    const finallyImg = window.location.href.split('auth')[0] + img
+    const { title, category, price, imgCart, img } = product.data
+    let finallyImg = null;
+    if (img === undefined) {
+        finallyImg = window.location.href.split('auth')[0] + imgCart
+    }
+    else {
+        finallyImg = img
+    }
     return (
         <div className='productPage'>
             <CartHeader />
