@@ -3,9 +3,10 @@ import { ProductsActionTypes } from "./action-types"
 export const GetProductsStartAction = () => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_START
 })
-export const GetProductsSuccessAction = (data: any) => ({
+export const GetProductsSuccessAction = (data: any, total: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_SUCCESS,
-    data
+    data,
+    total
 })
 export const GetProductsErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_ERROR,
@@ -34,12 +35,9 @@ export const DeleteProductAction = (id: any) => ({
     type: ProductsActionTypes.DELETE_PRODUCT,
     id
 })
-export const GetPage = (page: number, pageSize: number) => ({
+export const GetPage = (page: number, pageSize: number, totalCount: number) => ({
     type: ProductsActionTypes.SET_PAGE,
     page,
-    pageSize
-})
-export const GetProductTotal = (total: any) => ({
-    type: ProductsActionTypes.SET_TOTAL_COUNT,
-    total
+    pageSize,
+    totalCount
 })

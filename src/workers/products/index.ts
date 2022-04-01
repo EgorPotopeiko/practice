@@ -1,5 +1,5 @@
 import { selectFilters } from './../../store/filters/selectors';
-import { GetProductTotal, GetProductErrorAction, GetProductSuccessAction } from './../../store/products/actions';
+import { GetProductErrorAction, GetProductSuccessAction } from './../../store/products/actions';
 import { selectPage, selectPageSize } from './../../store/products/selectors';
 import { FiltersActionTypes } from './../../store/filters/action-types';
 import { takeLatest, select } from 'redux-saga/effects';
@@ -25,6 +25,7 @@ function* loadProductList() {
         const pageSize: AxiosResponse = yield select(selectPageSize);
         const filters: AxiosResponse = yield select(selectFilters);
         const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize, filters);
+        const total = data.data.totalCount
         const newData = data.data.content.map((product: any) => {
             return {
                 id: product.id,
@@ -34,8 +35,7 @@ function* loadProductList() {
                 price: product.price,
             }
         })
-        yield put(GetProductTotal(data.data.totalCount));
-        yield put(GetProductsSuccessAction(newData));
+        yield put(GetProductsSuccessAction(newData, total));
     }
     catch (error) {
         yield put(GetProductsErrorAction(error));

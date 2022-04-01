@@ -12,5 +12,4 @@ export const ProductsActionTypes = {
     DELETE_PRODUCT: '[Products] DELETE_PRODUCT',
 
     SET_PAGE: '[Pagination] SET_PAGE',
-    SET_TOTAL_COUNT: '[Pagination] SET_TOTAL_COUNT'
 } as const;

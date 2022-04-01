@@ -38,6 +38,7 @@ export default function productsReducer(state: TProductsState = initialState, ac
             return {
                 ...SuccessActionState(state),
                 products: action.data,
+                totalCount: action.total
             }
         case ProductsActionTypes.LOAD_PRODUCTS_ERROR:
             return ErrorActionState(state, action.error)
@@ -69,12 +70,8 @@ export default function productsReducer(state: TProductsState = initialState, ac
             return {
                 ...state,
                 page: action.page,
-                pageSize: action.pageSize
-            }
-        case ProductsActionTypes.SET_TOTAL_COUNT:
-            return {
-                ...state,
-                totalCount: action.total
+                pageSize: action.pageSize,
+                totalCount: action.totalCount
             }
         default:
             return state
