@@ -25,13 +25,18 @@ const validate = (value: any) => {
     }
 }
 
+const props = {
+    headers: {
+        "Access-Control-Allow-Origin": 'http://localhost:3000',
+    },
+}
+
 const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [img64, setImg64] = useState(null);
     const [visible, setVisible] = useState(false);
     const [fileList, setFileList]: any = useState([]);
-    const [fileListProduct, setFileListProduct]: any = useState([]);
     const formData = new FormData();
     const [upLoading, setUpLoading] = useState(false);
     const categoryValues = useSelector(selectUserMenu);
@@ -51,29 +56,29 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             setVisible(false)
         }, 3000)
     }
-    const handleUpload = async () => {
-        fileList.forEach((file: any) => {
-            formData.append('files[]', file);
-        });
-        setUpLoading(true)
-        fetch('https://www.mocky.io/v2/5cc8019d300000980a055e76', {
-            method: 'POST',
-            body: formData,
-        })
-            .then(res => res.json())
-            .then(() => {
-                setFileList([])
-                console.log('upload successfully.');
-            })
-            .catch(() => {
-                console.log('upload failed.');
-            })
-            .finally(() => {
-                setUpLoading(false)
-            });
-    }
+    // const handleUpload = async () => {
+    //     filesList.forEach((file: any) => {
+    //         formData.append('files[]', file);
+    //     });
+    //     setUpLoading(true)
+    //     fetch('https://www.mocky.io/v2/5cc8019d300000980a055e76', {
+    //         method: 'POST',
+    //         body: formData,
+    //     })
+    //         .then(res => res.json())
+    //         .then(() => {
+    //             setFilesList([])
+    //             console.log('upload successfully.');
+    //         })
+    //         .catch(() => {
+    //             console.log('upload failed.');
+    //         })
+    //         .finally(() => {
+    //             setUpLoading(false)
+    //         });
+    // }
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
-        setFileListProduct(newFileList);
+        setFileList(newFileList);
         const newFile = newFileList[newFileList.length - 1]
         getBase64(newFile.originFileObj, (imageURL: any) => {
             setImg64(imageURL)
@@ -93,19 +98,19 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
         const imgWindow = window.open(src)!;
         imgWindow.document.write(image.outerHTML);
     };
-    const props = {
-        onRemove: (file: any) => {
-            const index = fileList.indexOf(file);
-            const newFileList = fileList.slice();
-            newFileList.splice(index, 1);
-            setFileList(newFileList)
-        },
-        beforeUpload: async (file: any) => {
-            setFileList([...fileList, file]);
-            return false;
-        },
-        fileList,
-    };
+    // const props = {
+    //     onRemove: (file: any) => {
+    //         const index = filesList.indexOf(file);
+    //         const newFileList = filesList.slice();
+    //         newFileList.splice(index, 1);
+    //         setFileList(newFileList)
+    //     },
+    //     beforeUpload: async (file: any) => {
+    //         setFilesList([...filesList, file]);
+    //         return false;
+    //     },
+    //     filesList,
+    // };
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>
@@ -119,9 +124,9 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             </div>
             <div className='admin__filters-btns'>
                 <Button type='default' onClick={() => setVisible(true)}>Добавить новый товар</Button>
-                <Upload {...props}>
+                {/* <Upload {...props}>
                     <Button type='primary' onClick={handleUpload} loading={upLoading}>Импорт</Button>
-                </Upload>
+                </Upload> */}
             </div>
             <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={600}>
                 <div className='admin__createModal'>
@@ -158,14 +163,14 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                             accept='.jpg'
                                             listType="picture-card"
-                                            fileList={fileListProduct}
-                                            beforeUpload={() => {
-                                                return false
-                                            }}
-
+                                            fileList={fileList}
+                                            // beforeUpload={() => {
+                                            //     return false
+                                            // }}
                                             onChange={onChange}
                                             onPreview={onPreview}
-                                            disabled={fileListProduct.length > 0 ? true : false}
+                                            disabled={fileList.length > 0 ? true : false}
+                                            {...props}
                                         >
                                             {fileList.length < 5 && '+ Upload'}
                                         </Upload>
