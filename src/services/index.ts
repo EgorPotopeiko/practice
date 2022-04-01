@@ -2,7 +2,15 @@ import $api from "../http";
 
 export default class ProductsDB {
 
-    static getAllProducts(page: any, pageSize: any, filters?: any) {
+    static getAllProducts(page: any, pageSize: any) {
+        return $api.post(`/product/search`, {
+            page: page - 1,
+            pageSize: pageSize,
+            filterData: {}
+        })
+    }
+
+    static getProducts(page: any, pageSize: any, filters?: any) {
         return $api.post(`/product/search`, {
             page: page - 1,
             pageSize: pageSize,

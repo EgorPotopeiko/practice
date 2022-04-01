@@ -37,8 +37,8 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
     const [img64, setImg64] = useState(null);
     const [visible, setVisible] = useState(false);
     const [fileList, setFileList]: any = useState([]);
-    const formData = new FormData();
-    const [upLoading, setUpLoading] = useState(false);
+    // const formData = new FormData();
+    // const [upLoading, setUpLoading] = useState(false);
     const categoryValues = useSelector(selectUserMenu);
     const filterCategories = categoryValues.filter((item: any) => item !== 'all');
     const onCancel = () => {

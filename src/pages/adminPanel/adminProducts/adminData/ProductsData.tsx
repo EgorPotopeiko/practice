@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-self-assign */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
@@ -8,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
 import "./ProductsData.less";
-import { selectPage, selectProducts, selectTotal } from '../../../../store/products/selectors';
+import { selectProducts, selectTotal } from '../../../../store/products/selectors';
 import { selectUserMenu } from '../../../../store/filters/selectors';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 
@@ -78,7 +76,6 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
-    const page = useSelector(selectPage);
     const totalCount = useSelector(selectTotal)
     products.map((item: TProduct) => {
         item['key'] = item.id;
@@ -86,7 +83,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()))
-    // newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
+    newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()))
     // if (searchCategory.toLowerCase() === "all") {
     //     newData = newData
     // }
@@ -232,7 +229,6 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                     pagination={{
                         onChange: (page: number) => pagination(page, 6),
                         total: totalCount,
-                        defaultCurrent: page,
                         pageSize: 6
                     }}
                 />
