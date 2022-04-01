@@ -2,7 +2,7 @@
 import { Table } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CartHeader from '../../../../components/header/CartHeader/CartHeader';
+import Header from '../../../../components/header/Header';
 import { TOrder } from '../../../../models/order';
 import { selectUser } from '../../../../store/login/selectors';
 
@@ -43,7 +43,7 @@ const OrdersList: React.FC = () => {
     })
     return (
         <>
-            <CartHeader />
+            <Header />
             <Table dataSource={ordersItems} columns={columns} />
         </>
     )

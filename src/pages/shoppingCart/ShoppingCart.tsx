@@ -1,11 +1,11 @@
 import React from 'react';
-import CartHeader from '../../components/header/CartHeader/CartHeader';
+import Header from '../../components/header/Header';
 import Cart from './cart/Cart';
 
 const ShoppingCart: React.FC = () => {
     return (
         <div className="shoppingCart">
-            <CartHeader />
+            <Header />
             <Cart />
         </div>
     );

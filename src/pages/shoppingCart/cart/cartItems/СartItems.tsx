@@ -17,22 +17,22 @@ const CartItems: React.FC = () => {
         {
             title: 'Название',
             dataIndex: 'title',
-            key: 'title',
+            key: 'title'
         },
         {
             title: 'Категория',
             dataIndex: 'category',
-            key: 'category',
+            key: 'category'
         },
         {
             title: 'Количество',
             dataIndex: 'amount',
-            key: 'amount',
+            key: 'amount'
         },
         {
             title: 'Цена',
             dataIndex: 'total',
-            key: 'total',
+            key: 'total'
         },
         {
             title: 'Action',
@@ -46,11 +46,11 @@ const CartItems: React.FC = () => {
                         })
                     } />
                 </Space>
-            ),
+            )
         },
     ];
     cartItems.map((item: TProduct) => {
-        item['key'] = item.id;
+        item['key'] = item.id
     })
     if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) {
         localStorage.setItem(`orders ${user.name}`, JSON.stringify([]))
