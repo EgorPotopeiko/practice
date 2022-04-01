@@ -1,0 +1,48 @@
+@import '../../../../vars.less';
+
+.admin__filters {
+    display: flex;
+    justify-content: space-between;
+
+    &-block {
+        max-width: 600px;
+        width: 100%;
+    }
+
+    &-btns {
+        .ant-btn-default {
+            margin-right: 5px;
+        }
+    }
+
+    .ant {
+        &-input {
+            max-width: 150px;
+        }
+
+        &-select {
+            max-width: 150px;
+            width: 100%;
+        }
+
+        &-modal-content {
+            max-width: 600px;
+        }
+    }
+}
+
+.admin__createModal {
+    .ant-input-number {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+        padding: 5px 8px;
+        border: 1px solid rgba(0, 0, 0, 0.178);
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
