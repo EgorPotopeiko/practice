@@ -2,19 +2,21 @@ import { UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 import './ModalAuth.less';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginActionTypes } from '../../../store/login/action-types';
 import { FiltersActionTypes } from '../../../store/filters/action-types';
 import { ProductsActionTypes } from '../../../store/products/action-types';
+import { selectError } from '../../../store/login/selectors';
 
 interface Props {
     visible: boolean,
-    setErrorVisible: React.Dispatch<React.SetStateAction<boolean>>,
     onCancel: () => void
 }
+
+const { Title } = Typography
 
 const validateEmail = (value: string) => {
     if (!value) {
@@ -31,14 +33,14 @@ const validatePassword = (value: string) => {
     }
 }
 
-const ModalAuth: React.FC<Props> = ({ visible, onCancel, setErrorVisible }) => {
+const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false);
+    const error = useSelector(selectError);
     const load = async () => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            onCancel()
             dispatch({
                 type: ProductsActionTypes.SET_PAGE,
                 page: 1,
@@ -50,7 +52,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel, setErrorVisible }) => {
         })
     }
     return (
-        <Modal width={530} title="Authorization" visible={visible} onCancel={onCancel} footer={null}>
+        <Modal width={530} title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>} visible={visible} onCancel={onCancel} footer={null}>
             <div className='modal__auth'>
                 <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={async (values: any) =>
                     setTimeout(() => {

@@ -43,11 +43,13 @@ const Menu: React.FC = () => {
                     </TabPane>
                 </Tabs>
                 :
-                <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => dispatch({
-                    type: FiltersActionTypes.SET_FILTERS,
-                    ...filters,
-                    category: category
-                })}>
+                <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => {
+                    dispatch({
+                        type: FiltersActionTypes.SET_FILTERS,
+                        ...filters,
+                        category: category
+                    })
+                }}>
                     {
                         userTabs.map((item: string) => (
                             <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />

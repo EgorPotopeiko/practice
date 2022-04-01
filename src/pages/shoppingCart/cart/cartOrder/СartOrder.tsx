@@ -12,6 +12,8 @@ import { selectUser } from '../../../../store/login/selectors';
 import { CartActionTypes } from '../../../../store/cart/action-types';
 import history from '../../../../history';
 import { USER_PATH } from '../../../../routing/names'
+import { FiltersActionTypes } from '../../../../store/filters/action-types';
+import { ProductsActionTypes } from '../../../../store/products/action-types';
 
 interface Props {
     visible: boolean,
@@ -96,6 +98,14 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             dispatch({
                 type: CartActionTypes.CLEAR_CART,
                 empty: []
+            })
+            dispatch({
+                type: FiltersActionTypes.REMOVE_ALL_FILTERS
+            })
+            dispatch({
+                type: ProductsActionTypes.SET_PAGE,
+                page: 1,
+                pageSize: 6
             })
             setLoading(false)
             setOrderVisible(false)
