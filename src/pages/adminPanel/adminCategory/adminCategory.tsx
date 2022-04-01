@@ -3,7 +3,7 @@ import { Button, Col, Form, Input, List, Row, Typography } from 'antd';
 import React, { useState } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { addedCategory, removedCategory } from '../../../store/filters/actions';
-import './adminCategory.less'
+import './AdminCategory.less'
 
 const { Title } = Typography;
 

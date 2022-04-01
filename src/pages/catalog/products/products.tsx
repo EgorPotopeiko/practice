@@ -2,18 +2,18 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-self-assign */
 import React from 'react';
-import CardList from './cardList/cardList';
-import CardTile from './cardTile/cardTile';
+import CardList from './cardList/CardList';
+import CardTile from './cardTile/CardTile';
 import { Pagination, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
-import './products.less';
+import './Products.less';
 import { useState } from 'react';
 import { RootStateOrAny, useSelector, useDispatch } from 'react-redux';
 import { removeAllFilters, sortingFilter } from '../../../store/filters/actions';
 import { TProduct } from '../../../models/product';
 import { useEffect } from 'react';
-import Loader from '../../../components/loader/loader';
+import Loader from '../../../components/loader/Loader';
 
 const { Title } = Typography;
 

@@ -3,7 +3,7 @@ import { Button, Input, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
 import { Field, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import './productsFilters.less';
+import './ProductsFilters.less';
 import Modal from 'antd/lib/modal/Modal';
 import { customAlphabet } from 'nanoid';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';

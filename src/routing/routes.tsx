@@ -2,9 +2,9 @@ import { Redirect, Route, Switch } from "react-router";
 import history from "../history";
 import { TRoutes } from "../models/routes";
 import AdminPanel from "../pages/adminPanel/AdminPanel";
-import Catalog from "../pages/catalog/catalog";
+import Catalog from "../pages/catalog/Catalog";
 import ProductPage from "../pages/productPage/ProductPage";
-import OrdersList from "../pages/shoppingCart/cart/ordersList/ordersList";
+import OrdersList from "../pages/shoppingCart/cart/ordersList/OrdersList";
 import ShoppingCart from "../pages/shoppingCart/ShoppingCart";
 import { USER_PATH, PUBLIC_PATH, ADMIN_PATH } from "./names"
 

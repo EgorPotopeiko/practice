@@ -1,6 +1,6 @@
 import { Input, Select } from 'antd';
 import React from 'react';
-import './orderFilters.less';
+import './OrderFilters.less';
 
 interface Props {
     setChooseStatus: React.Dispatch<React.SetStateAction<string>>,

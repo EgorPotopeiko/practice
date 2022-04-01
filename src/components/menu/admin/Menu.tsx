@@ -1,11 +1,11 @@
 import { Tabs } from 'antd';
 import React from 'react';
 import { useState } from 'react';
-import AdminCategory from '../../../pages/adminPanel/adminCategory/adminCategory';
+import AdminCategory from '../../../pages/adminPanel/adminCategory/AdminCategory';
 import OrderData from '../../../pages/adminPanel/adminOrders/adminData/OrderData';
-import OrderFilters from '../../../pages/adminPanel/adminOrders/filters/orderFilters';
+import OrderFilters from '../../../pages/adminPanel/adminOrders/filters/OrderFilters';
 import ProductsData from '../../../pages/adminPanel/adminProducts/adminData/ProductsData';
-import ProductsFilter from '../../../pages/adminPanel/adminProducts/filters/productsFilters';
+import ProductsFilter from '../../../pages/adminPanel/adminProducts/filters/ProductsFilters';
 import './Menu.less';
 
 const { TabPane } = Tabs;

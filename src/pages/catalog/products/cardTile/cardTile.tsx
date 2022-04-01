@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
-import './cardTile.less';
+import './CardTile.less';
 import { addedToCart } from '../../../../store/cart/actions';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import ProductsDB from '../../../../services';

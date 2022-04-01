@@ -1,5 +1,5 @@
 import React from 'react';
-import './loader.less';
+import './Loader.less';
 
 const Loader: React.FC = () => {
     return (
