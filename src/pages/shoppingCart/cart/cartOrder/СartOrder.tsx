@@ -2,16 +2,16 @@
 import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
-import "./СartOrder.less";
+import './СartOrder.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { customAlphabet } from "nanoid"
+import { customAlphabet } from 'nanoid';
 import Modal from 'antd/lib/modal/Modal';
 import { selectCart } from '../../../../store/cart/selectors';
 import { selectUser } from '../../../../store/login/selectors';
 import { CartActionTypes } from '../../../../store/cart/action-types';
 import history from '../../../../history';
-import { USER_PATH } from '../../../../routing/names'
+import { USER_PATH } from '../../../../routing/names';
 import { FiltersActionTypes } from '../../../../store/filters/action-types';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 
@@ -20,11 +20,11 @@ interface Props {
     setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const { AUTH } = USER_PATH
+const { AUTH } = USER_PATH;
 
 const { Title, Text } = Typography;
 
-const nanoid = customAlphabet('1234567890', 10)
+const nanoid = customAlphabet('1234567890', 10);
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [total, setTotal] = useState(0);
@@ -79,16 +79,16 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const { handleSubmit, handleChange, isSubmitting, values, resetForm } = formik;
 
     const onClose = () => {
-        setVisible(false)
+        setVisible(false);
         setOrderVisible(false)
     };
 
     const onChange = (e: RadioChangeEvent) => {
-        setDelivery(e.target.value);
+        setDelivery(e.target.value)
     };
 
     const finishOrder = () => {
-        setLoading(true)
+        setLoading(true);
         setTimeout(() => {
             values.status = "оплачен"
             const newOrder = values
@@ -106,24 +106,24 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 type: ProductsActionTypes.SET_PAGE,
                 page: 1,
                 pageSize: 6
-            })
-            setLoading(false)
-            setOrderVisible(false)
+            });
+            setLoading(false);
+            setOrderVisible(false);
             setSuccessVisible(true)
         }, 3000)
     }
 
     const backToMain = () => {
-        setSuccessVisible(false)
-        resetForm({})
+        setSuccessVisible(false);
+        resetForm({});
         history.push(AUTH)
     }
 
     const backToOrder = () => {
-        const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
-        orders.pop()
-        localStorage.setItem(`orders ${authUser.name}`, JSON.stringify(orders))
-        setOrderVisible(false)
+        const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
+        orders.pop();
+        localStorage.setItem(`orders ${authUser.name}`, JSON.stringify(orders));
+        setOrderVisible(false);
         setVisible(true)
     }
 

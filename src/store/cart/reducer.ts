@@ -2,7 +2,7 @@ import { CartActionTypes } from './action-types';
 import { RootStateOrAny } from 'react-redux';
 import { AnyAction } from 'redux';
 import { InferValueTypes } from '../../models/common';
-import * as actions from './actions'
+import * as actions from './actions';
 
 const initialState: TCartState = {
     cartProducts: []
@@ -35,7 +35,7 @@ const updateCartItems = (cartProducts: Array<Object>, item: any, idx: number) =>
 }
 
 const updateCartItem = (product: any, item: any = {}, quantity: number) => {
-    const { total = 0, amount = 0 } = item
+    const { total = 0, amount = 0 } = item;
     return {
         id: product.id,
         title: product.title,

@@ -1,4 +1,4 @@
-import { ProductsActionTypes } from "./action-types"
+import { ProductsActionTypes } from './action-types';
 
 export const GetProductsStartAction = () => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_START

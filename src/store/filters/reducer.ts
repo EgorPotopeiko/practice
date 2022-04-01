@@ -1,14 +1,14 @@
 import { RootStateOrAny } from 'react-redux';
-import { InferValueTypes } from "../../models/common";
+import { InferValueTypes } from '../../models/common';
 import * as actions from './actions';
-import { FiltersActionTypes } from "./action-types";
+import { FiltersActionTypes } from './action-types';
 
 const initialState: TFiltersState = {
     search: "",
     priceRange: [10, 100000],
     sort: "date",
     category: "all",
-    listCategories: JSON.parse(localStorage.getItem("categories")!) || ["all", "mobile", "electron", "pc", "home", "sport"],
+    listCategories: JSON.parse(localStorage.getItem("categories")!) || ["all", "mobile", "electron", "pc", "home", "sport"]
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -42,7 +42,7 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
                 search: "",
                 priceRange: [10, 100000],
                 sort: "date",
-                category: "all",
+                category: "all"
             }
         case FiltersActionTypes.ADDED_CATEGORY:
             return {

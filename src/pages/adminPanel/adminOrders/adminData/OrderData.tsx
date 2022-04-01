@@ -1,9 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select } from 'antd';
-import { RootStateOrAny, useSelector } from 'react-redux';
 import { EditOutlined } from '@ant-design/icons';
 import { TOrder } from '../../../../models/order';
 
@@ -66,12 +64,12 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
 const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) => {
     const [form] = Form.useForm();
-    let orders: any = []
+    let orders: any = [];
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i) || "";
         if (key.includes("orders")) {
-            let result = JSON.parse(localStorage.getItem(key)!)
-            orders = [...orders, ...result]
+            let result = JSON.parse(localStorage.getItem(key)!);
+            orders = [...orders, ...result];
         }
     }
     orders.map((item: TOrder) => {
@@ -106,13 +104,13 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                     ...row,
                 });
                 setData(newData);
-                localStorage.removeItem(`orders ${item.user}`)
-                localStorage.setItem(`orders ${item.user}`, JSON.stringify(newData))
+                localStorage.removeItem(`orders ${item.user}`);
+                localStorage.setItem(`orders ${item.user}`, JSON.stringify(newData));
                 setEditingKey('');
             } else {
                 newData.push(row);
-                localStorage.removeItem("orders")
-                localStorage.setItem("orders", JSON.stringify(newData))
+                localStorage.removeItem("orders");
+                localStorage.setItem("orders", JSON.stringify(newData));
                 setData(newData);
                 setEditingKey('');
             }
@@ -187,7 +185,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                 selectType: 'text',
                 dataIndex: col.dataIndex,
                 title: col.title,
-                editing: isEditing(record),
+                editing: isEditing(record)
             }),
         };
     });
@@ -196,7 +194,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
             <Table
                 components={{
                     body: {
-                        cell: EditableCell,
+                        cell: EditableCell
                     },
                 }}
                 bordered
@@ -204,7 +202,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                 columns={mergedColumns}
                 rowClassName="editable-row"
                 pagination={{
-                    onChange: cancel,
+                    onChange: cancel
                 }}
             />
         </Form>

@@ -19,8 +19,8 @@ function* login() {
     try {
         const email: AxiosResponse = yield select(selectEmail);
         const password: AxiosResponse = yield select(selectPassword);
-        const tryLogin: AxiosResponse = yield call(Authorization.auth, email, password)
-        yield put(GetAuthorizationProcessAction(tryLogin))
+        const tryLogin: AxiosResponse = yield call(Authorization.auth, email, password);
+        yield put(GetAuthorizationProcessAction(tryLogin));
     }
     catch (error) {
         yield put(GetAuthorizationErrorAction(error));
@@ -30,8 +30,8 @@ function* login() {
 function* loadInfo() {
     const user: AxiosResponse = yield select(selectUser);
     if (user.status === 200) {
-        const takeData: AxiosResponse = yield call(Authorization.getUser, user.data.jwt)
-        const role = takeData.data.name === "admin" ? "admin" : "user"
+        const takeData: AxiosResponse = yield call(Authorization.getUser, user.data.jwt);
+        const role = takeData.data.name === "admin" ? "admin" : "user";
         yield put(GetAuthorizationSuccessAction({ ...takeData.data, role: role, isAuth: true }))
     }
 }

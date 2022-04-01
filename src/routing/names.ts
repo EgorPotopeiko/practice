@@ -1,6 +1,6 @@
 export enum PUBLIC_PATH {
     APP = '/',
-    NOTFOUND = '/404',
+    NOTFOUND = '/404'
 }
 
 export enum USER_PATH {
@@ -11,6 +11,6 @@ export enum USER_PATH {
 }
 
 export enum ADMIN_PATH {
-    ADMIN = '/admin',
+    ADMIN = '/admin'
 }
 

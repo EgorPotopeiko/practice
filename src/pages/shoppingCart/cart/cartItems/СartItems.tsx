@@ -12,7 +12,7 @@ import { selectUser } from '../../../../store/login/selectors';
 const CartItems: React.FC = () => {
     const cartItems = useSelector(selectCart);
     const user = useSelector(selectUser);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const columns = [
         {
             title: 'Название',

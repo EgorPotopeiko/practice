@@ -34,7 +34,7 @@ const validatePassword = (value: string) => {
 }
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const error = useSelector(selectError);
     const load = async () => {

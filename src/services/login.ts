@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-concat */
-import $api from "../http";
+import $api from '../http';
 
 export default class Authorization {
     static auth(email: any, password: any) {

@@ -3,8 +3,8 @@ import { SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
-import { PUBLIC_PATH, USER_PATH } from "../../routing/names";
+import { Link } from 'react-router-dom';
+import { PUBLIC_PATH, USER_PATH } from '../../routing/names';
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectFilters } from '../../store/filters/selectors';
 import { LoginActionTypes } from '../../store/login/action-types';
@@ -17,9 +17,9 @@ const { Title, Text } = Typography;
 
 const { Option } = Select;
 
-const { APP } = PUBLIC_PATH
+const { APP } = PUBLIC_PATH;
 
-const { CART } = USER_PATH
+const { CART } = USER_PATH;
 
 export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
@@ -27,11 +27,11 @@ const Header: React.FC = () => {
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
-    const filters = useSelector(selectFilters)
-    const user = useSelector(selectUser)
+    const filters = useSelector(selectFilters);
+    const user = useSelector(selectUser);
     const showModal = () => {
         if (user.role === "guest" && user.isAuth === false) {
-            setModalAuthVisible(true);
+            setModalAuthVisible(true)
         }
         else {
             dispatch({

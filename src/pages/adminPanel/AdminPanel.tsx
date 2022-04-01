@@ -6,7 +6,7 @@ import Menu from '../../components/menu/Menu';
 import { ProductsActionTypes } from '../../store/products/action-types';
 
 const AdminPanel: React.FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch({
             type: ProductsActionTypes.LOAD_PRODUCTS_START

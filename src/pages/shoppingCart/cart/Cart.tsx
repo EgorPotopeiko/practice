@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import { Button } from 'antd';
 import React, { useState } from 'react';
-import "./Cart.less"
+import './Cart.less';
 import CartItems from './cartItems/СartItems';
 import CartOrder from './cartOrder/СartOrder';
 import { USER_PATH } from '../../../routing/names';

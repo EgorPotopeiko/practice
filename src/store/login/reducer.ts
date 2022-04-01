@@ -1,5 +1,5 @@
 import { InferValueTypes } from '../../models/common';
-import * as actions from './actions'
+import * as actions from './actions';
 import { StartActionState, SuccessActionState } from '../helpers';
 import { LoginActionTypes } from './action-types';
 
@@ -41,7 +41,7 @@ export default function loginReducer(state: TLoginState = initialState, action: 
         case LoginActionTypes.LOAD_AUTHORIZATION_SUCCESS:
             return {
                 ...SuccessActionState(state),
-                user: action.data,
+                user: action.data
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_ERROR:
             return {

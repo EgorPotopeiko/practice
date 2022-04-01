@@ -30,12 +30,12 @@ const Products: React.FC = () => {
     const [view, setView] = useState("list");
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
-    const filters = useSelector(selectFilters)
+    const filters = useSelector(selectFilters);
     const pagination = (page: Number, pageSize: Number) => dispatch({
         type: ProductsActionTypes.SET_PAGE,
         page,
         pageSize
-    })
+    });
     return (
         <div className="products">
             <div className="products__menu">

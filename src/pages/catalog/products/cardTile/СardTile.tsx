@@ -20,7 +20,7 @@ interface Props {
 
 const CardTile: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
-    const user = useSelector(selectUser)
+    const user = useSelector(selectUser);
     return (
         <div className='cardTile'>
             <Card size="small" title={

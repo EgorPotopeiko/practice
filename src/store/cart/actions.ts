@@ -1,4 +1,4 @@
-import { CartActionTypes } from "./action-types"
+import { CartActionTypes } from './action-types';
 
 export const GetAddedCartAction = (item: any) => ({
     type: CartActionTypes.PRODUCT_ADDED,

@@ -3,13 +3,13 @@ import React from 'react';
 import './ProductPage.less';
 import { useSelector } from 'react-redux';
 import { selectProduct } from '../../store/products/selectors';
-import Loader from "../../components/loader/Loader"
+import Loader from '../../components/loader/Loader';
 import CartHeader from '../../components/header/CartHeader/CartHeader';
 
 const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
-    const product = useSelector(selectProduct)
+    const product = useSelector(selectProduct);
     if (product === null) {
         return (
             <div className='productPage'>
@@ -20,7 +20,7 @@ const ProductPage: React.FC = () => {
             </div>
         )
     }
-    const { title, category, price, imgCart, img } = product.data
+    const { title, category, price, imgCart, img } = product.data;
     let finallyImg = null;
     if (img === undefined) {
         finallyImg = window.location.href.split('auth')[0] + imgCart

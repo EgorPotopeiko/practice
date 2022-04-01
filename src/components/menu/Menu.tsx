@@ -21,7 +21,7 @@ const Menu: React.FC = () => {
     const [chooseStatus, setChooseStatus] = useState("оплачен");
     const [searchUser, setSearchUser] = useState('');
     const [searchNumber, setSearchNumber] = useState('');
-    const user = useSelector(selectUser)
+    const user = useSelector(selectUser);
     const userTabs = useSelector(selectUserMenu);
     const dispatch = useDispatch();
     const filters = useSelector(selectFilters);

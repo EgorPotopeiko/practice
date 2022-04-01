@@ -8,14 +8,14 @@ import { USER_PATH } from '../../../routing/names';
 import { FiltersActionTypes } from '../../../store/filters/action-types';
 import { LoginActionTypes } from '../../../store/login/action-types';
 import { ProductsActionTypes } from '../../../store/products/action-types';
-import "./CartHeader.less"
+import './CartHeader.less';
 
 const { Title } = Typography;
 
 const { AUTH } = USER_PATH
 
 const CartHeader: React.FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     return (
         <div className="cart__header">
             <PageHeader>

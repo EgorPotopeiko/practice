@@ -1,4 +1,4 @@
-import { LoginActionTypes } from "./action-types"
+import { LoginActionTypes } from './action-types';
 
 export const GetAuthorizationStartAction = (email: any, password: any) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_START,
@@ -17,7 +17,6 @@ export const GetAuthorizationErrorAction = (error: any) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_ERROR,
     error
 })
-
 export const GetLogout = (user: any) => ({
     type: LoginActionTypes.LOGOUT,
     user

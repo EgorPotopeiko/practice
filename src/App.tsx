@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import "./App.less";
+import './App.less';
 import { useRoutes } from './routing/routes';
 import { selectUserMenu } from './store/filters/selectors';
 import { selectUser } from './store/login/selectors';
 
 function App() {
-    const user = useSelector(selectUser)
+    const user = useSelector(selectUser);
     const routes = useRoutes(user.isAuth, user.role);
-    const listCategories = useSelector(selectUserMenu)
+    const listCategories = useSelector(selectUserMenu);
     useEffect(() => {
         localStorage.setItem("categories", JSON.stringify(listCategories))
-    }, [listCategories])
+    }, [listCategories]);
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user))
-    }, [user])
+    }, [user]);
     return (
         <div className="App">
             {routes}

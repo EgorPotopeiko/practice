@@ -27,8 +27,8 @@ const validate = (value: any) => {
 
 const props = {
     headers: {
-        "Access-Control-Allow-Origin": 'http://localhost:3000',
-    },
+        "Access-Control-Allow-Origin": 'http://localhost:3000'
+    }
 }
 
 const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
@@ -79,7 +79,7 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
     // }
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
         setFileList(newFileList);
-        const newFile = newFileList[newFileList.length - 1]
+        const newFile = newFileList[newFileList.length - 1];
         getBase64(newFile.originFileObj, (imageURL: any) => {
             setImg64(imageURL)
         })
