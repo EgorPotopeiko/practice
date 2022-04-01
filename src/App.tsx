@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import "./App.less";
@@ -12,6 +13,9 @@ function App() {
     useEffect(() => {
         localStorage.setItem("categories", JSON.stringify(listCategories))
     }, [listCategories])
+    useEffect(() => {
+        localStorage.setItem("user", JSON.stringify(user))
+    }, [user])
     return (
         <div className="App">
             {routes}

@@ -4,7 +4,7 @@ import { StartActionState, SuccessActionState } from '../helpers';
 import { LoginActionTypes } from './action-types';
 
 const initialState: TLoginState = {
-    user: {
+    user: JSON.parse(localStorage.getItem("user")!) || {
         role: "guest",
         isAuth: false
     },
