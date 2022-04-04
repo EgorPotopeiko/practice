@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserMenu } from '../../../store/filters/selectors';
 import './AdminCategory.less'
-import {addedCategory, removedCategory} from "../../../store/filters/actions";
+import { addedCategory, removedCategory } from "../../../store/filters/actions";
 
 const { Title } = Typography;
 
@@ -21,7 +21,7 @@ const AdminCategory: React.FC = () => {
         <div className='adminCategory'>
             <Form>
                 <Form.Item>
-                    <Title level={3}>Добавление новой категории</Title>
+                    <Title level={2}>Добавление новой категории</Title>
                 </Form.Item>
                 <Row>
                     <Col span={12}>

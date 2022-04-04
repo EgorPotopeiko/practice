@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { TOrder } from '../../../../models/order';
+import './OrderData.less'
 
 const { Option } = Select;
 
@@ -190,22 +191,24 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         };
     });
     return (
-        <Form form={form} component={false}>
-            <Table
-                components={{
-                    body: {
-                        cell: EditableCell
-                    },
-                }}
-                bordered
-                dataSource={filteredData}
-                columns={mergedColumns}
-                rowClassName="editable-row"
-                pagination={{
-                    onChange: cancel
-                }}
-            />
-        </Form>
+        <div className='ordersData'>
+            <Form form={form} component={false}>
+                <Table
+                    components={{
+                        body: {
+                            cell: EditableCell
+                        },
+                    }}
+                    bordered
+                    dataSource={filteredData}
+                    columns={mergedColumns}
+                    rowClassName="editable-row"
+                    pagination={{
+                        onChange: cancel
+                    }}
+                />
+            </Form>
+        </div>
     );
 };
 
