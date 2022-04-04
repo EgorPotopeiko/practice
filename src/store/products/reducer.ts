@@ -4,24 +4,24 @@ import { ErrorActionState, StartActionState, SuccessActionState } from '../helpe
 import { ProductsActionTypes } from './action-types';
 
 const initialState: TProductsState = {
-    products: [],
+    products: null,
     error: null,
     isLoading: false,
     page: 1,
     pageSize: 6,
-    data: null,
+    product: null,
     totalCount: 0
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TProductsState = {
-    products: any[]
+    products: any[] | null
     isLoading: boolean
     error: any
     page: number
     pageSize: number
-    data: null,
+    product: null,
     totalCount: number
 }
 
@@ -54,12 +54,12 @@ export default function productsReducer(state: TProductsState = initialState, ac
         case ProductsActionTypes.CREATE_PRODUCT:
             return {
                 ...state,
-                products: [...state.products, action.product]
+                products: state.products ? [...state.products, action.product] : action.product
             }
         case ProductsActionTypes.REMOVE_PRODUCT:
             return {
                 ...state,
-                data: null
+                product: null
             }
         case ProductsActionTypes.DELETE_PRODUCT:
             return {

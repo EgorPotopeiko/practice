@@ -31,6 +31,7 @@ const Header: React.FC = () => {
     const filters = useSelector(selectFilters);
     const user = useSelector(selectUser);
     const showModal = () => {
+        // @ts-ignore
         if (user.role === "guest" && user.isAuth === false) {
             setModalAuthVisible(true)
         }

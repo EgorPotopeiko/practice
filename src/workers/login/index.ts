@@ -1,5 +1,5 @@
 import { LoginActionTypes } from './../../store/login/action-types';
-import { selectEmail, selectPassword, selectUser } from './../../store/login/selectors';
+import {selectCredentials, selectEmail, selectPassword, selectUser} from './../../store/login/selectors';
 import { AxiosResponse } from 'axios';
 import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetAuthorizationProcessAction } from './../../store/login/actions';
 import { put, takeLatest, select, call } from 'redux-saga/effects';
@@ -17,8 +17,7 @@ export interface ResponseGenerator {
 
 function* login() {
     try {
-        const email: AxiosResponse = yield select(selectEmail);
-        const password: AxiosResponse = yield select(selectPassword);
+        const {email, password}: {email: string, password: string} = yield select(selectCredentials);
         const tryLogin: AxiosResponse = yield call(Authorization.auth, email, password);
         yield put(GetAuthorizationProcessAction(tryLogin));
     }

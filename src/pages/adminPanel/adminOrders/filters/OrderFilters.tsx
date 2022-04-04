@@ -2,7 +2,7 @@ import { Input, Select } from 'antd';
 import React from 'react';
 import './OrderFilters.less';
 
-interface Props {
+type Props = {
     setChooseStatus: React.Dispatch<React.SetStateAction<string>>,
     setSearchUser: React.Dispatch<React.SetStateAction<string>>,
     setSearchNumber: React.Dispatch<React.SetStateAction<string>>

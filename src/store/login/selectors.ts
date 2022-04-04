@@ -1,6 +1,20 @@
-import { RootStateOrAny } from 'react-redux';
+import {createSelector} from "reselect";
+import {TApplicationState} from "../applicationState";
 
-export const selectEmail = (state: RootStateOrAny) => state.login.email;
-export const selectPassword = (state: RootStateOrAny) => state.login.password;
-export const selectError = (state: RootStateOrAny) => state.login.error;
-export const selectUser = (state: RootStateOrAny) => state.login.user;
+const stateAuth = (state: TApplicationState) => state.login;
+
+
+export const selectEmail = createSelector(stateAuth,(state) => state.email)
+export const selectPassword = createSelector(stateAuth,(state) => state.password)
+export const selectError = createSelector(stateAuth,(state) => state.error)
+export const selectStatus = createSelector(stateAuth,(state) => ({
+    isLoading: state.isLoading,
+    error: state.error
+}))
+export const selectUser = createSelector(stateAuth,(state) => state.user)
+
+export const selectCredentials = createSelector(
+    selectEmail,
+    selectPassword,
+    (email, password) => ({email, password})
+)

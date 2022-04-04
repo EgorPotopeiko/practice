@@ -10,8 +10,10 @@ import ImgCrop from 'antd-img-crop';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { getBase64 } from '../../../../services/getBase64';
 import { customAlphabet } from 'nanoid';
+import {TMenuState} from "../../../../components/menu/Menu";
 
 interface Props {
+    handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
     setSearchName: React.Dispatch<React.SetStateAction<string>>,
     setSearchArticle: React.Dispatch<React.SetStateAction<string>>,
     setSearchCategory: React.Dispatch<React.SetStateAction<string>>,
@@ -32,7 +34,7 @@ const props = {
     }
 }
 
-const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
+const ProductsFilter: React.FC<Props> = ({handlerFilter,  setSearchName, setSearchArticle, setSearchCategory }) => {
     const nanoid = customAlphabet('1234567890', 6);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
@@ -115,10 +117,14 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
     //     },
     //     filesList,
     // };
+
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>
-                <Input placeholder="Название" onChange={(e) => setSearchName(e.target.value)} />
+                <Input
+                    placeholder="Название"
+                    onChange={(e) => handlerFilter("searchName")(e.target.value)}
+                />
                 <Input placeholder="Артикул" onChange={(e) => setSearchArticle(e.target.value)} />
                 <Select placeholder="Категория" onChange={(category) => setSearchCategory(category)}>
                     {categoryValues.map((item: any) => (
@@ -175,7 +181,7 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                             // }}
                                             onChange={onChange}
                                             onPreview={onPreview}
-                                            disabled={fileList.length > 0 ? true : false}
+                                            disabled={fileList.length > 0}
                                             {...props}
                                         >
                                             {fileList.length < 5 && '+ Upload'}
@@ -184,7 +190,7 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
 
                                 </Form.Item>
                                 <SubmitButton loading={loading}
-                                    disabled={values.category.length === 0 ? true : false}
+                                    disabled={values.category.length === 0}
                                 >Создать</SubmitButton>
                             </Form>
                         )}
