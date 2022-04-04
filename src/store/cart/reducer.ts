@@ -1,3 +1,4 @@
+import { TProduct } from './../../models/product';
 import { CartActionTypes } from './action-types';
 import { RootStateOrAny } from 'react-redux';
 import { AnyAction } from 'redux';
@@ -34,7 +35,7 @@ const updateCartItems = (cartProducts: Array<Object>, item: any, idx: number) =>
     ]
 }
 
-const updateCartItem = (product: any, item: any = {}, quantity: number) => {
+const updateCartItem = (product: TProduct, item: any = {}, quantity: number) => {
     const { total = 0, amount = 0 } = item;
     return {
         id: product.id,
@@ -50,7 +51,7 @@ const updateCartItem = (product: any, item: any = {}, quantity: number) => {
 const updateOrder = (state: RootStateOrAny, productId: string, action: AnyAction, quantity: number) => {
     const newItem = action.item;
     const testMas = state.cartProducts;
-    const itemIndex = testMas.findIndex((product: any) => product.id === productId);
+    const itemIndex = testMas.findIndex((product: TProduct) => product.id === productId);
     const item = testMas[itemIndex];
     const finallyItem = updateCartItem(newItem, item, quantity);
     return {

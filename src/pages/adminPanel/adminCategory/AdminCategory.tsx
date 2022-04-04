@@ -1,6 +1,6 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, List, Row, Typography } from 'antd';
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserMenu } from '../../../store/filters/selectors';
 import './AdminCategory.less'
@@ -25,11 +25,11 @@ const AdminCategory: React.FC = () => {
                 </Form.Item>
                 <Row>
                     <Col span={12}>
-                        <Input value={categoryName} onChange={(e: any) => setCategoryName(e.target.value)} placeholder='Название новой категории' />
+                        <Input value={categoryName} onChange={(e: ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)} placeholder='Название новой категории' />
                         <Button type='primary' onClick={addCategory}>Создать категорию</Button>
                     </Col>
                     <Col span={12}>
-                        <List header={<div>Существующие категории</div>} bordered dataSource={categories} renderItem={(item: any) => <List.Item actions={[<DeleteOutlined onClick={() =>
+                        <List header={<div>Существующие категории</div>} bordered dataSource={categories} renderItem={(item: string) => <List.Item actions={[<DeleteOutlined onClick={() =>
                             dispatch(removedCategory(item))
                         } />]}>{item}</List.Item>} />
                     </Col>

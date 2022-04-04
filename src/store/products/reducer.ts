@@ -1,10 +1,11 @@
+import { TProduct } from './../../models/product';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions'
 import { ErrorActionState, StartActionState, SuccessActionState } from '../helpers';
 import { ProductsActionTypes } from './action-types';
 
 const initialState: TProductsState = {
-    products: null,
+    products: [],
     error: null,
     isLoading: false,
     page: 1,
@@ -16,7 +17,7 @@ const initialState: TProductsState = {
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TProductsState = {
-    products: any[] | null
+    products: any[]
     isLoading: boolean
     error: any
     page: number
@@ -25,9 +26,9 @@ export type TProductsState = {
     totalCount?: number
 }
 
-const deleteProduct = (state: any, id: any) => {
+const deleteProduct = (state: TProductsState, id: string) => {
     const products = state.products;
-    return products.filter((product: any) => product.id !== id)
+    return products.filter((product: TProduct) => product.id !== id)
 }
 
 export default function productsReducer(state: TProductsState = initialState, action: ActionTypes): TProductsState {

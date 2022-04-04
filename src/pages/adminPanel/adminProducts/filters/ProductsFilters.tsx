@@ -10,9 +10,9 @@ import ImgCrop from 'antd-img-crop';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { getBase64 } from '../../../../services/getBase64';
 import { customAlphabet } from 'nanoid';
-import {TMenuState} from "../../../../components/menu/Menu";
+import { TMenuState } from "../../../../components/menu/Menu";
 
-interface Props {
+type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
     setSearchName: React.Dispatch<React.SetStateAction<string>>,
     setSearchArticle: React.Dispatch<React.SetStateAction<string>>,
@@ -34,17 +34,17 @@ const props = {
     }
 }
 
-const ProductsFilter: React.FC<Props> = ({handlerFilter,  setSearchName, setSearchArticle, setSearchCategory }) => {
+const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSearchArticle, setSearchCategory }) => {
     const nanoid = customAlphabet('1234567890', 6);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [img64, setImg64] = useState(null);
     const [visible, setVisible] = useState(false);
-    const [fileList, setFileList]: any = useState([]);
+    const [fileList, setFileList] = useState([]);
     // const formData = new FormData();
     // const [upLoading, setUpLoading] = useState(false);
     const categoryValues = useSelector(selectUserMenu);
-    const filterCategories = categoryValues.filter((item: any) => item !== 'all');
+    const filterCategories = categoryValues.filter((item: string) => item !== 'all');
     const onCancel = () => {
         setVisible(false)
     }

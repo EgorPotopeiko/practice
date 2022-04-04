@@ -1,6 +1,6 @@
 import { LoginActionTypes } from './action-types';
 
-export const GetAuthorizationStartAction = (email: any, password: any) => ({
+export const GetAuthorizationStartAction = (email: string, password: string) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_START,
     email,
     password
