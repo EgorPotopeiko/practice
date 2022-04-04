@@ -138,7 +138,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
                     <Button type='primary' onClick={handleUpload} loading={upLoading}>Импорт</Button>
                 </Upload> */}
             </div>
-            <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={600}>
+            <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={700}>
                 <div className='admin__createModal'>
                     <Formik initialValues={{ title: '', prise: '', category: [] }} validateOnBlur onSubmit={(values) => {
                         createProduct(values)
