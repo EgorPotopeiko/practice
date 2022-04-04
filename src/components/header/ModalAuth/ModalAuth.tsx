@@ -62,7 +62,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                             password: values.password
                         })
                     }, 3000)}>
-                    {() => (
+                    {(formic) => (
                         <Form >
                             <FormItem name='email' validate={validateEmail}>
                                 <FormInput

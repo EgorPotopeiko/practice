@@ -2,21 +2,19 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, List, Row, Typography } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FiltersActionTypes } from '../../../store/filters/action-types';
 import { selectUserMenu } from '../../../store/filters/selectors';
 import './AdminCategory.less'
+import {addedCategory, removedCategory} from "../../../store/filters/actions";
 
 const { Title } = Typography;
 
 const AdminCategory: React.FC = () => {
-    const categories = useSelector(selectUserMenu);
-    const [categoryName, setCategoryName] = useState('');
     const dispatch = useDispatch();
+    const categories = useSelector(selectUserMenu);
+    const [categoryName, setCategoryName] = useState<string>('');
+
     const addCategory = () => {
-        dispatch({
-            type: FiltersActionTypes.ADDED_CATEGORY,
-            category: categoryName
-        })
+        dispatch(addedCategory(categoryName))
         setCategoryName('')
     }
     return (
@@ -32,10 +30,7 @@ const AdminCategory: React.FC = () => {
                     </Col>
                     <Col span={12}>
                         <List header={<div>Существующие категории</div>} bordered dataSource={categories} renderItem={(item: any) => <List.Item actions={[<DeleteOutlined onClick={() =>
-                            dispatch({
-                                type: FiltersActionTypes.DELETED_CATEGORY,
-                                category: item
-                            })
+                            dispatch(removedCategory(item))
                         } />]}>{item}</List.Item>} />
                     </Col>
                 </Row>

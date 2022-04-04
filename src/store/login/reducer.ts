@@ -2,6 +2,7 @@ import { InferValueTypes } from '../../models/common';
 import * as actions from './actions';
 import { StartActionState, SuccessActionState } from '../helpers';
 import { LoginActionTypes } from './action-types';
+import {TUser} from "../../models/user";
 
 const initialState: TLoginState = {
     user: JSON.parse(localStorage.getItem("user")!) || {
@@ -17,7 +18,7 @@ const initialState: TLoginState = {
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TLoginState = {
-    user: Object,
+    user: TUser,
     email: string,
     password: string,
     error: null,
