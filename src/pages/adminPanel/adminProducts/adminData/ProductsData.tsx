@@ -133,7 +133,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
         },
         {
             title: 'Артикул',
-            dataIndex: 'key',
+            dataIndex: 'id',
             key: 'article'
         },
         {
