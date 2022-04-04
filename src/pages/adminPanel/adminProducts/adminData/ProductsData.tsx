@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, UserAddOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
 import './ProductsData.less';
 import { selectProducts, selectTotal } from '../../../../store/products/selectors';
@@ -140,7 +140,10 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
             title: 'Категория',
             dataIndex: 'category',
             key: 'category',
-            editable: true
+            editable: true,
+            render: (record: any) => (
+                <span>{record + ' '}</span>
+            )
         },
         {
             title: 'Статус',

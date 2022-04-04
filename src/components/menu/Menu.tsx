@@ -9,6 +9,8 @@ import ProductsFilter from '../../pages/adminPanel/adminProducts/filters/Product
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectFilters, selectUserMenu } from '../../store/filters/selectors';
 import { selectUser } from '../../store/login/selectors';
+import { selectProductsLoading } from '../../store/products/selectors';
+import Loader from '../loader/Loader';
 import './Menu.less';
 
 const { TabPane } = Tabs;
@@ -22,6 +24,7 @@ const Menu: React.FC = () => {
     const [searchUser, setSearchUser] = useState('');
     const [searchNumber, setSearchNumber] = useState('');
     const user = useSelector(selectUser);
+    const loading = useSelector(selectProductsLoading)
     const userTabs = useSelector(selectUserMenu);
     const dispatch = useDispatch();
     const filters = useSelector(selectFilters);
@@ -31,8 +34,17 @@ const Menu: React.FC = () => {
                 ?
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
-                        <ProductsFilter setSearchName={setSearchName} setSearchArticle={setSearchArticle} setSearchCategory={setSearchCategory} setSearchStatus={setSearchStatus} />
-                        <ProductsData searchName={searchName} searchArticle={searchArticle} searchCategory={searchCategory} searchStatus={searchStatus} />
+                        {
+                            loading
+                                ?
+                                <Loader />
+                                :
+                                <>
+                                    <ProductsFilter setSearchName={setSearchName} setSearchArticle={setSearchArticle} setSearchCategory={setSearchCategory} setSearchStatus={setSearchStatus} />
+                                    <ProductsData searchName={searchName} searchArticle={searchArticle} searchCategory={searchCategory} searchStatus={searchStatus} />
+                                </>
+                        }
+
                     </TabPane>
                     <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ">
                         <AdminCategory />
