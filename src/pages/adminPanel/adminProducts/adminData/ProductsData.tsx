@@ -76,14 +76,14 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
-    const totalCount = useSelector(selectTotal);
     products.map((item: TProduct) => {
-        item['key'] = item.id;
+        item['key'] = item.id.split('-')[0];
     });
+    const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
-    newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()));
+    // newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()));
     // if (searchCategory.toLowerCase() === "all") {
     //     newData = newData
     // }
@@ -146,7 +146,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
             title: 'Статус',
             dataIndex: 'available',
             key: 'available',
-            render: (available: boolean) => (
+            render: () => (
                 <span>Есть на складе</span>
             )
         },

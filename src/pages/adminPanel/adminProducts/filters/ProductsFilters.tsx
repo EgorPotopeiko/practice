@@ -9,6 +9,7 @@ import { selectUserMenu } from '../../../../store/filters/selectors';
 import ImgCrop from 'antd-img-crop';
 import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { getBase64 } from '../../../../services/getBase64';
+import { customAlphabet } from 'nanoid';
 
 interface Props {
     setSearchName: React.Dispatch<React.SetStateAction<string>>,
@@ -32,6 +33,7 @@ const props = {
 }
 
 const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setSearchCategory }) => {
+    const nanoid = customAlphabet('1234567890', 6);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const [img64, setImg64] = useState(null);
@@ -48,6 +50,8 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
         setLoading(true)
         setTimeout(() => {
             values.img = img64
+            values.id = nanoid()
+            values.key = values.id
             dispatch({
                 type: ProductsActionTypes.CREATE_PRODUCT,
                 product: values
@@ -130,8 +134,10 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
             </div>
             <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={600}>
                 <div className='admin__createModal'>
-                    <Formik initialValues={{ title: '', prise: '', category: [] }} validateOnBlur onSubmit={(values) => createProduct(values)}>
-                        {({ setFieldValue }) => (
+                    <Formik initialValues={{ title: '', prise: '', category: [] }} validateOnBlur onSubmit={(values) => {
+                        createProduct(values)
+                    }}>
+                        {({ values, setFieldValue }) => (
                             <Form>
                                 <Form.Item name='title' validate={validate}>
                                     <FormInput
@@ -148,7 +154,7 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                         placeholder='Стоимость'
                                     />
                                 </Form.Item>
-                                <Form.Item name='category'>
+                                <Form.Item name='category' validate={validate}>
                                     <Select onChange={(item) => {
                                         setFieldValue('category', [item])
                                     }}>
@@ -177,7 +183,9 @@ const ProductsFilter: React.FC<Props> = ({ setSearchName, setSearchArticle, setS
                                     </ImgCrop>
 
                                 </Form.Item>
-                                <SubmitButton loading={loading}>Создать</SubmitButton>
+                                <SubmitButton loading={loading}
+                                    disabled={values.category.length === 0 ? true : false}
+                                >Создать</SubmitButton>
                             </Form>
                         )}
                     </Formik>

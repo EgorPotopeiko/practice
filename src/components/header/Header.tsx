@@ -25,7 +25,6 @@ const { CART } = USER_PATH;
 export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
 const Header: React.FC = () => {
-    console.log(history)
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
