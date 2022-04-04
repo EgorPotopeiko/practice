@@ -4,5 +4,7 @@ export type TUser = {
     lastName: string,
     password: string,
     email: string,
-    role: string
+    role: string,
+    isAuth: boolean,
+    name: string
 }

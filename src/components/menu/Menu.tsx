@@ -7,10 +7,8 @@ import OrderFilters from '../../pages/adminPanel/adminOrders/filters/OrderFilter
 import ProductsData from '../../pages/adminPanel/adminProducts/adminData/ProductsData';
 import ProductsFilter from '../../pages/adminPanel/adminProducts/filters/ProductsFilters';
 import { FiltersActionTypes } from '../../store/filters/action-types';
-import { selectFilters, selectUserMenu } from '../../store/filters/selectors';
+import { selectAllFilters, selectUserMenu } from '../../store/filters/selectors';
 import { selectUser } from '../../store/login/selectors';
-import { selectProductsLoading } from '../../store/products/selectors';
-import Loader from '../loader/Loader';
 import './Menu.less';
 
 const { TabPane } = Tabs;
@@ -51,10 +49,9 @@ const Menu: React.FC = () => {
     }
 
     const user = useSelector(selectUser);
-    const loading = useSelector(selectProductsLoading)
     const userTabs = useSelector(selectUserMenu);
     const dispatch = useDispatch();
-    const filters = useSelector(selectFilters);
+    const filters = useSelector(selectAllFilters);
     return (
         <div className="menu__catalog">
             {user.role === "admin"

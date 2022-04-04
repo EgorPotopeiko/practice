@@ -13,7 +13,7 @@ import Loader from '../../../components/loader/Loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
 import { ProductsActionTypes } from '../../../store/products/action-types';
 import CardTile from './cardTile/СardTile';
-import { selectFilters } from '../../../store/filters/selectors';
+import { selectAllFilters } from '../../../store/filters/selectors';
 import { FiltersActionTypes } from '../../../store/filters/action-types';
 import { TProduct } from '../../../models/product';
 
@@ -30,7 +30,7 @@ const Products: React.FC = () => {
     const [view, setView] = useState("list");
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
-    const filters = useSelector(selectFilters);
+    const filters = useSelector(selectAllFilters);
     const pagination = (page: Number, pageSize: Number) => dispatch({
         type: ProductsActionTypes.SET_PAGE,
         page,

@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 import history from '../../history';
 import { PUBLIC_PATH, USER_PATH } from '../../routing/names';
 import { FiltersActionTypes } from '../../store/filters/action-types';
-import { selectFilters } from '../../store/filters/selectors';
-import { LoginActionTypes } from '../../store/login/action-types';
+import { RemoveAllFilters } from '../../store/filters/actions';
+import { selectAllFilters } from '../../store/filters/selectors';
+import { GetLogout } from '../../store/login/actions';
 import { selectUser } from '../../store/login/selectors';
-import { ProductsActionTypes } from '../../store/products/action-types';
+import { GetPage, RemoveProductAction } from '../../store/products/actions';
 import './Header.less';
 import ModalAuth from './ModalAuth/ModalAuth';
 
@@ -28,29 +29,19 @@ const Header: React.FC = () => {
     const [modalAuthVisible, setModalAuthVisible] = useState(false);
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
-    const filters = useSelector(selectFilters);
+    const filters = useSelector(selectAllFilters);
     const user = useSelector(selectUser);
     const showModal = () => {
-        // @ts-ignore
         if (user.role === "guest" && user.isAuth === false) {
             setModalAuthVisible(true)
         }
         else {
-            dispatch({
-                type: LoginActionTypes.LOGOUT,
-                user: {
-                    role: "guest",
-                    isAuth: false
-                }
-            })
-            dispatch({
-                type: FiltersActionTypes.REMOVE_ALL_FILTERS
-            })
-            dispatch({
-                type: ProductsActionTypes.SET_PAGE,
-                page: 1,
-                pageSize: 6
-            })
+            dispatch(GetLogout({
+                role: "guest",
+                isAuth: false
+            }))
+            dispatch(RemoveAllFilters())
+            dispatch(GetPage(1, 6))
         }
     }
     const cancelModal = () => {
@@ -61,17 +52,9 @@ const Header: React.FC = () => {
             <PageHeader>
                 <div className='header__wrap'>
                     <Title onClick={() => {
-                        dispatch({
-                            type: ProductsActionTypes.REMOVE_PRODUCT
-                        })
-                        dispatch({
-                            type: FiltersActionTypes.REMOVE_ALL_FILTERS
-                        })
-                        dispatch({
-                            type: ProductsActionTypes.SET_PAGE,
-                            page: 1,
-                            pageSize: 6
-                        })
+                        dispatch(RemoveProductAction())
+                        dispatch(RemoveAllFilters())
+                        dispatch(GetPage(1, 6))
                     }
                     }><Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>

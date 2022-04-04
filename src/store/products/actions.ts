@@ -35,7 +35,7 @@ export const DeleteProductAction = (id: any) => ({
     type: ProductsActionTypes.DELETE_PRODUCT,
     id
 })
-export const GetPage = (page: number, pageSize: number, totalCount: number) => ({
+export const GetPage = (page: number, pageSize: number, totalCount?: number) => ({
     type: ProductsActionTypes.SET_PAGE,
     page,
     pageSize,

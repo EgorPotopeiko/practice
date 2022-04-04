@@ -22,7 +22,7 @@ export type TProductsState = {
     page: number
     pageSize: number
     product: null,
-    totalCount: number
+    totalCount?: number
 }
 
 const deleteProduct = (state: any, id: any) => {
@@ -47,7 +47,7 @@ export default function productsReducer(state: TProductsState = initialState, ac
         case ProductsActionTypes.LOAD_PRODUCT_SUCCESS:
             return {
                 ...SuccessActionState(state),
-                data: action.data,
+                product: action.data,
             }
         case ProductsActionTypes.LOAD_PRODUCT_ERROR:
             return ErrorActionState(state, action.error)
