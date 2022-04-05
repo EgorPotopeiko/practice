@@ -73,6 +73,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 };
 
 const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName, searchStatus }) => {
+    console.log(searchName)
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
@@ -81,15 +82,17 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
+    console.log(data)
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
-    // newData = newData.filter((item: TProduct) => item.key.toLowerCase().includes(searchArticle.toLowerCase()));
+    newData = newData.filter((item: TProduct) => item.id.toLowerCase().includes(searchArticle.toLowerCase()));
     // if (searchCategory.toLowerCase() === "all") {
     //     newData = newData
     // }
     // else {
     //     newData = newData.filter((item: TProduct) => item.category === searchCategory.toLowerCase())
     // }
+    console.log(newData)
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {

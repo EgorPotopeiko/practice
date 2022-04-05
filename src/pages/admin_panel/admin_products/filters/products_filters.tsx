@@ -15,10 +15,13 @@ import { CreateProductAction } from '../../../../store/products/actions';
 
 type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
-    setSearchName: React.Dispatch<React.SetStateAction<string>>,
-    setSearchArticle: React.Dispatch<React.SetStateAction<string>>,
-    setSearchCategory: React.Dispatch<React.SetStateAction<string>>,
-    setSearchStatus: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+type TCreateProductState = {
+    loading: boolean
+    img64: string | null
+    visible: boolean
+    fileList: any | null
 }
 
 const { Option } = Select;
@@ -40,29 +43,37 @@ const props = {
     }
 }
 
-const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSearchArticle, setSearchCategory }) => {
+const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
+    const [filter, setFilter] = useState<TCreateProductState>({
+        loading: false,
+        img64: null,
+        visible: false,
+        fileList: []
+    });
+    const createFilter = (type: keyof TCreateProductState) => (value: any) => {
+        setFilter({
+            ...filter,
+            [type]: value
+        })
+    }
     const nanoid = customAlphabet('1234567890', 6);
-    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const [img64, setImg64] = useState(null);
-    const [visible, setVisible] = useState(false);
-    const [fileList, setFileList] = useState([]);
     // const formData = new FormData();
     // const [upLoading, setUpLoading] = useState(false);
     const categoryValues = useSelector(selectUserMenu);
     const filterCategories = categoryValues.filter((item: string) => item !== 'all');
     const onCancel = () => {
-        setVisible(false)
+        createFilter("visible")(false)
     }
     const createProduct = (values: any) => {
-        setLoading(true)
+        createFilter("loading")(true)
         setTimeout(() => {
-            values.img = img64
+            values.img = filter.img64
             values.id = nanoid()
             values.key = values.id
             dispatch(CreateProductAction(values))
-            setLoading(false)
-            setVisible(false)
+            createFilter("loading")(false)
+            createFilter("visible")(false)
         }, 3000)
     }
     // const handleUpload = async () => {
@@ -87,10 +98,10 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
     //         });
     // }
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
-        setFileList(newFileList);
+        createFilter("fileList")(newFileList);
         const newFile = newFileList[newFileList.length - 1];
         getBase64(newFile.originFileObj, (imageURL: any) => {
-            setImg64(imageURL)
+            createFilter("img64")(imageURL)
         })
     };
     const onPreview = async (file: any) => {
@@ -128,20 +139,20 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
                     placeholder="Название"
                     onChange={(e) => handlerFilter("searchName")(e.target.value)}
                 />
-                <Input placeholder="Артикул" onChange={(e) => setSearchArticle(e.target.value)} />
-                <Select placeholder="Категория" onChange={(category) => setSearchCategory(category)}>
+                <Input placeholder="Артикул" onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
+                <Select placeholder="Категория" onChange={(category) => handlerFilter("searchCategory")(category)}>
                     {categoryValues.map((item: any) => (
                         <Option key={item} value={item}>{item}</Option>
                     ))}
                 </Select>
             </div>
             <div className='admin__filters-btns'>
-                <Button type='default' onClick={() => setVisible(true)}>Добавить новый товар</Button>
+                <Button type='default' onClick={() => createFilter("visible")(true)}>Добавить новый товар</Button>
                 {/* <Upload {...props}>
                     <Button type='primary' onClick={handleUpload} loading={upLoading}>Импорт</Button>
                 </Upload> */}
             </div>
-            <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={700}>
+            <Modal title="Создание нового товара" visible={filter.visible} onCancel={onCancel} footer={null} width={700}>
                 <div className='admin__create-modal'>
                     <Formik
                         initialValues={{ title: '', prise: '', category: [], img: '' }}
@@ -182,21 +193,21 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
                                             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                             accept='.jpg'
                                             listType="picture-card"
-                                            fileList={fileList}
+                                            fileList={filter.fileList}
                                             // beforeUpload={() => {
                                             //     return false
                                             // }}
                                             onChange={onChange}
                                             onPreview={onPreview}
-                                            disabled={fileList.length > 0}
+                                            disabled={filter.fileList.length > 0}
                                             {...props}
                                         >
-                                            {fileList.length < 5 && '+ Upload'}
+                                            {filter.fileList.length < 5 && '+ Upload'}
                                         </Upload>
                                     </ImgCrop>
 
                                 </Form.Item>
-                                <SubmitButton loading={loading}
+                                <SubmitButton loading={filter.loading}
                                     disabled={values.category.length === 0}
                                 >Создать</SubmitButton>
                             </Form>

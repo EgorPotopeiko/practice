@@ -1,27 +1,26 @@
 import { Input, Select } from 'antd';
 import React from 'react';
+import { TMenuState } from '../../../../components/menu/menu';
 import './order_filters.less';
 
 type Props = {
-    setChooseStatus: React.Dispatch<React.SetStateAction<string>>,
-    setSearchUser: React.Dispatch<React.SetStateAction<string>>,
-    setSearchNumber: React.Dispatch<React.SetStateAction<string>>
+    handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void,
 }
 
 const selectValues = ["оплачен", "доставлен", "в пути", "оформлен"];
 
 const { Option } = Select;
 
-const OrderFilters: React.FC<Props> = ({ setChooseStatus, setSearchNumber, setSearchUser }) => {
+const OrderFilters: React.FC<Props> = ({ handlerFilter }) => {
     return (
         <div className="order__filters">
-            <Select placeholder="Статус" onChange={(status) => setChooseStatus(status)}>
+            <Select placeholder="Статус" onChange={(status) => handlerFilter("chooseStatus")(status)}>
                 {selectValues.map((item) => (
                     <Option key={item} value={item}>{item}</Option>
                 ))}
             </Select>
-            <Input placeholder="Пользователь" onChange={(e) => setSearchUser(e.target.value)} />
-            <Input placeholder="Номер заказа" onChange={(e) => setSearchNumber(e.target.value)} />
+            <Input placeholder="Пользователь" onChange={(e) => handlerFilter("searchUser")(e.target.value)} />
+            <Input placeholder="Номер заказа" onChange={(e) => handlerFilter("searchNumber")(e.target.value)} />
 
         </div>
     );
