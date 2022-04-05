@@ -4,24 +4,33 @@
     .ant-card {
         background-color: @card-background;
         filter: drop-shadow(3px 5px 4px rgba(8, 8, 8, 0.082));
-        margin-top: 5px;
+        margin-top: 10px;
         margin-bottom: 15px;
-        width: 270px;
+        width: 315px;
+
         &-head-title {
             h4 {
                 a {
                     color: @header-color;
+                    line-height: 2;
+                    font-size: 22px;
                 }
             }
         }
+
+        p {
+            font-size: 18px;
+        }
     }
-    .ant-card-small > .ant-card-body {
+
+    .ant-card-small>.ant-card-body {
         position: relative;
+
         .anticon {
             position: absolute;
             right: 14px;
             top: 12px;
-            font-size: 23px;
+            font-size: 30px;
         }
     }
 }
