@@ -1,0 +1,81 @@
+@import '../../../../vars.less';
+
+.cardList {
+    .ant {
+        &-card {
+            background-color: @card-background;
+            filter: drop-shadow(3px 5px 4px rgba(8, 8, 8, 0.151));
+            margin-top: 10px;
+            margin-bottom: 20px;
+            max-width: 400px;
+            width: 100%;
+
+            &-head-title {
+                position: relative;
+
+                span {
+                    font-weight: 400;
+                    color: #918c8cd8;
+                    font-size: 20px;
+                }
+            }
+
+            &:hover {
+                .anticon {
+                    display: block;
+                }
+            }
+
+            &-body {
+                padding: 15px 0px 5px 0px;
+
+                p {
+                    font-weight: 600;
+                    padding-left: 25px;
+                    font-size: 18px;
+                }
+            }
+
+            .anticon {
+                color: @header-color;
+                font-size: 30px;
+                position: absolute;
+                right: 0;
+                top: 45px;
+                display: none;
+            }
+
+            &-cover {
+                max-width: 250px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 15px;
+            }
+        }
+
+        &-typography a {
+            color: @header-color;
+        }
+
+        &-divider-horizontal {
+            margin-top: 0;
+            margin-bottom: 10px;
+            background-color: rgba(207, 203, 203, 0.849);
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .cardList {
+        .ant {
+            &-card {
+                &-body {
+                    p {
+                        padding-left: 0;
+                    }
+                }
+            }
+
+        }
+    }
+}
