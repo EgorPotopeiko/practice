@@ -1,0 +1,70 @@
+@import '../../../../vars.less';
+
+.admin__filters {
+    display: flex;
+    justify-content: space-between;
+
+    &-block {
+        max-width: 600px;
+        width: 100%;
+    }
+
+    &-btns {
+        .ant-btn-default {
+            margin-right: 5px;
+            font-size: 20px;
+            line-height: 0;
+            padding: 18px 10px;
+            border-radius: 5px;
+        }
+    }
+
+    .ant {
+        &-input {
+            max-width: 150px;
+            font-size: 18px;
+        }
+
+        &-select {
+            max-width: 150px;
+            width: 100%;
+            font-size: 18px;
+
+            &-selector {
+                height: 35px !important;
+            }
+        }
+
+        &-modal-content {
+            max-width: 600px;
+        }
+    }
+}
+
+.admin__create-modal {
+    .ant {
+        &-input {
+            font-size: 20px;
+
+            &-number {
+                width: 100%;
+                font-size: 20px;
+            }
+        }
+
+        &-select {
+            font-size: 20px;
+        }
+
+        &-upload.ant-upload-select-picture-card {
+            width: 150px;
+            height: 150px;
+        }
+
+        &-btn {
+            padding: 20px 20px;
+            line-height: 0;
+            font-size: 20px;
+        }
+    }
+}
