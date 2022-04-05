@@ -1,3 +1,4 @@
+/* eslint-disable no-self-assign */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
@@ -72,8 +73,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     );
 };
 
-const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName, searchStatus }) => {
-    console.log(searchName)
+const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName }) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
@@ -82,17 +82,15 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
-    console.log(data)
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
     newData = newData.filter((item: TProduct) => item.id.toLowerCase().includes(searchArticle.toLowerCase()));
-    // if (searchCategory.toLowerCase() === "all") {
-    //     newData = newData
-    // }
-    // else {
-    //     newData = newData.filter((item: TProduct) => item.category === searchCategory.toLowerCase())
-    // }
-    console.log(newData)
+    if (searchCategory.toLowerCase() === "all") {
+        newData = newData
+    }
+    else {
+        newData = newData.filter((item: TProduct) => item.category[0].toLowerCase() === searchCategory.toLowerCase())
+    }
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {

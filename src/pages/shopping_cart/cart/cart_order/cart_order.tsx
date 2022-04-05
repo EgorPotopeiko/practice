@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -20,6 +21,15 @@ interface Props {
     setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+type TMenuState = {
+    total: number,
+    length: number,
+    loading: boolean,
+    orderVisible: boolean,
+    successVisible: boolean,
+    delivery: string
+}
+
 const { AUTH } = USER_PATH;
 
 const { Title, Text } = Typography;
@@ -27,19 +37,27 @@ const { Title, Text } = Typography;
 const nanoid = customAlphabet('1234567890', 10);
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
-    const [total, setTotal] = useState(0);
-    const [length, setLength] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [orderVisible, setOrderVisible] = useState(false);
-    const [successVisible, setSuccessVisible] = useState(false);
+    const [filter, setFilter] = useState<TMenuState>({
+        total: 0,
+        length: 0,
+        loading: false,
+        orderVisible: false,
+        successVisible: false,
+        delivery: 'курьером'
+    });
+    const createFilter = (type: keyof TMenuState) => (value: any) => {
+        setFilter({
+            ...filter,
+            [type]: value
+        })
+    }
     const cartItems = useSelector(selectCart);
-    const [delivery, setDelivery] = useState('курьером');
     const authUser = useSelector(selectUser);
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
             id: '',
-            delivery: delivery,
+            delivery: filter.delivery,
             town: '',
             street: '',
             house: '',
@@ -52,25 +70,25 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             email: authUser.email,
             user: `${authUser.name}`,
             comment: '',
-            count: length,
-            payment: total
+            count: filter.length,
+            payment: filter.total
         },
         enableReinitialize: false,
         onSubmit: (values, { setSubmitting }) => {
-            setLoading(true)
+            createFilter("loading")(true)
             setSubmitting(true)
             setTimeout(() => {
                 values.id = nanoid()
-                values.delivery = delivery
-                values.count = length
-                values.payment = total
+                values.delivery = filter.delivery
+                values.count = filter.length
+                values.payment = filter.total
                 const newOrder = values
                 const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
                 localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
-                setLoading(false)
+                createFilter("loading")(false)
                 setSubmitting(false)
                 setVisible(false)
-                setOrderVisible(true)
+                createFilter("orderVisible")(true)
             }, 3000)
         }
 
@@ -80,15 +98,15 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
 
     const onClose = () => {
         setVisible(false);
-        setOrderVisible(false)
+        createFilter("orderVisible")(false)
     };
 
     const onChange = (e: RadioChangeEvent) => {
-        setDelivery(e.target.value)
+        createFilter("delivery")(e.target.value)
     };
 
     const finishOrder = () => {
-        setLoading(true);
+        createFilter("loading")(true)
         setTimeout(() => {
             values.status = "оплачен"
             const newOrder = values
@@ -98,14 +116,14 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             dispatch(GetClearCartAction())
             dispatch(RemoveAllFilters())
             dispatch(GetPage(1, 6));
-            setLoading(false);
-            setOrderVisible(false);
-            setSuccessVisible(true)
+            createFilter("loading")(false)
+            createFilter("orderVisible")(false)
+            createFilter("successVisible")(true)
         }, 3000)
     }
 
     const backToMain = () => {
-        setSuccessVisible(false);
+        createFilter("successVisible")(false)
         resetForm({});
         history.push(AUTH)
     }
@@ -114,7 +132,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
         orders.pop();
         localStorage.setItem(`orders ${authUser.name}`, JSON.stringify(orders));
-        setOrderVisible(false);
+        createFilter("orderVisible")(false)
         setVisible(true)
     }
 
@@ -125,8 +143,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             ttl += +el.total;
             len += +el.amount;
         });
-        setTotal(+ttl.toFixed(2));
-        setLength(len)
+        createFilter("total")(+ttl.toFixed(2))
+        createFilter("length")(len)
     }, [cartItems]);
     return (
         <>
@@ -142,17 +160,17 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Row gutter={16}>
                             <Col span={18}>
                                 <Form.Item>
-                                    <Title level={3}>Выбрано {length} товара(-ов)</Title>
+                                    <Title level={3}>Выбрано {filter.length} товара(-ов)</Title>
                                 </Form.Item>
                             </Col>
                             <Col span={6}>
                                 <Form.Item>
-                                    <Text>{total} руб</Text>
+                                    <Text>{filter.total} руб</Text>
                                 </Form.Item>
                             </Col>
                         </Row>
                         <Text>Способ доставки</Text>
-                        <Radio.Group defaultValue="курьером" onChange={onChange} value={delivery}>
+                        <Radio.Group defaultValue="курьером" onChange={onChange} value={filter.delivery}>
                             <Radio value="курьером">Курьером</Radio>
                             <Radio value="почтой">Почтой</Radio>
                             <Radio value="самовывоз">Самовывоз</Radio>
@@ -285,7 +303,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                             type="primary"
                             htmlType="submit"
                             disabled={isSubmitting}
-                            loading={loading}
+                            loading={filter.loading}
                         >Оформить заказ</Button>
                     </Form>
                 </div>
@@ -293,7 +311,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             <Drawer
                 title="Заказ"
                 width={950}
-                visible={orderVisible}
+                visible={filter.orderVisible}
                 closable={false}
                 bodyStyle={{ paddingBottom: 80 }}>
                 <div className='order__modal'>
@@ -323,13 +341,13 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Form.Item>
                             <Text>{values.number}</Text>
                         </Form.Item>
-                        <Button type='primary' loading={loading} onClick={() => finishOrder()}>Оплатить</Button>
+                        <Button type='primary' loading={filter.loading} onClick={() => finishOrder()}>Оплатить</Button>
                         <Button type='link' onClick={() => backToOrder()}>Вернуться к заказу</Button>
                     </Form>
                 </div>
 
             </Drawer>
-            <Modal title="Ваш заказ успешно создан" onCancel={backToMain} visible={successVisible} footer={null}>
+            <Modal title="Ваш заказ успешно создан" onCancel={backToMain} visible={filter.successVisible} footer={null}>
                 <div className='success__modal'>
                     <Form>
                         <Form.Item>
