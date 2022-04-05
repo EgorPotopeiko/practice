@@ -11,7 +11,7 @@ import { GetLogout } from '../../store/login/actions';
 import { selectUser } from '../../store/login/selectors';
 import { GetPage, RemoveProductAction } from '../../store/products/actions';
 import './Header.less';
-import ModalAuth from './ModalAuth';
+import ModalAuth from './modal_auth';
 
 const { Title, Text } = Typography;
 
