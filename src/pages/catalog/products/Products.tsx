@@ -8,11 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectProductsLoading, selectProducts, selectTotal } from '../../../store/products/selectors';
 import Loader from '../../../components/loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
-import { ProductsActionTypes } from '../../../store/products/action-types';
 import CardTile from './cardTile';
 import { selectAllFilters } from '../../../store/filters/selectors';
-import { FiltersActionTypes } from '../../../store/filters/action-types';
 import { TProduct } from '../../../models/product';
+import { GetPage } from '../../../store/products/actions';
+import { GetFilters } from '../../../store/filters/actions';
 
 const { Title } = Typography;
 
@@ -28,11 +28,8 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
     const filters = useSelector(selectAllFilters);
-    const pagination = (page: Number, pageSize: Number) => dispatch({
-        type: ProductsActionTypes.SET_PAGE,
-        page,
-        pageSize
-    });
+    const { category, priceRange, search } = filters;
+    const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize));
     return (
         <div className="products">
             <div className="products__menu">
@@ -42,11 +39,7 @@ const Products: React.FC = () => {
                     <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
-            <Select defaultValue="date" onChange={(sort: string) => dispatch({
-                type: FiltersActionTypes.SET_FILTERS,
-                ...filters,
-                sort: sort
-            })}>
+            <Select defaultValue="date" onChange={(sort: string) => dispatch(GetFilters(search, priceRange, sort, category))}>
                 <Option key="date" value="date">по дате добавления</Option>
                 <Option key="alphabet" value="alphabet">по алфавиту</Option>
                 <Option key="low_price" value="low_price">по возрастанию цены</Option>

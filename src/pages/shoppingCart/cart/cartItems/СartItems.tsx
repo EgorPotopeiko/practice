@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import './CartItems.less';
 import { TProduct } from '../../../../models/product';
 import { selectCart } from '../../../../store/cart/selectors';
-import { CartActionTypes } from '../../../../store/cart/action-types';
 import { selectUser } from '../../../../store/login/selectors';
+import { GetRemovedCartAction } from '../../../../store/cart/actions';
 
 const CartItems: React.FC = () => {
     const cartItems = useSelector(selectCart);
@@ -40,10 +40,7 @@ const CartItems: React.FC = () => {
             render: (record: TProduct) => (
                 <Space size="middle">
                     <DeleteOutlined onClick={() =>
-                        dispatch({
-                            type: CartActionTypes.PRODUCT_REMOVED,
-                            item: record
-                        })
+                        dispatch(GetRemovedCartAction(record))
                     } />
                 </Space>
             )

@@ -9,11 +9,11 @@ import { customAlphabet } from 'nanoid';
 import Modal from 'antd/lib/modal/Modal';
 import { selectCart } from '../../../../store/cart/selectors';
 import { selectUser } from '../../../../store/login/selectors';
-import { CartActionTypes } from '../../../../store/cart/action-types';
 import history from '../../../../history';
 import { USER_PATH } from '../../../../routing/names';
-import { FiltersActionTypes } from '../../../../store/filters/action-types';
-import { ProductsActionTypes } from '../../../../store/products/action-types';
+import { GetClearCartAction } from '../../../../store/cart/actions';
+import { RemoveAllFilters } from '../../../../store/filters/actions';
+import { GetPage } from '../../../../store/products/actions';
 
 interface Props {
     visible: boolean,
@@ -95,18 +95,9 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
             orders.pop()
             localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
-            dispatch({
-                type: CartActionTypes.CLEAR_CART,
-                empty: []
-            })
-            dispatch({
-                type: FiltersActionTypes.REMOVE_ALL_FILTERS
-            })
-            dispatch({
-                type: ProductsActionTypes.SET_PAGE,
-                page: 1,
-                pageSize: 6
-            });
+            dispatch(GetClearCartAction())
+            dispatch(RemoveAllFilters())
+            dispatch(GetPage(1, 6));
             setLoading(false);
             setOrderVisible(false);
             setSuccessVisible(true)

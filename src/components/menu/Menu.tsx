@@ -6,7 +6,7 @@ import OrderData from '../../pages/adminPanel/adminOrders/adminData';
 import OrderFilters from '../../pages/adminPanel/adminOrders/filters';
 import ProductsData from '../../pages/adminPanel/adminProducts/adminData';
 import ProductsFilter from '../../pages/adminPanel/adminProducts/filters';
-import { FiltersActionTypes } from '../../store/filters/action-types';
+import { GetFilters } from '../../store/filters/actions';
 import { selectAllFilters, selectUserMenu } from '../../store/filters/selectors';
 import { selectUser } from '../../store/login/selectors';
 import './Menu.less';
@@ -52,6 +52,7 @@ const Menu: React.FC = () => {
     const userTabs = useSelector(selectUserMenu);
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
+    const { priceRange, search, sort } = filters;
     return (
         <div className="menu__catalog">
             {user.role === "admin"
@@ -80,11 +81,7 @@ const Menu: React.FC = () => {
                 </Tabs>
                 :
                 <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => {
-                    dispatch({
-                        type: FiltersActionTypes.SET_FILTERS,
-                        ...filters,
-                        category: category
-                    })
+                    dispatch(GetFilters(search, priceRange, sort, category))
                 }}>
                     {
                         userTabs.map((item: string) => (

@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import { SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import React, { ChangeEvent, useState } from 'react';
@@ -6,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 import { PUBLIC_PATH, USER_PATH } from '../../routing/names';
-import { FiltersActionTypes } from '../../store/filters/action-types';
-import { RemoveAllFilters } from '../../store/filters/actions';
+import { GetFilters, RemoveAllFilters } from '../../store/filters/actions';
 import { selectAllFilters } from '../../store/filters/selectors';
 import { GetLogout } from '../../store/login/actions';
 import { selectUser } from '../../store/login/selectors';
@@ -30,6 +28,7 @@ const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
+    const { category, priceRange, search, sort } = filters;
     const user = useSelector(selectUser);
     const showModal = () => {
         if (user.role === "guest" && user.isAuth === false) {
@@ -58,11 +57,7 @@ const Header: React.FC = () => {
                     }
                     }><Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
-                        <Input suffix={<SearchOutlined onClick={() => dispatch({
-                            type: FiltersActionTypes.SET_FILTERS,
-                            ...filters,
-                            search: searchInput
-                        })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, sort, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
                         <Link to={CART}><UserOutlined hidden={user.isAuth ? false : true} /></Link>
                         <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} />
@@ -72,11 +67,7 @@ const Header: React.FC = () => {
                     ?
                     <div className='header__filters'>
                         <>
-                            <Input suffix={<SearchOutlined onClick={() => dispatch({
-                                type: FiltersActionTypes.SET_FILTERS,
-                                ...filters,
-                                search: searchInput
-                            })} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                            <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, sort, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple"
                             // onChange={(maker: string) => dispatch({
                             //     type: FiltersActionTypes.SET_FILTERS,
@@ -101,11 +92,7 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>Цена</Text>
-                            <Slider range max={100000} defaultValue={[10, 100000]} onAfterChange={(priceRange: Array<Number>) => dispatch({
-                                type: FiltersActionTypes.SET_FILTERS,
-                                ...filters,
-                                priceRange: priceRange
-                            })} />
+                            <Slider range max={100000} defaultValue={[10, 100000]} onAfterChange={(newPriceRange: Array<number>) => dispatch(GetFilters(search, newPriceRange, sort, category))} />
                         </>
                     </div>
                     :

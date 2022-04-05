@@ -7,11 +7,11 @@ import Modal from 'antd/lib/modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserMenu } from '../../../../store/filters/selectors';
 import ImgCrop from 'antd-img-crop';
-import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { getBase64 } from '../../../../services/getBase64';
 import { customAlphabet } from 'nanoid';
 import { TMenuState } from "../../../../components/menu/Menu";
 import * as Yup from 'yup';
+import { CreateProductAction } from '../../../../store/products/actions';
 
 type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
@@ -60,10 +60,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
             values.img = img64
             values.id = nanoid()
             values.key = values.id
-            dispatch({
-                type: ProductsActionTypes.CREATE_PRODUCT,
-                product: values
-            })
+            dispatch(CreateProductAction(values))
             setLoading(false)
             setVisible(false)
         }, 3000)

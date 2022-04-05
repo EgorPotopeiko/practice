@@ -73,7 +73,7 @@ export default function cartReducer(state: TCartState = initialState, action: Ac
         case CartActionTypes.CLEAR_CART:
             return {
                 ...state,
-                cartProducts: action.empty
+                cartProducts: []
             }
         default:
             return state

@@ -8,7 +8,7 @@ import { TProduct } from '../../../../models/product';
 import './ProductsData.less';
 import { selectProducts, selectTotal } from '../../../../store/products/selectors';
 import { selectUserMenu } from '../../../../store/filters/selectors';
-import { ProductsActionTypes } from '../../../../store/products/action-types';
+import { DeleteProductAction, GetPage } from '../../../../store/products/actions';
 
 const { Option } = Select;
 
@@ -161,7 +161,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
         {
             title: 'Изменение',
             dataIndex: 'operation',
-            render: (_: any, record: TProduct) => {
+            render: (_: any, record: any) => {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
@@ -180,10 +180,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                             Edit
                         </EditOutlined>
                         <DeleteOutlined onClick={() =>
-                            dispatch({
-                                type: ProductsActionTypes.DELETE_PRODUCT,
-                                id: record.id
-                            })
+                            dispatch(DeleteProductAction(record.id))
                         } />
                     </>
                 );
@@ -191,11 +188,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
         },
     ];
 
-    const pagination = (page: Number, pageSize: Number) => dispatch({
-        type: ProductsActionTypes.SET_PAGE,
-        page,
-        pageSize
-    })
+    const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize))
 
     const mergedColumns = columns.map(col => {
         if (!col.editable) {

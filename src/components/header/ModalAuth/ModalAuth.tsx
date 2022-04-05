@@ -6,11 +6,11 @@ import { Button, Typography } from 'antd';
 import './ModalAuth.less';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginActionTypes } from '../../../store/login/action-types';
-import { FiltersActionTypes } from '../../../store/filters/action-types';
-import { ProductsActionTypes } from '../../../store/products/action-types';
 import { selectError } from '../../../store/login/selectors';
 import * as Yup from 'yup';
+import { GetPage } from '../../../store/products/actions';
+import { RemoveAllFilters } from '../../../store/filters/actions';
+import { GetAuthorizationStartAction } from '../../../store/login/actions';
 
 interface Props {
     visible: boolean,
@@ -34,15 +34,9 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            dispatch({
-                type: ProductsActionTypes.SET_PAGE,
-                page: 1,
-                pageSize: 6
-            })
+            dispatch(GetPage(1, 6))
         }, 3000)
-        dispatch({
-            type: FiltersActionTypes.REMOVE_ALL_FILTERS
-        })
+        dispatch(RemoveAllFilters())
     }
     return (
         <Modal
@@ -57,11 +51,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                     validationSchema={SignupSchema}
                     onSubmit={async (values) =>
                         setTimeout(() => {
-                            dispatch({
-                                type: LoginActionTypes.LOAD_AUTHORIZATION_START,
-                                email: values.email,
-                                password: values.password
-                            })
+                            dispatch(GetAuthorizationStartAction(values.email, values.password))
                         }, 3000)}>
                     {(formic) => (
                         <Form >

@@ -9,8 +9,7 @@ export const GetRemovedCartAction = (item: TProduct) => ({
     type: CartActionTypes.PRODUCT_REMOVED,
     item
 })
-export const GetClearCartAction = (empty: Array<Object>) => ({
-    type: CartActionTypes.CLEAR_CART,
-    empty
+export const GetClearCartAction = () => ({
+    type: CartActionTypes.CLEAR_CART
 })
 

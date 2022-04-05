@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Card, Divider, Image, Spin, Typography } from 'antd';
-import React, { useEffect } from 'react';
+import { Button, Card, Divider, Image, Typography } from 'antd';
+import React from 'react';
 import './ProductPage.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProduct } from '../../store/products/selectors';
-import { CartActionTypes } from '../../store/cart/action-types';
 import Header from '../../components/header';
 import Loader from '../../components/loader';
+import { GetAddedCartAction } from '../../store/cart/actions';
 
 const { Title, Text } = Typography;
 
@@ -49,10 +48,7 @@ const ProductPage: React.FC = () => {
                     </div>
                     <div className='productPage__info-add'>
                         <Text strong >{price} руб.</Text>
-                        <Button onClick={() => dispatch({
-                            type: CartActionTypes.PRODUCT_ADDED,
-                            item: product
-                        })}>Добавить в корзину</Button>
+                        <Button onClick={() => dispatch(GetAddedCartAction({ id, title, category, price, img }))}>Добавить в корзину</Button>
                     </div>
                 </div>
                 <Divider />

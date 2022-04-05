@@ -4,9 +4,9 @@ import './СardList.less';
 import { Link } from 'react-router-dom';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { selectUser } from '../../../../store/login/selectors';
-import { CartActionTypes } from '../../../../store/cart/action-types';
+import { GetProductStartAction } from '../../../../store/products/actions';
+import { GetAddedCartAction } from '../../../../store/cart/actions';
 
 const { Title, Text } = Typography;
 
@@ -31,19 +31,13 @@ const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
     return (
         <div className='cardList'>
             <Card title={<>
-                <Title onClick={user.isAuth ? () => dispatch({
-                    type: ProductsActionTypes.LOAD_PRODUCT_START,
-                    id: id
-                })
+                <Title onClick={user.isAuth ? () => dispatch(GetProductStartAction(id))
                     :
                     undefined} level={3}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
                 <Text>{
                     mas
                 }</Text>
-                <ShoppingCartOutlined hidden={user.isAuth ? false : true} onClick={() => dispatch({
-                    type: CartActionTypes.PRODUCT_ADDED,
-                    item: { id, title, category, price, img }
-                })} />
+                <ShoppingCartOutlined hidden={user.isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction({ id, title, category, price, img }))} />
             </>}
                 cover={<img alt="example" src={img} />}>
                 <Divider />
