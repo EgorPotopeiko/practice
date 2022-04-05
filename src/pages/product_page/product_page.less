@@ -1,0 +1,142 @@
+@import '../../vars.less';
+
+.productPage {
+    &__title {
+        margin-left: 20px;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 20px;
+
+        &-desc {
+            display: grid;
+            padding-right: 5px;
+
+            span {
+                font-size: 20px;
+            }
+        }
+
+        &-add {
+            display: grid;
+
+            .ant-btn {
+                padding: 5px 15px;
+                line-height: 0;
+            }
+
+            span {
+                text-align: end;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .ant {
+        &-card {
+            max-width: 850px;
+            padding: 5px 15px;
+            margin-left: auto;
+            margin-right: auto;
+
+            &-head {
+                padding-left: 24px;
+                padding-right: 20px;
+
+                &-title {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    h3 {
+                        max-width: 350px;
+                        white-space: normal;
+                    }
+
+                    h4 {
+                        margin-top: 0;
+                        color: @primary_color;
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .productPage {
+        &__info {
+            &-desc {
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .ant {
+            &-card {
+                &-head-title {
+                    h3 {
+                        font-size: 20px;
+                    }
+
+                    h4 {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 390px) {
+    .productPage {
+        &__info {
+            &-add {
+                .ant-btn-primary {
+                    padding: 2px 5px;
+                    white-space: normal;
+                    max-height: 50px;
+                    height: 100%;
+
+                    span {
+                        text-align: center;
+                        font-size: 12px;
+                        line-height: 1.5;
+                    }
+                }
+            }
+        }
+
+        .ant {
+            &-card {
+                &-head-title {
+                    h3 {
+                        font-size: 17px;
+                    }
+
+                    h4 {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 390px) {
+    .productPage {
+        &__info {
+            &-add {
+                .ant-btn-primary {
+                    span {
+                        line-height: 1.2;
+                    }
+                }
+            }
+        }
+    }
+}
