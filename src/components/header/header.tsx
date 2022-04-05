@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
-    const { category, priceRange, search, sort } = filters;
+    const { category, priceRange, search } = filters;
     const user = useSelector(selectUser);
     const showModal = () => {
         if (user.role === "guest" && user.isAuth === false) {
@@ -57,7 +57,7 @@ const Header: React.FC = () => {
                     }
                     }><Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
-                        <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, sort, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
                         <Link to={CART}><UserOutlined hidden={user.isAuth ? false : true} /></Link>
                         <ModalAuth onCancel={cancelModal} visible={modalAuthVisible} />
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
                     ?
                     <div className='header__filters'>
                         <>
-                            <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, sort, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                            <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple"
                             // onChange={(maker: string) => dispatch({
                             //     type: FiltersActionTypes.SET_FILTERS,
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>Цена</Text>
-                            <Slider range max={100000} defaultValue={[10, 100000]} onAfterChange={(newPriceRange: Array<number>) => dispatch(GetFilters(search, newPriceRange, sort, category))} />
+                            <Slider range max={100000} defaultValue={[10, 100000]} onAfterChange={(newPriceRange: Array<number>) => dispatch(GetFilters(search, newPriceRange, category))} />
                         </>
                     </div>
                     :

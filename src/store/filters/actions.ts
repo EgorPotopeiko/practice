@@ -1,10 +1,9 @@
 import { FiltersActionTypes } from './action-types';
 
-export const GetFilters = (search: string, priceRange: Array<number>, sort: string, category: string) => ({
+export const GetFilters = (search: string, priceRange: Array<number>, category: string) => ({
     type: FiltersActionTypes.SET_FILTERS,
     search,
     priceRange,
-    sort,
     category
 })
 

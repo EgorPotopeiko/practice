@@ -6,7 +6,6 @@ import { FiltersActionTypes } from './action-types';
 const initialState: TFiltersState = {
     search: "",
     priceRange: [10, 100000],
-    sort: "date",
     category: "all",
     listCategories: JSON.parse(localStorage.getItem("categories")!) || ["all", "mobile", "electron", "pc", "home", "sport"]
 };
@@ -16,7 +15,6 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 export type TFiltersState = {
     search: string,
     priceRange: Array<number>,
-    sort: string,
     category: string,
     listCategories: Array<string>
 }
@@ -33,7 +31,6 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
                 ...state,
                 search: action.search,
                 priceRange: action.priceRange,
-                sort: action.sort,
                 category: action.category
             }
         case FiltersActionTypes.REMOVE_ALL_FILTERS:
@@ -41,7 +38,6 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
                 ...state,
                 search: "",
                 priceRange: [10, 100000],
-                sort: "date",
                 category: "all"
             }
         case FiltersActionTypes.ADDED_CATEGORY:

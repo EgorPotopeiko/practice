@@ -44,7 +44,7 @@ const Menu: React.FC = () => {
     const userTabs = useSelector(selectUserMenu);
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
-    const { priceRange, search, sort } = filters;
+    const { priceRange, search } = filters;
     return (
         <div className="menu__catalog">
             {user.role === "admin"
@@ -69,7 +69,7 @@ const Menu: React.FC = () => {
                 </Tabs>
                 :
                 <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => {
-                    dispatch(GetFilters(search, priceRange, sort, category))
+                    dispatch(GetFilters(search, priceRange, category))
                 }}>
                     {
                         userTabs.map((item: string) => (

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import { List, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
@@ -9,10 +10,8 @@ import { selectProductsLoading, selectProducts, selectTotal } from '../../../sto
 import Loader from '../../../components/loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
 import CardTile from './card_tile';
-import { selectAllFilters } from '../../../store/filters/selectors';
 import { TProduct } from '../../../models/product';
-import { GetPage } from '../../../store/products/actions';
-import { GetFilters } from '../../../store/filters/actions';
+import { GetPage, GetView } from '../../../store/products/actions';
 
 const { Title } = Typography;
 
@@ -27,9 +26,8 @@ const Products: React.FC = () => {
     const [view, setView] = useState("list");
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
-    const filters = useSelector(selectAllFilters);
-    const { category, priceRange, search } = filters;
     const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize));
+
     return (
         <div className="products">
             <div className="products__menu">
@@ -39,8 +37,7 @@ const Products: React.FC = () => {
                     <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
-            <Select defaultValue="date" onChange={(sort: string) => dispatch(GetFilters(search, priceRange, sort, category))}>
-                <Option key="date" value="date">по дате добавления</Option>
+            <Select defaultValue="alphabet" onChange={(sort: string) => dispatch(GetView(sort))}>
                 <Option key="alphabet" value="alphabet">по алфавиту</Option>
                 <Option key="low_price" value="low_price">по возрастанию цены</Option>
                 <Option key="high_price" value="high_price">по убыванию цены</Option>
