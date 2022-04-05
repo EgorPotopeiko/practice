@@ -1,7 +1,7 @@
 import { Tabs } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AdminCategory from '../../pages/adminPanel/adminCategory';
+import AdminCategory from '../../pages/adminPanel/admin_category';
 import OrderData from '../../pages/adminPanel/adminOrders/adminData';
 import OrderFilters from '../../pages/adminPanel/adminOrders/filters';
 import ProductsData from '../../pages/adminPanel/adminProducts/adminData';
