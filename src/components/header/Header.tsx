@@ -13,7 +13,7 @@ import { GetLogout } from '../../store/login/actions';
 import { selectUser } from '../../store/login/selectors';
 import { GetPage, RemoveProductAction } from '../../store/products/actions';
 import './Header.less';
-import ModalAuth from './ModalAuth/ModalAuth';
+import ModalAuth from './ModalAuth';
 
 const { Title, Text } = Typography;
 

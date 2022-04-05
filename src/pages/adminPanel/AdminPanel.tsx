@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import Header from '../../components/header/Header';
-import Menu from '../../components/menu/Menu';
+import Header from '../../components/header';
+import Menu from '../../components/menu';
 import { ProductsActionTypes } from '../../store/products/action-types';
 
 const AdminPanel: React.FC = () => {
@@ -13,7 +13,7 @@ const AdminPanel: React.FC = () => {
         })
     }, [])
     return (
-        <div className="adminPanel">
+        <div className="admin__panel">
             <Header />
             <Menu />
         </div>

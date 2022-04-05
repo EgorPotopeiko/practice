@@ -1,11 +1,11 @@
 import { Tabs } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AdminCategory from '../../pages/adminPanel/adminCategory/AdminCategory';
-import OrderData from '../../pages/adminPanel/adminOrders/adminData/OrderData';
-import OrderFilters from '../../pages/adminPanel/adminOrders/filters/OrderFilters';
-import ProductsData from '../../pages/adminPanel/adminProducts/adminData/ProductsData';
-import ProductsFilter from '../../pages/adminPanel/adminProducts/filters/ProductsFilters';
+import AdminCategory from '../../pages/adminPanel/adminCategory';
+import OrderData from '../../pages/adminPanel/adminOrders/adminData';
+import OrderFilters from '../../pages/adminPanel/adminOrders/filters';
+import ProductsData from '../../pages/adminPanel/adminProducts/adminData';
+import ProductsFilter from '../../pages/adminPanel/adminProducts/filters';
 import { FiltersActionTypes } from '../../store/filters/action-types';
 import { selectAllFilters, selectUserMenu } from '../../store/filters/selectors';
 import { selectUser } from '../../store/login/selectors';

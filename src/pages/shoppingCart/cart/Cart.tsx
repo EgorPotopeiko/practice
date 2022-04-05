@@ -2,8 +2,8 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import './Cart.less';
-import CartItems from './cartItems/СartItems';
-import CartOrder from './cartOrder/СartOrder';
+import CartItems from './cartItems';
+import CartOrder from './cartOrder';
 import { USER_PATH } from '../../../routing/names';
 import { Link } from 'react-router-dom';
 

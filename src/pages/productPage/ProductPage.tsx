@@ -5,8 +5,8 @@ import './ProductPage.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProduct } from '../../store/products/selectors';
 import { CartActionTypes } from '../../store/cart/action-types';
-import Header from '../../components/header/Header';
-import Loader from '../../components/loader/Loader';
+import Header from '../../components/header';
+import Loader from '../../components/loader';
 
 const { Title, Text } = Typography;
 

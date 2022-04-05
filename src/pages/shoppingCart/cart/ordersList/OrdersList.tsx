@@ -2,7 +2,7 @@
 import { Table } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../../../../components/header/Header';
+import Header from '../../../../components/header';
 import { TOrder } from '../../../../models/order';
 import { selectUser } from '../../../../store/login/selectors';
 

@@ -1,10 +1,10 @@
 import { Redirect, Route, Switch } from 'react-router';
 import { TRoutes } from '../models/routes';
-import AdminPanel from '../pages/adminPanel/AdminPanel';
+import AdminPanel from '../pages/adminPanel';
 import Catalog from '../pages/catalog/catalog';
-import ProductPage from '../pages/productPage/ProductPage';
-import OrdersList from '../pages/shoppingCart/cart/ordersList/OrdersList';
-import ShoppingCart from '../pages/shoppingCart/ShoppingCart';
+import ProductPage from '../pages/productPage';
+import OrdersList from '../pages/shoppingCart/cart/ordersList';
+import ShoppingCart from '../pages/shoppingCart';
 import { USER_PATH, PUBLIC_PATH, ADMIN_PATH } from './names';
 
 const { APP } = PUBLIC_PATH;
