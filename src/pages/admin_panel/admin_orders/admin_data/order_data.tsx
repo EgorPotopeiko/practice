@@ -191,7 +191,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         };
     });
     return (
-        <div className='ordersData'>
+        <div className='orders__data'>
             <Form form={form} component={false}>
                 <Table
                     components={{

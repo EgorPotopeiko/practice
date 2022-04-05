@@ -18,7 +18,7 @@ const AdminCategory: React.FC = () => {
         setCategoryName('')
     }
     return (
-        <div className='adminCategory'>
+        <div className='admin__category'>
             <Form>
                 <Form.Item>
                     <Title level={2}>Добавление новой категории</Title>

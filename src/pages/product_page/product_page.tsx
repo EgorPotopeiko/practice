@@ -31,28 +31,28 @@ const ProductPage: React.FC = () => {
         finallyImg = img
     }
     return (
-        <div className='productPage'>
+        <div className='product__page'>
             <Header />
             <Card title={<>
                 <Image width={400} src={finallyImg} />
-                <div className='productPage__title'>
+                <div className='product__page-title'>
                     <Title level={3}>{title}</Title>
                     <Title level={4}>Есть в наличии</Title>
                 </div>
             </>}>
-                <div className='productPage__info'>
-                    <div className='productPage__info-desc'>
+                <div className='product__page-info'>
+                    <div className='product__page-info-desc'>
                         <Text>Изготовитель:</Text>
                         <Text>Категория: {category[0]}</Text>
                         <Text>Подкатегория: {category[1]}</Text>
                     </div>
-                    <div className='productPage__info-add'>
+                    <div className='product__page-info-add'>
                         <Text strong >{price} руб.</Text>
                         <Button onClick={() => dispatch(GetAddedCartAction({ id, title, category, price, img }))}>Добавить в корзину</Button>
                     </div>
                 </div>
                 <Divider />
-                <div className='productPage__description'>
+                <div className='product__page-description'>
                     <Title level={4}>Полное описание</Title>
                 </div>
             </Card>

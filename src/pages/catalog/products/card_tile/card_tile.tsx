@@ -22,7 +22,7 @@ const CardTile: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     return (
-        <div className='cardTile'>
+        <div className='card__tile'>
             <Card size="small" title={
                 <>
                     <Title onClick={user.isAuth ? () => dispatch(GetProductStartAction(id))

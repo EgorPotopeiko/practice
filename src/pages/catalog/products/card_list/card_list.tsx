@@ -29,7 +29,7 @@ const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
     }
     func(category)
     return (
-        <div className='cardList'>
+        <div className='card__list'>
             <Card title={<>
                 <Title onClick={user.isAuth ? () => dispatch(GetProductStartAction(id))
                     :

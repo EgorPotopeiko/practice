@@ -4,7 +4,7 @@ import Cart from './cart';
 
 const ShoppingCart: React.FC = () => {
     return (
-        <div className="shoppingCart">
+        <div className="shopping__cart">
             <Header />
             <Cart />
         </div>
