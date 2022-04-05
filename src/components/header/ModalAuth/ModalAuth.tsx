@@ -10,6 +10,7 @@ import { LoginActionTypes } from '../../../store/login/action-types';
 import { FiltersActionTypes } from '../../../store/filters/action-types';
 import { ProductsActionTypes } from '../../../store/products/action-types';
 import { selectError } from '../../../store/login/selectors';
+import * as Yup from 'yup';
 
 interface Props {
     visible: boolean,
@@ -18,20 +19,12 @@ interface Props {
 
 const { Title } = Typography
 
-const validateEmail = (value: string) => {
-    if (!value) {
-        return "Required!";
-    }
-    else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-        return "Invalid email address!"
-    }
-}
-
-const validatePassword = (value: string) => {
-    if (!value) {
-        return "Required!"
-    }
-}
+const SignupSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Required'),
+    password: Yup.string()
+        .min(3, 'Too Short!')
+        .required('Required'),
+});
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
@@ -52,19 +45,27 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
         })
     }
     return (
-        <Modal width={530} title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>} visible={visible} onCancel={onCancel} footer={null}>
+        <Modal
+            width={530}
+            title={<Title style={error ? { color: 'red' } : {}}
+                level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>}
+            visible={visible} onCancel={onCancel}
+            footer={null}>
             <div className='modal__auth'>
-                <Formik initialValues={{ email: '', password: '' }} validateOnBlur onSubmit={async (values) =>
-                    setTimeout(() => {
-                        dispatch({
-                            type: LoginActionTypes.LOAD_AUTHORIZATION_START,
-                            email: values.email,
-                            password: values.password
-                        })
-                    }, 3000)}>
+                <Formik initialValues={{ email: '', password: '' }}
+                    validateOnBlur
+                    validationSchema={SignupSchema}
+                    onSubmit={async (values) =>
+                        setTimeout(() => {
+                            dispatch({
+                                type: LoginActionTypes.LOAD_AUTHORIZATION_START,
+                                email: values.email,
+                                password: values.password
+                            })
+                        }, 3000)}>
                     {(formic) => (
                         <Form >
-                            <FormItem name='email' validate={validateEmail}>
+                            <FormItem name='email'>
                                 <FormInput
                                     name='email'
                                     required={true}
@@ -72,7 +73,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                     prefix={<UserOutlined className="site-form-item-icon" />}
                                 />
                             </FormItem>
-                            <FormItem name='password' validate={validatePassword}>
+                            <FormItem name='password'>
                                 <FormInput.Password
                                     name='password'
                                     required={true}

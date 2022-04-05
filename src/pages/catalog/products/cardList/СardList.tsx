@@ -21,6 +21,13 @@ interface Props {
 const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
+    let mas: any[] = [];
+    const func = (array: any) => {
+        for (const elements of array) {
+            mas.push(elements + ' ')
+        }
+    }
+    func(category)
     return (
         <div className='cardList'>
             <Card title={<>
@@ -30,7 +37,9 @@ const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
                 })
                     :
                     undefined} level={3}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
-                <Text>{category[0]} {category[1]}</Text>
+                <Text>{
+                    mas
+                }</Text>
                 <ShoppingCartOutlined hidden={user.isAuth ? false : true} onClick={() => dispatch({
                     type: CartActionTypes.PRODUCT_ADDED,
                     item: { id, title, category, price, img }

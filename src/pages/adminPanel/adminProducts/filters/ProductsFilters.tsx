@@ -11,6 +11,7 @@ import { ProductsActionTypes } from '../../../../store/products/action-types';
 import { getBase64 } from '../../../../services/getBase64';
 import { customAlphabet } from 'nanoid';
 import { TMenuState } from "../../../../components/menu/Menu";
+import * as Yup from 'yup';
 
 type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
@@ -22,11 +23,16 @@ type Props = {
 
 const { Option } = Select;
 
-const validate = (value: any) => {
-    if (!value) {
-        return "Required!";
-    }
-}
+const CreateProductSchema = Yup.object().shape({
+    title: Yup.string()
+        .min(2, 'Too Short!')
+        .required('Required'),
+    prise: Yup.number()
+        .positive()
+        .required('Required'),
+    category: Yup.array().required('Required'),
+    img: Yup.string()
+});
 
 const props = {
     headers: {
@@ -139,20 +145,24 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
                 </Upload> */}
             </div>
             <Modal title="Создание нового товара" visible={visible} onCancel={onCancel} footer={null} width={700}>
-                <div className='admin__createModal'>
-                    <Formik initialValues={{ title: '', prise: '', category: [] }} validateOnBlur onSubmit={(values) => {
-                        createProduct(values)
-                    }}>
+                <div className='admin__create-modal'>
+                    <Formik
+                        initialValues={{ title: '', prise: '', category: [], img: '' }}
+                        validateOnBlur
+                        validationSchema={CreateProductSchema}
+                        onSubmit={(values) => {
+                            createProduct(values)
+                        }}>
                         {({ values, setFieldValue }) => (
                             <Form>
-                                <Form.Item name='title' validate={validate}>
+                                <Form.Item name='title'>
                                     <FormInput
                                         name='title'
                                         required={true}
                                         placeholder='Название товара'
                                     />
                                 </Form.Item>
-                                <Form.Item name='prise' validate={validate}>
+                                <Form.Item name='prise'>
                                     <FormInput
                                         type='number'
                                         required={true}
@@ -160,8 +170,8 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
                                         placeholder='Стоимость'
                                     />
                                 </Form.Item>
-                                <Form.Item name='category' validate={validate}>
-                                    <Select onChange={(item) => {
+                                <Form.Item name='category'>
+                                    <Select mode='multiple' onChange={(item) => {
                                         setFieldValue('category', [item])
                                     }}>
                                         {filterCategories.map((item: any) => (
@@ -196,8 +206,8 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter, setSearchName, setSear
                         )}
                     </Formik>
                 </div>
-            </Modal>
-        </div>
+            </Modal >
+        </div >
     );
 }
 
