@@ -22,12 +22,11 @@ const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     let mas: Array<string> = [];
-    const func = (array: string) => {
-        for (const elements of array) {
+    (function func() {
+        for (const elements of category) {
             mas.push(elements + ' ')
         }
-    }
-    func(category)
+    })()
     return (
         <div className='card__list'>
             <Card title={<>
