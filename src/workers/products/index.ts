@@ -1,3 +1,4 @@
+import { TFilters } from './../../models/filters';
 import { selectAllFilters } from './../../store/filters/selectors';
 import { GetProductErrorAction, GetProductSuccessAction } from './../../store/products/actions';
 import { selectPage, selectPageSize } from './../../store/products/selectors';
@@ -11,12 +12,12 @@ import { ProductsActionTypes } from '../../store/products/action-types';
 
 function* loadProductList() {
     try {
-        const page: AxiosResponse = yield select(selectPage);
-        const pageSize: AxiosResponse = yield select(selectPageSize);
-        const filters: AxiosResponse = yield select(selectAllFilters);
+        const page: number = yield select(selectPage);
+        const pageSize: number = yield select(selectPageSize);
+        const filters: TFilters = yield select(selectAllFilters);
         const data: AxiosResponse = yield call(ProductsDB.getProducts, page, pageSize, filters);
         const total = data.data.totalCount;
-        const newData = data.data.content.map((product: any) => {
+        let newData = data.data.content.map((product: any) => {
             return {
                 id: product.id,
                 title: product.title,

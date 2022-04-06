@@ -89,11 +89,6 @@ export default function productsReducer(state: TProductsState = initialState, ac
             return {
                 ...state,
                 view: action.view,
-                products: state.view === "high_price"
-                    ?
-                    state.products.sort(function (a: TProduct, b: TProduct) { return b.price - a.price })
-                    :
-                    state.products.sort(function (a: TProduct, b: TProduct) { return a.price - b.price })
             }
         default:
             return state
