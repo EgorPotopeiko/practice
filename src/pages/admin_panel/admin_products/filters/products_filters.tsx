@@ -139,7 +139,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                                 </Form.Item>
                                 <Form.Item name='category'>
                                     <Select mode='multiple' onChange={(item) => {
-                                        setFieldValue('category', [item])
+                                        setFieldValue('category', [...item])
                                     }}>
                                         {filterCategories.map((item: any) => (
                                             <Option key={item} value={item}>{item}</Option>
