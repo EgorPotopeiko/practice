@@ -4,6 +4,6 @@ export type TCartProduct = {
     category: string,
     price: number,
     img: string,
-    amount: number,
-    total: number
+    amount?: number,
+    total?: number
 }
