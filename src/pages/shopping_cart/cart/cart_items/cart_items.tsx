@@ -39,22 +39,14 @@ const CartItems: React.FC = () => {
             key: 'action',
             render: (record: TProduct) => (
                 <Space size="middle">
-                    <DeleteOutlined onClick={() =>
-                        dispatch(GetRemovedCartAction(record))
-                    } />
+                    <DeleteOutlined onClick={() => dispatch(GetRemovedCartAction(record))} />
                 </Space>
             )
         },
     ];
-    cartItems.map((item: TProduct) => {
-        item['key'] = item.id
-    })
-    if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) {
-        localStorage.setItem(`orders ${user.name}`, JSON.stringify([]))
-    }
-    else {
-        localStorage.getItem(`orders ${user.name}`)
-    }
+    cartItems.map((item: TProduct) => { item['key'] = item.id })
+    if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) { localStorage.setItem(`orders ${user.name}`, JSON.stringify([])) }
+    else { localStorage.getItem(`orders ${user.name}`) }
     return (
         <Table bordered dataSource={cartItems} columns={columns} />
     )

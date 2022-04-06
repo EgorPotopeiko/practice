@@ -42,37 +42,47 @@ const Products: React.FC = () => {
                 <Option key="low_price" value="low_price">по возрастанию цены</Option>
                 <Option key="high_price" value="high_price">по убыванию цены</Option>
             </Select>
-            {loading ?
-                <List>
-                    {spinner}
+            {!!loading && (<List>{spinner}</List>)}
+            {!loading && (
+                <List grid={view === "tile" ? { gutter: 8 } : undefined}
+                    dataSource={products}
+                    pagination={{
+                        showSizeChanger: true,
+                        defaultCurrent: pageNumber,
+                        pageSize: pageSize,
+                        pageSizeOptions: [6, 10, 20],
+                        total: totalCount,
+                        onChange: (page: number, pageSize: number) => pagination(page, pageSize)
+                    }}
+                    renderItem={(item: TProduct) => (
+                        <>
+                            {
+                                view === "list" && (
+                                    <CardList
+                                        key={item.id}
+                                        id={item.id}
+                                        title={item.title}
+                                        price={item.price}
+                                        category={item.category}
+                                        img={item.img}
+                                    />
+                                )}
+                            {
+                                view === "tile" && (
+                                    <CardTile
+                                        key={item.id}
+                                        id={item.id}
+                                        title={item.title}
+                                        price={item.price}
+                                        category={item.category}
+                                        img={item.img}
+                                    />
+                                )}
+                        </>
+                    )}>
                 </List>
-                :
-                <List grid={view === "tile" ? {
-                    gutter: 8,
-
-                } : undefined} dataSource={products} pagination={{ showSizeChanger: true, defaultCurrent: pageNumber, pageSize: pageSize, pageSizeOptions: [6, 10, 20], total: totalCount, onChange: (page: number, pageSize: number) => pagination(page, pageSize) }} renderItem={(item: TProduct) => (
-                    view === "list"
-                        ?
-                        <CardList
-                            key={item.id}
-                            id={item.id}
-                            title={item.title}
-                            price={item.price}
-                            category={item.category}
-                            img={item.img}
-                        />
-                        :
-                        <CardTile
-                            key={item.id}
-                            id={item.id}
-                            title={item.title}
-                            price={item.price}
-                            category={item.category}
-                            img={item.img}
-                        />
-                )}>
-                </List>}
-        </div>
+            )}
+        </div >
     );
 }
 

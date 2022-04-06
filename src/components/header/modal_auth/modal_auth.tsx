@@ -21,9 +21,7 @@ const { Title } = Typography
 
 const SignupSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string()
-        .min(3, 'Too Short!')
-        .required('Required'),
+    password: Yup.string().min(3, 'Too Short!').required('Required'),
 });
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
@@ -41,18 +39,15 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     return (
         <Modal
             width={530}
-            title={<Title style={error ? { color: 'red' } : {}}
-                level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>}
-            visible={visible} onCancel={onCancel}
+            title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>}
+            visible={visible}
+            onCancel={onCancel}
             footer={null}>
             <div className='modal__auth'>
                 <Formik initialValues={{ email: '', password: '' }}
                     validateOnBlur
                     validationSchema={SignupSchema}
-                    onSubmit={async (values) =>
-                        setTimeout(() => {
-                            dispatch(GetAuthorizationStartAction(values.email, values.password))
-                        }, 3000)}>
+                    onSubmit={async (values) => setTimeout(() => { dispatch(GetAuthorizationStartAction(values.email, values.password)) }, 3000)}>
                     {(formic) => (
                         <Form >
                             <FormItem name='email'>
@@ -70,9 +65,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                     placeholder='Password'
                                 />
                             </FormItem>
-                            <Button.Group>
-                                <SubmitButton loading={loading} onClick={load}>Войти</SubmitButton>
-                            </Button.Group>
+                            <Button.Group><SubmitButton loading={loading} onClick={load}>Войти</SubmitButton></Button.Group>
                         </Form>
                     )}
                 </Formik>

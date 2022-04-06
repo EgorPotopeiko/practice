@@ -101,9 +101,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         createFilter("orderVisible")(false)
     };
 
-    const onChange = (e: RadioChangeEvent) => {
-        createFilter("delivery")(e.target.value)
-    };
+    const onChange = (e: RadioChangeEvent) => { createFilter("delivery")(e.target.value) };
 
     const finishOrder = () => {
         createFilter("loading")(true)
@@ -158,16 +156,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 <div className='create__modal'>
                     <Form onFinish={handleSubmit}>
                         <Row gutter={16}>
-                            <Col span={18}>
-                                <Form.Item>
-                                    <Title level={3}>Выбрано {filter.length} товара(-ов)</Title>
-                                </Form.Item>
-                            </Col>
-                            <Col span={6}>
-                                <Form.Item>
-                                    <Text>{filter.total} руб</Text>
-                                </Form.Item>
-                            </Col>
+                            <Col span={18}><Form.Item><Title level={3}>Выбрано {filter.length} товара(-ов)</Title></Form.Item></Col>
+                            <Col span={6}><Form.Item><Text>{filter.total} руб</Text></Form.Item></Col>
                         </Row>
                         <Text>Способ доставки</Text>
                         <Radio.Group defaultValue="курьером" onChange={onChange} value={filter.delivery}>
@@ -318,41 +308,26 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                     <Form>
                         <Row gutter={16}>
                             <Col span={18}>
-                                <Form.Item>
-                                    <Title level={4}>Заказ №{values.id}</Title>
-                                </Form.Item>
+                                <Form.Item><Title level={4}>Заказ №{values.id}</Title></Form.Item>
                             </Col>
                             <Col span={6}>
-                                <Form.Item>
-                                    <Text>{values.payment} руб</Text>
-                                </Form.Item>
+                                <Form.Item><Text>{values.payment} руб</Text></Form.Item>
                             </Col>
                         </Row>
                         <Divider />
-                        <Form.Item>
-                            <Text><b>Способ доставки:</b> {values.delivery}</Text>
-                        </Form.Item>
-                        <Form.Item>
-                            <Text><b>По адресу:</b> {values.town}, {values.street}, {values.house}</Text>
-                        </Form.Item>
-                        <Form.Item>
-                            <Text><b>Получатель:</b> {values.name}</Text>
-                        </Form.Item>
-                        <Form.Item>
-                            <Text>{values.number}</Text>
-                        </Form.Item>
+                        <Form.Item><Text><b>Способ доставки:</b> {values.delivery}</Text></Form.Item>
+                        <Form.Item><Text><b>По адресу:</b> {values.town}, {values.street}, {values.house}</Text></Form.Item>
+                        <Form.Item><Text><b>Получатель:</b> {values.name}</Text></Form.Item>
+                        <Form.Item><Text>{values.number}</Text></Form.Item>
                         <Button type='primary' loading={filter.loading} onClick={() => finishOrder()}>Оплатить</Button>
                         <Button type='link' onClick={() => backToOrder()}>Вернуться к заказу</Button>
                     </Form>
                 </div>
-
             </Drawer>
             <Modal title="Ваш заказ успешно создан" onCancel={backToMain} visible={filter.successVisible} footer={null}>
                 <div className='success__modal'>
                     <Form>
-                        <Form.Item>
-                            <Text>Номер вашего заказа: <b><i>{values.id}</i></b></Text>
-                        </Form.Item>
+                        <Form.Item><Text>Номер вашего заказа: <b><i>{values.id}</i></b></Text></Form.Item>
                     </Form>
                 </div>
 

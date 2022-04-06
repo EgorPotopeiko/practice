@@ -20,18 +20,19 @@ const AdminCategory: React.FC = () => {
     return (
         <div className='admin__category'>
             <Form>
-                <Form.Item>
-                    <Title level={2}>Добавление новой категории</Title>
-                </Form.Item>
+                <Form.Item><Title level={2}>Добавление новой категории</Title></Form.Item>
                 <Row>
                     <Col span={12}>
                         <Input value={categoryName} onChange={(e: ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)} placeholder='Название новой категории' />
                         <Button type='primary' onClick={addCategory}>Создать категорию</Button>
                     </Col>
                     <Col span={12}>
-                        <List header={<div>Существующие категории</div>} bordered dataSource={categories} renderItem={(item: string) => <List.Item actions={[<DeleteOutlined onClick={() =>
-                            dispatch(removedCategory(item))
-                        } />]}>{item}</List.Item>} />
+                        <List
+                            header={<div>Существующие категории</div>}
+                            bordered
+                            dataSource={categories}
+                            renderItem={(item: string) => <List.Item actions={[<DeleteOutlined onClick={() => dispatch(removedCategory(item))} />]}>{item}</List.Item>}
+                        />
                     </Col>
                 </Row>
             </Form>

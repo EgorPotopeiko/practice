@@ -89,9 +89,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         setEditingKey(record.key);
     };
 
-    const cancel = () => {
-        setEditingKey('');
-    };
+    const cancel = () => { setEditingKey('') };
 
     const save = async (key: React.Key) => {
         try {
@@ -115,9 +113,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                 setData(newData);
                 setEditingKey('');
             }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
+        } catch (errInfo) { console.log('Validate Failed:', errInfo) }
     };
 
     const columns = [
@@ -167,9 +163,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                         </Popconfirm>
                     </span>
                 ) : (
-                    <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        Edit
-                    </EditOutlined>
+                    <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>Edit</EditOutlined>
                 );
             },
         },
@@ -194,18 +188,12 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         <div className='orders__data'>
             <Form form={form} component={false}>
                 <Table
-                    components={{
-                        body: {
-                            cell: EditableCell
-                        },
-                    }}
+                    components={{ body: { cell: EditableCell } }}
                     bordered
                     dataSource={filteredData}
                     columns={mergedColumns}
                     rowClassName="editable-row"
-                    pagination={{
-                        onChange: cancel
-                    }}
+                    pagination={{ onChange: cancel }}
                 />
             </Form>
         </div>

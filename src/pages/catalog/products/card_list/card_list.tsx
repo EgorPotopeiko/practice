@@ -22,20 +22,12 @@ const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
     let mas: Array<string> = [];
-    (function func() {
-        for (const elements of category) {
-            mas.push(elements + ' ')
-        }
-    })()
+    (function func() { for (const elements of category) { mas.push(elements + ' ') } })()
     return (
         <div className='card__list'>
             <Card title={<>
-                <Title onClick={user.isAuth ? () => dispatch(GetProductStartAction(id))
-                    :
-                    undefined} level={3}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
-                <Text>{
-                    mas
-                }</Text>
+                <Title onClick={user.isAuth ? () => dispatch(GetProductStartAction(id)) : undefined} level={3}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
+                <Text>{mas}</Text>
                 <ShoppingCartOutlined hidden={user.isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction({ id, title, category, price, img }))} />
             </>}
                 cover={<img alt="example" src={img} />}>

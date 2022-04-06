@@ -10,8 +10,8 @@ const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
     const dispatch = useDispatch();
-    const product: any = useSelector(selectProduct)
-    const loading = useSelector(selectProductsLoading)
+    const product: any = useSelector(selectProduct);
+    const loading = useSelector(selectProductsLoading);
     return (
         <Spin spinning={loading}>
             <div className='product__page'>
@@ -31,9 +31,7 @@ const ProductPage: React.FC = () => {
                             <div className='product__page-info-desc'>
                                 <Text>Изготовитель:</Text>
                                 <Text>Категория: {product.category[0]}</Text>
-                                {product.category.length > 1 &&
-                                    <Text>Подкатегория: {product.category[1]}</Text>
-                                }
+                                {product.category.length > 1 && <Text>Подкатегория: {product.category[1]}</Text>}
                             </div>
                             <div className='product__page-info-add'>
                                 <Text strong >{product.price} руб.</Text>

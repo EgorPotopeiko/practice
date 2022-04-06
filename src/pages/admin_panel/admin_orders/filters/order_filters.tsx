@@ -4,7 +4,7 @@ import { TMenuState } from '../../../../components/menu/menu';
 import './order_filters.less';
 
 type Props = {
-    handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void,
+    handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
 }
 
 const selectValues = ["оплачен", "доставлен", "в пути", "оформлен"];
@@ -21,7 +21,6 @@ const OrderFilters: React.FC<Props> = ({ handlerFilter }) => {
             </Select>
             <Input placeholder="Пользователь" onChange={(e) => handlerFilter("searchUser")(e.target.value)} />
             <Input placeholder="Номер заказа" onChange={(e) => handlerFilter("searchNumber")(e.target.value)} />
-
         </div>
     );
 }

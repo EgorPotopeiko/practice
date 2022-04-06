@@ -77,20 +77,14 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
-    products.map((item: TProduct) => {
-        item['key'] = item.id.split('-')[0];
-    });
+    products.map((item: TProduct) => { item['key'] = item.id.split('-')[0] });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
     newData = newData.filter((item: TProduct) => item.id.toLowerCase().includes(searchArticle.toLowerCase()));
-    if (searchCategory.toLowerCase() === "all") {
-        newData = newData
-    }
-    else {
-        newData = newData.filter((item: TProduct) => item.category[0].toLowerCase() === searchCategory.toLowerCase())
-    }
+    if (searchCategory.toLowerCase() === "all") { newData = newData }
+    else { newData = newData.filter((item: TProduct) => item.category[0].toLowerCase() === searchCategory.toLowerCase()) }
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {
@@ -98,9 +92,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
         setEditingKey(record.key);
     };
 
-    const cancel = () => {
-        setEditingKey('');
-    };
+    const cancel = () => { setEditingKey('') };
 
     const save = async (key: React.Key) => {
         try {
@@ -120,9 +112,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                 setData(newData);
                 setEditingKey('');
             }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
+        } catch (errInfo) { console.log('Validate Failed:', errInfo) }
     };
 
     const columns = [
@@ -142,17 +132,13 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
             dataIndex: 'category',
             key: 'category',
             editable: true,
-            render: (record: any) => (
-                <span>{record + ' '}</span>
-            )
+            render: (record: any) => (<span>{record + ' '}</span>)
         },
         {
             title: 'Статус',
             dataIndex: 'available',
             key: 'available',
-            render: () => (
-                <span>Есть на складе</span>
-            )
+            render: () => (<span>Есть на складе</span>)
         },
         {
             title: 'Количество на складе',
@@ -166,26 +152,16 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
-                        <Typography.Link onClick={() => {
-                            save(record.key)
-                        }} style={{ marginRight: 8 }}>
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
-                        </Popconfirm>
+                        <Typography.Link onClick={() => { save(record.key) }} style={{ marginRight: 8 }}>Save</Typography.Link>
+                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}><a>Cancel</a></Popconfirm>
                     </span>
                 ) : (
                     <>
-                        <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>
-                            Edit
-                        </EditOutlined>
-                        <DeleteOutlined onClick={() =>
-                            dispatch(DeleteProductAction(record.id))
-                        } />
+                        <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>Edit</EditOutlined>
+                        <DeleteOutlined onClick={() => dispatch(DeleteProductAction(record.id))} />
                     </>
                 );
-            },
+            }
         },
     ];
 
@@ -207,18 +183,12 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
             }),
         };
     });
-    useEffect(() => {
-        setData(products)
-    }, [products])
+    useEffect(() => { setData(products) }, [products])
     return (
         <div className='products__data'>
             <Form form={form} component={false}>
                 <Table
-                    components={{
-                        body: {
-                            cell: EditableCell
-                        },
-                    }}
+                    components={{ body: { cell: EditableCell } }}
                     bordered
                     dataSource={newData}
                     columns={mergedColumns}

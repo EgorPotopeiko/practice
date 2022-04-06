@@ -39,7 +39,6 @@ const Menu: React.FC = () => {
             [type]: value
         })
     }
-
     const user = useSelector(selectUser);
     const userTabs = useSelector(selectUserMenu);
     const dispatch = useDispatch();
@@ -51,26 +50,21 @@ const Menu: React.FC = () => {
                 ?
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
-                        <ProductsFilter
-                            handlerFilter={handlerFilter} />
+                        <ProductsFilter handlerFilter={handlerFilter} />
                         <ProductsData
                             searchName={filter.searchName}
                             searchArticle={filter.searchArticle}
                             searchCategory={filter.searchCategory}
                             searchStatus={filter.searchStatus} />
                     </TabPane>
-                    <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ">
-                        <AdminCategory />
-                    </TabPane>
+                    <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ"><AdminCategory /></TabPane>
                     <TabPane tab="ЗАКАЗЫ" key="ЗАКАЗЫ">
                         <OrderFilters handlerFilter={handlerFilter} />
                         <OrderData chooseStatus={filter.chooseStatus} searchUser={filter.searchUser} searchNumber={filter.searchNumber} />
                     </TabPane>
                 </Tabs>
                 :
-                <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => {
-                    dispatch(GetFilters(search, priceRange, category))
-                }}>
+                <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => { dispatch(GetFilters(search, priceRange, category)) }}>
                     {
                         userTabs.map((item: string) => (
                             <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />

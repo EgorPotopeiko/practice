@@ -26,21 +26,13 @@ type TCreateProductState = {
 const { Option } = Select;
 
 const CreateProductSchema = Yup.object().shape({
-    title: Yup.string()
-        .min(2, 'Too Short!')
-        .required('Required'),
-    prise: Yup.number()
-        .positive()
-        .required('Required'),
+    title: Yup.string().min(2, 'Too Short!').required('Required'),
+    prise: Yup.number().positive().required('Required'),
     category: Yup.array().required('Required'),
     img: Yup.string()
 });
 
-const props = {
-    headers: {
-        "Access-Control-Allow-Origin": 'http://localhost:3000'
-    }
-}
+const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } }
 
 const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     const [filter, setFilter] = useState<TCreateProductState>({
@@ -59,9 +51,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     const dispatch = useDispatch();
     const categoryValues = useSelector(selectUserMenu);
     const filterCategories = categoryValues.filter((item: string) => item !== 'all');
-    const onCancel = () => {
-        createFilter("visible")(false)
-    }
+    const onCancel = () => { createFilter("visible")(false) };
     const createProduct = (values: any) => {
         createFilter("loading")(true)
         setTimeout(() => {
@@ -76,9 +66,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
         setFileList(newFileList);
         const newFile = newFileList[newFileList.length - 1];
-        getBase64(newFile.originFileObj, (imageURL: any) => {
-            createFilter("img64")(imageURL)
-        })
+        getBase64(newFile.originFileObj, (imageURL: any) => { createFilter("img64")(imageURL) })
     };
     const onPreview = async (file: any) => {
         let src = file.url;
@@ -117,9 +105,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                         initialValues={{ title: '', prise: '', category: [], img: '' }}
                         validateOnBlur
                         validationSchema={CreateProductSchema}
-                        onSubmit={(values) => {
-                            createProduct(values)
-                        }}>
+                        onSubmit={(values) => { createProduct(values) }}>
                         {({ values, setFieldValue }) => (
                             <Form>
                                 <Form.Item name='title'>
@@ -161,11 +147,8 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                                             {fileList.length < 5 && '+ Upload'}
                                         </Upload>
                                     </ImgCrop>
-
                                 </Form.Item>
-                                <SubmitButton loading={filter.loading}
-                                    disabled={values.category.length === 0}
-                                >Создать</SubmitButton>
+                                <SubmitButton loading={filter.loading} disabled={values.category.length === 0}>Создать</SubmitButton>
                             </Form>
                         )}
                     </Formik>

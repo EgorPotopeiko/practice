@@ -23,13 +23,9 @@ const CardTile: React.FC<Props> = ({ id, title, price, category, img }) => {
     const user = useSelector(selectUser);
     return (
         <div className='card__tile'>
-            <Card size="small" title={
-                <>
-                    <Title onClick={user.isAuth ? () => dispatch(GetProductStartAction(id))
-                        :
-                        undefined} level={4}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
-                </>
-            }>
+            <Card size="small" title={(
+                <Title onClick={user.isAuth ? () => dispatch(GetProductStartAction(id)) : undefined} level={4}>{user.isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
+            )}>
                 <p>{price} руб.</p>
                 <ShoppingCartOutlined hidden={user.isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction({ id, title, category, price, img }))} />
             </Card>

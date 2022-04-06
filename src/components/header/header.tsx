@@ -31,9 +31,7 @@ const Header: React.FC = () => {
     const { category, priceRange, search } = filters;
     const user = useSelector(selectUser);
     const showModal = () => {
-        if (user.role === "guest" && user.isAuth === false) {
-            setModalAuthVisible(true)
-        }
+        if (user.role === "guest" && user.isAuth === false) { setModalAuthVisible(true) }
         else {
             dispatch(GetLogout({
                 role: "guest",
@@ -43,9 +41,7 @@ const Header: React.FC = () => {
             dispatch(GetPage(1, 6))
         }
     }
-    const cancelModal = () => {
-        setModalAuthVisible(false)
-    }
+    const cancelModal = () => { setModalAuthVisible(false) }
     return (
         <div className="header">
             <PageHeader>
@@ -55,8 +51,8 @@ const Header: React.FC = () => {
                         localStorage.removeItem("product")
                         dispatch(RemoveAllFilters())
                         dispatch(GetPage(1, 6))
-                    }
-                    }><Link to={APP}>Shop</Link></Title>
+                    }}>
+                        <Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
                         <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Button onClick={showModal}>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
@@ -70,9 +66,7 @@ const Header: React.FC = () => {
                         <>
                             <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple">
-                                {selectValues.map((item) => (
-                                    <Option key={item} value={item}>{item.toUpperCase()}</Option>
-                                ))}
+                                {selectValues.map((item) => (<Option key={item} value={item}>{item.toUpperCase()}</Option>))}
                             </Select>
                         </>
                         <>
