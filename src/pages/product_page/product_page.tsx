@@ -1,34 +1,35 @@
-import { Button, Card, Divider, Image, Typography } from 'antd';
+import { Button, Card, Divider, Image, Spin, Typography } from 'antd';
 import React from 'react';
 import './product_page.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProduct } from '../../store/products/selectors';
+import { selectProduct, selectProductsLoading } from '../../store/products/selectors';
 import Header from '../../components/header';
-import Loader from '../../components/loader';
 import { GetAddedCartAction } from '../../store/cart/actions';
 
 const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
     const product: any = useSelector(selectProduct)
+    const loading = useSelector(selectProductsLoading)
     const dispatch = useDispatch();
+    let finallyImg = null;
     if (product === null) {
         return (
             <div className='productPage'>
-                <Header />
-                <Card>
-                    <Loader />
-                </Card>
+                <Spin spinning={loading}>
+                    <Header />
+                    <Card>
+                        <Title>Loading...</Title>
+                    </Card>
+                </Spin>
             </div>
         )
     }
-    const { id, title, category, price, imgCart, img } = product.data;
-    let finallyImg = null;
-    if (img === undefined) {
-        finallyImg = window.location.href.split('auth')[0] + imgCart
+    if (product.img === undefined) {
+        finallyImg = window.location.href.split('auth')[0] + product.imgCart
     }
     else {
-        finallyImg = img
+        finallyImg = product.img
     }
     return (
         <div className='product__page'>
@@ -36,19 +37,19 @@ const ProductPage: React.FC = () => {
             <Card title={<>
                 <Image width={400} src={finallyImg} />
                 <div className='product__page-title'>
-                    <Title level={3}>{title}</Title>
+                    <Title level={3}>{product.title}</Title>
                     <Title level={4}>Есть в наличии</Title>
                 </div>
             </>}>
                 <div className='product__page-info'>
                     <div className='product__page-info-desc'>
                         <Text>Изготовитель:</Text>
-                        <Text>Категория: {category[0]}</Text>
-                        <Text>Подкатегория: {category[1]}</Text>
+                        <Text>Категория: {product.category}</Text>
+                        <Text>Подкатегория: {product.category}</Text>
                     </div>
                     <div className='product__page-info-add'>
-                        <Text strong >{price} руб.</Text>
-                        <Button onClick={() => dispatch(GetAddedCartAction({ id, title, category, price, img }))}>Добавить в корзину</Button>
+                        <Text strong >{product.price} руб.</Text>
+                        <Button onClick={() => dispatch(GetAddedCartAction(product))}>Добавить в корзину</Button>
                     </div>
                 </div>
                 <Divider />

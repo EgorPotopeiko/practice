@@ -37,7 +37,8 @@ function* loadProduct(payload: any) {
     const { id } = payload
     try {
         const data: AxiosResponse = yield call(ProductsDB.getProduct, id);
-        yield put(GetProductSuccessAction(data));
+        localStorage.setItem("product", JSON.stringify(data.data))
+        yield put(GetProductSuccessAction(data.data));
     }
     catch (error) {
         yield put(GetProductErrorAction(error));

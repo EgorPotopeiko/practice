@@ -10,7 +10,7 @@ const initialState: TProductsState = {
     isLoading: false,
     page: 1,
     pageSize: 6,
-    product: null,
+    product: JSON.parse(localStorage.getItem("product")!) || null,
     totalCount: 0,
 };
 
