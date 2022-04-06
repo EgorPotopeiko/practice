@@ -132,7 +132,11 @@
         .anticon-user {
             color: @light-text-color;
             font-size: 45px;
+        }
+
+        .ant-btn {
             margin-left: 10px;
+            margin-right: 10px;
         }
     }
 }
@@ -244,6 +248,28 @@
                 &-slider {
                     max-width: 500px;
                 }
+            }
+        }
+    }
+}
+
+@media (max-width: 350px) {
+    .header {
+        &__wrap {
+            h1.ant-typography {
+                font-size: 32px;
+                margin-top: 12px;
+            }
+        }
+
+        &__user {
+            .ant-btn {
+                padding: 20px 10px;
+            }
+
+            .anticon {
+                font-size: 35px;
+                margin-top: 5px;
             }
         }
     }
