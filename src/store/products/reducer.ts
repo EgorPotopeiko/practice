@@ -12,7 +12,6 @@ const initialState: TProductsState = {
     pageSize: 6,
     product: null,
     totalCount: 0,
-    view: 'alphabet'
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -24,8 +23,7 @@ export type TProductsState = {
     page: number
     pageSize: number
     product: null,
-    totalCount?: number,
-    view: string
+    totalCount?: number
 }
 
 const deleteProduct = (state: TProductsState, id: string) => {
@@ -75,11 +73,6 @@ export default function productsReducer(state: TProductsState = initialState, ac
                 page: action.page,
                 pageSize: action.pageSize,
                 totalCount: action.totalCount
-            }
-        case ProductsActionTypes.SET_VIEW:
-            return {
-                ...state,
-                view: action.view,
             }
         default:
             return state

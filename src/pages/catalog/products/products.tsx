@@ -11,7 +11,7 @@ import Loader from '../../../components/loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
 import CardTile from './card_tile';
 import { TProduct } from '../../../models/product';
-import { GetPage, GetView } from '../../../store/products/actions';
+import { GetPage } from '../../../store/products/actions';
 
 const { Title } = Typography;
 
@@ -37,7 +37,7 @@ const Products: React.FC = () => {
                     <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
-            <Select defaultValue="alphabet" onChange={(sort: string) => dispatch(GetView(sort))}>
+            <Select defaultValue="alphabet">
                 <Option key="alphabet" value="alphabet">по алфавиту</Option>
                 <Option key="low_price" value="low_price">по возрастанию цены</Option>
                 <Option key="high_price" value="high_price">по убыванию цены</Option>
