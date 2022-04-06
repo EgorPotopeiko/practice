@@ -9,7 +9,7 @@ export default function* pageLoader() {
 function* loaderWorker({ payload }: LocationChangeAction) {
     try {
         const pathname = payload.location.pathname;
-        if (pathname === '/' || pathname === '/auth') {
+        if (pathname === '/' || pathname === '/auth' || pathname === '/admin') {
             yield put(GetProductsStartAction());
         }
     } catch (error: any) {

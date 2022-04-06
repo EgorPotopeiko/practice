@@ -9,9 +9,9 @@ import { GetAddedCartAction } from '../../store/cart/actions';
 const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
+    const dispatch = useDispatch();
     const product: any = useSelector(selectProduct)
     const loading = useSelector(selectProductsLoading)
-    const dispatch = useDispatch();
     let finallyImg = null;
     if (product === null) {
         return (
