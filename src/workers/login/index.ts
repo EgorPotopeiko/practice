@@ -4,6 +4,7 @@ import { AxiosResponse } from 'axios';
 import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetAuthorizationProcessAction } from './../../store/login/actions';
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import Authorization from '../../services/login';
+import { ResponseGenerator } from '../../models/response-generator';
 
 function* login() {
     try {
@@ -17,7 +18,7 @@ function* login() {
 }
 
 function* loadInfo() {
-    const user: AxiosResponse = yield select(selectUser);
+    const user: ResponseGenerator = yield select(selectUser);
     if (user.status === 200) {
         const takeData: AxiosResponse = yield call(Authorization.getUser, user.data.jwt);
         const role = takeData.data.name === "admin" ? "admin" : "user";

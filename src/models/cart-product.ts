@@ -1,4 +1,4 @@
-export type TNewProduct = {
+export type TCartProduct = {
     id: string,
     title: string,
     category: string,

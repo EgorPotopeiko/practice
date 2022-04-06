@@ -1,4 +1,4 @@
-import { TNewProduct } from './../../models/new-product';
+import { TCartProduct } from '../../models/cart-product';
 import { TProduct } from './../../models/product';
 import { CartActionTypes } from './action-types';
 import { RootStateOrAny } from 'react-redux';
@@ -16,7 +16,7 @@ export type TCartState = {
     cartProducts: Array<Object>
 }
 
-const updateCartItems = (cartProducts: Array<Object>, item: TNewProduct, idx: number) => {
+const updateCartItems = (cartProducts: Array<Object>, item: TCartProduct, idx: number) => {
     if (item.amount === 0) {
         return [
             ...cartProducts.slice(0, idx),
@@ -36,7 +36,7 @@ const updateCartItems = (cartProducts: Array<Object>, item: TNewProduct, idx: nu
     ]
 }
 
-const updateCartItem = (product: TProduct, item: TNewProduct, quantity: number) => {
+const updateCartItem = (product: TProduct, item: TCartProduct, quantity: number) => {
     const { total = 0, amount = 0 } = item;
     return {
         id: product.id,
