@@ -21,8 +21,8 @@ interface Props {
 const CardProduct: React.FC<Props> = ({ id, title, price, category, img }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
-    let mas: any[] = [];
-    const func = (array: any) => {
+    let mas: Array<string> = [];
+    const func = (array: string) => {
         for (const elements of array) {
             mas.push(elements + ' ')
         }

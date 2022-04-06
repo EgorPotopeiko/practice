@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable array-callback-return */
 import { TProduct } from './../../models/product';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions'
@@ -33,13 +31,6 @@ export type TProductsState = {
 const deleteProduct = (state: TProductsState, id: string) => {
     const products = state.products;
     return products.filter((product: TProduct) => product.id !== id)
-}
-
-const setView = (state: TProductsState, view: string) => {
-    let products = state.products;
-    if (view === "high_price") products = products.sort(function (a: TProduct, b: TProduct) { return b.price - a.price });
-    if (view === "low_price") products = products.sort(function (a: TProduct, b: TProduct) { return a.price - b.price });
-    console.log(products)
 }
 
 export default function productsReducer(state: TProductsState = initialState, action: ActionTypes): TProductsState {

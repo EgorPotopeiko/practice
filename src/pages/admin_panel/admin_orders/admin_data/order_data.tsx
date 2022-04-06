@@ -65,7 +65,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
 const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) => {
     const [form] = Form.useForm();
-    let orders: any = [];
+    let orders: Array<TOrder> = [];
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i) || "";
         if (key.includes("orders")) {
