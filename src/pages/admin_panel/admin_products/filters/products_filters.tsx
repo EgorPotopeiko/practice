@@ -21,7 +21,6 @@ type TCreateProductState = {
     loading: boolean
     img64: string | null
     visible: boolean
-    fileList: any | null
 }
 
 const { Option } = Select;
@@ -47,9 +46,9 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     const [filter, setFilter] = useState<TCreateProductState>({
         loading: false,
         img64: null,
-        visible: false,
-        fileList: []
+        visible: false
     });
+    const [fileList, setFileList] = useState([])
     const createFilter = (type: keyof TCreateProductState) => (value: any) => {
         setFilter({
             ...filter,
@@ -75,7 +74,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
         }, 3000)
     }
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
-        createFilter("fileList")(newFileList);
+        setFileList(newFileList);
         const newFile = newFileList[newFileList.length - 1];
         getBase64(newFile.originFileObj, (imageURL: any) => {
             createFilter("img64")(imageURL)
@@ -95,7 +94,6 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
         const imgWindow = window.open(src)!;
         imgWindow.document.write(image.outerHTML);
     };
-
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>
@@ -154,13 +152,13 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                                             action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                             accept='.jpg'
                                             listType="picture-card"
-                                            fileList={filter.fileList}
+                                            fileList={fileList}
                                             onChange={onChange}
                                             onPreview={onPreview}
-                                            disabled={filter.fileList.length > 0}
+                                            disabled={fileList.length > 0}
                                             {...props}
                                         >
-                                            {filter.fileList.length < 5 && '+ Upload'}
+                                            {fileList.length < 5 && '+ Upload'}
                                         </Upload>
                                     </ImgCrop>
 
