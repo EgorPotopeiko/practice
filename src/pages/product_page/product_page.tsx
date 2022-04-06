@@ -16,43 +16,36 @@ const ProductPage: React.FC = () => {
         <Spin spinning={loading}>
             <div className='product__page'>
                 <Header />
-                {
-                    product === null
-                        ?
-                        <Card>
-                            <Empty />
-                        </Card>
-                        :
-                        <Card title={<>
+                {!product && (<Card><Empty /></Card>)}
+                {!!product && (
+                    <Card title={(
+                        <>
                             <Image width={400} src={product.img === undefined ? window.location.href.split('auth')[0] + product.imgCart : product.img} />
                             <div className='product__page-title'>
                                 <Title level={3}>{product.title}</Title>
                                 <Title level={4}>Есть в наличии</Title>
                             </div>
-                        </>}>
-                            <div className='product__page-info'>
-                                <div className='product__page-info-desc'>
-                                    <Text>Изготовитель:</Text>
-                                    <Text>Категория: {product.category[0]}</Text>
-                                    {
-                                        product.category.length > 1
-                                            ?
-                                            <Text>Подкатегория: {product.category[1]}</Text>
-                                            :
-                                            null
-                                    }
-                                </div>
-                                <div className='product__page-info-add'>
-                                    <Text strong >{product.price} руб.</Text>
-                                    <Button onClick={() => dispatch(GetAddedCartAction(product))}>Добавить в корзину</Button>
-                                </div>
+                        </>
+                    )}>
+                        <div className='product__page-info'>
+                            <div className='product__page-info-desc'>
+                                <Text>Изготовитель:</Text>
+                                <Text>Категория: {product.category[0]}</Text>
+                                {product.category.length > 1 &&
+                                    <Text>Подкатегория: {product.category[1]}</Text>
+                                }
                             </div>
-                            <Divider />
-                            <div className='product__page-description'>
-                                <Title level={4}>Полное описание</Title>
+                            <div className='product__page-info-add'>
+                                <Text strong >{product.price} руб.</Text>
+                                <Button onClick={() => dispatch(GetAddedCartAction(product))}>Добавить в корзину</Button>
                             </div>
-                        </Card>
-                }
+                        </div>
+                        <Divider />
+                        <div className='product__page-description'>
+                            <Title level={4}>Полное описание</Title>
+                        </div>
+                    </Card>
+                )}
             </div>
         </Spin>
     );
