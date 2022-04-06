@@ -58,8 +58,6 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     }
     const nanoid = customAlphabet('1234567890', 6);
     const dispatch = useDispatch();
-    // const formData = new FormData();
-    // const [upLoading, setUpLoading] = useState(false);
     const categoryValues = useSelector(selectUserMenu);
     const filterCategories = categoryValues.filter((item: string) => item !== 'all');
     const onCancel = () => {
@@ -76,27 +74,6 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
             createFilter("visible")(false)
         }, 3000)
     }
-    // const handleUpload = async () => {
-    //     filesList.forEach((file: any) => {
-    //         formData.append('files[]', file);
-    //     });
-    //     setUpLoading(true)
-    //     fetch('https://www.mocky.io/v2/5cc8019d300000980a055e76', {
-    //         method: 'POST',
-    //         body: formData,
-    //     })
-    //         .then(res => res.json())
-    //         .then(() => {
-    //             setFilesList([])
-    //             console.log('upload successfully.');
-    //         })
-    //         .catch(() => {
-    //             console.log('upload failed.');
-    //         })
-    //         .finally(() => {
-    //             setUpLoading(false)
-    //         });
-    // }
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
         createFilter("fileList")(newFileList);
         const newFile = newFileList[newFileList.length - 1];
@@ -118,19 +95,6 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
         const imgWindow = window.open(src)!;
         imgWindow.document.write(image.outerHTML);
     };
-    // const props = {
-    //     onRemove: (file: any) => {
-    //         const index = filesList.indexOf(file);
-    //         const newFileList = filesList.slice();
-    //         newFileList.splice(index, 1);
-    //         setFileList(newFileList)
-    //     },
-    //     beforeUpload: async (file: any) => {
-    //         setFilesList([...filesList, file]);
-    //         return false;
-    //     },
-    //     filesList,
-    // };
 
     return (
         <div className="admin__filters">
@@ -148,9 +112,6 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
             </div>
             <div className='admin__filters-btns'>
                 <Button type='default' onClick={() => createFilter("visible")(true)}>Добавить новый товар</Button>
-                {/* <Upload {...props}>
-                    <Button type='primary' onClick={handleUpload} loading={upLoading}>Импорт</Button>
-                </Upload> */}
             </div>
             <Modal title="Создание нового товара" visible={filter.visible} onCancel={onCancel} footer={null} width={700}>
                 <div className='admin__create-modal'>
@@ -194,9 +155,6 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                                             accept='.jpg'
                                             listType="picture-card"
                                             fileList={filter.fileList}
-                                            // beforeUpload={() => {
-                                            //     return false
-                                            // }}
                                             onChange={onChange}
                                             onPreview={onPreview}
                                             disabled={filter.fileList.length > 0}

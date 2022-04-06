@@ -68,13 +68,7 @@ const Header: React.FC = () => {
                     <div className='header__filters'>
                         <>
                             <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
-                            <Select placeholder="Производитель" mode="multiple"
-                            // onChange={(maker: string) => dispatch({
-                            //     type: FiltersActionTypes.SET_FILTERS,
-                            //     ...filters,
-                            //     maker: maker
-                            // })}
-                            >
+                            <Select placeholder="Производитель" mode="multiple">
                                 {selectValues.map((item) => (
                                     <Option key={item} value={item}>{item.toUpperCase()}</Option>
                                 ))}
@@ -82,13 +76,7 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>В наличии</Text>
-                            <Switch defaultChecked
-                            //  onChange={(checked: boolean) => dispatch({
-                            //     type: FiltersActionTypes.SET_FILTERS,
-                            //     ...filters,
-                            //     available: checked,
-                            // })} 
-                            />
+                            <Switch defaultChecked />
                         </>
                         <>
                             <Text>Цена</Text>
