@@ -10,7 +10,7 @@ import { GetAddedCartAction } from '../../store/cart/actions';
 const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
-    const product = useSelector(selectProduct);
+    const product: any = useSelector(selectProduct)
     const dispatch = useDispatch();
     if (product === null) {
         return (

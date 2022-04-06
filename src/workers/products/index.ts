@@ -9,16 +9,6 @@ import { GetProductsErrorAction, GetProductsSuccessAction } from '../../store/pr
 import { AxiosResponse } from 'axios';
 import { ProductsActionTypes } from '../../store/products/action-types';
 
-export interface ResponseGenerator {
-    [x: string]: any,
-    config?: any,
-    content?: any,
-    headers?: any,
-    request?: any,
-    status?: number,
-    statusText?: string
-}
-
 function* loadProductList() {
     try {
         const page: AxiosResponse = yield select(selectPage);

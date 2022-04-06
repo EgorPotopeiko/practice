@@ -5,16 +5,6 @@ import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetAuthoriz
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import Authorization from '../../services/login';
 
-export interface ResponseGenerator {
-    [x: string]: any,
-    config?: any,
-    content?: any,
-    headers?: any,
-    request?: any,
-    status?: number,
-    statusText?: string
-}
-
 function* login() {
     try {
         const { email, password }: { email: string, password: string } = yield select(selectCredentials);

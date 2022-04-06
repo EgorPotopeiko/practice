@@ -6,16 +6,6 @@ export default function* pageLoader() {
     yield takeEvery(LOCATION_CHANGE, loaderWorker)
 }
 
-export interface ResponseGenerator {
-    [x: string]: any,
-    config?: any,
-    data?: any,
-    headers?: any,
-    request?: any,
-    status?: number,
-    statusText?: string
-}
-
 function* loaderWorker({ payload }: LocationChangeAction) {
     try {
         const pathname = payload.location.pathname;
