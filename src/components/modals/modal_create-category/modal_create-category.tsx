@@ -29,7 +29,6 @@ const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
             dispatch(CloseModalAction())
         }, 1000)
     }
-    console.log(categoryName.length)
     return (
         <Modal
             title="Создание новой категории"
@@ -44,7 +43,13 @@ const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
                     validationSchema={CreateCategorySchema}
                     onSubmit={() => { addCategory() }}>
                     <Form>
-                        <Form.Item name='name'><Input name='name' placeholder='Название категории' value={categoryName} onChange={(e: ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)} /></Form.Item>
+                        <Form.Item name='name'>
+                            <Input
+                                name='name'
+                                placeholder='Название категории'
+                                value={categoryName}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)} />
+                        </Form.Item>
                         <div className='modal__create-category-btns'>
                             <SubmitButton disabled={categoryName.length === 0 ? true : false}>Создать</SubmitButton>
                             <Button type='dashed' onClick={() => setCategoryName('')}>Clear</Button>

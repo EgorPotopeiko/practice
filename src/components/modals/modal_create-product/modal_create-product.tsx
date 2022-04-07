@@ -1,4 +1,4 @@
-import { Select, Upload } from 'antd';
+import { Button, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
@@ -11,7 +11,7 @@ import { selectUserMenu } from '../../../store/filters/selectors';
 import { CreateProductAction } from '../../../store/products/actions';
 import { getBase64 } from '../../../services/getBase64';
 import './modal_create-product.less';
-import { CloseModalAction } from '../../../store/modals/actions';
+import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
 
 interface Props {
     visible: boolean,
@@ -111,13 +111,12 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                 />
                             </Form.Item>
                             <Form.Item name='category'>
-                                <Select mode='multiple' onChange={(item) => {
-                                    setFieldValue('category', [...item])
-                                }}>
+                                <Select placeholder='Категории' mode='multiple' onChange={(item) => { setFieldValue('category', [...item]) }}>
                                     {filterCategories.map((item: any) => (
                                         <Option key={item} value={item}>{item}</Option>
                                     ))}
                                 </Select>
+                                <Button type='link' onClick={() => dispatch(OpenModalAction("CreateCategory"))}>Нет подходящей категории? Создайте свою</Button>
                             </Form.Item>
                             <Form.Item name='img'>
                                 <ImgCrop rotate>
