@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { TProduct } from './../../models/product';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions'
@@ -12,6 +13,7 @@ const initialState: TProductsState = {
     pageSize: 6,
     product: JSON.parse(localStorage.getItem("product")!) || null,
     totalCount: 0,
+    view: 'alphabet'
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -23,7 +25,8 @@ export type TProductsState = {
     page: number
     pageSize: number
     product: null,
-    totalCount?: number
+    totalCount?: number,
+    view: string
 }
 
 const deleteProduct = (state: TProductsState, id: string) => {
@@ -73,6 +76,20 @@ export default function productsReducer(state: TProductsState = initialState, ac
                 page: action.page,
                 pageSize: action.pageSize,
                 totalCount: action.totalCount
+            }
+        case ProductsActionTypes.SET_VIEW:
+            return {
+                ...state,
+                view: action.view,
+                products: state.view === "alphabet"
+                    ?
+                    state.products.sort(function (a: TProduct, b: TProduct) { if (a.title < b.title) { return -1 } })
+                    :
+                    state.view === "high_price"
+                        ?
+                        state.products.sort(function (a: TProduct, b: TProduct) { return b.price - a.price })
+                        :
+                        state.products.sort(function (a: TProduct, b: TProduct) { return a.price - b.price })
             }
         default:
             return state

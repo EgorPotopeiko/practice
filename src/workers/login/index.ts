@@ -12,9 +12,7 @@ function* login() {
         const tryLogin: AxiosResponse = yield call(Authorization.auth, email, password);
         yield put(GetAuthorizationProcessAction(tryLogin));
     }
-    catch (error) {
-        yield put(GetAuthorizationErrorAction(error));
-    }
+    catch (error) { yield put(GetAuthorizationErrorAction(error)) }
 }
 
 function* loadInfo() {

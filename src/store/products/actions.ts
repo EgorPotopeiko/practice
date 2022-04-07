@@ -41,3 +41,7 @@ export const GetPage = (page: number, pageSize: number, totalCount?: number) => 
     pageSize,
     totalCount
 })
+export const GetView = (view: string) => ({
+    type: ProductsActionTypes.SET_VIEW,
+    view
+})

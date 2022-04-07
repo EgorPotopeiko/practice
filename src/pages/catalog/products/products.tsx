@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import { List, Typography } from 'antd';
@@ -6,12 +7,12 @@ import { Select } from 'antd';
 import './products.less';
 import CardList from './card_list';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProductsLoading, selectProducts, selectTotal } from '../../../store/products/selectors';
+import { selectProductsLoading, selectProducts, selectTotal, selectView } from '../../../store/products/selectors';
 import Loader from '../../../components/loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
 import CardTile from './card_tile';
 import { TProduct } from '../../../models/product';
-import { GetPage } from '../../../store/products/actions';
+import { GetPage, GetView } from '../../../store/products/actions';
 
 const { Title } = Typography;
 
@@ -27,7 +28,7 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
     const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize));
-
+    const stateSort = useSelector(selectView);
     return (
         <div className="products">
             <div className="products__menu">
@@ -37,7 +38,7 @@ const Products: React.FC = () => {
                     <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
-            <Select defaultValue="alphabet">
+            <Select defaultValue="alphabet" onChange={(sort: string) => dispatch(GetView(sort))}>
                 <Option key="alphabet" value="alphabet">по алфавиту</Option>
                 <Option key="low_price" value="low_price">по возрастанию цены</Option>
                 <Option key="high_price" value="high_price">по убыванию цены</Option>

@@ -28,9 +28,7 @@ function* loadProductList() {
         });
         yield put(GetProductsSuccessAction(newData, total))
     }
-    catch (error) {
-        yield put(GetProductsErrorAction(error))
-    }
+    catch (error) { yield put(GetProductsErrorAction(error)) }
 }
 
 function* loadProduct(payload: any) {
@@ -40,9 +38,7 @@ function* loadProduct(payload: any) {
         localStorage.setItem("product", JSON.stringify(data.data));
         yield put(GetProductSuccessAction(data.data))
     }
-    catch (error) {
-        yield put(GetProductErrorAction(error))
-    }
+    catch (error) { yield put(GetProductErrorAction(error)) }
 }
 
 function* createProduct(payload: any) {
