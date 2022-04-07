@@ -85,10 +85,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>
-                <Input
-                    placeholder="Название"
-                    onChange={(e) => handlerFilter("searchName")(e.target.value)}
-                />
+                <Input placeholder="Название" onChange={(e) => handlerFilter("searchName")(e.target.value)} />
                 <Input placeholder="Артикул" onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
                 <Select placeholder="Категория" onChange={(category) => handlerFilter("searchCategory")(category)}>
                     {categoryValues.map((item: any) => (
@@ -99,7 +96,12 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
             <div className='admin__filters-btns'>
                 <Button type='default' onClick={() => createFilter("visible")(true)}>Добавить новый товар</Button>
             </div>
-            <Modal title="Создание нового товара" visible={filter.visible} onCancel={onCancel} footer={null} width={700}>
+            <Modal
+                title="Создание нового товара"
+                visible={filter.visible}
+                onCancel={onCancel}
+                footer={null}
+                width={700}>
                 <div className='admin__create-modal'>
                     <Formik
                         initialValues={{ title: '', prise: '', category: [], img: '' }}

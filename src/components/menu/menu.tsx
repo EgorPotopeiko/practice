@@ -60,11 +60,17 @@ const Menu: React.FC = () => {
                     <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ"><AdminCategory /></TabPane>
                     <TabPane tab="ЗАКАЗЫ" key="ЗАКАЗЫ">
                         <OrderFilters handlerFilter={handlerFilter} />
-                        <OrderData chooseStatus={filter.chooseStatus} searchUser={filter.searchUser} searchNumber={filter.searchNumber} />
+                        <OrderData
+                            chooseStatus={filter.chooseStatus}
+                            searchUser={filter.searchUser}
+                            searchNumber={filter.searchNumber} />
                     </TabPane>
                 </Tabs>
                 :
-                <Tabs defaultActiveKey="1" type="card" onChange={(category: string) => { dispatch(GetFilters(search, priceRange, category)) }}>
+                <Tabs
+                    defaultActiveKey="1"
+                    type="card"
+                    onChange={(category: string) => { dispatch(GetFilters(search, priceRange, category)) }}>
                     {
                         userTabs.map((item: string) => (
                             <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />

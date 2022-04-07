@@ -48,7 +48,10 @@ const CartItems: React.FC = () => {
     if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) { localStorage.setItem(`orders ${user.name}`, JSON.stringify([])) }
     else { localStorage.getItem(`orders ${user.name}`) }
     return (
-        <Table bordered dataSource={cartItems} columns={columns} />
+        <Table
+            bordered
+            dataSource={cartItems}
+            columns={columns} />
     )
 }
 

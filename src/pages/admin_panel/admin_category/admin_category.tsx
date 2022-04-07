@@ -23,7 +23,10 @@ const AdminCategory: React.FC = () => {
                 <Form.Item><Title level={2}>Добавление новой категории</Title></Form.Item>
                 <Row>
                     <Col span={12}>
-                        <Input value={categoryName} onChange={(e: ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)} placeholder='Название новой категории' />
+                        <Input
+                            value={categoryName}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)}
+                            placeholder='Название новой категории' />
                         <Button type='primary' onClick={addCategory}>Создать категорию</Button>
                     </Col>
                     <Col span={12}>

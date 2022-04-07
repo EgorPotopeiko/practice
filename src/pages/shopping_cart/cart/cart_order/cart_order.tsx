@@ -160,7 +160,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                             <Col span={6}><Form.Item><Text>{filter.total} руб</Text></Form.Item></Col>
                         </Row>
                         <Text>Способ доставки</Text>
-                        <Radio.Group defaultValue="курьером" onChange={onChange} value={filter.delivery}>
+                        <Radio.Group
+                            defaultValue="курьером"
+                            onChange={onChange}
+                            value={filter.delivery}>
                             <Radio value="курьером">Курьером</Radio>
                             <Radio value="почтой">Почтой</Radio>
                             <Radio value="самовывоз">Самовывоз</Radio>
@@ -262,7 +265,12 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                             initialValue={values.number}
                             rules={[{ required: true, message: 'Введите номер телефона' }]}
                         >
-                            <MaskedInput mask="+375 (11)-111-11-11" name="number" placeholder="+375 (__)-___-__-__" value={values.number} onChange={handleChange} />
+                            <MaskedInput
+                                mask="+375 (11)-111-11-11"
+                                name="number"
+                                placeholder="+375 (__)-___-__-__"
+                                value={values.number}
+                                onChange={handleChange} />
                         </Form.Item>
                         <Form.Item
                             name="name"

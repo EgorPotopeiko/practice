@@ -44,7 +44,8 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
             onCancel={onCancel}
             footer={null}>
             <div className='modal__auth'>
-                <Formik initialValues={{ email: '', password: '' }}
+                <Formik
+                    initialValues={{ email: '', password: '' }}
                     validateOnBlur
                     validationSchema={SignupSchema}
                     onSubmit={async (values) => setTimeout(() => { dispatch(GetAuthorizationStartAction(values.email, values.password)) }, 3000)}>
