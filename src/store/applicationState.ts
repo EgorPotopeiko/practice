@@ -1,3 +1,4 @@
+import { TModalsState } from './modals/reducer';
 import { TCartState } from './cart/reducer';
 import { TLoginState } from './login/reducer';
 import { RouterState } from 'connected-react-router';
@@ -9,5 +10,6 @@ export type TApplicationState = Readonly<{
     products: TProductsState,
     filters: TFiltersState,
     login: TLoginState,
-    cart: TCartState
+    cart: TCartState,
+    modals: TModalsState
 }>

@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import { GetPage } from '../../../store/products/actions';
 import { RemoveAllFilters } from '../../../store/filters/actions';
 import { GetAuthorizationStartAction } from '../../../store/login/actions';
+import { CloseModalAction } from '../../../store/modals/actions';
 
 interface Props {
     visible: boolean,
@@ -33,8 +34,9 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
         setTimeout(() => {
             setLoading(false)
             dispatch(GetPage(1, 6))
+            dispatch(RemoveAllFilters())
+            dispatch(CloseModalAction())
         }, 3000)
-        dispatch(RemoveAllFilters())
     }
     return (
         <Modal

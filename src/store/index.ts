@@ -6,13 +6,15 @@ import { TApplicationState } from './applicationState';
 import filtersReducer from './filters/reducer';
 import loginReducer from './login/reducer';
 import cartReducer from './cart/reducer';
+import modalsReducer from './modals/reducer';
 
 const store = (history: History) => combineReducers<TApplicationState>({
     router: connectRouter(history),
     products: productsReducer,
     filters: filtersReducer,
     login: loginReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    modals: modalsReducer
 });
 
 export default store;
