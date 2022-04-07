@@ -16,7 +16,7 @@ export const addedCategory = (category: string) => ({
     category
 })
 
-export const removedCategory = (category: string) => ({
+export const deletedCategory = (category: string) => ({
     type: FiltersActionTypes.DELETED_CATEGORY,
     category
 })

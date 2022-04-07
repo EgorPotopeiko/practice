@@ -11,7 +11,6 @@ import { selectUser } from '../../../../store/login/selectors';
 import { GetClearCartAction } from '../../../../store/cart/actions';
 import { RemoveAllFilters } from '../../../../store/filters/actions';
 import { GetPage } from '../../../../store/products/actions';
-import { OpenModalAction } from '../../../../store/modals/actions';
 
 interface Props {
     visible: boolean,
@@ -314,7 +313,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Form.Item><Text>{values.number}</Text></Form.Item>
                         <Button type='primary' loading={filter.loading} onClick={() => {
                             finishOrder()
-                            dispatch(OpenModalAction("SuccessCreateProduct"))
                         }}>Оплатить</Button>
                         <Button type='link' onClick={() => backToOrder()}>Вернуться к заказу</Button>
                     </Form>

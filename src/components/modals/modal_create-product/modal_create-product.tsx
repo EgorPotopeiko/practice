@@ -87,7 +87,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
             onCancel={onCancel}
             footer={null}
             width={700}>
-            <div className='admin__create-modal'>
+            <div className='modal__create-product'>
                 <Formik
                     initialValues={{ title: '', prise: '', category: [], img: '' }}
                     validateOnBlur

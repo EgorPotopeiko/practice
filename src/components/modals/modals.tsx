@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CloseModalAction } from '../../store/modals/actions';
 import { selectCredentialsModal } from '../../store/modals/selectors';
 import ModalAuth from './modal_auth';
+import ModalCreateCategory from './modal_create-category';
 import ModalCreateProduct from './modal_create-product';
-import ModalCreateProductSuccess from './modal_create-product-success';
 
 const Modals: React.FC = () => {
     const dispatch = useDispatch();
@@ -22,11 +22,9 @@ const Modals: React.FC = () => {
                 return (
                     <ModalCreateProduct onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
                 )
-            case "SuccessCreateProduct":
+            case "CreateCategory":
                 return (
-                    <ModalCreateProductSuccess onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen}
-                    // data={modalParams.data} 
-                    />
+                    <ModalCreateCategory onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
                 )
             default:
                 return (

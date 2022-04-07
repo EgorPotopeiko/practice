@@ -46,7 +46,7 @@ const CartItems: React.FC = () => {
     ];
     cartItems.map((item: any) => {
         item['key'] = item.id
-        item['total'] = item.total.toFixed(2)
+        item['total'] = +item.total.toFixed(2)
     })
     if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) { localStorage.setItem(`orders ${user.name}`, JSON.stringify([])) }
     else { localStorage.getItem(`orders ${user.name}`) }
