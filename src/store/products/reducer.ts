@@ -13,7 +13,7 @@ const initialState: TProductsState = {
     pageSize: 6,
     product: JSON.parse(localStorage.getItem("product")!) || null,
     totalCount: 0,
-    view: 'alphabet'
+    view: 'low_price'
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -81,15 +81,11 @@ export default function productsReducer(state: TProductsState = initialState, ac
             return {
                 ...state,
                 view: action.view,
-                products: state.view === "alphabet"
+                products: state.view === "high_price"
                     ?
-                    state.products.sort(function (a: TProduct, b: TProduct) { if (b.title < a.title) { return -1 } })
+                    state.products.sort(function (a: TProduct, b: TProduct) { return a.price - b.price })
                     :
-                    state.view === "high_price"
-                        ?
-                        state.products.sort(function (a: TProduct, b: TProduct) { return a.price - b.price })
-                        :
-                        state.products.sort(function (a: TProduct, b: TProduct) { return b.price - a.price })
+                    state.products.sort(function (a: TProduct, b: TProduct) { return b.price - a.price })
             }
         default:
             return state

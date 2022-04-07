@@ -38,8 +38,7 @@ const Products: React.FC = () => {
                     <AppstoreOutlined onClick={() => setView("tile")} />
                 </div>
             </div>
-            <Select defaultValue="alphabet" onChange={(sort: string) => dispatch(GetView(sort))}>
-                <Option key="alphabet" value="alphabet">по алфавиту</Option>
+            <Select defaultValue="low_price" onChange={(sort: string) => dispatch(GetView(sort))}>
                 <Option key="low_price" value="low_price">по возрастанию цены</Option>
                 <Option key="high_price" value="high_price">по убыванию цены</Option>
             </Select>
