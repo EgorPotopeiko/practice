@@ -7,7 +7,7 @@ import ImgCrop from 'antd-img-crop';
 import * as Yup from 'yup';
 import { customAlphabet } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserMenu } from '../../../store/filters/selectors';
+import { selectListCategories } from '../../../store/category/selectors';
 import { CreateProductAction } from '../../../store/products/actions';
 import { getBase64 } from '../../../services/getBase64';
 import './modal_create-product.less';
@@ -48,7 +48,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
     }
     const nanoid = customAlphabet('1234567890', 6);
     const dispatch = useDispatch();
-    const categoryValues = useSelector(selectUserMenu);
+    const categoryValues = useSelector(selectListCategories);
     const filterCategories = categoryValues.filter((item: string) => item !== 'all');
     const createProduct = (values: any) => {
         createFilter("loading")(true)

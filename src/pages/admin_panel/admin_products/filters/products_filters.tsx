@@ -2,7 +2,7 @@ import { Button, Input, Select } from 'antd';
 import React from 'react';
 import './products_filters.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserMenu } from '../../../../store/filters/selectors';
+import { selectListCategories } from '../../../../store/category/selectors';
 import { TMenuState } from "../../../../components/menu/Menu";
 import { OpenModalAction } from '../../../../store/modals/actions';
 
@@ -14,7 +14,7 @@ const { Option } = Select;
 
 const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     const dispatch = useDispatch();
-    const categoryValues = useSelector(selectUserMenu);
+    const categoryValues = useSelector(selectListCategories);
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>

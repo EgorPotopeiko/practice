@@ -1,3 +1,4 @@
+import { TCategoryState } from './category/reducer';
 import { TModalsState } from './modals/reducer';
 import { TCartState } from './cart/reducer';
 import { TLoginState } from './login/reducer';
@@ -11,5 +12,6 @@ export type TApplicationState = Readonly<{
     filters: TFiltersState,
     login: TLoginState,
     cart: TCartState,
-    modals: TModalsState
+    modals: TModalsState,
+    category: TCategoryState
 }>

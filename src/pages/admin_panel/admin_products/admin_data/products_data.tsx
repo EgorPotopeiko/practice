@@ -8,7 +8,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
 import './products_data.less';
 import { selectProducts, selectTotal } from '../../../../store/products/selectors';
-import { selectUserMenu } from '../../../../store/filters/selectors';
+import { selectListCategories } from '../../../../store/category/selectors';
 import { DeleteProductAction, GetPage } from '../../../../store/products/actions';
 
 const { Option } = Select;
@@ -43,7 +43,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     ...restProps
 }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
-    const listCategories = useSelector(selectUserMenu);
+    const listCategories = useSelector(selectListCategories);
     const filterCategories = listCategories.filter((item: string) => item !== 'all');
     const categoryNode = <Select>
         {filterCategories.map((item: string) => (

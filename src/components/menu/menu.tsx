@@ -7,7 +7,8 @@ import OrderFilters from '../../pages/admin_panel/admin_orders/filters';
 import ProductsData from '../../pages/admin_panel/admin_products/admin_data';
 import ProductsFilter from '../../pages/admin_panel/admin_products/filters';
 import { GetFilters } from '../../store/filters/actions';
-import { selectAllFilters, selectUserMenu } from '../../store/filters/selectors';
+import { selectAllFilters } from '../../store/filters/selectors';
+import { selectListCategories } from '../../store/category/selectors';
 import { selectUser } from '../../store/login/selectors';
 import './menu.less';
 
@@ -40,7 +41,7 @@ const Menu: React.FC = () => {
         })
     }
     const user = useSelector(selectUser);
-    const userTabs = useSelector(selectUserMenu);
+    const userTabs = useSelector(selectListCategories);
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
     const { priceRange, search } = filters;

@@ -83,13 +83,13 @@ export default function productsReducer(state: TProductsState = initialState, ac
                 view: action.view,
                 products: state.view === "alphabet"
                     ?
-                    state.products.sort(function (a: TProduct, b: TProduct) { if (a.title < b.title) { return -1 } })
+                    state.products.sort(function (a: TProduct, b: TProduct) { if (b.title < a.title) { return -1 } })
                     :
                     state.view === "high_price"
                         ?
-                        state.products.sort(function (a: TProduct, b: TProduct) { return b.price - a.price })
-                        :
                         state.products.sort(function (a: TProduct, b: TProduct) { return a.price - b.price })
+                        :
+                        state.products.sort(function (a: TProduct, b: TProduct) { return b.price - a.price })
             }
         default:
             return state

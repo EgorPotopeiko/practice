@@ -1,10 +1,9 @@
-import { RootStateOrAny } from 'react-redux';
 import { createSelector } from 'reselect';
 import { TApplicationState } from '../applicationState';
 
 const stateProducts = (state: TApplicationState) => state.products;
 
-export const selectProducts = (state: RootStateOrAny) => state.products.products;
+export const selectProducts = (state: TApplicationState) => state.products.products;
 export const selectProduct = createSelector(stateProducts, (state) => state.product)
 export const selectProductsLoading = createSelector(stateProducts, (state) => state.isLoading)
 export const selectPage = createSelector(stateProducts, (state) => state.page)

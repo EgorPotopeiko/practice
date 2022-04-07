@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import './admin_category.less'
 import { deletedCategory } from "../../../store/filters/actions";
 import { OpenModalAction } from '../../../store/modals/actions';
-import { selectUserMenu } from '../../../store/filters/selectors';
+import { selectListCategories } from '../../../store/category/selectors';
 
 const { Title } = Typography;
 
 const AdminCategory: React.FC = () => {
     const dispatch = useDispatch();
-    const categories = useSelector(selectUserMenu);
+    const categories = useSelector(selectListCategories);
     return (
         <div className='admin__category'>
             <Form>
