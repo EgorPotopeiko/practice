@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable array-callback-return */
 import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import MaskedInput from 'antd-mask-input';
@@ -7,14 +6,12 @@ import './cart_order.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { customAlphabet } from 'nanoid';
-import Modal from 'antd/lib/modal/Modal';
 import { selectCart } from '../../../../store/cart/selectors';
 import { selectUser } from '../../../../store/login/selectors';
-import history from '../../../../history';
-import { USER_PATH } from '../../../../routing/names';
 import { GetClearCartAction } from '../../../../store/cart/actions';
 import { RemoveAllFilters } from '../../../../store/filters/actions';
 import { GetPage } from '../../../../store/products/actions';
+import { OpenModalAction } from '../../../../store/modals/actions';
 
 interface Props {
     visible: boolean,
@@ -22,27 +19,22 @@ interface Props {
 }
 
 type TMenuState = {
-    total: number,
     length: number,
     loading: boolean,
     orderVisible: boolean,
-    successVisible: boolean,
     delivery: string
 }
-
-const { AUTH } = USER_PATH;
 
 const { Title, Text } = Typography;
 
 const nanoid = customAlphabet('1234567890', 10);
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
+    const [total, setTotal] = useState(0);
     const [filter, setFilter] = useState<TMenuState>({
-        total: 0,
         length: 0,
         loading: false,
         orderVisible: false,
-        successVisible: false,
         delivery: 'курьером'
     });
     const createFilter = (type: keyof TMenuState) => (value: any) => {
@@ -71,7 +63,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             user: `${authUser.name}`,
             comment: '',
             count: filter.length,
-            payment: filter.total
+            payment: total
         },
         enableReinitialize: false,
         onSubmit: (values, { setSubmitting }) => {
@@ -81,7 +73,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 values.id = nanoid()
                 values.delivery = filter.delivery
                 values.count = filter.length
-                values.payment = filter.total
+                values.payment = total
                 const newOrder = values
                 const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
                 localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
@@ -94,7 +86,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
 
     });
 
-    const { handleSubmit, handleChange, isSubmitting, values, resetForm } = formik;
+    const { handleSubmit, handleChange, isSubmitting, values } = formik;
 
     const onClose = () => {
         setVisible(false);
@@ -116,14 +108,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             dispatch(GetPage(1, 6));
             createFilter("loading")(false)
             createFilter("orderVisible")(false)
-            createFilter("successVisible")(true)
         }, 3000)
-    }
-
-    const backToMain = () => {
-        createFilter("successVisible")(false)
-        resetForm({});
-        history.push(AUTH)
     }
 
     const backToOrder = () => {
@@ -141,7 +126,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             ttl += +el.total;
             len += +el.amount;
         });
-        createFilter("total")(+ttl.toFixed(2))
+        setTotal(+ttl.toFixed(2))
         createFilter("length")(len)
     }, [cartItems]);
     return (
@@ -157,7 +142,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                     <Form onFinish={handleSubmit}>
                         <Row gutter={16}>
                             <Col span={18}><Form.Item><Title level={3}>Выбрано {filter.length} товара(-ов)</Title></Form.Item></Col>
-                            <Col span={6}><Form.Item><Text>{filter.total} руб</Text></Form.Item></Col>
+                            <Col span={6}><Form.Item><Text>{total} руб</Text></Form.Item></Col>
                         </Row>
                         <Text>Способ доставки</Text>
                         <Radio.Group
@@ -327,19 +312,15 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Form.Item><Text><b>По адресу:</b> {values.town}, {values.street}, {values.house}</Text></Form.Item>
                         <Form.Item><Text><b>Получатель:</b> {values.name}</Text></Form.Item>
                         <Form.Item><Text>{values.number}</Text></Form.Item>
-                        <Button type='primary' loading={filter.loading} onClick={() => finishOrder()}>Оплатить</Button>
+                        <Button type='primary' loading={filter.loading} onClick={() => {
+                            finishOrder()
+                            dispatch(OpenModalAction("SuccessCreateProduct"))
+                        }}>Оплатить</Button>
                         <Button type='link' onClick={() => backToOrder()}>Вернуться к заказу</Button>
                     </Form>
                 </div>
             </Drawer>
-            <Modal title="Ваш заказ успешно создан" onCancel={backToMain} visible={filter.successVisible} footer={null}>
-                <div className='success__modal'>
-                    <Form>
-                        <Form.Item><Text>Номер вашего заказа: <b><i>{values.id}</i></b></Text></Form.Item>
-                    </Form>
-                </div>
 
-            </Modal>
         </>
     );
 }
