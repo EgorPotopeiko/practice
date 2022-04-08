@@ -63,8 +63,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
                         },
                     ]}
                 >
-                    {dataIndex === 'title' || dataIndex === 'key' ? inputNode :
-                        dataIndex === 'category' ? categoryNode : null}
+                    {dataIndex === 'title' || dataIndex === 'key' ? inputNode : dataIndex === 'category' ? categoryNode : null}
                 </Form.Item>
             ) : (
                 children

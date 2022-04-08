@@ -43,7 +43,10 @@ const Header: React.FC = () => {
                     }}>
                         <Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
-                        <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        <Input
+                            suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />}
+                            placeholder="Поиск по названию"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         <Button onClick={() => {
                             user.role === "guest" && user.isAuth === false
                                 ?
@@ -55,8 +58,8 @@ const Header: React.FC = () => {
                                 }))
                             dispatch(RemoveAllFilters())
                             dispatch(GetPage(1, pageSize))
-                        }
-                        }>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
+                        }}>{user.isAuth ? 'Выйти' : 'Войти'}
+                        </Button>
                         <Link to={CART}><UserOutlined hidden={user.isAuth ? false : true} /></Link>
                     </div>
                 </div>
@@ -81,7 +84,6 @@ const Header: React.FC = () => {
                     :
                     null
                 }
-
             </PageHeader>
         </div>
     );
