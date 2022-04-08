@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import { List, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
@@ -7,7 +5,7 @@ import { Select } from 'antd';
 import './products.less';
 import CardList from './card_list';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProductsLoading, selectProducts, selectTotal, selectView } from '../../../store/products/selectors';
+import { selectProductsLoading, selectProducts, selectTotal } from '../../../store/products/selectors';
 import Loader from '../../../components/loader';
 import { selectPage, selectPageSize } from '../../../store/products/selectors';
 import CardTile from './card_tile';
@@ -28,7 +26,6 @@ const Products: React.FC = () => {
     const dispatch = useDispatch();
     const spinner = loading ? <Loader /> : null;
     const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize));
-    const stateSort = useSelector(selectView);
     return (
         <div className="products">
             <div className="products__menu">

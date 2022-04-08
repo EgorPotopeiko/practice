@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import { TProduct } from './../../models/product';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions'

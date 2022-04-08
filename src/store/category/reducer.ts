@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions'
 import { ErrorActionState, StartActionState, SuccessActionState } from '../helpers';

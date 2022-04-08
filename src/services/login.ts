@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-concat */
 import $api from '../http';
 
 export default class Authorization {

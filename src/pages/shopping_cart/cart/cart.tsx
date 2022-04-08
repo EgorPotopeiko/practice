@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import './cart.less';
