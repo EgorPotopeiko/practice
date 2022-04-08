@@ -24,9 +24,16 @@ export const GetProductErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCT_ERROR,
     error
 })
-export const CreateProductAction = (product: Array<Object>) => ({
-    type: ProductsActionTypes.CREATE_PRODUCT,
+export const CreateProductStartAction = (product: Array<Object>) => ({
+    type: ProductsActionTypes.CREATE_PRODUCT_START,
     product
+})
+export const CreateProductSuccessAction = () => ({
+    type: ProductsActionTypes.CREATE_PRODUCT_SUCCESS
+})
+export const CreateProductErrorAction = (error: any) => ({
+    type: ProductsActionTypes.CREATE_PRODUCT_ERROR,
+    error
 })
 export const RemoveProductAction = () => ({
     type: ProductsActionTypes.REMOVE_PRODUCT

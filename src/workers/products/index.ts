@@ -1,6 +1,6 @@
 import { TFilters } from './../../models/filters';
 import { selectAllFilters } from './../../store/filters/selectors';
-import { GetProductErrorAction, GetProductSuccessAction } from './../../store/products/actions';
+import { GetProductErrorAction, GetProductSuccessAction, CreateProductSuccessAction, GetProductsStartAction } from './../../store/products/actions';
 import { selectPage, selectPageSize } from './../../store/products/selectors';
 import { FiltersActionTypes } from './../../store/filters/action-types';
 import { takeLatest, select } from 'redux-saga/effects';
@@ -44,18 +44,21 @@ function* loadProduct(payload: any) {
 function* createProduct(payload: any) {
     const { product } = payload;
     yield call(ProductsDB.createProduct, product)
+    yield put(CreateProductSuccessAction())
+    yield put(GetProductsStartAction())
 }
 
 function* deleteProduct(payload: any) {
     const { id } = payload;
     yield call(ProductsDB.deleteProduct, id)
+    yield put(GetProductsStartAction())
 }
 
 export function* productsSaga() {
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCTS_START, loadProductList);
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCT_START, loadProduct);
     yield takeLatest(ProductsActionTypes.SET_PAGE, loadProductList);
-    yield takeLatest(ProductsActionTypes.CREATE_PRODUCT, createProduct);
+    yield takeLatest(ProductsActionTypes.CREATE_PRODUCT_START, createProduct);
     yield takeLatest(ProductsActionTypes.DELETE_PRODUCT, deleteProduct);
     yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList)
 }

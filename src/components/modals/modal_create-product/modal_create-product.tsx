@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { customAlphabet } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectListCategories } from '../../../store/category/selectors';
-import { CreateProductAction } from '../../../store/products/actions';
+import { CreateProductStartAction } from '../../../store/products/actions';
 import { getBase64 } from '../../../services/getBase64';
 import './modal_create-product.less';
 import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
@@ -56,7 +56,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
             values.img = filter.img64
             values.id = nanoid()
             values.key = values.id
-            dispatch(CreateProductAction(values))
+            dispatch(CreateProductStartAction(values))
             createFilter("loading")(false)
             dispatch(CloseModalAction())
         }, 3000)
