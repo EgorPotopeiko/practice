@@ -11,6 +11,8 @@ import { selectAllFilters } from '../../store/filters/selectors';
 import { selectListCategories } from '../../store/category/selectors';
 import { selectUser } from '../../store/login/selectors';
 import './menu.less';
+import { GetPage } from '../../store/products/actions';
+import { selectPageSize } from '../../store/products/selectors';
 
 const { TabPane } = Tabs;
 
@@ -41,6 +43,7 @@ const Menu: React.FC = () => {
         })
     }
     const user = useSelector(selectUser);
+    const pageSize = useSelector(selectPageSize)
     const userTabs = useSelector(selectListCategories);
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
@@ -71,7 +74,10 @@ const Menu: React.FC = () => {
                 <Tabs
                     defaultActiveKey="1"
                     type="card"
-                    onChange={(category: string) => { dispatch(GetFilters(search, priceRange, category)) }}>
+                    onChange={(category: string) => {
+                        dispatch(GetPage(1, pageSize))
+                        dispatch(GetFilters(search, priceRange, category))
+                    }}>
                     {
                         userTabs.map((item: string) => (
                             <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
