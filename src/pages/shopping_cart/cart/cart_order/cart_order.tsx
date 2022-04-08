@@ -11,6 +11,7 @@ import { selectUser } from '../../../../store/login/selectors';
 import { GetClearCartAction } from '../../../../store/cart/actions';
 import { RemoveAllFilters } from '../../../../store/filters/actions';
 import { GetPage } from '../../../../store/products/actions';
+import { selectPageSize } from '../../../../store/products/selectors';
 
 interface Props {
     visible: boolean,
@@ -30,6 +31,7 @@ const nanoid = customAlphabet('1234567890', 10);
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [total, setTotal] = useState(0);
+    const pageSize = useSelector(selectPageSize)
     const [filter, setFilter] = useState<TMenuState>({
         length: 0,
         loading: false,
@@ -104,7 +106,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
             dispatch(GetClearCartAction())
             dispatch(RemoveAllFilters())
-            dispatch(GetPage(1, 6));
+            dispatch(GetPage(1, pageSize));
             createFilter("loading")(false)
             createFilter("orderVisible")(false)
         }, 3000)

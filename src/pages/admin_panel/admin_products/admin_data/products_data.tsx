@@ -194,9 +194,9 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                     columns={mergedColumns}
                     rowClassName="editable-row"
                     pagination={{
-                        onChange: (page: number) => pagination(page, 6),
+                        onChange: (page: number) => pagination(page, 10),
                         total: totalCount,
-                        pageSize: 6
+                        pageSize: 10
                     }}
                 />
             </Form>

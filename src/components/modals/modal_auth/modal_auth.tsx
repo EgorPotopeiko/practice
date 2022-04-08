@@ -12,6 +12,7 @@ import { GetPage } from '../../../store/products/actions';
 import { RemoveAllFilters } from '../../../store/filters/actions';
 import { GetAuthorizationStartAction } from '../../../store/login/actions';
 import { CloseModalAction } from '../../../store/modals/actions';
+import { selectPageSize } from '../../../store/products/selectors';
 
 interface Props {
     visible: boolean,
@@ -29,11 +30,12 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const error = useSelector(selectError);
+    const pageSize = useSelector(selectPageSize);
     const load = async () => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            dispatch(GetPage(1, 6))
+            dispatch(GetPage(1, pageSize))
             dispatch(RemoveAllFilters())
             dispatch(CloseModalAction())
         }, 3000)

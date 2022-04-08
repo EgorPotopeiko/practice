@@ -11,6 +11,7 @@ import { GetLogout } from '../../store/login/actions';
 import { selectUser } from '../../store/login/selectors';
 import { OpenModalAction } from '../../store/modals/actions';
 import { GetPage, RemoveProductAction } from '../../store/products/actions';
+import { selectPageSize } from '../../store/products/selectors';
 import './header.less';
 
 const { Title, Text } = Typography;
@@ -25,6 +26,7 @@ export const selectValues = ["Рога и копыта", "ZooParadise", "Purina"
 
 const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
+    const pageSize = useSelector(selectPageSize);
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
     const { category, priceRange, search } = filters;
@@ -37,7 +39,7 @@ const Header: React.FC = () => {
                         dispatch(RemoveProductAction())
                         localStorage.removeItem("product")
                         dispatch(RemoveAllFilters())
-                        dispatch(GetPage(1, 6))
+                        dispatch(GetPage(1, pageSize))
                     }}>
                         <Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
@@ -52,7 +54,7 @@ const Header: React.FC = () => {
                                     isAuth: false
                                 }))
                             dispatch(RemoveAllFilters())
-                            dispatch(GetPage(1, 6))
+                            dispatch(GetPage(1, pageSize))
                         }
                         }>{user.isAuth ? 'Выйти' : 'Войти'}</Button>
                         <Link to={CART}><UserOutlined hidden={user.isAuth ? false : true} /></Link>

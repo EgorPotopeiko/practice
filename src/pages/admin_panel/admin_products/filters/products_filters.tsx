@@ -27,7 +27,9 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                 </Select>
             </div>
             <div className='admin__filters-btns'>
-                <Button type='default' onClick={() => dispatch(OpenModalAction("CreateProduct"))}>Добавить новый товар</Button>
+                <Button type='default' onClick={() => {
+                    dispatch(OpenModalAction("CreateProduct"))
+                }}>Добавить новый товар</Button>
             </div>
         </div >
     );
