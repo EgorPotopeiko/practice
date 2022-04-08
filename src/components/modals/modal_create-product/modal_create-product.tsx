@@ -39,13 +39,13 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
         loading: false,
         img64: null
     });
-    const [fileList, setFileList] = useState([])
+    const [fileList, setFileList] = useState([]);
     const createFilter = (type: keyof TCreateProductState) => (value: any) => {
         setFilter({
             ...filter,
             [type]: value
         })
-    }
+    };
     const nanoid = customAlphabet('1234567890', 6);
     const dispatch = useDispatch();
     const categoryValues = useSelector(selectListCategories);
@@ -60,7 +60,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
             createFilter("loading")(false)
             dispatch(CloseModalAction())
         }, 3000)
-    }
+    };
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
         setFileList(newFileList);
         const newFile = newFileList[newFileList.length - 1];

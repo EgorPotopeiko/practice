@@ -18,7 +18,6 @@ const CreateCategorySchema = Yup.object().shape({
     name: Yup.string().min(3, 'Too Short!').required('Required'),
 });
 
-
 const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
     const [categoryName, setCategoryName] = useState<string>('');
