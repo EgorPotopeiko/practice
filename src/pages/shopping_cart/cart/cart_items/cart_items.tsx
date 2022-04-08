@@ -22,7 +22,12 @@ const CartItems: React.FC = () => {
         {
             title: 'Категория',
             dataIndex: 'category',
-            key: 'category'
+            key: 'category',
+            render: (record: TProduct) => (
+                <Space size='small'>
+                    {record}
+                </Space>
+            )
         },
         {
             title: 'Количество',
