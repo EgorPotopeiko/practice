@@ -8,7 +8,7 @@ import { PUBLIC_PATH, USER_PATH } from '../../routing/names';
 import { GetFilters, RemoveAllFilters } from '../../store/filters/actions';
 import { selectAllFilters } from '../../store/filters/selectors';
 import { GetLogout } from '../../store/login/actions';
-import { selectUser } from '../../store/login/selectors';
+import { selectAuth, selectUser } from '../../store/login/selectors';
 import { OpenModalAction } from '../../store/modals/actions';
 import { GetPage, RemoveProductAction } from '../../store/products/actions';
 import { selectPageSize } from '../../store/products/selectors';
@@ -30,6 +30,7 @@ const Header: React.FC = () => {
     const dispatch = useDispatch();
     const { category, priceRange, search } = useSelector(selectAllFilters);
     const user = useSelector(selectUser);
+    const isAuth = useSelector(selectAuth);
     return (
         <div className="header">
             <PageHeader>
@@ -52,19 +53,18 @@ const Header: React.FC = () => {
                             null
                         }
                         <Button onClick={() => {
-                            user.role === "guest" && user.isAuth === false
+                            user.role === "guest" && isAuth === false
                                 ?
                                 dispatch(OpenModalAction("Auth"))
                                 :
                                 dispatch(GetLogout({
-                                    role: "guest",
-                                    isAuth: false
+                                    role: "guest"
                                 }))
                             dispatch(RemoveAllFilters())
                             dispatch(GetPage(1, pageSize))
-                        }}>{user.isAuth ? 'Выйти' : 'Войти'}
+                        }}>{isAuth ? 'Выйти' : 'Войти'}
                         </Button>
-                        <Link to={CART}><UserOutlined hidden={user.isAuth ? false : true} /></Link>
+                        <Link to={CART}><UserOutlined hidden={isAuth ? false : true} /></Link>
                     </div>
                 </div>
                 {(user.role === "guest" || user.role === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")

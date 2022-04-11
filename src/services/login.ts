@@ -7,6 +7,9 @@ export default class Authorization {
             password: password
         })
     }
+    static logout() {
+        return $api.post(`/users/logout`)
+    }
     static getUser(jwt: any) {
         return $api.get(`/users/info`, {
             headers: {

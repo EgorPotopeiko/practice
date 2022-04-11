@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 import './app.less';
 import { useRoutes } from './routing/routes';
 import { selectListCategories } from './store/category/selectors';
-import { selectUser } from './store/login/selectors';
+import { selectAuth, selectUser } from './store/login/selectors';
 
 function App() {
     const user = useSelector(selectUser);
-    const routes = useRoutes(user.isAuth, user.role);
+    const isAuth = useSelector(selectAuth)
+    const routes = useRoutes(isAuth, user.role);
     const listCategories = useSelector(selectListCategories);
     useEffect(() => {
         localStorage.setItem("categories", JSON.stringify(listCategories))

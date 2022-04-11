@@ -2,15 +2,13 @@ import { InferValueTypes } from '../../models/common';
 import * as actions from './actions';
 import { StartActionState, SuccessActionState } from '../helpers';
 import { LoginActionTypes } from './action-types';
-import {TUser} from "../../models/user";
+import { TUser } from "../../models/user";
 
 const initialState: TLoginState = {
     user: JSON.parse(localStorage.getItem("user")!) || {
-        role: "guest",
-        isAuth: false
+        role: "guest"
     },
-    email: "",
-    password: "",
+    isAuth: localStorage.getItem('token') ? true : false,
     error: null,
     isLoading: false
 };
@@ -19,8 +17,7 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TLoginState = {
     user: TUser,
-    email: string,
-    password: string,
+    isAuth: boolean,
     error: null,
     isLoading: boolean
 }
@@ -37,11 +34,13 @@ export default function loginReducer(state: TLoginState = initialState, action: 
             return {
                 ...SuccessActionState(state),
                 user: action.data,
-                isLoading: true
+                isLoading: true,
+                isAuth: true
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_SUCCESS:
             return {
                 ...SuccessActionState(state),
+                isAuth: true,
                 user: action.data
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_ERROR:
@@ -53,7 +52,8 @@ export default function loginReducer(state: TLoginState = initialState, action: 
         case LoginActionTypes.LOGOUT:
             return {
                 ...state,
-                user: action.user
+                user: action.user,
+                isAuth: false
             }
         default:
             return state
