@@ -5,6 +5,7 @@ import { selectCredentialsModal } from '../../store/modals/selectors';
 import ModalAuth from './modal_auth';
 import ModalCreateCategory from './modal_create-category';
 import ModalCreateProduct from './modal_create-product';
+import ModalRegistration from './modal_registration';
 
 const Modals: React.FC = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,8 @@ const Modals: React.FC = () => {
         switch (modalParams.typeModal) {
             case "Auth":
                 return <ModalAuth onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
+            case "Registration":
+                return <ModalRegistration onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
             case "CreateProduct":
                 return <ModalCreateProduct onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
             case "CreateCategory":

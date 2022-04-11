@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 import { GetPage } from '../../../store/products/actions';
 import { RemoveAllFilters } from '../../../store/filters/actions';
 import { GetAuthorizationStartAction } from '../../../store/login/actions';
-import { CloseModalAction } from '../../../store/modals/actions';
+import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
 import { selectPageSize } from '../../../store/products/selectors';
 
 type Props = {
@@ -70,7 +70,10 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                     placeholder='Password'
                                 />
                             </FormItem>
-                            <Button.Group><SubmitButton loading={loading} onClick={load}>Войти</SubmitButton></Button.Group>
+                            <Button.Group>
+                                <SubmitButton loading={loading} onClick={load}>Войти</SubmitButton>
+                            </Button.Group>
+                            <Button type='link' onClick={() => dispatch(OpenModalAction("Registration"))}>Зарегистрироваться</Button>
                         </Form>
                     )}
                 </Formik>
