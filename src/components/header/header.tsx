@@ -42,10 +42,15 @@ const Header: React.FC = () => {
                     }}>
                         <Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
-                        <Input
-                            suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />}
-                            placeholder="Поиск по названию"
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        {(user.role === "guest" || user.role === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
+                            ?
+                            <Input
+                                suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />}
+                                placeholder="Поиск по названию"
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                            :
+                            null
+                        }
                         <Button onClick={() => {
                             user.role === "guest" && user.isAuth === false
                                 ?
