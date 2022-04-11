@@ -1,4 +1,4 @@
-import { CategoryActionTypes } from "./action-types"
+import { CategoryActionTypes } from './action-types';
 
 export const CreateCategoryStartAction = (title: any) => ({
     type: CategoryActionTypes.CREATE_CATEGORY_START,

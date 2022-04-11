@@ -18,11 +18,11 @@ const initialState: TProductsState = {
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TProductsState = {
-    products: any
-    isLoading: boolean
-    error: any
-    page: number
-    pageSize: number
+    products: any,
+    isLoading: boolean,
+    error: any,
+    page: number,
+    pageSize: number,
     product: null,
     totalCount?: number,
     view: string

@@ -34,7 +34,12 @@ export const useRoutes = (isAuth: boolean, role: string) => {
                     path,
                     Component,
                     exact = true }) => (
-                    <Route key={path} path={path} component={Component} strict exact={exact}></Route>
+                    <Route
+                        key={path}
+                        path={path}
+                        component={Component}
+                        strict
+                        exact={exact}></Route>
                 ))}
                 <Redirect to={AUTH} />
             </Switch>
@@ -47,7 +52,12 @@ export const useRoutes = (isAuth: boolean, role: string) => {
                     path,
                     Component,
                     exact = true }) => (
-                    <Route key={path} path={path} component={Component} strict exact={exact}></Route>
+                    <Route
+                        key={path}
+                        path={path}
+                        component={Component}
+                        strict
+                        exact={exact}></Route>
                 ))}
                 <Redirect to={ADMIN} />
             </Switch>
@@ -59,7 +69,12 @@ export const useRoutes = (isAuth: boolean, role: string) => {
                 path,
                 Component,
                 exact = true }) => (
-                <Route key={path} path={path} component={Component} strict exact={exact}></Route>
+                <Route
+                    key={path}
+                    path={path}
+                    component={Component}
+                    strict
+                    exact={exact}></Route>
             ))}
             <Redirect to={APP} />
         </Switch>

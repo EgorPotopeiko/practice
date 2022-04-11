@@ -10,7 +10,7 @@ function* login() {
     try {
         const { email, password }: { email: string, password: string } = yield select(selectCredentials);
         const tryLogin: AxiosResponse = yield call(Authorization.auth, email, password);
-        yield put(GetAuthorizationProcessAction(tryLogin));
+        yield put(GetAuthorizationProcessAction(tryLogin))
     }
     catch (error) { yield put(GetAuthorizationErrorAction(error)) }
 }
@@ -26,5 +26,5 @@ function* loadInfo() {
 
 export function* loginSaga() {
     yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_START, login);
-    yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_PROCESS, loadInfo);
+    yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_PROCESS, loadInfo)
 }

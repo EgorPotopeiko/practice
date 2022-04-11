@@ -20,7 +20,7 @@ function configureStore(initialState = {}, history: History) {
         initialState,
         composeEnhancers(applyMiddleware(
             routerMiddleware(history),
-            sagaMiddleware,
+            sagaMiddleware
         )),
     );
 

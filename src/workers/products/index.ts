@@ -43,14 +43,14 @@ function* loadProduct(payload: any) {
 
 function* createProduct(payload: any) {
     const { product } = payload;
-    yield call(ProductsDB.createProduct, product)
-    yield put(CreateProductSuccessAction())
+    yield call(ProductsDB.createProduct, product);
+    yield put(CreateProductSuccessAction());
     yield put(GetProductsStartAction())
 }
 
 function* deleteProduct(payload: any) {
     const { id } = payload;
-    yield call(ProductsDB.deleteProduct, id)
+    yield call(ProductsDB.deleteProduct, id);
     yield put(GetProductsStartAction())
 }
 
