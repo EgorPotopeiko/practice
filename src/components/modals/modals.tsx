@@ -9,9 +9,7 @@ import ModalCreateProduct from './modal_create-product';
 const Modals: React.FC = () => {
     const dispatch = useDispatch();
     const modalParams = useSelector(selectCredentialsModal);
-    if (!modalParams.isOpen) {
-        return null
-    }
+    if (!modalParams.isOpen) return null
     else {
         switch (modalParams.typeModal) {
             case "Auth":

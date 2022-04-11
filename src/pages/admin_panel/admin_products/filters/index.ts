@@ -1,2 +1,2 @@
-import ProductsFilters from "./products_filters";
+import ProductsFilters from './products_filters';
 export default ProductsFilters;

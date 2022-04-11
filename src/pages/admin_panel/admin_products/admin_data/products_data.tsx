@@ -1,5 +1,4 @@
 /* eslint-disable no-self-assign */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input } from 'antd';
@@ -13,7 +12,7 @@ import { DeleteProductAction, GetPage } from '../../../../store/products/actions
 
 const { Option } = Select;
 
-interface Props {
+type Props = {
     searchName: string,
     searchArticle: string,
     searchCategory: string,
@@ -152,7 +151,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
                 return editable ? (
                     <span>
                         <Typography.Link onClick={() => { save(record.key) }} style={{ marginRight: 8 }}>Save</Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}><a>Cancel</a></Popconfirm>
+                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}><span>Cancel</span></Popconfirm>
                     </span>
                 ) : (
                     <>

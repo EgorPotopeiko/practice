@@ -9,13 +9,13 @@ import { CloseModalAction } from '../../../store/modals/actions';
 import './modal_create-category.less'
 import { Button } from 'antd';
 
-interface Props {
+type Props = {
     visible: boolean,
     onCancel: () => void
 }
 
 const CreateCategorySchema = Yup.object().shape({
-    name: Yup.string().min(3, 'Too Short!').required('Required'),
+    name: Yup.string().min(3, 'Too Short!').required('Required')
 });
 
 const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {

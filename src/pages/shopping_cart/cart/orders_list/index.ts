@@ -1,2 +1,2 @@
-import OrdersList from "./orders_list";
+import OrdersList from './orders_list';
 export default OrdersList;

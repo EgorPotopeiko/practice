@@ -1,2 +1,2 @@
-import OrderFilters from "./order_filters";
+import OrderFilters from './order_filters';
 export default OrderFilters;

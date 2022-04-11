@@ -1,14 +1,13 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { TOrder } from '../../../../models/order';
-import './order_data.less'
+import './order_data.less';
 
 const { Option } = Select;
 
-interface Props {
+type Props = {
     chooseStatus: string,
     searchUser: string,
     searchNumber: string
@@ -159,7 +158,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                             Save
                         </Typography.Link>
                         <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
+                            <span>Cancel</span>
                         </Popconfirm>
                     </span>
                 ) : (

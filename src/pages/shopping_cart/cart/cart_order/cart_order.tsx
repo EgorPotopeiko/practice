@@ -13,7 +13,7 @@ import { RemoveAllFilters } from '../../../../store/filters/actions';
 import { GetPage } from '../../../../store/products/actions';
 import { selectPageSize } from '../../../../store/products/selectors';
 
-interface Props {
+type Props = {
     visible: boolean,
     setVisible: React.Dispatch<React.SetStateAction<boolean>>
 }

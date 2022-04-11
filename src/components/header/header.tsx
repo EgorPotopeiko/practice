@@ -28,8 +28,7 @@ const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
     const pageSize = useSelector(selectPageSize);
     const dispatch = useDispatch();
-    const filters = useSelector(selectAllFilters);
-    const { category, priceRange, search } = filters;
+    const { category, priceRange, search } = useSelector(selectAllFilters);
     const user = useSelector(selectUser);
     return (
         <div className="header">

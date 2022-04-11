@@ -14,7 +14,7 @@ import { GetAuthorizationStartAction } from '../../../store/login/actions';
 import { CloseModalAction } from '../../../store/modals/actions';
 import { selectPageSize } from '../../../store/products/selectors';
 
-interface Props {
+type Props = {
     visible: boolean,
     onCancel: () => void
 }

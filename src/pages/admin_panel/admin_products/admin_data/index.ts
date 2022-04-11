@@ -1,2 +1,2 @@
-import ProductsData from "./products_data";
+import ProductsData from './products_data';
 export default ProductsData;

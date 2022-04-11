@@ -1,2 +1,2 @@
-import СartOrder from "./cart_order";
+import СartOrder from './cart_order';
 export default СartOrder;

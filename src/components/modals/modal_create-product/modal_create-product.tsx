@@ -13,13 +13,13 @@ import { getBase64 } from '../../../services/getBase64';
 import './modal_create-product.less';
 import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
 
-interface Props {
+type Props = {
     visible: boolean,
     onCancel: () => void
 }
 
 type TCreateProductState = {
-    loading: boolean
+    loading: boolean,
     img64: string | null
 }
 
@@ -32,7 +32,7 @@ const CreateProductSchema = Yup.object().shape({
     img: Yup.string()
 });
 
-const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } }
+const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
 
 const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
     const [filter, setFilter] = useState<TCreateProductState>({
@@ -112,7 +112,10 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                 />
                             </Form.Item>
                             <Form.Item name='category'>
-                                <Select placeholder='Категории' mode='multiple' onChange={(item) => { setFieldValue('category', [...item]) }}>
+                                <Select
+                                    placeholder='Категории'
+                                    mode='multiple'
+                                    onChange={(item) => { setFieldValue('category', [...item]) }}>
                                     {filterCategories.map((item: any) => (
                                         <Option key={item} value={item}>{item}</Option>
                                     ))}

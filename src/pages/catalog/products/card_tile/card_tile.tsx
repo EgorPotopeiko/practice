@@ -10,7 +10,7 @@ import { GetAddedCartAction } from '../../../../store/cart/actions';
 
 const { Title } = Typography;
 
-interface Props {
+type Props = {
     id: string,
     title: string,
     price: number,

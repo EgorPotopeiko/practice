@@ -1,2 +1,2 @@
-import СardTile from "./card_tile";
+import СardTile from './card_tile';
 export default СardTile;

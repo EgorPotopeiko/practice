@@ -1,2 +1,2 @@
-import AdminPanel from "./admin_panel";
+import AdminPanel from './admin_panel';
 export default AdminPanel;
