@@ -57,9 +57,7 @@ export default function productsReducer(state: TProductsState = initialState, ac
         case ProductsActionTypes.CREATE_PRODUCT_START:
             return StartActionState(state)
         case ProductsActionTypes.CREATE_PRODUCT_SUCCESS:
-            return {
-                ...SuccessActionState(state)
-            }
+            return SuccessActionState(state)
         case ProductsActionTypes.CREATE_PRODUCT_ERROR:
             return ErrorActionState(state, action.error)
         case ProductsActionTypes.REMOVE_PRODUCT:

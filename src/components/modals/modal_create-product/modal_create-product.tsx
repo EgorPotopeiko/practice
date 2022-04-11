@@ -27,7 +27,7 @@ const { Option } = Select;
 
 const CreateProductSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Too Short!').required('Required'),
-    prise: Yup.number().positive().required('Required'),
+    prise: Yup.number().positive().required('Required').max(99999, 'Too Large '),
     category: Yup.array().required('Required'),
     img: Yup.string()
 });
@@ -104,6 +104,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                             </Form.Item>
                             <Form.Item name='prise'>
                                 <FormInput
+                                    min={1}
                                     type='number'
                                     required={true}
                                     name='prise'

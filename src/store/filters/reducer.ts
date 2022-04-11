@@ -4,7 +4,7 @@ import { FiltersActionTypes } from './action-types';
 
 const initialState: TFiltersState = {
     search: "",
-    priceRange: [10, 100000],
+    priceRange: [0, 100000],
     category: "all",
 };
 
@@ -29,7 +29,7 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
             return {
                 ...state,
                 search: "",
-                priceRange: [10, 100000],
+                priceRange: [0, 100000],
                 category: "all"
             }
         default:
