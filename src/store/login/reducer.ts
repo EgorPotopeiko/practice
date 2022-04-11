@@ -1,3 +1,4 @@
+import { ErrorActionState } from './../helpers';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions';
 import { StartActionState, SuccessActionState } from '../helpers';
@@ -25,11 +26,7 @@ export type TLoginState = {
 export default function loginReducer(state: TLoginState = initialState, action: ActionTypes): TLoginState {
     switch (action.type) {
         case LoginActionTypes.LOAD_AUTHORIZATION_START:
-            return {
-                ...StartActionState(state),
-                email: action.email,
-                password: action.password
-            }
+            return StartActionState(state)
         case LoginActionTypes.LOAD_AUTHORIZATION_PROCESS:
             return {
                 ...SuccessActionState(state),
@@ -49,6 +46,12 @@ export default function loginReducer(state: TLoginState = initialState, action: 
                 error: action.error,
                 isLoading: false
             }
+        case LoginActionTypes.LOAD_REGISTRATION_START:
+            return StartActionState(state)
+        case LoginActionTypes.LOAD_REGISTRATION_SUCCESS:
+            return SuccessActionState(state)
+        case LoginActionTypes.LOAD_REGISTRATION_ERROR:
+            return ErrorActionState(state, action.error)
         case LoginActionTypes.LOGOUT:
             return {
                 ...state,

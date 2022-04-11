@@ -1,7 +1,7 @@
 import { LoginActionTypes } from './../../store/login/action-types';
 import { selectUser } from './../../store/login/selectors';
 import { AxiosResponse } from 'axios';
-import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetAuthorizationProcessAction } from './../../store/login/actions';
+import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetAuthorizationProcessAction, GetRegistrationSuccessAction, GetRegistrationErrorAction } from './../../store/login/actions';
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import Authorization from '../../services/login';
 import { ResponseGenerator } from '../../models/response-generator';
@@ -14,6 +14,15 @@ function* login(payload: any) {
         yield put(GetAuthorizationProcessAction(tryLogin))
     }
     catch (error) { yield put(GetAuthorizationErrorAction(error)) }
+}
+
+function* registration(payload: any) {
+    try {
+        const { name, email, password } = payload;
+        const tryRegister: AxiosResponse = yield call(Authorization.registration, name, email, password);
+        yield put(GetRegistrationSuccessAction(tryRegister))
+    }
+    catch (error) { yield put(GetRegistrationErrorAction(error)) }
 }
 
 function* loadInfo() {
@@ -31,6 +40,7 @@ function* logout() {
 
 export function* loginSaga() {
     yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_START, login);
-    yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_PROCESS, loadInfo)
-    yield takeLatest(LoginActionTypes.LOGOUT, logout)
+    yield takeLatest(LoginActionTypes.LOAD_REGISTRATION_START, registration);
+    yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_PROCESS, loadInfo);
+    yield takeLatest(LoginActionTypes.LOGOUT, logout);
 }

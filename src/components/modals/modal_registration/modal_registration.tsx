@@ -20,7 +20,10 @@ const RegistrationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string().min(5, 'Too Short!').required('Required'),
 });
-
+const onRegister = (values: any) => {
+    const { name, email, password } = values;
+    console.log(email)
+}
 const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
     const error = useSelector(selectError);
     return (
@@ -35,7 +38,7 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                     initialValues={{ email: '', password: '', name: '' }}
                     validateOnBlur
                     validationSchema={RegistrationSchema}
-                    onSubmit={async (values) => console.log(values)}>
+                    onSubmit={async (values) => onRegister(values)}>
                     {(formic) => (
                         <Form >
                             <FormItem name='name'>

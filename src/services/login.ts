@@ -7,6 +7,13 @@ export default class Authorization {
             password: password
         })
     }
+    static registration(name: any, email: any, password: any) {
+        return $api.post(`/users/register`, {
+            name: name,
+            email: email,
+            password: password
+        })
+    }
     static logout() {
         return $api.post(`/users/logout`)
     }
