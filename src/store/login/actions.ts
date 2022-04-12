@@ -17,7 +17,7 @@ export const GetAuthorizationErrorAction = (error: any) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_ERROR,
     error
 })
-export const GetRegistrationStartAction = (email: string, password: string, name: string) => ({
+export const GetRegistrationStartAction = (name: string, email: string, password: string) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_START,
     name,
     email,

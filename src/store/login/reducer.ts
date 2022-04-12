@@ -1,4 +1,3 @@
-import { ErrorActionState } from './../helpers';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions';
 import { StartActionState, SuccessActionState } from '../helpers';
@@ -51,7 +50,11 @@ export default function loginReducer(state: TLoginState = initialState, action: 
         case LoginActionTypes.LOAD_REGISTRATION_SUCCESS:
             return SuccessActionState(state)
         case LoginActionTypes.LOAD_REGISTRATION_ERROR:
-            return ErrorActionState(state, action.error)
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false
+            }
         case LoginActionTypes.LOGOUT:
             return {
                 ...state,
