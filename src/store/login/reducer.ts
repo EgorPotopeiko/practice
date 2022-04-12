@@ -18,7 +18,7 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 export type TLoginState = {
     user: TUser,
     isAuth: boolean,
-    error: null,
+    error: any,
     isLoading: boolean
 }
 

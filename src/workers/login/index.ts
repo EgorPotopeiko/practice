@@ -19,7 +19,7 @@ function* login(payload: any) {
 function* registration(payload: any) {
     try {
         const { name, email, password } = payload;
-        const tryRegister: AxiosResponse = yield call(Authorization.registration, name, email, password);
+        const { data: tryRegister }: AxiosResponse = yield Authorization.registration(name, email, password);
         yield put(GetRegistrationSuccessAction(tryRegister))
     }
     catch (error) { yield put(GetRegistrationErrorAction(error)) }

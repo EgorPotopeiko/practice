@@ -7,7 +7,7 @@ export default class Authorization {
             password: password
         })
     }
-    static registration(name: any, email: any, password: any) {
+    static async registration(name: any, email: any, password: any): Promise<any> {
         return $api.post(`/users/register`, {
             name: name,
             email: email,
