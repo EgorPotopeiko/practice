@@ -36,7 +36,6 @@ const ModalRegistrationSuccess: React.FC<Props> = ({ visible, onCancel }) => {
                     ]}
                 />
             </div>
-
         </Modal>
     )
 }

@@ -5,6 +5,7 @@ import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetAuthoriz
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import Authorization from '../../services/login';
 import { ResponseGenerator } from '../../models/response-generator';
+import AuthService from '../../services/auth_service';
 
 function* login(payload: any) {
     try {
@@ -33,6 +34,16 @@ function* loadInfo() {
         yield put(GetAuthorizationSuccessAction({ ...takeData.data, role: role }))
     }
 }
+
+// function* checkAuth() {
+//     try {
+//         const response: ResponseGenerator = yield call(AuthService.checkAuth)
+//         localStorage.setItem('token', response.data)
+//     }
+//     catch (e) {
+//         console.log(e)
+//     }
+// }
 
 function* logout() {
     yield localStorage.removeItem('token')

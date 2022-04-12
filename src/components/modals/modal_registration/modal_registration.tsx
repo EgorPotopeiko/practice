@@ -70,15 +70,12 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                     )}
                 </Formik>
             </div>
-            {error
-                ?
+            {error &&
                 notification.open({
                     message: 'Error',
                     description:
                         'Такой пользователь уже существует',
                 })
-                :
-                null
             }
         </Modal>
     )

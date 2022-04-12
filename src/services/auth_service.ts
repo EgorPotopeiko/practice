@@ -12,4 +12,7 @@ export default class AuthService {
     static async logout(): Promise<void> {
         return $api.post('/logout')
     }
+    static async checkAuth(): Promise<void> {
+        return $api.get('/refresh')
+    }
 }
