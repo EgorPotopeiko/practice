@@ -2,11 +2,10 @@ import { UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
-import { Button, notification, Typography } from 'antd';
+import { Button, notification, Spin, Typography } from 'antd';
 import './modal_auth.less';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectError } from '../../../store/login/selectors';
+import { selectStatus, selectSuccess } from '../../../store/login/selectors';
 import * as Yup from 'yup';
 import { GetPage } from '../../../store/products/actions';
 import { RemoveAllFilters } from '../../../store/filters/actions';
@@ -28,17 +27,15 @@ const SignupSchema = Yup.object().shape({
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(false);
-    const error = useSelector(selectError);
+    const { error, isLoading } = useSelector(selectStatus);
+    const isSuccess = useSelector(selectSuccess);
     const pageSize = useSelector(selectPageSize);
     const load = async () => {
-        setLoading(true)
         setTimeout(() => {
-            setLoading(false)
             dispatch(GetPage(1, pageSize))
             dispatch(RemoveAllFilters())
             dispatch(CloseModalAction())
-        }, 3000)
+        }, 1000)
     }
     return (
         <>
@@ -48,39 +45,41 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                 visible={visible}
                 onCancel={onCancel}
                 footer={null}>
-                <div className='modal__auth'>
-                    <Formik
-                        initialValues={{ email: '', password: '' }}
-                        validateOnBlur
-                        validationSchema={SignupSchema}
-                        onSubmit={async (values) => setTimeout(() => { dispatch(GetAuthorizationStartAction(values.email, values.password)) }, 3000)}>
-                        {(formic) => (
-                            <Form >
-                                <FormItem name='email'>
-                                    <FormInput
-                                        name='email'
-                                        required={true}
-                                        placeholder='Email'
-                                        prefix={<UserOutlined className="site-form-item-icon" />}
-                                    />
-                                </FormItem>
-                                <FormItem name='password'>
-                                    <FormInput.Password
-                                        name='password'
-                                        required={true}
-                                        placeholder='Password'
-                                    />
-                                </FormItem>
-                                <Button.Group>
-                                    <SubmitButton loading={loading} onClick={load}>Войти</SubmitButton>
-                                </Button.Group>
-                                <Button type='link' onClick={() => dispatch(OpenModalAction("Registration"))}>Зарегистрироваться</Button>
-                            </Form>
-                        )}
-                    </Formik>
-                </div>
+                <Spin spinning={!!isLoading}>
+                    <div className='modal__auth'>
+                        <Formik
+                            initialValues={{ email: '', password: '' }}
+                            validateOnBlur
+                            validationSchema={SignupSchema}
+                            onSubmit={async (values) => dispatch(GetAuthorizationStartAction(values.email, values.password))}>
+                            {(formic) => (
+                                <Form >
+                                    <FormItem name='email'>
+                                        <FormInput
+                                            name='email'
+                                            required={true}
+                                            placeholder='Email'
+                                            prefix={<UserOutlined className="site-form-item-icon" />}
+                                        />
+                                    </FormItem>
+                                    <FormItem name='password'>
+                                        <FormInput.Password
+                                            name='password'
+                                            required={true}
+                                            placeholder='Password'
+                                        />
+                                    </FormItem>
+                                    <Button.Group>
+                                        <SubmitButton loading={!!isLoading} onClick={load}>Войти</SubmitButton>
+                                    </Button.Group>
+                                    <Button type='link' onClick={() => dispatch(OpenModalAction("Registration"))}>Зарегистрироваться</Button>
+                                </Form>
+                            )}
+                        </Formik>
+                    </div>
+                </Spin>
             </Modal>
-            {error &&
+            {isSuccess === 'Error' &&
                 notification.open({
                     message: 'Error',
                     description:

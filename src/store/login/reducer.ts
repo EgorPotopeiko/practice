@@ -9,6 +9,7 @@ const initialState: TLoginState = {
         role: "guest"
     },
     isAuth: localStorage.getItem('token') ? true : false,
+    isSuccess: '',
     error: null,
     isLoading: false
 };
@@ -18,6 +19,7 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 export type TLoginState = {
     user: TUser,
     isAuth: boolean,
+    isSuccess: string,
     error: any,
     isLoading: boolean
 }
@@ -25,7 +27,10 @@ export type TLoginState = {
 export default function loginReducer(state: TLoginState = initialState, action: ActionTypes): TLoginState {
     switch (action.type) {
         case LoginActionTypes.LOAD_AUTHORIZATION_START:
-            return StartActionState(state)
+            return {
+                ...StartActionState(state),
+                isSuccess: ''
+            }
         case LoginActionTypes.LOAD_AUTHORIZATION_PROCESS:
             return {
                 ...SuccessActionState(state),
@@ -37,23 +42,32 @@ export default function loginReducer(state: TLoginState = initialState, action: 
             return {
                 ...SuccessActionState(state),
                 isAuth: true,
-                user: action.data
+                user: action.data,
+                isSuccess: 'Success'
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_ERROR:
             return {
                 ...state,
                 error: action.error,
-                isLoading: false
+                isLoading: false,
+                isSuccess: 'Error'
             }
         case LoginActionTypes.LOAD_REGISTRATION_START:
-            return StartActionState(state)
+            return {
+                ...StartActionState(state),
+                isSuccess: ''
+            }
         case LoginActionTypes.LOAD_REGISTRATION_SUCCESS:
-            return SuccessActionState(state)
+            return {
+                ...SuccessActionState(state),
+                isSuccess: 'Success'
+            }
         case LoginActionTypes.LOAD_REGISTRATION_ERROR:
             return {
                 ...state,
                 error: action.error,
-                isLoading: false
+                isLoading: false,
+                isSuccess: 'Error'
             }
         case LoginActionTypes.LOGOUT:
             return {

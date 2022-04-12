@@ -10,3 +10,4 @@ export const selectStatus = createSelector(stateAuth, (state) => ({
 }));
 export const selectUser = createSelector(stateAuth, (state) => state.user);
 export const selectAuth = createSelector(stateAuth, (state) => state.isAuth);
+export const selectSuccess = createSelector(stateAuth, (state) => state.isSuccess)
