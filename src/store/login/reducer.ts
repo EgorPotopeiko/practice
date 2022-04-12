@@ -61,6 +61,11 @@ export default function loginReducer(state: TLoginState = initialState, action: 
                 user: action.user,
                 isAuth: false
             }
+        case LoginActionTypes.SET_ERROR:
+            return {
+                ...state,
+                error: null
+            }
         default:
             return state
     }

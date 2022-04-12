@@ -8,5 +8,7 @@ export const LoginActionTypes = {
     LOAD_REGISTRATION_SUCCESS: '[Registration] LOAD_REGISTRATION_SUCCESS',
     LOAD_REGISTRATION_ERROR: '[Registration] LOAD_REGISTRATION_ERROR',
 
-    LOGOUT: '[Authorization] LOGOUT'
+    LOGOUT: '[Authorization] LOGOUT',
+
+    SET_ERROR: '[Error] SET_ERROR'
 } as const;

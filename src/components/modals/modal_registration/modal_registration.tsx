@@ -2,12 +2,11 @@ import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
-import { Button, Typography } from 'antd';
+import { Button, notification, Typography } from 'antd';
 import './modal_registration.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatus } from '../../../store/login/selectors';
 import * as Yup from 'yup';
-import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
 import { GetRegistrationStartAction } from '../../../store/login/actions';
 
 type Props = {
@@ -39,11 +38,7 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                     validateOnBlur
                     validationSchema={RegistrationSchema}
                     onSubmit={async (values) => {
-                        setTimeout(() => {
-                            dispatch(GetRegistrationStartAction(values.name, values.email, values.password))
-                            dispatch(CloseModalAction())
-                            dispatch(OpenModalAction("Registration_Success", { ...values }))
-                        }, 3000)
+                        await dispatch(GetRegistrationStartAction(values.name, values.email, values.password))
                     }}>
                     {(formic) => (
                         <Form >
@@ -75,6 +70,16 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                     )}
                 </Formik>
             </div>
+            {error
+                ?
+                notification.open({
+                    message: 'Error',
+                    description:
+                        'Такой пользователь уже существует',
+                })
+                :
+                null
+            }
         </Modal>
     )
 }

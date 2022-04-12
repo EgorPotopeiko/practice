@@ -35,3 +35,6 @@ export const GetLogout = (user: any) => ({
     type: LoginActionTypes.LOGOUT,
     user
 })
+export const setError = () => ({
+    type: LoginActionTypes.SET_ERROR
+})
