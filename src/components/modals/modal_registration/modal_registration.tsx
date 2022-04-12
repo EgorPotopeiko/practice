@@ -26,58 +26,60 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
     const { isLoading, error } = useSelector(selectStatus);
     const dispatch = useDispatch();
     return (
-        <Modal
-            width={530}
-            title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Error' : 'Registration'}</Title>}
-            visible={visible}
-            onCancel={onCancel}
-            footer={null}>
-            <div className='modal__registration'>
-                <Formik
-                    initialValues={{ email: '', password: '', name: '' }}
-                    validateOnBlur
-                    validationSchema={RegistrationSchema}
-                    onSubmit={async (values) => {
-                        await dispatch(GetRegistrationStartAction(values.name, values.email, values.password))
-                    }}>
-                    {(formic) => (
-                        <Form >
-                            <FormItem name='name'>
-                                <FormInput
-                                    name='name'
-                                    required={true}
-                                    placeholder='Name'
-                                    prefix={<UserOutlined className="site-form-item-icon" />}
-                                />
-                            </FormItem>
-                            <FormItem name='email'>
-                                <FormInput
-                                    name='email'
-                                    required={true}
-                                    placeholder='Email'
-                                    prefix={<MailOutlined className="site-form-item-icon" />}
-                                />
-                            </FormItem>
-                            <FormItem name='password'>
-                                <FormInput.Password
-                                    name='password'
-                                    required={true}
-                                    placeholder='Password'
-                                />
-                            </FormItem>
-                            <Button.Group><SubmitButton loading={isLoading}>Зарегистрироваться</SubmitButton></Button.Group>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
+        <>
+            <Modal
+                width={530}
+                title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Error' : 'Registration'}</Title>}
+                visible={visible}
+                onCancel={onCancel}
+                footer={null}>
+                <div className='modal__registration'>
+                    <Formik
+                        initialValues={{ email: '', password: '', name: '' }}
+                        validateOnBlur
+                        validationSchema={RegistrationSchema}
+                        onSubmit={async (values) => {
+                            await dispatch(GetRegistrationStartAction(values.name, values.email, values.password))
+                        }}>
+                        {(formic) => (
+                            <Form >
+                                <FormItem name='name'>
+                                    <FormInput
+                                        name='name'
+                                        required={true}
+                                        placeholder='Name'
+                                        prefix={<UserOutlined className="site-form-item-icon" />}
+                                    />
+                                </FormItem>
+                                <FormItem name='email'>
+                                    <FormInput
+                                        name='email'
+                                        required={true}
+                                        placeholder='Email'
+                                        prefix={<MailOutlined className="site-form-item-icon" />}
+                                    />
+                                </FormItem>
+                                <FormItem name='password'>
+                                    <FormInput.Password
+                                        name='password'
+                                        required={true}
+                                        placeholder='Password'
+                                    />
+                                </FormItem>
+                                <Button.Group><SubmitButton loading={isLoading}>Зарегистрироваться</SubmitButton></Button.Group>
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
+            </Modal>
             {error &&
                 notification.open({
                     message: 'Error',
                     description:
-                        'Такой пользователь уже существует',
+                        'Такой пользователь уже существует'
                 })
             }
-        </Modal>
+        </>
     )
 }
 

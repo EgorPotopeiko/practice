@@ -2,7 +2,7 @@ import { UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
-import { Button, Typography } from 'antd';
+import { Button, notification, Typography } from 'antd';
 import './modal_auth.less';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,44 +41,53 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
         }, 3000)
     }
     return (
-        <Modal
-            width={530}
-            title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>}
-            visible={visible}
-            onCancel={onCancel}
-            footer={null}>
-            <div className='modal__auth'>
-                <Formik
-                    initialValues={{ email: '', password: '' }}
-                    validateOnBlur
-                    validationSchema={SignupSchema}
-                    onSubmit={async (values) => setTimeout(() => { dispatch(GetAuthorizationStartAction(values.email, values.password)) }, 3000)}>
-                    {(formic) => (
-                        <Form >
-                            <FormItem name='email'>
-                                <FormInput
-                                    name='email'
-                                    required={true}
-                                    placeholder='Email'
-                                    prefix={<UserOutlined className="site-form-item-icon" />}
-                                />
-                            </FormItem>
-                            <FormItem name='password'>
-                                <FormInput.Password
-                                    name='password'
-                                    required={true}
-                                    placeholder='Password'
-                                />
-                            </FormItem>
-                            <Button.Group>
-                                <SubmitButton loading={loading} onClick={load}>Войти</SubmitButton>
-                            </Button.Group>
-                            <Button type='link' onClick={() => dispatch(OpenModalAction("Registration"))}>Зарегистрироваться</Button>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-        </Modal>
+        <>
+            <Modal
+                width={530}
+                title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>}
+                visible={visible}
+                onCancel={onCancel}
+                footer={null}>
+                <div className='modal__auth'>
+                    <Formik
+                        initialValues={{ email: '', password: '' }}
+                        validateOnBlur
+                        validationSchema={SignupSchema}
+                        onSubmit={async (values) => setTimeout(() => { dispatch(GetAuthorizationStartAction(values.email, values.password)) }, 3000)}>
+                        {(formic) => (
+                            <Form >
+                                <FormItem name='email'>
+                                    <FormInput
+                                        name='email'
+                                        required={true}
+                                        placeholder='Email'
+                                        prefix={<UserOutlined className="site-form-item-icon" />}
+                                    />
+                                </FormItem>
+                                <FormItem name='password'>
+                                    <FormInput.Password
+                                        name='password'
+                                        required={true}
+                                        placeholder='Password'
+                                    />
+                                </FormItem>
+                                <Button.Group>
+                                    <SubmitButton loading={loading} onClick={load}>Войти</SubmitButton>
+                                </Button.Group>
+                                <Button type='link' onClick={() => dispatch(OpenModalAction("Registration"))}>Зарегистрироваться</Button>
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
+            </Modal>
+            {error &&
+                notification.open({
+                    message: 'Error',
+                    description:
+                        'Неверная почта или пароль',
+                })
+            }
+        </>
     )
 }
 
