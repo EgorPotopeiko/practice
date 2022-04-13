@@ -5,10 +5,6 @@ export const GetAuthorizationStartAction = (email: string, password: string) => 
     email,
     password
 })
-export const GetAuthorizationProcessAction = (data: any) => ({
-    type: LoginActionTypes.LOAD_AUTHORIZATION_PROCESS,
-    data
-})
 export const GetAuthorizationSuccessAction = (data: any) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_SUCCESS,
     data

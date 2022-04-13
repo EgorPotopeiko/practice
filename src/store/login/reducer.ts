@@ -31,13 +31,6 @@ export default function loginReducer(state: TLoginState = initialState, action: 
                 ...StartActionState(state),
                 isSuccess: ''
             }
-        case LoginActionTypes.LOAD_AUTHORIZATION_PROCESS:
-            return {
-                ...SuccessActionState(state),
-                user: action.data,
-                isLoading: true,
-                isAuth: true
-            }
         case LoginActionTypes.LOAD_AUTHORIZATION_SUCCESS:
             return {
                 ...SuccessActionState(state),

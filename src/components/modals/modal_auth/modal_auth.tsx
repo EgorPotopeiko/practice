@@ -7,11 +7,8 @@ import './modal_auth.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatus, selectSuccess } from '../../../store/login/selectors';
 import * as Yup from 'yup';
-import { GetPage } from '../../../store/products/actions';
-import { RemoveAllFilters } from '../../../store/filters/actions';
 import { GetAuthorizationStartAction } from '../../../store/login/actions';
 import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
-import { selectPageSize } from '../../../store/products/selectors';
 
 type Props = {
     visible: boolean,
@@ -29,11 +26,8 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
     const { error, isLoading } = useSelector(selectStatus);
     const isSuccess = useSelector(selectSuccess);
-    const pageSize = useSelector(selectPageSize);
     const load = async () => {
         setTimeout(() => {
-            dispatch(GetPage(1, pageSize))
-            dispatch(RemoveAllFilters())
             dispatch(CloseModalAction())
         }, 1000)
     }

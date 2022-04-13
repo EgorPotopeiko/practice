@@ -30,7 +30,7 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
                 ...state,
                 search: "",
                 price: [0, 5000],
-                category: []
+                category: [1]
             }
         default:
             return state

@@ -10,12 +10,15 @@ import { GetProductsErrorAction, GetProductsSuccessAction } from '../../store/pr
 import { AxiosResponse } from 'axios';
 import { ProductsActionTypes } from '../../store/products/action-types';
 
+function* startLoadProducts() {
+    yield put(GetProductsStartAction())
+}
+
 function* loadProductList() {
     try {
         const page: number = yield select(selectPage);
         const pageSize: number = yield select(selectPageSize);
         const filters: TFilters = yield select(selectAllFilters);
-        console.log(filters)
         const data: AxiosResponse = yield call(ProductsDB.getProducts, page, pageSize, filters);
         const total = data.data.totalCount;
         let newData = data.data.content.map((product: any) => {
@@ -58,8 +61,8 @@ function* deleteProduct(payload: any) {
 export function* productsSaga() {
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCTS_START, loadProductList);
     yield takeLatest(ProductsActionTypes.LOAD_PRODUCT_START, loadProduct);
-    yield takeLatest(ProductsActionTypes.SET_PAGE, loadProductList);
+    yield takeLatest(ProductsActionTypes.SET_PAGE, startLoadProducts);
     yield takeLatest(ProductsActionTypes.CREATE_PRODUCT_START, createProduct);
     yield takeLatest(ProductsActionTypes.DELETE_PRODUCT, deleteProduct);
-    yield takeLatest(FiltersActionTypes.SET_FILTERS, loadProductList)
+    yield takeLatest(FiltersActionTypes.SET_FILTERS, startLoadProducts)
 }

@@ -43,7 +43,7 @@ const Header: React.FC = () => {
                     }}>
                         <Link to={APP}>Shop</Link></Title>
                     <div className='header__user'>
-                        {(user.role === "guest" || user.role === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
+                        {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
                             ?
                             <Input
                                 suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
@@ -60,14 +60,12 @@ const Header: React.FC = () => {
                                 dispatch(GetLogout({
                                     role: "guest"
                                 }))
-                            dispatch(RemoveAllFilters())
-                            dispatch(GetPage(1, pageSize))
                         }}>{isAuth ? 'Выйти' : 'Войти'}
                         </Button>
                         <Link to={CART}><UserOutlined hidden={isAuth ? false : true} /></Link>
                     </div>
                 </div>
-                {(user.role === "guest" || user.role === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
+                {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
                     ?
                     <div className='header__filters'>
                         <>price

@@ -27,7 +27,7 @@ export const guestRoutes: TRoutes[] = [
 ]
 
 export const useRoutes = (isAuth: boolean, role: string) => {
-    if (isAuth && role === "user") {
+    if (isAuth && role.toLowerCase() === "user") {
         return (
             <Switch>
                 {userRoutes.map(({
@@ -45,7 +45,7 @@ export const useRoutes = (isAuth: boolean, role: string) => {
             </Switch>
         )
     }
-    if (isAuth && role === "admin") {
+    if (isAuth && role.toLowerCase() === "admin") {
         return (
             <Switch>
                 {adminRoutes.map(({
