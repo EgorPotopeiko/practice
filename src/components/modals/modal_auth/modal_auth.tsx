@@ -27,9 +27,9 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const { error, isLoading } = useSelector(selectStatus);
     const isSuccess = useSelector(selectSuccess);
     const load = async () => {
-        setTimeout(() => {
-            dispatch(CloseModalAction())
-        }, 1000)
+        // setTimeout(() => {
+        //     dispatch(CloseModalAction())
+        // }, 1000)
     }
     return (
         <>

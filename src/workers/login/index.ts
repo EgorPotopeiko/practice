@@ -1,3 +1,4 @@
+import { CloseModalAction } from './../../store/modals/actions';
 import { RemoveAllFilters } from './../../store/filters/actions';
 import { selectPageSize } from './../../store/products/selectors';
 import { GetProductsStartAction, GetPage } from './../../store/products/actions';
@@ -19,6 +20,7 @@ function* login(payload: any) {
         yield put(GetPage(1, pageSize))
         yield put(RemoveAllFilters())
         yield put(GetAuthorizationSuccessAction(tryLogin.data.user))
+        yield put(CloseModalAction())
     }
     catch (error) { yield put(GetAuthorizationErrorAction(error)) }
 }

@@ -43,7 +43,8 @@ export default function loginReducer(state: TLoginState = initialState, action: 
                 ...state,
                 error: action.error,
                 isLoading: false,
-                isSuccess: 'Error'
+                isSuccess: 'Error',
+                user: { ...state.user, role: "guest" }
             }
         case LoginActionTypes.LOAD_REGISTRATION_START:
             return {
