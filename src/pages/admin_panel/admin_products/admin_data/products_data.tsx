@@ -82,7 +82,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
     newData = newData.filter((item: TProduct) => item.id.toLowerCase().includes(searchArticle.toLowerCase()));
     if (searchCategory.toLowerCase() === "all") { newData = newData }
-    else { newData = newData.filter((item: TProduct) => item.category[0].toLowerCase() === searchCategory.toLowerCase()) }
+    // else { newData = newData.filter((item: TProduct) => item.category[0].toLowerCase() === searchCategory.toLowerCase()) }
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {

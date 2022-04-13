@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
     const pageSize = useSelector(selectPageSize);
     const dispatch = useDispatch();
-    const { category, priceRange, search } = useSelector(selectAllFilters);
+    const { category, price, search } = useSelector(selectAllFilters);
     const user = useSelector(selectUser);
     const isAuth = useSelector(selectAuth);
     return (
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                         {(user.role === "guest" || user.role === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
                             ?
                             <Input
-                                suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />}
+                                suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
                                 placeholder="Поиск по названию"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             :
@@ -70,8 +70,8 @@ const Header: React.FC = () => {
                 {(user.role === "guest" || user.role === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
                     ?
                     <div className='header__filters'>
-                        <>
-                            <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, priceRange, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        <>price
+                            <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, price, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple">
                                 {selectValues.map((item) => (<Option key={item} value={item}>{item.toUpperCase()}</Option>))}
                             </Select>
@@ -82,7 +82,7 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>Цена</Text>
-                            <Slider range max={100000} defaultValue={[0, 100000]} onAfterChange={(newPriceRange: Array<number>) => dispatch(GetFilters(search, newPriceRange, category))} />
+                            <Slider range max={5000} defaultValue={[0, 5000]} onAfterChange={(newPrice: Array<number>) => dispatch(GetFilters(search, newPrice, category))} />
                         </>
                     </div>
                     :

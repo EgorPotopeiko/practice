@@ -1,7 +1,9 @@
+import { TCategory } from './category';
+
 export type TCartProduct = {
     id: string,
     title: string,
-    category: string,
+    categories: Array<TCategory>,
     price: number,
     img: string,
     amount?: number,

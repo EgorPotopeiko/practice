@@ -41,7 +41,7 @@ const updateCartItem = (product: TProduct, item: any = {}, quantity: number) => 
     return {
         id: product.id,
         title: product.title,
-        category: product.category,
+        categories: product.categories,
         price: product.price,
         img: product.img,
         amount: amount + quantity,

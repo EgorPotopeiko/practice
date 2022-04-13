@@ -4,7 +4,7 @@ import { FiltersActionTypes } from './action-types';
 
 const initialState: TFiltersState = {
     search: "",
-    priceRange: [0, 100000],
+    price: [0, 5000],
     category: "all"
 };
 
@@ -12,7 +12,7 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TFiltersState = {
     search: string,
-    priceRange: Array<number>,
+    price: Array<number>,
     category: string
 }
 
@@ -22,14 +22,14 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
             return {
                 ...state,
                 search: action.search,
-                priceRange: action.priceRange,
+                price: action.price,
                 category: action.category
             }
         case FiltersActionTypes.REMOVE_ALL_FILTERS:
             return {
                 ...state,
                 search: "",
-                priceRange: [0, 100000],
+                price: [0, 5000],
                 category: "all"
             }
         default:

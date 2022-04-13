@@ -12,12 +12,13 @@ export default class ProductsDB {
 
     static getProducts(page: any, pageSize: any, filters?: any) {
         return $api.post(`/product/search`, {
+            totalCount: 100,
             page: page - 1,
             pageSize: pageSize,
             filterData: {
                 searchString: filters.search,
-                category: filters.category === "all" ? [] : [filters.category],
-                price: filters.priceRange
+                // category: filters.category === "all" ? [] : [filters.category],
+                // price: filters.price
             }
         })
     }
@@ -29,11 +30,11 @@ export default class ProductsDB {
     };
 
     static createProduct = async (product: any) => {
-        const { id, title, prise, category, img } = product
+        const { id, title, price, category, img } = product
         return $api.post(`/product/create`, {
             id,
             title,
-            prise,
+            price,
             category,
             img
         })

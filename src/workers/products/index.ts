@@ -21,8 +21,8 @@ function* loadProductList() {
             return {
                 id: product.id,
                 title: product.title,
-                img: product.imgCart || product.img,
-                category: product.category,
+                img: product.img,
+                categories: product.categories,
                 price: product.price
             }
         });

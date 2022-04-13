@@ -20,7 +20,7 @@ const ProductPage: React.FC = () => {
                 {!!product && (
                     <Card title={(
                         <>
-                            <Image width={400} src={product.img === undefined ? window.location.href.split('auth')[0] + product.imgCart : product.img} />
+                            <Image width={400} src={product.img === undefined ? window.location.href.split('auth')[0] + product.img : product.img} />
                             <div className='product__page-title'>
                                 <Title level={3}>{product.title}</Title>
                                 <Title level={4}>Есть в наличии</Title>

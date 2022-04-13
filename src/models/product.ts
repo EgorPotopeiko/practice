@@ -1,9 +1,11 @@
+import { TCategory } from "./category"
+
 export type TProduct = {
     key?: string,
     id: string,
     title: string,
     price: number,
-    category: string,
+    categories: Array<TCategory>,
     status?: string,
     img: string
 }

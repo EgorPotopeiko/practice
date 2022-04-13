@@ -27,7 +27,7 @@ const { Option } = Select;
 
 const CreateProductSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Too Short!').required('Required'),
-    prise: Yup.number().positive().required('Required').max(99999, 'Too Large '),
+    price: Yup.number().positive().required('Required').max(99999, 'Too Large '),
     category: Yup.array().required('Required'),
     img: Yup.string()
 });
@@ -89,7 +89,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
             width={700}>
             <div className='modal__create-product'>
                 <Formik
-                    initialValues={{ title: '', prise: '', category: [], img: '' }}
+                    initialValues={{ title: '', price: '', category: [], img: '' }}
                     validateOnBlur
                     validationSchema={CreateProductSchema}
                     onSubmit={(values) => { createProduct(values) }}>
@@ -102,12 +102,12 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                     placeholder='Название товара'
                                 />
                             </Form.Item>
-                            <Form.Item name='prise'>
+                            <Form.Item name='price'>
                                 <FormInput
                                     min={1}
                                     type='number'
                                     required={true}
-                                    name='prise'
+                                    name='price'
                                     placeholder='Стоимость'
                                 />
                             </Form.Item>

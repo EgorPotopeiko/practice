@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { selectAuth } from '../../../../store/login/selectors';
 import { GetProductStartAction } from '../../../../store/products/actions';
 import { GetAddedCartAction } from '../../../../store/cart/actions';
+import { TCategory } from '../../../../models/category';
 
 const { Title } = Typography;
 
@@ -14,11 +15,11 @@ type Props = {
     id: string,
     title: string,
     price: number,
-    category: string,
+    categories: Array<TCategory>,
     img: string
 }
 
-const CardTile: React.FC<Props> = ({ id, title, price, category, img }) => {
+const CardTile: React.FC<Props> = ({ id, title, price, categories, img }) => {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectAuth);
     return (
@@ -27,7 +28,7 @@ const CardTile: React.FC<Props> = ({ id, title, price, category, img }) => {
                 <Title onClick={isAuth ? () => dispatch(GetProductStartAction(id)) : undefined} level={4}>{isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
             )}>
                 <p>{price} руб.</p>
-                <ShoppingCartOutlined hidden={isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction({ id, title, category, price, img }))} />
+                <ShoppingCartOutlined hidden={isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction({ id, title, categories, price, img }))} />
             </Card>
         </div>
     );

@@ -1,6 +1,6 @@
 export type TFilters = {
     category: string,
     search: string,
-    priceRange: Array<number>,
+    price: Array<number>,
     listCategories: Array<string>
 }

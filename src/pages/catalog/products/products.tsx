@@ -60,7 +60,7 @@ const Products: React.FC = () => {
                                         id={item.id}
                                         title={item.title}
                                         price={item.price}
-                                        category={item.category}
+                                        categories={item.categories}
                                         img={item.img}
                                     />
                                 )}
@@ -71,7 +71,7 @@ const Products: React.FC = () => {
                                         id={item.id}
                                         title={item.title}
                                         price={item.price}
-                                        category={item.category}
+                                        categories={item.categories}
                                         img={item.img}
                                     />
                                 )}

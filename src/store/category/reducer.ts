@@ -20,6 +20,15 @@ export type TCategoryState = {
 
 export default function categoryReducer(state: TCategoryState = initialState, action: ActionTypes): TCategoryState {
     switch (action.type) {
+        case CategoryActionTypes.LOAD_CATEGORY_START:
+            return StartActionState(state)
+        case CategoryActionTypes.LOAD_CATEGORY_SUCCESS:
+            return {
+                ...SuccessActionState(state),
+                listCategories: action.data
+            }
+        case CategoryActionTypes.LOAD_CATEGORY_ERROR:
+            return ErrorActionState(state, action.error)
         case CategoryActionTypes.CREATE_CATEGORY_START:
             return StartActionState(state)
         case CategoryActionTypes.CREATE_CATEGORY_SUCCESS:

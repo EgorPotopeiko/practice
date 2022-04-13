@@ -47,7 +47,7 @@ const Menu: React.FC = () => {
     const userTabs = useSelector(selectListCategories);
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
-    const { priceRange, search } = filters;
+    const { price, search } = filters;
     return (
         <div className="menu__catalog">
             {user.role === "admin"
@@ -76,11 +76,11 @@ const Menu: React.FC = () => {
                     type="card"
                     onChange={(category: string) => {
                         dispatch(GetPage(1, pageSize))
-                        dispatch(GetFilters(search, priceRange, category))
+                        dispatch(GetFilters(search, price, category))
                     }}>
                     {
-                        userTabs.map((item: string) => (
-                            <TabPane tab={item.toUpperCase()} key={item.toLowerCase()} />
+                        userTabs.map((item: any) => (
+                            <TabPane tab={item.title.toUpperCase()} key={item.title.toLowerCase()} />
                         ))
                     }
                 </Tabs>
