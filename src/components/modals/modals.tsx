@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { SetError, SetSuccess } from '../../store/login/actions';
 import { CloseModalAction } from '../../store/modals/actions';
 import { selectCredentialsModal } from '../../store/modals/selectors';
 import ModalAuth from './modal_auth';
@@ -10,17 +11,22 @@ import ModalRegistration from './modal_registration';
 const Modals: React.FC = () => {
     const dispatch = useDispatch();
     const modalParams = useSelector(selectCredentialsModal);
+    const closeActions = () => {
+        dispatch(CloseModalAction())
+        dispatch(SetError())
+        dispatch(SetSuccess(''))
+    }
     if (!modalParams.isOpen) return null
     else {
         switch (modalParams.typeModal) {
             case "Auth":
-                return <ModalAuth onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
+                return <ModalAuth onCancel={() => closeActions()} visible={modalParams.isOpen} />
             case "Registration":
-                return <ModalRegistration onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
+                return <ModalRegistration onCancel={() => closeActions()} visible={modalParams.isOpen} />
             case "CreateProduct":
-                return <ModalCreateProduct onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
+                return <ModalCreateProduct onCancel={() => closeActions()} visible={modalParams.isOpen} />
             case "CreateCategory":
-                return <ModalCreateCategory onCancel={() => dispatch(CloseModalAction())} visible={modalParams.isOpen} />
+                return <ModalCreateCategory onCancel={() => closeActions()} visible={modalParams.isOpen} />
             default:
                 return (
                     null

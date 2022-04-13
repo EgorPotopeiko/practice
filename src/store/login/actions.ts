@@ -31,6 +31,11 @@ export const GetLogout = (user: any) => ({
     type: LoginActionTypes.LOGOUT,
     user
 })
-export const setError = () => ({
+export const SetError = () => ({
     type: LoginActionTypes.SET_ERROR
 })
+export const SetSuccess = (success: any) => ({
+    type: LoginActionTypes.SET_SUCCESS,
+    success
+})
+

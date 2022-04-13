@@ -24,7 +24,7 @@ const RegistrationSchema = Yup.object().shape({
 });
 
 const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
-    const { isLoading, error } = useSelector(selectStatus);
+    const { isLoading } = useSelector(selectStatus);
     const isSuccess = useSelector(selectSuccess);
     const dispatch = useDispatch();
     const btn = (
@@ -34,7 +34,7 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
         <>
             <Modal
                 width={530}
-                title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Error' : 'Registration'}</Title>}
+                title={<Title level={3}>Registration</Title>}
                 visible={visible}
                 onCancel={onCancel}
                 footer={null}>

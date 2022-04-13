@@ -7,8 +7,8 @@ import './modal_auth.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatus, selectSuccess } from '../../../store/login/selectors';
 import * as Yup from 'yup';
-import { GetAuthorizationStartAction } from '../../../store/login/actions';
-import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
+import { GetAuthorizationStartAction, SetSuccess } from '../../../store/login/actions';
+import { OpenModalAction } from '../../../store/modals/actions';
 
 type Props = {
     visible: boolean,
@@ -24,18 +24,13 @@ const SignupSchema = Yup.object().shape({
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
-    const { error, isLoading } = useSelector(selectStatus);
+    const { isLoading } = useSelector(selectStatus);
     const isSuccess = useSelector(selectSuccess);
-    const load = async () => {
-        // setTimeout(() => {
-        //     dispatch(CloseModalAction())
-        // }, 1000)
-    }
     return (
         <>
             <Modal
                 width={530}
-                title={<Title style={error ? { color: 'red' } : {}} level={4}>{error ? 'Incorrect email or password' : 'Authorization'}</Title>}
+                title={<Title level={3}>Authorization</Title>}
                 visible={visible}
                 onCancel={onCancel}
                 footer={null}>
@@ -64,9 +59,12 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                         />
                                     </FormItem>
                                     <Button.Group>
-                                        <SubmitButton loading={!!isLoading} onClick={load}>Войти</SubmitButton>
+                                        <SubmitButton loading={!!isLoading}>Войти</SubmitButton>
                                     </Button.Group>
-                                    <Button type='link' onClick={() => dispatch(OpenModalAction("Registration"))}>Зарегистрироваться</Button>
+                                    <Button type='link' onClick={() => {
+                                        dispatch(OpenModalAction("Registration"))
+                                        dispatch(SetSuccess(''))
+                                    }}>Зарегистрироваться</Button>
                                 </Form>
                             )}
                         </Formik>

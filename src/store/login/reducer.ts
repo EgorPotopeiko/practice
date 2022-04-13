@@ -74,6 +74,11 @@ export default function loginReducer(state: TLoginState = initialState, action: 
                 ...state,
                 error: null
             }
+        case LoginActionTypes.SET_SUCCESS:
+            return {
+                ...state,
+                isSuccess: action.success
+            }
         default:
             return state
     }
