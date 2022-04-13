@@ -43,7 +43,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
     const listCategories = useSelector(selectListCategories);
-    const filterCategories = listCategories.filter((item: string) => item !== 'all');
+    const filterCategories = listCategories.filter((item: string) => item !== 'test');
     const categoryNode = <Select>
         {filterCategories.map((item: string) => (
             <Option key={item} value={item}>{item}</Option>
@@ -81,8 +81,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
     newData = newData.filter((item: TProduct) => item.id.toLowerCase().includes(searchArticle.toLowerCase()));
-    if (searchCategory.toLowerCase() === "all") { newData = newData }
-    // else { newData = newData.filter((item: TProduct) => item.category[0].toLowerCase() === searchCategory.toLowerCase()) }
+    newData = newData.filter((item: TProduct) => item.categories[0].title.toLowerCase() === searchCategory.toLowerCase())
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {

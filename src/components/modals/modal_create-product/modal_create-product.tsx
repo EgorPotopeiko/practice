@@ -49,7 +49,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
     const nanoid = customAlphabet('1234567890', 6);
     const dispatch = useDispatch();
     const categoryValues = useSelector(selectListCategories);
-    const filterCategories = categoryValues.filter((item: string) => item !== 'all');
+    const filterCategories = categoryValues.filter((item: string) => item !== 'test');
     const createProduct = (values: any) => {
         createFilter("loading")(true)
         setTimeout(() => {

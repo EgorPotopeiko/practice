@@ -17,7 +17,7 @@ export default class ProductsDB {
             pageSize: pageSize,
             filterData: {
                 searchString: filters.search,
-                // category: filters.category === "all" ? [] : [filters.category],
+                category: filters.category,
                 // price: filters.price
             }
         })

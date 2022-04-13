@@ -4,13 +4,13 @@ import { ErrorActionState, StartActionState, SuccessActionState } from '../helpe
 import { CategoryActionTypes } from './action-types';
 
 const initialState: TCategoryState = {
-    listCategories: JSON.parse(localStorage.getItem("categories")!) || ["all", "mobile", "electron", "pc", "home", "sport"]
+    listCategories: []
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TCategoryState = {
-    listCategories: Array<string>
+    listCategories: Array<any>
 }
 
 // const deleteCategory = (state: TCategoryState, id: string) => {

@@ -19,7 +19,7 @@ const { TabPane } = Tabs;
 export type TMenuState = {
     searchName: string
     searchArticle: string
-    searchCategory: 'all' | string
+    searchCategory: 'test' | string
     searchStatus: boolean
     chooseStatus: "оплачен" | string
     searchUser: string
@@ -30,7 +30,7 @@ const Menu: React.FC = () => {
     const [filter, setFilter] = useState<TMenuState>({
         searchName: '',
         searchArticle: '',
-        searchCategory: 'all',
+        searchCategory: 'test',
         searchStatus: true,
         chooseStatus: "оплачен",
         searchUser: "",
@@ -74,9 +74,12 @@ const Menu: React.FC = () => {
                 <Tabs
                     defaultActiveKey="1"
                     type="card"
-                    onChange={(category: string) => {
+                    onChange={(categories: any) => {
+                        const putCategory = [];
+                        const findCategory = userTabs.find((category: any) => category.title === categories)
+                        putCategory.push(findCategory.id)
                         dispatch(GetPage(1, pageSize))
-                        dispatch(GetFilters(search, price, category))
+                        dispatch(GetFilters(search, price, putCategory))
                     }}>
                     {
                         userTabs.map((item: any) => (
