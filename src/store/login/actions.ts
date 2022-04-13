@@ -27,6 +27,21 @@ export const GetRegistrationErrorAction = (error: any) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_ERROR,
     error
 })
+export const GetRegistrationAdminStartAction = (name: string, email: string, password: string, secret: any) => ({
+    type: LoginActionTypes.LOAD_REGISTRATION_ADMIN_START,
+    name,
+    email,
+    password,
+    secret
+})
+export const GetRegistrationAdminSuccessAction = (data: any) => ({
+    type: LoginActionTypes.LOAD_REGISTRATION_ADMIN_SUCCESS,
+    data
+})
+export const GetRegistrationAdminErrorAction = (error: any) => ({
+    type: LoginActionTypes.LOAD_REGISTRATION_ADMIN_ERROR,
+    error
+})
 export const GetLogout = (user: any) => ({
     type: LoginActionTypes.LOGOUT,
     user

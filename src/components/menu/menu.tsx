@@ -50,7 +50,7 @@ const Menu: React.FC = () => {
     const { price, search } = filters;
     return (
         <div className="menu__catalog">
-            {user.role === "admin"
+            {user.role.toLowerCase() === "admin"
                 ?
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">

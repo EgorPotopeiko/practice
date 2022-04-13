@@ -2,34 +2,43 @@ import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
-import { Button, notification, Spin, Typography } from 'antd';
+import { Button, Checkbox, notification, Spin, Typography } from 'antd';
 import './modal_registration.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStatus, selectSuccess } from '../../../store/login/selectors';
 import * as Yup from 'yup';
-import { GetRegistrationStartAction } from '../../../store/login/actions';
+import { GetRegistrationAdminStartAction, GetRegistrationStartAction } from '../../../store/login/actions';
 import { OpenModalAction } from '../../../store/modals/actions';
+import { useState } from 'react';
 
 type Props = {
     visible: boolean,
     onCancel: () => void
 }
 
-const { Title } = Typography
+const { Title } = Typography;
 
 const RegistrationSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Too short name').required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string().min(5, 'Too Short!').required('Required'),
+    secret: Yup.string()
 });
 
 const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
     const { isLoading } = useSelector(selectStatus);
     const isSuccess = useSelector(selectSuccess);
+    const [isAdmin, setIsAdmin] = useState(false);
     const dispatch = useDispatch();
     const btn = (
         <Button type='primary' onClick={() => dispatch(OpenModalAction('Auth'))}>Перейти к авторизации</Button>
     )
+    const initialValues = {
+        email: '',
+        password: '',
+        name: '',
+        secret: ''
+    }
     return (
         <>
             <Modal
@@ -41,11 +50,14 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                 <Spin spinning={!!isLoading}>
                     <div className='modal__registration'>
                         <Formik
-                            initialValues={{ email: '', password: '', name: '' }}
+                            initialValues={initialValues}
                             validateOnBlur
                             validationSchema={RegistrationSchema}
                             onSubmit={async (values) => {
-                                await dispatch(GetRegistrationStartAction(values.name, values.email, values.password))
+                                isAdmin ?
+                                    await dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret))
+                                    :
+                                    await dispatch(GetRegistrationStartAction(values.name, values.email, values.password))
                             }}>
                             {(formic) => (
                                 <Form >
@@ -72,6 +84,15 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                                             placeholder='Password'
                                         />
                                     </FormItem>
+                                    <FormItem name='password'>
+                                        <Checkbox onChange={() => setIsAdmin(!isAdmin)}>Регистрация админа</Checkbox>
+                                    </FormItem>
+                                    <FormItem name='secret' hidden={isAdmin ? false : true}>
+                                        <FormInput
+                                            name='secret'
+                                            placeholder='Secret'
+                                        />
+                                    </FormItem>
                                     <Button.Group><SubmitButton loading={isLoading}>Зарегистрироваться</SubmitButton></Button.Group>
                                 </Form>
                             )}
@@ -93,7 +114,7 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                     message: 'Error',
                     type: 'error',
                     description:
-                        'Такой пользователь уже существует'
+                        'Пользователь с таким почтовым адресом уще существует'
                 })
             }
         </>

@@ -1,7 +1,7 @@
 /* eslint-disable no-self-assign */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
-import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input } from 'antd';
+import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
@@ -72,15 +72,16 @@ const EditableCell: React.FC<EditableCellProps> = ({
 };
 
 const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName }) => {
+    console.log(searchArticle)
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
-    products.map((item: TProduct) => { item['key'] = item.id.split('-')[0] });
+    products.map((item: TProduct) => { item['key'] = item.id });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
-    newData = newData.filter((item: TProduct) => item.id.toLowerCase().includes(searchArticle.toLowerCase()));
+    newData = newData.filter((item: TProduct) => item.id.toString().includes(searchArticle));
     newData = newData.filter((item: TProduct) => item.categories[0].title.toLowerCase() === searchCategory.toLowerCase())
     const isEditing = (record: TProduct) => record.key === editingKey;
 
@@ -126,10 +127,14 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
         },
         {
             title: 'Категория',
-            dataIndex: 'category',
-            key: 'category',
+            dataIndex: 'categories',
+            key: 'categories',
             editable: true,
-            render: (record: any) => (<span>{record + ' '}</span>)
+            render: (_: any, record: any) => (
+                <Space size='middle'>
+                    <span>{record.title}</span>
+                </Space>
+            )
         },
         {
             title: 'Статус',

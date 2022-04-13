@@ -13,7 +13,7 @@ export default class AuthService {
         return $api.post<AuthResponse>('/auth/registration/admin', { name, email, password, secret })
     }
     static async logout(): Promise<void> {
-        return $api.post('/auth/logout')
+        return $api.get('/auth/logout')
     }
     static async checkAuth(): Promise<void> {
         return $api.get('/auth/refresh')

@@ -19,7 +19,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
         <div className="admin__filters">
             <div className='admin__filters-block'>
                 <Input placeholder="Название" onChange={(e) => handlerFilter("searchName")(e.target.value)} />
-                <Input placeholder="Артикул" onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
+                <Input type='number' placeholder="Артикул" onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
                 <Select placeholder="Категория" onChange={(category) => handlerFilter("searchCategory")(category)}>
                     {categoryValues.map((item: any) => (
                         <Option key={item} value={item}>{item}</Option>

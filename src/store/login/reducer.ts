@@ -63,6 +63,23 @@ export default function loginReducer(state: TLoginState = initialState, action: 
                 isLoading: false,
                 isSuccess: 'Error'
             }
+        case LoginActionTypes.LOAD_REGISTRATION_ADMIN_START:
+            return {
+                ...StartActionState(state),
+                isSuccess: ''
+            }
+        case LoginActionTypes.LOAD_REGISTRATION_ADMIN_SUCCESS:
+            return {
+                ...SuccessActionState(state),
+                isSuccess: 'Success'
+            }
+        case LoginActionTypes.LOAD_REGISTRATION_ADMIN_ERROR:
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false,
+                isSuccess: 'Error'
+            }
         case LoginActionTypes.LOGOUT:
             return {
                 ...state,

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './app.less';
 import { useRoutes } from './routing/routes';
+import AuthService from './services/auth_service';
 import { selectListCategories } from './store/category/selectors';
 import { selectAuth, selectUser } from './store/login/selectors';
 
@@ -16,6 +17,11 @@ function App() {
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user))
     }, [user]);
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            AuthService.checkAuth()
+        }
+    }, [])
     return (
         <div className="App">
             {routes}

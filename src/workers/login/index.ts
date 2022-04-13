@@ -1,3 +1,4 @@
+import { ProductsActionTypes } from './../../store/products/action-types';
 import { CloseModalAction } from './../../store/modals/actions';
 import { RemoveAllFilters } from './../../store/filters/actions';
 import { selectPageSize } from './../../store/products/selectors';
@@ -5,7 +6,7 @@ import { GetProductsStartAction, GetPage } from './../../store/products/actions'
 import { LoginActionTypes } from './../../store/login/action-types';
 import { selectUser } from './../../store/login/selectors';
 import { AxiosResponse } from 'axios';
-import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetRegistrationSuccessAction, GetRegistrationErrorAction } from './../../store/login/actions';
+import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetRegistrationSuccessAction, GetRegistrationErrorAction, GetRegistrationAdminSuccessAction, GetRegistrationAdminErrorAction } from './../../store/login/actions';
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import Authorization from '../../services/auth_service';
 import { ResponseGenerator } from '../../models/response-generator';
@@ -34,6 +35,15 @@ function* registration(payload: any) {
     catch (error) { yield put(GetRegistrationErrorAction(error)) }
 }
 
+function* registrationAdmin(payload: any) {
+    try {
+        const { name, email, password, secret } = payload;
+        const { data: tryRegister }: AxiosResponse = yield Authorization.registrationAdmin(name, email, password, secret);
+        yield put(GetRegistrationAdminSuccessAction(tryRegister))
+    }
+    catch (error) { yield put(GetRegistrationAdminErrorAction(error)) }
+}
+
 // function* loadInfo() {
 //     const user: ResponseGenerator = yield select(selectUser);
 //     if (user.status === 200) {
@@ -43,22 +53,14 @@ function* registration(payload: any) {
 //     }
 // }
 
-// function* checkAuth() {
-//     try {
-//         const response: ResponseGenerator = yield call(AuthService.checkAuth)
-//         localStorage.setItem('token', response.data)
-//     }
-//     catch (e) {
-//         console.log(e)
-//     }
-// }
-
 function* logout() {
+    yield call(AuthService.logout)
     yield localStorage.removeItem('token')
 }
 
 export function* loginSaga() {
     yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_START, login);
     yield takeLatest(LoginActionTypes.LOAD_REGISTRATION_START, registration);
+    yield takeLatest(LoginActionTypes.LOAD_REGISTRATION_ADMIN_START, registrationAdmin);
     yield takeLatest(LoginActionTypes.LOGOUT, logout);
 }
