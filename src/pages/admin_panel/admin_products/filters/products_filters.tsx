@@ -22,7 +22,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                 <Input type='number' placeholder="Артикул" onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
                 <Select placeholder="Категория" onChange={(category) => handlerFilter("searchCategory")(category)}>
                     {categoryValues.map((item: any) => (
-                        <Option key={item} value={item}>{item}</Option>
+                        <Option key={item.title} value={item.title}>{item.title}</Option>
                     ))}
                 </Select>
             </div>

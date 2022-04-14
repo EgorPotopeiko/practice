@@ -37,6 +37,8 @@ export default function productsReducer(state: TProductsState = initialState, ac
     switch (action.type) {
         case ProductsActionTypes.LOAD_PRODUCTS_START:
             return StartActionState(state)
+        case ProductsActionTypes.LOAD_ALL_PRODUCTS_START:
+            return StartActionState(state)
         case ProductsActionTypes.LOAD_PRODUCTS_SUCCESS:
             return {
                 ...SuccessActionState(state),

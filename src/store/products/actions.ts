@@ -3,6 +3,9 @@ import { ProductsActionTypes } from './action-types';
 export const GetProductsStartAction = () => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_START
 })
+export const GetAllProductsStartAction = () => ({
+    type: ProductsActionTypes.LOAD_ALL_PRODUCTS_START
+})
 export const GetProductsSuccessAction = (data: any, total: number) => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_SUCCESS,
     data,

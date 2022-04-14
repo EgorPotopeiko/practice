@@ -19,7 +19,7 @@ const { TabPane } = Tabs;
 export type TMenuState = {
     searchName: string
     searchArticle: string
-    searchCategory: 'all' | string
+    searchCategory: 'test' | string
     searchStatus: boolean
     chooseStatus: "оплачен" | string
     searchUser: string
@@ -30,7 +30,7 @@ const Menu: React.FC = () => {
     const [filter, setFilter] = useState<TMenuState>({
         searchName: '',
         searchArticle: '',
-        searchCategory: 'all',
+        searchCategory: 'test',
         searchStatus: true,
         chooseStatus: "оплачен",
         searchUser: "",
