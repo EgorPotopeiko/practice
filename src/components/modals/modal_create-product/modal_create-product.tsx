@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { Button, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
 import { Formik } from 'formik';
@@ -5,7 +6,6 @@ import React, { useState } from 'react';
 import Modal from 'antd/lib/modal/Modal';
 import ImgCrop from 'antd-img-crop';
 import * as Yup from 'yup';
-import { customAlphabet } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectListCategories } from '../../../store/category/selectors';
 import { CreateProductStartAction } from '../../../store/products/actions';
@@ -28,13 +28,14 @@ const { Option } = Select;
 const CreateProductSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Too Short!').required('Required'),
     price: Yup.number().positive().required('Required').max(99999, 'Too Large '),
-    category: Yup.array().required('Required'),
+    category: Yup.array(),
     img: Yup.string()
 });
 
 const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
 
 const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
+    const [testImg, setTestImg] = useState('');
     const [filter, setFilter] = useState<TCreateProductState>({
         loading: false,
         img64: null
@@ -46,16 +47,12 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
             [type]: value
         })
     };
-    const nanoid = customAlphabet('1234567890', 6);
     const dispatch = useDispatch();
     const categoryValues = useSelector(selectListCategories);
-    const filterCategories = categoryValues.filter((item: string) => item !== 'test');
     const createProduct = (values: any) => {
         createFilter("loading")(true)
         setTimeout(() => {
             values.img = filter.img64
-            values.id = nanoid()
-            values.key = values.id
             dispatch(CreateProductStartAction(values))
             createFilter("loading")(false)
             dispatch(CloseModalAction())
@@ -64,7 +61,10 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
         setFileList(newFileList);
         const newFile = newFileList[newFileList.length - 1];
-        getBase64(newFile.originFileObj, (imageURL: any) => { createFilter("img64")(imageURL) })
+        getBase64(newFile.originFileObj, (imageURL: any) => {
+            createFilter("img64")(imageURL)
+            setTestImg(imageURL)
+        })
     };
     const onPreview = async (file: any) => {
         let src = file.url;
@@ -89,7 +89,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
             width={700}>
             <div className='modal__create-product'>
                 <Formik
-                    initialValues={{ title: '', price: '', category: [], img: '' }}
+                    initialValues={{ title: '', price: '', categories: [], img: testImg }}
                     validateOnBlur
                     validationSchema={CreateProductSchema}
                     onSubmit={(values) => { createProduct(values) }}>
@@ -111,13 +111,22 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                     placeholder='Стоимость'
                                 />
                             </Form.Item>
-                            <Form.Item name='category'>
+                            <Form.Item name='categories'>
                                 <Select
                                     placeholder='Категории'
                                     mode='multiple'
-                                    onChange={(item) => { setFieldValue('category', [...item]) }}>
-                                    {filterCategories.map((item: any) => (
-                                        <Option key={item} value={item}>{item}</Option>
+                                    onChange={(value) => {
+                                        value.map((valuesId: any) => {
+                                            categoryValues.map((item: any) => {
+                                                if (item.title === valuesId) {
+                                                    setFieldValue('categories', [...values.categories, { id: item.id }])
+                                                }
+                                            })
+                                        })
+
+                                    }}>
+                                    {categoryValues.map((item: any) => (
+                                        <Option key={item.title} value={item.title}>{item.title}</Option>
                                     ))}
                                 </Select>
                                 <Button type='link' onClick={() => dispatch(OpenModalAction("CreateCategory"))}>Нет подходящей категории? Создайте свою</Button>
@@ -138,7 +147,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                     </Upload>
                                 </ImgCrop>
                             </Form.Item>
-                            <SubmitButton loading={filter.loading} disabled={values.category.length === 0}>Создать</SubmitButton>
+                            <SubmitButton>Создать</SubmitButton>
                         </Form>
                     )}
                 </Formik>

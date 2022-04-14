@@ -2,7 +2,7 @@ import { GetCategoriesErrorAction, GetCategoriesSuccessAction } from './../../st
 import { CategoryActionTypes } from './../../store/category/action-types';
 import { takeLatest } from 'redux-saga/effects';
 import { call, put } from 'redux-saga/effects';
-import CategoryDB from '../../services/category';
+import CategoryDB from '../../services/category_service';
 import { AxiosResponse } from 'axios';
 
 function* loadCategoryList() {

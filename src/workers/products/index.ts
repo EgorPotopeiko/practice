@@ -5,7 +5,7 @@ import { selectPage, selectPageSize } from './../../store/products/selectors';
 import { FiltersActionTypes } from './../../store/filters/action-types';
 import { takeLatest, select } from 'redux-saga/effects';
 import { call, put } from 'redux-saga/effects';
-import ProductsDB from '../../services';
+import ProductsDB from '../../services/products_service';
 import { GetProductsErrorAction, GetProductsSuccessAction } from '../../store/products/actions';
 import { AxiosResponse } from 'axios';
 import { ProductsActionTypes } from '../../store/products/action-types';
