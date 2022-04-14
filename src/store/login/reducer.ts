@@ -5,9 +5,7 @@ import { LoginActionTypes } from './action-types';
 import { TUser } from "../../models/user";
 
 const initialState: TLoginState = {
-    user: JSON.parse(localStorage.getItem("user")!) || {
-        role: "guest"
-    },
+    user: { role: "guest" } as TUser,
     isAuth: localStorage.getItem('token') ? true : false,
     isSuccess: '',
     error: null,
@@ -26,6 +24,19 @@ export type TLoginState = {
 
 export default function loginReducer(state: TLoginState = initialState, action: ActionTypes): TLoginState {
     switch (action.type) {
+        case LoginActionTypes.REFRESH_START:
+            return StartActionState(state)
+        case LoginActionTypes.REFRESH_SUCCESS:
+            return {
+                ...SuccessActionState(state),
+                user: action.data
+            }
+        case LoginActionTypes.REFRESH_ERROR:
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false,
+            }
         case LoginActionTypes.LOAD_AUTHORIZATION_START:
             return {
                 ...StartActionState(state),

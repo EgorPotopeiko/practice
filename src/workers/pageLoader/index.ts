@@ -10,7 +10,7 @@ export default function* pageLoader() {
 function* loaderWorker({ payload }: LocationChangeAction) {
     try {
         const pathname = payload.location.pathname;
-        if (pathname === '/' || pathname === '/auth' || pathname === '/admin') {
+        if (pathname === '/') {
             yield put(GetProductsStartAction())
             yield put(GetCategoriesStartAction())
         }

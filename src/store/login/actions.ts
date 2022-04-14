@@ -1,5 +1,16 @@
 import { LoginActionTypes } from './action-types';
 
+export const GetRefreshStartAction = () => ({
+    type: LoginActionTypes.REFRESH_START,
+})
+export const GetRefreshSuccessAction = (data: any) => ({
+    type: LoginActionTypes.REFRESH_SUCCESS,
+    data
+})
+export const GetRefreshErrorAction = (error: any) => ({
+    type: LoginActionTypes.REFRESH_ERROR,
+    error
+})
 export const GetAuthorizationStartAction = (email: string, password: string) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_START,
     email,

@@ -1,4 +1,8 @@
 export const LoginActionTypes = {
+    REFRESH_START: '[Refresh] REFRESH_START',
+    REFRESH_SUCCESS: '[Refresh] REFRESH_SUCCESS',
+    REFRESH_ERROR: '[Refresh] REFRESH_ERROR',
+
     LOAD_AUTHORIZATION_START: '[Authorization] LOAD_AUTHORIZATION_START',
     LOAD_AUTHORIZATION_SUCCESS: '[Authorization] LOAD_AUTHORIZATION_SUCCESS',
     LOAD_AUTHORIZATION_ERROR: '[Authorization] LOAD_AUTHORIZATION_ERROR',
@@ -14,5 +18,6 @@ export const LoginActionTypes = {
     LOGOUT: '[Authorization] LOGOUT',
 
     SET_ERROR: '[Error] SET_ERROR',
-    SET_SUCCESS: '[Success] SET_SUCCESS'
+    SET_SUCCESS: '[Success] SET_SUCCESS',
+    REFRESH_SET_USER: '[User] REFRESH_SET_USER'
 } as const;
