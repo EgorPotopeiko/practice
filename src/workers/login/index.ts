@@ -23,7 +23,9 @@ function* login(payload: any) {
         yield put(GetAuthorizationSuccessAction(tryLogin.data.user))
         yield put(CloseModalAction())
     }
-    catch (error) { yield put(GetAuthorizationErrorAction(error)) }
+    catch (error) {
+        yield put(GetAuthorizationErrorAction(error))
+    }
 }
 
 function* registration(payload: any) {

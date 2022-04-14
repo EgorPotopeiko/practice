@@ -36,7 +36,7 @@ export default function loginReducer(state: TLoginState = initialState, action: 
                 ...SuccessActionState(state),
                 isAuth: true,
                 user: action.data,
-                isSuccess: 'Success'
+                isSuccess: 'Success_auth'
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_ERROR:
             return {
@@ -54,7 +54,7 @@ export default function loginReducer(state: TLoginState = initialState, action: 
         case LoginActionTypes.LOAD_REGISTRATION_SUCCESS:
             return {
                 ...SuccessActionState(state),
-                isSuccess: 'Success'
+                isSuccess: 'Success_registration'
             }
         case LoginActionTypes.LOAD_REGISTRATION_ERROR:
             return {
@@ -71,7 +71,7 @@ export default function loginReducer(state: TLoginState = initialState, action: 
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_SUCCESS:
             return {
                 ...SuccessActionState(state),
-                isSuccess: 'Success'
+                isSuccess: 'Success_admin_registration'
             }
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_ERROR:
             return {

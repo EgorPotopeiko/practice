@@ -2,13 +2,12 @@ import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
-import { Button, Checkbox, notification, Spin, Typography } from 'antd';
+import { Button, Checkbox, Spin, Typography } from 'antd';
 import './modal_registration.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectStatus, selectSuccess } from '../../../store/login/selectors';
+import { selectStatus } from '../../../store/login/selectors';
 import * as Yup from 'yup';
 import { GetRegistrationAdminStartAction, GetRegistrationStartAction } from '../../../store/login/actions';
-import { OpenModalAction } from '../../../store/modals/actions';
 import { useState } from 'react';
 
 type Props = {
@@ -27,12 +26,11 @@ const RegistrationSchema = Yup.object().shape({
 
 const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
     const { isLoading } = useSelector(selectStatus);
-    const isSuccess = useSelector(selectSuccess);
     const [isAdmin, setIsAdmin] = useState(false);
     const dispatch = useDispatch();
-    const btn = (
-        <Button type='primary' onClick={() => dispatch(OpenModalAction('Auth'))}>Перейти к авторизации</Button>
-    )
+    // const btn = (
+    //     <Button type='primary' onClick={() => dispatch(OpenModalAction('Auth'))}>Перейти к авторизации</Button>
+    // )
     const initialValues = {
         email: '',
         password: '',
@@ -100,23 +98,6 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                     </div>
                 </Spin>
             </Modal>
-            {isSuccess === 'Success' &&
-                notification.open({
-                    message: 'Done',
-                    type: 'success',
-                    description:
-                        'Регистрация завершена успешно',
-                    btn
-                })
-            }
-            {isSuccess === 'Error' &&
-                notification.open({
-                    message: 'Error',
-                    type: 'error',
-                    description:
-                        'Пользователь с таким почтовым адресом уще существует'
-                })
-            }
         </>
     )
 }

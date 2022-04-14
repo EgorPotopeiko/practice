@@ -2,12 +2,12 @@ import { UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
-import { Button, notification, Spin, Typography } from 'antd';
+import { Button, Spin, Typography } from 'antd';
 import './modal_auth.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectStatus, selectSuccess } from '../../../store/login/selectors';
+import { selectStatus } from '../../../store/login/selectors';
 import * as Yup from 'yup';
-import { GetAuthorizationStartAction, SetSuccess } from '../../../store/login/actions';
+import { GetAuthorizationStartAction, SetError, SetSuccess } from '../../../store/login/actions';
 import { OpenModalAction } from '../../../store/modals/actions';
 
 type Props = {
@@ -25,7 +25,6 @@ const SignupSchema = Yup.object().shape({
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
     const { isLoading } = useSelector(selectStatus);
-    const isSuccess = useSelector(selectSuccess);
     return (
         <>
             <Modal
@@ -63,6 +62,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                     </Button.Group>
                                     <Button type='link' onClick={() => {
                                         dispatch(OpenModalAction("Registration"))
+                                        dispatch(SetError())
                                         dispatch(SetSuccess(''))
                                     }}>Зарегистрироваться</Button>
                                 </Form>
@@ -71,13 +71,6 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                     </div>
                 </Spin>
             </Modal>
-            {isSuccess === 'Error' &&
-                notification.open({
-                    message: 'Error',
-                    description:
-                        'Неверная почта или пароль',
-                })
-            }
         </>
     )
 }
