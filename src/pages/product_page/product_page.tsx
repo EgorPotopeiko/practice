@@ -30,8 +30,8 @@ const ProductPage: React.FC = () => {
                         <div className='product__page-info'>
                             <div className='product__page-info-desc'>
                                 <Text>Изготовитель:</Text>
-                                <Text>Категория: {product.category[0]}</Text>
-                                {product.category.length > 1 && <Text>Подкатегория: {product.category[1]}</Text>}
+                                <Text>Категория: </Text>
+                                <Text>Подкатегория: </Text>
                             </div>
                             <div className='product__page-info-add'>
                                 <Text strong >{product.price} руб.</Text>

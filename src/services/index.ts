@@ -24,9 +24,7 @@ export default class ProductsDB {
     }
 
     static getProduct = async (id: any) => {
-        return $api.post(`/product/product`, {
-            id
-        })
+        return $api.get(`/product/${id}`, {})
     };
 
     static createProduct = async (product: any) => {

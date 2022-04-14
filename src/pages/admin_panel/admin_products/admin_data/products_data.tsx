@@ -72,7 +72,6 @@ const EditableCell: React.FC<EditableCellProps> = ({
 };
 
 const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName }) => {
-    console.log(searchArticle)
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);

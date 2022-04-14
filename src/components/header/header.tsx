@@ -37,7 +37,6 @@ const Header: React.FC = () => {
                 <div className='header__wrap'>
                     <Title onClick={() => {
                         dispatch(RemoveProductAction())
-                        localStorage.removeItem("product")
                         dispatch(RemoveAllFilters())
                         dispatch(GetPage(1, pageSize))
                     }}>
