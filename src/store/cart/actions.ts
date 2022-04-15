@@ -1,15 +1,11 @@
-import { TProduct } from './../../models/product';
 import { CartActionTypes } from './action-types';
 
-export const GetAddedCartAction = (item: TProduct) => ({
+export const GetAddedCartAction = (products: Array<object>) => ({
     type: CartActionTypes.PRODUCT_ADDED,
-    item
+    products
 })
-export const GetRemovedCartAction = (item: TProduct) => ({
+export const GetRemovedCartAction = (products: Array<object>) => ({
     type: CartActionTypes.PRODUCT_REMOVED,
-    item
-})
-export const GetClearCartAction = () => ({
-    type: CartActionTypes.CLEAR_CART
+    products
 })
 

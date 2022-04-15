@@ -44,7 +44,7 @@ const CartItems: React.FC = () => {
             key: 'action',
             render: (record: TProduct) => (
                 <Space size="middle">
-                    <DeleteOutlined onClick={() => dispatch(GetRemovedCartAction(record))} />
+                    <DeleteOutlined onClick={() => dispatch(GetRemovedCartAction([{ id: record.id }]))} />
                 </Space>
             )
         },

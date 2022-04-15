@@ -1,4 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
+import { cartSaga } from './cart';
 import { categoriesSaga } from './category';
 import { loginSaga } from './login';
 import pageLoader from './pageLoader';
@@ -9,6 +10,7 @@ export default function* rootSaga() {
         fork(productsSaga),
         fork(pageLoader),
         fork(loginSaga),
-        fork(categoriesSaga)
+        fork(categoriesSaga),
+        fork(cartSaga)
     ])
 }

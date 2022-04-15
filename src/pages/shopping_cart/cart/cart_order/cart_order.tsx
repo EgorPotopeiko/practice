@@ -8,7 +8,6 @@ import { useFormik } from 'formik';
 import { customAlphabet } from 'nanoid';
 import { selectCart } from '../../../../store/cart/selectors';
 import { selectUser } from '../../../../store/login/selectors';
-import { GetClearCartAction } from '../../../../store/cart/actions';
 import { RemoveAllFilters } from '../../../../store/filters/actions';
 import { GetPage } from '../../../../store/products/actions';
 import { selectPageSize } from '../../../../store/products/selectors';
@@ -104,7 +103,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
             orders.pop()
             localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
-            dispatch(GetClearCartAction())
             dispatch(RemoveAllFilters())
             dispatch(GetPage(1, pageSize));
             createFilter("loading")(false)

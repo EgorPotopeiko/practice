@@ -29,7 +29,7 @@ const CardProduct: React.FC<Props> = ({ id, title, price, categories, img }) => 
             <Card title={<>
                 <Title onClick={isAuth ? () => dispatch(GetProductStartAction(id)) : undefined} level={3}>{isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
                 <Text>{mas}</Text>
-                <ShoppingCartOutlined hidden={isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction({ id, title, categories, price, img }))} />
+                <ShoppingCartOutlined hidden={isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction([{ id: id }]))} />
             </>}
                 cover={<img alt="example" src={img} />}>
                 <Divider />
