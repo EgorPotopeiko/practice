@@ -1,8 +1,11 @@
+import { TProduct } from './../models/product';
+import { AxiosResponse } from 'axios';
 import $api from '../http';
+import { ProductResponse } from '../models/product-response';
 
 export default class ProductsDB {
 
-    static getAllProducts(page: any, pageSize: any) {
+    static getAllProducts(page: any, pageSize: any): Promise<AxiosResponse<ProductResponse>> {
         return $api.post(`/product/search`, {
             page: page - 1,
             pageSize: pageSize,
@@ -10,7 +13,7 @@ export default class ProductsDB {
         })
     }
 
-    static getProducts(page: any, pageSize: any, filters?: any) {
+    static getProducts(page: any, pageSize: any, filters?: any): Promise<AxiosResponse<ProductResponse>> {
         return $api.post(`/product/search`, {
             totalCount: 100,
             page: page - 1,
@@ -23,12 +26,11 @@ export default class ProductsDB {
         })
     }
 
-    static getProduct = async (id: any) => {
+    static getProduct = async (id: any): Promise<AxiosResponse<TProduct>> => {
         return $api.get(`/product/${id}`, {})
     };
 
-    static createProduct = async (product: any) => {
-        console.log(product)
+    static createProduct = async (product: any): Promise<void> => {
         const { title, price, img, categories } = product;
         return $api.post(`/product`, {
             title,
@@ -38,7 +40,7 @@ export default class ProductsDB {
         })
     };
 
-    static deleteProduct = async (id: any) => {
+    static deleteProduct = async (id: any): Promise<void> => {
         return $api.delete(`/product/${id}`)
     };
 }

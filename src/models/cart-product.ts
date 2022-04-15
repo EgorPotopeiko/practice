@@ -6,6 +6,4 @@ export type TCartProduct = {
     categories: Array<TCategory>,
     price: number,
     img: string,
-    amount?: number,
-    total?: number
 }

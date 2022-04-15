@@ -1,3 +1,4 @@
+import { notification } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectError, selectSuccess } from '../../store/login/selectors';
@@ -5,6 +6,9 @@ import NotificationError from './notification_error/notification_error';
 import NotificationSuccess from './notification_success/notification_success';
 
 const Notifications: React.FC = () => {
+    notification.config({
+        duration: 3
+    });
     const error = useSelector(selectError);
     const isSuccess = useSelector(selectSuccess);
     const reStatus = /code (\d+)/;
