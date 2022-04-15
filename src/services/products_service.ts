@@ -1,3 +1,4 @@
+import { TFilters } from './../models/filters';
 import { TProduct } from './../models/product';
 import { AxiosResponse } from 'axios';
 import $api from '../http';
@@ -5,7 +6,7 @@ import { ProductResponse } from '../models/product-response';
 
 export default class ProductsDB {
 
-    static getAllProducts(page: any, pageSize: any): Promise<AxiosResponse<ProductResponse>> {
+    static getAllProducts(page: number, pageSize: number): Promise<AxiosResponse<ProductResponse>> {
         return $api.post(`/product/search`, {
             page: page - 1,
             pageSize: pageSize,
@@ -13,24 +14,24 @@ export default class ProductsDB {
         })
     }
 
-    static getProducts(page: any, pageSize: any, filters?: any): Promise<AxiosResponse<ProductResponse>> {
+    static getProducts(page: number, pageSize: number, filters?: TFilters): Promise<AxiosResponse<ProductResponse>> {
         return $api.post(`/product/search`, {
             totalCount: 100,
             page: page - 1,
             pageSize: pageSize,
             filterData: {
-                searchString: filters.search,
-                category: filters.category,
+                searchString: filters?.search,
+                category: filters?.category,
                 // price: filters.price
             }
         })
     }
 
-    static getProduct = async (id: any): Promise<AxiosResponse<TProduct>> => {
+    static getProduct = async (id: number): Promise<AxiosResponse<TProduct>> => {
         return $api.get(`/product/${id}`, {})
     };
 
-    static createProduct = async (product: any): Promise<void> => {
+    static createProduct = async (product: TProduct): Promise<void> => {
         const { title, price, img, categories } = product;
         return $api.post(`/product`, {
             title,
@@ -40,7 +41,7 @@ export default class ProductsDB {
         })
     };
 
-    static deleteProduct = async (id: any): Promise<void> => {
+    static deleteProduct = async (id: number): Promise<void> => {
         return $api.delete(`/product/${id}`)
     };
 }
