@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import './cart.less';
 import CartItems from './cart_items';
 import CartOrder from './cart_order';
@@ -12,7 +12,7 @@ const { ORDERS } = USER_PATH;
 
 const Cart: React.FC = () => {
     const [visible, setVisible] = useState(false);
-    const [idProduct, setIdProduct]: any = useState(null);
+    const [idProduct, setIdProduct]: [number | null, Dispatch<SetStateAction<null>>] = useState(null);
     useEffect(() => {
         CartDB.getCart()
             .then((response: any) => response.data)

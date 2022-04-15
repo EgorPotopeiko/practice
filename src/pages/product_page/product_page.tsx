@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectProduct, selectProductsLoading } from '../../store/products/selectors';
 import Header from '../../components/header';
 import { GetAddedCartAction } from '../../store/cart/actions';
+import { TProduct } from '../../models/product';
 
 const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
     const dispatch = useDispatch();
-    const product: any = useSelector(selectProduct);
+    const product: TProduct | null = useSelector(selectProduct);
     const loading = useSelector(selectProductsLoading);
     return (
         <Spin spinning={loading}>
@@ -35,7 +36,7 @@ const ProductPage: React.FC = () => {
                             </div>
                             <div className='product__page-info-add'>
                                 <Text strong >{product.price} руб.</Text>
-                                <Button onClick={() => dispatch(GetAddedCartAction(product))}>Добавить в корзину</Button>
+                                <Button onClick={() => dispatch(GetAddedCartAction([{ id: product.id }]))}>Добавить в корзину</Button>
                             </div>
                         </div>
                         <Divider />
