@@ -4,10 +4,10 @@ import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addedCategory } from '../../../store/filters/actions';
 import { CloseModalAction } from '../../../store/modals/actions';
 import './modal_create-category.less'
 import { Button } from 'antd';
+import { CreateCategoryStartAction } from '../../../store/category/actions';
 
 type Props = {
     visible: boolean,
@@ -23,7 +23,7 @@ const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
     const [categoryName, setCategoryName] = useState<string>('');
     const addCategory = () => {
         setTimeout(() => {
-            dispatch(addedCategory(categoryName))
+            dispatch(CreateCategoryStartAction(categoryName))
             setCategoryName('')
             dispatch(CloseModalAction())
         }, 1000)

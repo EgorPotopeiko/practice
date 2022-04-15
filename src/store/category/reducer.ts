@@ -33,16 +33,14 @@ export default function categoryReducer(state: TCategoryState = initialState, ac
             return StartActionState(state)
         case CategoryActionTypes.CREATE_CATEGORY_SUCCESS:
             return {
-                ...SuccessActionState(state),
-                listCategories: [...state.listCategories, action.data]
+                ...SuccessActionState(state)
             }
         case CategoryActionTypes.CREATE_CATEGORY_ERROR:
             return ErrorActionState(state, action.error)
-        // case CategoryActionTypes.DELETE_CATEGORY:
-        //     return {
-        //         ...state,
-        //         listCategories: deleteCategory(state, action.id)
-        //     }
+        case CategoryActionTypes.DELETE_CATEGORY:
+            return {
+                ...state
+            }
         default:
             return state
     }

@@ -13,8 +13,6 @@ export default class CategoryDB {
     }
 
     static deleteCategory = async (id: number) => {
-        return $api.post(`/category/${id}`, {
-            id
-        })
+        return $api.delete(`/category/${id}`)
     };
 }

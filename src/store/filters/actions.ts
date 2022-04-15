@@ -10,13 +10,3 @@ export const GetFilters = (search: string, price: Array<number>, categories: Arr
 export const RemoveAllFilters = () => ({
     type: FiltersActionTypes.REMOVE_ALL_FILTERS
 })
-
-export const addedCategory = (category: string) => ({
-    type: FiltersActionTypes.ADDED_CATEGORY,
-    category
-})
-
-export const deletedCategory = (category: string) => ({
-    type: FiltersActionTypes.DELETED_CATEGORY,
-    category
-})

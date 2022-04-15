@@ -3,9 +3,9 @@ import { Button, Col, Form, List, Row, Typography } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './admin_category.less';
-import { deletedCategory } from '../../../store/filters/actions';
 import { OpenModalAction } from '../../../store/modals/actions';
 import { selectListCategories } from '../../../store/category/selectors';
+import { DeleteCategoryAction } from '../../../store/category/actions';
 
 const { Title } = Typography;
 
@@ -25,7 +25,7 @@ const AdminCategory: React.FC = () => {
                             header={<div>Существующие категории</div>}
                             bordered
                             dataSource={categories}
-                            renderItem={(item: string) => <List.Item actions={[<DeleteOutlined onClick={() => dispatch(deletedCategory(item))} />]}>{item}</List.Item>}
+                            renderItem={(item: any) => <List.Item actions={[<DeleteOutlined onClick={() => dispatch(DeleteCategoryAction(item.id))} />]}>{item.title}</List.Item>}
                         />
                     </Col>
                 </Row>
