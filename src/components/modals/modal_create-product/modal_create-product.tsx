@@ -12,10 +12,18 @@ import { CreateProductStartAction } from '../../../store/products/actions';
 import { getBase64 } from '../../../services/getBase64';
 import './modal_create-product.less';
 import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
+import { TCategory } from '../../../models/category';
 
 type Props = {
     visible: boolean,
     onCancel: () => void
+}
+
+export type TValues = {
+    title: string,
+    price: number,
+    categories: Array<{ id: number }>,
+    img: string | null
 }
 
 type TCreateProductState = {
@@ -49,7 +57,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
     };
     const dispatch = useDispatch();
     const categoryValues = useSelector(selectListCategories);
-    const createProduct = (values: any) => {
+    const createProduct = (values: TValues) => {
         createFilter("loading")(true)
         setTimeout(() => {
             values.img = filter.img64
@@ -61,7 +69,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
         setFileList(newFileList);
         const newFile = newFileList[newFileList.length - 1];
-        getBase64(newFile.originFileObj, (imageURL: any) => {
+        getBase64(newFile.originFileObj, (imageURL: string) => {
             createFilter("img64")(imageURL)
             setTestImg(imageURL)
         })
@@ -89,7 +97,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
             width={700}>
             <div className='modal__create-product'>
                 <Formik
-                    initialValues={{ title: '', price: '', categories: [], img: testImg }}
+                    initialValues={{ title: '', price: 0, categories: [], img: testImg }}
                     validateOnBlur
                     validationSchema={CreateProductSchema}
                     onSubmit={(values) => { createProduct(values) }}>
@@ -116,8 +124,8 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                     placeholder='Категории'
                                     mode='multiple'
                                     onChange={(value) => {
-                                        value.map((valuesId: any) => {
-                                            categoryValues.map((item: any) => {
+                                        value.map((valuesId: string) => {
+                                            categoryValues.map((item: TCategory) => {
                                                 if (item.title === valuesId) {
                                                     setFieldValue('categories', [...values.categories, { id: item.id }])
                                                 }
@@ -125,7 +133,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                         })
 
                                     }}>
-                                    {categoryValues.map((item: any) => (
+                                    {categoryValues.map((item: TCategory) => (
                                         <Option key={item.title} value={item.title}>{item.title}</Option>
                                     ))}
                                 </Select>
