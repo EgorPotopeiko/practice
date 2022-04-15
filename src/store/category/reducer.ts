@@ -10,7 +10,7 @@ const initialState: TCategoryState = {
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TCategoryState = {
-    listCategories: Array<any>
+    listCategories: Array<any> // ошибка при типизации на TCategory
 }
 
 export default function categoryReducer(state: TCategoryState = initialState, action: ActionTypes): TCategoryState {

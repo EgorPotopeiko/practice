@@ -1,3 +1,3 @@
-import { RootStateOrAny } from 'react-redux';
+import { TApplicationState } from '../applicationState';
 
-export const selectCart = (state: RootStateOrAny) => state.cart.cartProducts;
+export const selectCart = (state: TApplicationState) => state.cart.cartProducts;
