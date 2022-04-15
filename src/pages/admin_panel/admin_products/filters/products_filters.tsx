@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectListCategories } from '../../../../store/category/selectors';
 import { TMenuState } from '../../../../components/menu/Menu';
 import { OpenModalAction } from '../../../../store/modals/actions';
+import { TCategory } from '../../../../models/category';
 
 type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
@@ -21,7 +22,7 @@ const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
                 <Input placeholder="Название" onChange={(e) => handlerFilter("searchName")(e.target.value)} />
                 <Input type='number' placeholder="Артикул" onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
                 <Select placeholder="Категория" onChange={(category) => handlerFilter("searchCategory")(category)}>
-                    {categoryValues.map((item: any) => (
+                    {categoryValues.map((item: TCategory) => (
                         <Option key={item.title} value={item.title}>{item.title}</Option>
                     ))}
                 </Select>

@@ -13,11 +13,6 @@ export type TCategoryState = {
     listCategories: Array<any>
 }
 
-// const deleteCategory = (state: TCategoryState, id: string) => {
-//     const categories = state.listCategories;
-//     return categories.filter((category: TCategory) => category.id !== id)
-// }
-
 export default function categoryReducer(state: TCategoryState = initialState, action: ActionTypes): TCategoryState {
     switch (action.type) {
         case CategoryActionTypes.LOAD_CATEGORY_START:

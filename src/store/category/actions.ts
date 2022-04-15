@@ -23,7 +23,7 @@ export const CreateCategoryErrorAction = (error: any) => ({
     type: CategoryActionTypes.CREATE_CATEGORY_ERROR,
     error
 })
-export const DeleteCategoryAction = (id: string) => ({
+export const DeleteCategoryAction = (id: number) => ({
     type: CategoryActionTypes.DELETE_CATEGORY,
     id
 })

@@ -9,6 +9,7 @@ import './products_data.less';
 import { selectProducts, selectTotal } from '../../../../store/products/selectors';
 import { selectListCategories } from '../../../../store/category/selectors';
 import { DeleteProductAction, GetPage } from '../../../../store/products/actions';
+import { TCategory } from '../../../../models/category';
 
 const { Option } = Select;
 
@@ -81,7 +82,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [editingKey, setEditingKey] = useState('');
     let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
     newData = newData.filter((item: TProduct) => item.id.toString().includes(searchArticle));
-    newData = newData.filter((item: TProduct) => item.categories.find((element: any) => element.title === searchCategory.toLowerCase()))
+    newData = newData.filter((item: TProduct) => item.categories.find((element: TCategory) => element.title === searchCategory.toLowerCase()))
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {
@@ -129,9 +130,9 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
             dataIndex: 'categories',
             key: 'categories',
             editable: true,
-            render: (_: any, record: any) => (
+            render: (_: any, record: TProduct) => (
                 <Space size='middle'>
-                    <span>{record.categories.map((category: any) => {
+                    <span>{record.categories.map((category: TCategory) => {
                         return category.title + ' '
                     })}</span>
                 </Space>

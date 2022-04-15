@@ -6,6 +6,7 @@ import './admin_category.less';
 import { OpenModalAction } from '../../../store/modals/actions';
 import { selectListCategories } from '../../../store/category/selectors';
 import { DeleteCategoryAction } from '../../../store/category/actions';
+import { TCategory } from '../../../models/category';
 
 const { Title } = Typography;
 
@@ -25,7 +26,7 @@ const AdminCategory: React.FC = () => {
                             header={<div>Существующие категории</div>}
                             bordered
                             dataSource={categories}
-                            renderItem={(item: any) => <List.Item actions={[<DeleteOutlined onClick={() => dispatch(DeleteCategoryAction(item.id))} />]}>{item.title}</List.Item>}
+                            renderItem={(item: TCategory) => <List.Item actions={[<DeleteOutlined onClick={() => dispatch(DeleteCategoryAction(item.id))} />]}>{item.title}</List.Item>}
                         />
                     </Col>
                 </Row>
