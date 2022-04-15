@@ -7,19 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from '../../../../store/login/selectors';
 import { GetProductStartAction } from '../../../../store/products/actions';
 import { GetAddedCartAction } from '../../../../store/cart/actions';
-import { TCategory } from '../../../../models/category';
+import { TProduct } from '../../../../models/product';
 
 const { Title, Text } = Typography;
 
-type Props = {
-    id: string,
-    title: string,
-    price: number,
-    categories: Array<TCategory>,
-    img: string
-}
-
-const CardProduct: React.FC<Props> = ({ id, title, price, categories, img }) => {
+const CardProduct: React.FC<TProduct> = ({ id, title, price, categories, img }) => {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectAuth);
     let mas: Array<string> = [];

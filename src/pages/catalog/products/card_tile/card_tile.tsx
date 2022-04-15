@@ -12,7 +12,7 @@ import { TCategory } from '../../../../models/category';
 const { Title } = Typography;
 
 type Props = {
-    id: string,
+    id: number,
     title: string,
     price: number,
     categories: Array<TCategory>,

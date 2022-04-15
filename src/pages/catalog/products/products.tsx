@@ -56,7 +56,6 @@ const Products: React.FC = () => {
                             {
                                 view === "list" && (
                                     <CardList
-                                        key={item.id}
                                         id={item.id}
                                         title={item.title}
                                         price={item.price}

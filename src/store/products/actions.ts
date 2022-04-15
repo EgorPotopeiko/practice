@@ -15,7 +15,7 @@ export const GetProductsErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_ERROR,
     error
 })
-export const GetProductStartAction = (id: string) => ({
+export const GetProductStartAction = (id: number) => ({
     type: ProductsActionTypes.LOAD_PRODUCT_START,
     id
 })
@@ -41,7 +41,7 @@ export const CreateProductErrorAction = (error: any) => ({
 export const RemoveProductAction = () => ({
     type: ProductsActionTypes.REMOVE_PRODUCT
 })
-export const DeleteProductAction = (id: string) => ({
+export const DeleteProductAction = (id: number) => ({
     type: ProductsActionTypes.DELETE_PRODUCT,
     id
 })

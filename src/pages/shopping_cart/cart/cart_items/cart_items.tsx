@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import { DeleteOutlined } from '@ant-design/icons';
-import { Space, Table } from 'antd';
+import { Space, Spin, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './cart_items.less';
@@ -16,7 +16,6 @@ type Props = {
 const CartItems: React.FC<Props> = ({ idProduct }) => {
     const [cartData, setCartData]: any[] = useState([]);
     cartData.map((item: any) => {
-        console.log(item)
         item['key'] = item.id
     })
     const user = useSelector(selectUser);
@@ -72,10 +71,13 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
         }
     }, [idProduct])
     return (
-        <Table
-            bordered
-            dataSource={cartData}
-            columns={columns} />
+        <Spin spinning={idProduct === undefined ? true : false}>
+            <Table
+                bordered
+                dataSource={cartData}
+                columns={columns} />
+        </Spin>
+
     )
 }
 

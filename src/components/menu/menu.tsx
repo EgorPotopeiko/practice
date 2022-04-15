@@ -13,6 +13,7 @@ import { selectUser } from '../../store/login/selectors';
 import './menu.less';
 import { GetPage } from '../../store/products/actions';
 import { selectPageSize } from '../../store/products/selectors';
+import { TCategory } from '../../models/category';
 
 const { TabPane } = Tabs;
 
@@ -74,15 +75,15 @@ const Menu: React.FC = () => {
                 <Tabs
                     defaultActiveKey="1"
                     type="card"
-                    onChange={(categories: any) => {
+                    onChange={(categories: string) => {
                         const putCategory = [];
-                        const findCategory = userTabs.find((category: any) => category.title === categories)
+                        const findCategory = userTabs.find((category: TCategory) => category.title === categories)
                         putCategory.push(findCategory.id)
                         dispatch(GetPage(1, pageSize))
                         dispatch(GetFilters(search, price, putCategory))
                     }}>
                     {
-                        userTabs.map((item: any) => (
+                        userTabs.map((item: TCategory) => (
                             <TabPane tab={item.title.toUpperCase()} key={item.title.toLowerCase()} />
                         ))
                     }

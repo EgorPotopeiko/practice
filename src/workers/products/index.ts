@@ -1,3 +1,4 @@
+import { TProduct } from './../../models/product';
 import { TFilters } from './../../models/filters';
 import { selectAllFilters } from './../../store/filters/selectors';
 import { GetProductErrorAction, GetProductSuccessAction, CreateProductSuccessAction, GetProductsStartAction, GetAllProductsStartAction } from './../../store/products/actions';
@@ -20,7 +21,7 @@ function* loadAllProductList() {
         const pageSize: number = yield select(selectPageSize);
         const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize);
         const total = data.data.totalCount;
-        let newData = data.data.content.map((product: any) => {
+        let newData = data.data.content.map((product: TProduct) => {
             return {
                 id: product.id,
                 title: product.title,
@@ -41,7 +42,7 @@ function* loadProductList() {
         const filters: TFilters = yield select(selectAllFilters);
         const data: AxiosResponse = yield call(ProductsDB.getProducts, page, pageSize, filters);
         const total = data.data.totalCount;
-        let newData = data.data.content.map((product: any) => {
+        let newData = data.data.content.map((product: TProduct) => {
             return {
                 id: product.id,
                 title: product.title,

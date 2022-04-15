@@ -75,7 +75,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
-    products.map((item: TProduct) => { item['key'] = item.id });
+    products.map((item: TProduct) => { item['key'] = item.id.toString() });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');

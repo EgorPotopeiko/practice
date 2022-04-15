@@ -28,7 +28,7 @@ export type TProductsState = {
     view: string
 }
 
-const deleteProduct = (state: TProductsState, id: string) => {
+const deleteProduct = (state: TProductsState, id: number) => {
     const products = state.products;
     return products.filter((product: TProduct) => product.id !== id)
 }
