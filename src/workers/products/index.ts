@@ -74,7 +74,7 @@ function* createProduct(payload: any) {
 function* deleteProduct(payload: any) {
     const { id } = payload;
     yield call(ProductsDB.deleteProduct, id);
-    yield put(GetProductsStartAction())
+    yield put(GetAllProductsStartAction())
 }
 
 export function* productsSaga() {

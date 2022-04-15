@@ -39,9 +39,6 @@ export default class ProductsDB {
     };
 
     static deleteProduct = async (id: any) => {
-        return $api.delete(`/product/delete`, {
-            data: { id: id }
-        })
+        return $api.delete(`/product/${id}`)
     };
-
 }
