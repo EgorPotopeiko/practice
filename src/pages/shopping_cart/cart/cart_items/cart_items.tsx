@@ -1,16 +1,24 @@
 /* eslint-disable array-callback-return */
 import { DeleteOutlined } from '@ant-design/icons';
 import { Space, Table } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './cart_items.less';
 import { TProduct } from '../../../../models/product';
-import { selectCart } from '../../../../store/cart/selectors';
 import { selectUser } from '../../../../store/login/selectors';
 import { GetRemovedCartAction } from '../../../../store/cart/actions';
+import ProductsDB from '../../../../services/products_service';
 
-const CartItems: React.FC = () => {
-    const cartItems = useSelector(selectCart);
+type Props = {
+    idProduct: number | undefined
+}
+
+const CartItems: React.FC<Props> = ({ idProduct }) => {
+    const [cartData, setCartData]: any[] = useState([]);
+    cartData.map((item: any) => {
+        console.log(item)
+        item['key'] = item.id
+    })
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const columns = [
@@ -21,23 +29,28 @@ const CartItems: React.FC = () => {
         },
         {
             title: 'Категория',
-            dataIndex: 'category',
-            key: 'category',
-            render: (record: TProduct) => (
-                <Space size='small'>
-                    {record}
+            dataIndex: 'categories',
+            key: 'categories',
+            render: (_: any, record: any) => (
+                <Space size='middle'>
+                    <span>{record.categories.map((category: any) => {
+                        return category.title + ' '
+                    })}</span>
                 </Space>
             )
         },
         {
             title: 'Количество',
             dataIndex: 'amount',
-            key: 'amount'
+            key: 'amount',
+            render: () => (
+                <span>1</span>
+            )
         },
         {
             title: 'Цена',
-            dataIndex: 'total',
-            key: 'total'
+            dataIndex: 'price',
+            key: 'price'
         },
         {
             title: 'Action',
@@ -49,16 +62,19 @@ const CartItems: React.FC = () => {
             )
         },
     ];
-    cartItems.map((item: any) => {
-        item['key'] = item.id
-        item['total'] = +item.total.toFixed(2)
-    })
     if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) { localStorage.setItem(`orders ${user.name}`, JSON.stringify([])) }
     else { localStorage.getItem(`orders ${user.name}`) }
+    useEffect(() => {
+        if (idProduct !== undefined) {
+            ProductsDB.getProduct(idProduct)
+                .then((response: any) => response.data)
+                .then((data: any) => setCartData([{ ...data }]))
+        }
+    }, [idProduct])
     return (
         <Table
             bordered
-            dataSource={cartItems}
+            dataSource={cartData}
             columns={columns} />
     )
 }

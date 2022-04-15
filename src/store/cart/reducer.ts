@@ -22,11 +22,11 @@ export default function cartReducer(state: TCartState = initialState, action: Ac
     switch (action.type) {
         case CartActionTypes.PRODUCT_ADDED:
             return {
-                ...SuccessActionState(state)
+                ...SuccessActionState(state),
             }
         case CartActionTypes.PRODUCT_REMOVED:
             return {
-                ...SuccessActionState(state)
+                ...SuccessActionState(state),
             }
         default:
             return state
