@@ -1,3 +1,4 @@
+import { TProduct } from './../../models/product';
 import { ProductsActionTypes } from './action-types';
 
 export const GetProductsStartAction = () => ({
@@ -6,7 +7,7 @@ export const GetProductsStartAction = () => ({
 export const GetAllProductsStartAction = () => ({
     type: ProductsActionTypes.LOAD_ALL_PRODUCTS_START
 })
-export const GetProductsSuccessAction = (data: any, total: number) => ({
+export const GetProductsSuccessAction = (data: Array<TProduct>, total: number) => ({
     type: ProductsActionTypes.LOAD_PRODUCTS_SUCCESS,
     data,
     total
@@ -19,7 +20,7 @@ export const GetProductStartAction = (id: number) => ({
     type: ProductsActionTypes.LOAD_PRODUCT_START,
     id
 })
-export const GetProductSuccessAction = (data: any) => ({
+export const GetProductSuccessAction = (data: TProduct) => ({
     type: ProductsActionTypes.LOAD_PRODUCT_SUCCESS,
     data
 })

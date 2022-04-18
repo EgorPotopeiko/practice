@@ -31,7 +31,7 @@ export const GetRegistrationStartAction = (name: string, email: string, password
     email,
     password
 })
-export const GetRegistrationSuccessAction = (data: any) => ({
+export const GetRegistrationSuccessAction = (data: TUser) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_SUCCESS,
     data
 })
@@ -46,7 +46,7 @@ export const GetRegistrationAdminStartAction = (name: string, email: string, pas
     password,
     secret
 })
-export const GetRegistrationAdminSuccessAction = (data: any) => ({
+export const GetRegistrationAdminSuccessAction = (data: TUser) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_ADMIN_SUCCESS,
     data
 })
@@ -61,7 +61,7 @@ export const GetLogout = (user: any) => ({
 export const SetError = () => ({
     type: LoginActionTypes.SET_ERROR
 })
-export const SetSuccess = (success: any) => ({
+export const SetSuccess = (success: string) => ({
     type: LoginActionTypes.SET_SUCCESS,
     success
 })
