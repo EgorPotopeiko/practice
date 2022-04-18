@@ -1,4 +1,3 @@
-import { Redirect, Route, Switch } from 'react-router';
 import { TRoutes } from '../models/routes';
 import AdminPanel from '../pages/admin_panel';
 import Catalog from '../pages/catalog/catalog';
@@ -25,58 +24,16 @@ export const adminRoutes: TRoutes[] = [
 export const guestRoutes: TRoutes[] = [
     { path: APP, Component: Catalog, name: 'Гость', exact: true }
 ]
-
-export const useRoutes = (isAuth: boolean, role: string) => {
+export type TRoutesHook = {
+    routes: TRoutes[],
+    redirect: string
+}
+export const useRoutes = (isAuth: boolean, role: string): TRoutesHook => {
     if (isAuth && role.toLowerCase() === "user") {
-        return (
-            <Switch>
-                {userRoutes.map(({
-                    path,
-                    Component,
-                    exact = true }) => (
-                    <Route
-                        key={path}
-                        path={path}
-                        component={Component}
-                        strict
-                        exact={exact}></Route>
-                ))}
-                <Redirect to={AUTH} />
-            </Switch>
-        )
+        return {routes: userRoutes, redirect: USER_PATH.AUTH}
     }
     if (isAuth && role.toLowerCase() === "admin") {
-        return (
-            <Switch>
-                {adminRoutes.map(({
-                    path,
-                    Component,
-                    exact = true }) => (
-                    <Route
-                        key={path}
-                        path={path}
-                        component={Component}
-                        strict
-                        exact={exact}></Route>
-                ))}
-                <Redirect to={ADMIN} />
-            </Switch>
-        )
+        return {routes: adminRoutes, redirect: ADMIN_PATH.ADMIN}
     }
-    return (
-        <Switch>
-            {guestRoutes.map(({
-                path,
-                Component,
-                exact = true }) => (
-                <Route
-                    key={path}
-                    path={path}
-                    component={Component}
-                    strict
-                    exact={exact}></Route>
-            ))}
-            <Redirect to={APP} />
-        </Switch>
-    )
+    return {routes: guestRoutes, redirect: PUBLIC_PATH.APP}
 }
