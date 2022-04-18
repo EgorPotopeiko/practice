@@ -16,8 +16,8 @@ type Props = {
 
 const CartItems: React.FC<Props> = ({ idProduct }) => {
     const cartData = useSelector(selectCart)
-    cartData.map((item: any) => {
-        item['key'] = item.id
+    cartData.map((cartProduct: any) => {
+        cartProduct['key'] = cartProduct.id
     })
     const user = useSelector(selectUser);
     const dispatch = useDispatch();

@@ -26,7 +26,7 @@ const AdminCategory: React.FC = () => {
                             header={<div>Существующие категории</div>}
                             bordered
                             dataSource={categories}
-                            renderItem={(item: TCategory) => <List.Item actions={[<DeleteOutlined onClick={() => dispatch(DeleteCategoryAction(item.id))} />]}>{item.title}</List.Item>}
+                            renderItem={(category: TCategory) => <List.Item actions={[<DeleteOutlined onClick={() => dispatch(DeleteCategoryAction(category.id))} />]}>{category.title}</List.Item>}
                         />
                     </Col>
                 </Row>

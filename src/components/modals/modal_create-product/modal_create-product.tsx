@@ -125,14 +125,14 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                     mode='multiple'
                                     onChange={(value) => {
                                         value.map((valuesId: string) => {
-                                            categoryValues.map((item: TCategory) => {
-                                                if (item.title === valuesId) setFieldValue('categories', [...values.categories, { id: item.id }])
+                                            categoryValues.map((category: TCategory) => {
+                                                if (category.title === valuesId) setFieldValue('categories', [...values.categories, { id: category.id }])
                                             })
                                         })
 
                                     }}>
-                                    {categoryValues.map((item: TCategory) => (
-                                        <Option key={item.title} value={item.title}>{item.title}</Option>
+                                    {categoryValues.map((category: TCategory) => (
+                                        <Option key={category.title} value={category.title}>{category.title}</Option>
                                     ))}
                                 </Select>
                                 <Button type='link' onClick={() => dispatch(OpenModalAction("CreateCategory"))}>Нет подходящей категории? Создайте свою</Button>

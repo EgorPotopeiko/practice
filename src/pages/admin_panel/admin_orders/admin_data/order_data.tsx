@@ -72,15 +72,15 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
             orders = [...orders, ...result];
         }
     }
-    orders.map((item: TOrder) => {
-        item['key'] = item.id;
-        item['payment'] = `${item.payment}`;
+    orders.map((order: TOrder) => {
+        order['key'] = order.id;
+        order['payment'] = `${order.payment}`;
     })
     const [data, setData] = useState(orders);
     const [editingKey, setEditingKey] = useState('');
-    let filteredData = data.filter((item: TOrder) => item.user.includes(searchUser))
-    filteredData = filteredData.filter((item: TOrder) => item.id.includes(searchNumber))
-    filteredData = filteredData.filter((item: TOrder) => item.status === chooseStatus)
+    let filteredData = data.filter((order: TOrder) => order.user.includes(searchUser))
+    filteredData = filteredData.filter((order: TOrder) => order.id.includes(searchNumber))
+    filteredData = filteredData.filter((order: TOrder) => order.status === chooseStatus)
     const isEditing = (record: TOrder) => record.key === editingKey;
 
     const edit = (record: Partial<TOrder> & { key: React.Key }) => {
@@ -94,16 +94,16 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         try {
             const row = (await form.validateFields()) as TOrder;
             const newData = [...data];
-            const index = newData.findIndex(item => key === item.key);
+            const index = newData.findIndex(order => key === order.key);
             if (index > -1) {
-                const item = newData[index];
+                const order = newData[index];
                 newData.splice(index, 1, {
-                    ...item,
+                    ...order,
                     ...row,
                 });
                 setData(newData);
-                localStorage.removeItem(`orders ${item.user}`);
-                localStorage.setItem(`orders ${item.user}`, JSON.stringify(newData));
+                localStorage.removeItem(`orders ${order.user}`);
+                localStorage.setItem(`orders ${order.user}`, JSON.stringify(newData));
                 setEditingKey('');
             } else {
                 newData.push(row);

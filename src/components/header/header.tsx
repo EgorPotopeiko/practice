@@ -68,7 +68,7 @@ const Header: React.FC = () => {
                                 placeholder="Поиск по названию"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple">
-                                {selectValues.map((item) => (<Option key={item} value={item}>{item.toUpperCase()}</Option>))}
+                                {selectValues.map((maker) => (<Option key={maker} value={maker}>{maker.toUpperCase()}</Option>))}
                             </Select>
                         </>
                         <>

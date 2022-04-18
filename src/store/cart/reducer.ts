@@ -53,7 +53,7 @@ const updateOrder = (state: RootStateOrAny, productId: number, action: AnyAction
     const testMas = state.cartProducts;
     const itemIndex = testMas.findIndex((product: TProduct) => product.id === productId);
     const item = testMas[itemIndex];
-    const finallyItem = updateCartItem(newItem, item, quantity);
+    const finallyItem = updateCartItem(newItem, item, quantity)
     return {
         cartProducts: updateCartItems(testMas, finallyItem, itemIndex)
     }

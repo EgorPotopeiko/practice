@@ -15,8 +15,8 @@ const OrderFilters: React.FC<Props> = ({ handlerFilter }) => {
     return (
         <div className="order__filters">
             <Select placeholder="Статус" onChange={(status) => handlerFilter("chooseStatus")(status)}>
-                {selectValues.map((item) => (
-                    <Option key={item} value={item}>{item}</Option>
+                {selectValues.map((status) => (
+                    <Option key={status} value={status}>{status}</Option>
                 ))}
             </Select>
             <Input placeholder="Пользователь" onChange={(e) => handlerFilter("searchUser")(e.target.value)} />

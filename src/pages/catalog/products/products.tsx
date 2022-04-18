@@ -51,27 +51,27 @@ const Products: React.FC = () => {
                         total: totalCount,
                         onChange: (page: number, pageSize: number) => pagination(page, pageSize)
                     }}
-                    renderItem={(item: TProduct) => (
+                    renderItem={(product: TProduct) => (
                         <>
                             {
                                 view === "list" && (
                                     <CardList
-                                        id={item.id}
-                                        title={item.title}
-                                        price={item.price}
-                                        categories={item.categories}
-                                        img={item.img}
+                                        id={product.id}
+                                        title={product.title}
+                                        price={product.price}
+                                        categories={product.categories}
+                                        img={product.img}
                                     />
                                 )}
                             {
                                 view === "tile" && (
                                     <CardTile
-                                        key={item.id}
-                                        id={item.id}
-                                        title={item.title}
-                                        price={item.price}
-                                        categories={item.categories}
-                                        img={item.img}
+                                        key={product.id}
+                                        id={product.id}
+                                        title={product.title}
+                                        price={product.price}
+                                        categories={product.categories}
+                                        img={product.img}
                                     />
                                 )}
                         </>

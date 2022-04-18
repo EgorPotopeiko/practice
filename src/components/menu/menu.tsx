@@ -86,8 +86,8 @@ const Menu: React.FC = () => {
                     defaultActiveKey="1"
                     type="card"
                     onChange={(categories: string) => handler(categories)}>
-                    {userTabs.map((item: TCategory) => (
-                        <TabPane tab={item.title} key={item.title} />
+                    {userTabs.map((category: TCategory) => (
+                        <TabPane tab={category.title} key={category.title} />
                     ))}
                 </Tabs>
             }

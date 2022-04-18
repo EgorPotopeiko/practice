@@ -44,10 +44,10 @@ const EditableCell: React.FC<EditableCellProps> = ({
 }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
     const listCategories = useSelector(selectListCategories);
-    const filterCategories = listCategories.filter((item: string) => item !== '');
+    const filterCategories = listCategories.filter((category: string) => category !== '');
     const categoryNode = <Select>
-        {filterCategories.map((item: string) => (
-            <Option key={item} value={item}>{item}</Option>
+        {filterCategories.map((category: string) => (
+            <Option key={category} value={category}>{category}</Option>
         ))}
     </Select>
     return (
@@ -76,13 +76,13 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [form] = Form.useForm();
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
-    products.map((item: TProduct) => { item['key'] = item.id.toString() });
+    products.map((product: TProduct) => { product['key'] = product.id.toString() });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
-    let newData = data.filter((item: TProduct) => item.title.includes(searchName));
-    newData = newData.filter((item: TProduct) => item.id.toString().includes(searchArticle));
-    newData = newData.filter((item: TProduct) => item.categories.find((element: TCategory) => element.title === searchCategory))
+    let newData = data.filter((product: TProduct) => product.title.includes(searchName));
+    newData = newData.filter((product: TProduct) => product.id.toString().includes(searchArticle));
+    newData = newData.filter((product: TProduct) => product.categories.find((element: TCategory) => element.title === searchCategory))
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {
@@ -96,11 +96,11 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
         try {
             const row = (await form.validateFields()) as TProduct;
             const newData = [...data];
-            const index = newData.findIndex(item => key === item.key);
+            const index = newData.findIndex(product => key === product.key);
             if (index > -1) {
-                const item = newData[index];
+                const product = newData[index];
                 newData.splice(index, 1, {
-                    ...item,
+                    ...product,
                     ...row,
                 });
                 setData(newData);

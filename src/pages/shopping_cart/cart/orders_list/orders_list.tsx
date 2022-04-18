@@ -36,10 +36,10 @@ const OrdersList: React.FC = () => {
             key: 'payment'
         },
     ];
-    ordersItems.map((item: TOrder) => {
-        item['key'] = item.id;
-        item['address'] = `${item.town}, ул.${item.street}, ${item.house}`;
-        item['payment'] = `${item.payment} руб.`;
+    ordersItems.map((order: TOrder) => {
+        order['key'] = order.id;
+        order['address'] = `${order.town}, ул.${order.street}, ${order.house}`;
+        order['payment'] = `${order.payment} руб.`;
     })
     return (
         <>
