@@ -1,4 +1,3 @@
-import { TValues } from '../../components/modals/modal_create-product/modal_create-product';
 import { ProductsActionTypes } from './action-types';
 
 export const GetProductsStartAction = () => ({
@@ -28,7 +27,7 @@ export const GetProductErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCT_ERROR,
     error
 })
-export const CreateProductStartAction = (product: TValues) => ({
+export const CreateProductStartAction = (product: any) => ({
     type: ProductsActionTypes.CREATE_PRODUCT_START,
     product
 })

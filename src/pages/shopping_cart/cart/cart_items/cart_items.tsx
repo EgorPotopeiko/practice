@@ -8,6 +8,7 @@ import { TProduct } from '../../../../models/product';
 import { selectUser } from '../../../../store/login/selectors';
 import { GetRemovedCartAction } from '../../../../store/cart/actions';
 import { selectCart } from '../../../../store/cart/selectors';
+import { TCategory } from '../../../../models/category';
 
 type Props = {
     idProduct: number | undefined
@@ -30,9 +31,9 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
             title: 'Категория',
             dataIndex: 'categories',
             key: 'categories',
-            render: (_: any, record: any) => (
+            render: (_: any, record: TProduct) => (
                 <Space size='middle'>
-                    <span>{record.categories.map((category: any) => {
+                    <span>{record.categories.map((category: TCategory) => {
                         return category.title + ' '
                     })}</span>
                 </Space>

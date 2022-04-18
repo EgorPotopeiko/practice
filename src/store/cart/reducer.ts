@@ -1,3 +1,4 @@
+import { TCartProduct } from './../../models/cart-product';
 import { CartActionTypes } from './action-types';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions';
@@ -35,7 +36,7 @@ const updateCartItems = (cartProducts: Array<TProduct>, item: any, idx: number) 
     ]
 };
 
-const updateCartItem = (product: any, item: any = {}, quantity: number) => {
+const updateCartItem = (product: TCartProduct, item: any = {}, quantity: number) => {
     const { total = 0, amount = 0 } = item
     return {
         id: product.id,

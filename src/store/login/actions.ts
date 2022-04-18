@@ -1,9 +1,10 @@
+import { TUser } from './../../models/user';
 import { LoginActionTypes } from './action-types';
 
 export const GetRefreshStartAction = () => ({
     type: LoginActionTypes.REFRESH_START,
 })
-export const GetRefreshSuccessAction = (data: any) => ({
+export const GetRefreshSuccessAction = (data: TUser) => ({
     type: LoginActionTypes.REFRESH_SUCCESS,
     data
 })
@@ -16,7 +17,7 @@ export const GetAuthorizationStartAction = (email: string, password: string) => 
     email,
     password
 })
-export const GetAuthorizationSuccessAction = (data: any) => ({
+export const GetAuthorizationSuccessAction = (data: TUser) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_SUCCESS,
     data
 })
@@ -38,7 +39,7 @@ export const GetRegistrationErrorAction = (error: any) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_ERROR,
     error
 })
-export const GetRegistrationAdminStartAction = (name: string, email: string, password: string, secret: any) => ({
+export const GetRegistrationAdminStartAction = (name: string, email: string, password: string, secret: string) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_ADMIN_START,
     name,
     email,
