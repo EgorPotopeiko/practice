@@ -28,6 +28,13 @@ export type TMenuState = {
 }
 
 const Menu: React.FC = () => {
+    const user = useSelector(selectUser);
+    const pageSize = useSelector(selectPageSize);
+    const userTabs = useSelector(selectListCategories);
+    const dispatch = useDispatch();
+    const filters = useSelector(selectAllFilters);
+    const { price, search } = filters;
+
     const [filter, setFilter] = useState<TMenuState>({
         searchName: '',
         searchArticle: '',
@@ -43,16 +50,18 @@ const Menu: React.FC = () => {
             [type]: value
         })
     }
-    const user = useSelector(selectUser);
-    const pageSize = useSelector(selectPageSize);
-    const userTabs = useSelector(selectListCategories);
-    const dispatch = useDispatch();
-    const filters = useSelector(selectAllFilters);
-    const { price, search } = filters;
+    //handlers
+    const handler = (categories: string) => {
+        const putCategory = [];
+        const findCategory = userTabs.find((category: TCategory) => category.title === categories);
+        putCategory.push(findCategory.id);
+        dispatch(GetPage(1, pageSize));
+        dispatch(GetFilters(search, price, putCategory));
+    }
+
     return (
         <div className="menu__catalog">
-            {user.role.toLowerCase() === "admin"
-                &&
+            {user.role.toLowerCase() === "admin" &&
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
                         <ProductsFilter handlerFilter={handlerFilter} />
@@ -76,18 +85,10 @@ const Menu: React.FC = () => {
                 <Tabs
                     defaultActiveKey="1"
                     type="card"
-                    onChange={(categories: string) => {
-                        const putCategory = [];
-                        const findCategory = userTabs.find((category: TCategory) => category.title === categories);
-                        putCategory.push(findCategory.id);
-                        dispatch(GetPage(1, pageSize));
-                        dispatch(GetFilters(search, price, putCategory));
-                    }}>
-                    {
-                        userTabs.map((item: TCategory) => (
-                            <TabPane tab={item.title.toUpperCase()} key={item.title.toLowerCase()} />
-                        ))
-                    }
+                    onChange={(categories: string) => handler(categories)}>
+                    {userTabs.map((item: TCategory) => (
+                        <TabPane tab={item.title.toUpperCase()} key={item.title.toLowerCase()} />
+                    ))}
                 </Tabs>
             }
         </div>

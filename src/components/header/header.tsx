@@ -38,17 +38,15 @@ const Header: React.FC = () => {
                     }}>
                         <Link to={PUBLIC_PATH.APP}>Shop</Link></Title>
                     <div className='header__user'>
-                        {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
-                            ?
+                        {user.role !== "ADMIN" &&
+                            (history.location.pathname === "/auth" || history.location.pathname === "/") &&
                             <Input
                                 suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
                                 placeholder="Поиск по названию"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
-                            :
-                            null
                         }
                         <Button onClick={() => {
-                            user.role === "guest" && isAuth === false
+                            user.role === "GUEST" && !isAuth
                                 ?
                                 dispatch(OpenModalAction("Auth"))
                                 :
@@ -57,7 +55,7 @@ const Header: React.FC = () => {
                                 }))
                         }}>{isAuth ? 'Выйти' : 'Войти'}
                         </Button>
-                        <Link to={USER_PATH.CART}><UserOutlined hidden={isAuth ? false : true} /></Link>
+                        <Link to={USER_PATH.CART}><UserOutlined hidden={!isAuth} /></Link>
                     </div>
                 </div>
                 {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")

@@ -1,7 +1,6 @@
-/* eslint-disable no-lone-blocks */
 import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
-import { Formik } from 'formik';
+import {Formik, FormikValues} from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button, Checkbox, Spin, Typography } from 'antd';
 import './modal_registration.less';
@@ -10,20 +9,14 @@ import { selectStatus } from '../../../store/login/selectors';
 import * as Yup from 'yup';
 import { GetRegistrationAdminStartAction, GetRegistrationStartAction } from '../../../store/login/actions';
 import { useState } from 'react';
+import registrationSchema from "./schema";
+const { Title } = Typography;
 
 type Props = {
     visible: boolean,
     onCancel: () => void
 }
 
-const { Title } = Typography;
-
-const RegistrationSchema = Yup.object().shape({
-    name: Yup.string().min(2, 'Too short name').required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(5, 'Too Short!').required('Required'),
-    secret: Yup.string()
-});
 
 const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
     const { isLoading } = useSelector(selectStatus);
@@ -35,6 +28,10 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
         name: '',
         secret: ''
     }
+    const handlerSubmit = (values: FormikValues) => {
+        { !!isAdmin && dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret)) }
+        { !isAdmin && dispatch(GetRegistrationStartAction(values.name, values.email, values.password)) }
+    }
     return (
         <>
             <Modal
@@ -43,17 +40,14 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                 visible={visible}
                 onCancel={onCancel}
                 footer={null}>
-                <Spin spinning={!!isLoading}>
+                <Spin spinning={isLoading}>
                     <div className='modal__registration'>
                         <Formik
                             initialValues={initialValues}
                             validateOnBlur
-                            validationSchema={RegistrationSchema}
-                            onSubmit={async (values) => {
-                                { !!isAdmin && await dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret)) }
-                                { !isAdmin && await dispatch(GetRegistrationStartAction(values.name, values.email, values.password)) }
-                            }}>
-                            {(formic) => (
+                            validationSchema={registrationSchema}
+                            onSubmit={handlerSubmit}>
+                            {(_formic) => (
                                 <Form >
                                     <FormItem name='name'>
                                         <FormInput
