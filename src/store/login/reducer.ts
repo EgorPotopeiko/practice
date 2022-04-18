@@ -35,7 +35,7 @@ export default function loginReducer(state: TLoginState = initialState, action: 
             return {
                 ...state,
                 error: action.error,
-                isLoading: false,
+                isLoading: false
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_START:
             return {

@@ -37,7 +37,7 @@ const updateCartItems = (cartProducts: Array<TProduct>, item: any, idx: number) 
 };
 
 const updateCartItem = (product: TCartProduct, item: any = {}, quantity: number) => {
-    const { total = 0, amount = 0 } = item
+    const { total = 0, amount = 0 } = item;
     return {
         id: product.id,
         title: product.title,

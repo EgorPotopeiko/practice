@@ -12,6 +12,6 @@ export const GetRemovedCartAction = (products: Array<object>, cartProduct: TProd
     cartProduct
 })
 export const GetClearCartAction = () => ({
-    type: CartActionTypes.CLEAR_CART,
+    type: CartActionTypes.CLEAR_CART
 })
 

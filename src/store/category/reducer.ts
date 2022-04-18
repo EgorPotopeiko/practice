@@ -1,5 +1,5 @@
 import { InferValueTypes } from '../../models/common';
-import * as actions from './actions'
+import * as actions from './actions';
 import { ErrorActionState, StartActionState, SuccessActionState } from '../helpers';
 import { CategoryActionTypes } from './action-types';
 
@@ -27,9 +27,7 @@ export default function categoryReducer(state: TCategoryState = initialState, ac
         case CategoryActionTypes.CREATE_CATEGORY_START:
             return StartActionState(state)
         case CategoryActionTypes.CREATE_CATEGORY_SUCCESS:
-            return {
-                ...SuccessActionState(state)
-            }
+            return SuccessActionState(state)
         case CategoryActionTypes.CREATE_CATEGORY_ERROR:
             return ErrorActionState(state, action.error)
         case CategoryActionTypes.DELETE_CATEGORY:

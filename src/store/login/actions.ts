@@ -2,7 +2,7 @@ import { TUser } from './../../models/user';
 import { LoginActionTypes } from './action-types';
 
 export const GetRefreshStartAction = () => ({
-    type: LoginActionTypes.REFRESH_START,
+    type: LoginActionTypes.REFRESH_START
 })
 export const GetRefreshSuccessAction = (data: TUser) => ({
     type: LoginActionTypes.REFRESH_SUCCESS,

@@ -52,7 +52,7 @@ export default function productsReducer(state: TProductsState = initialState, ac
         case ProductsActionTypes.LOAD_PRODUCT_SUCCESS:
             return {
                 ...SuccessActionState(state),
-                product: action.data,
+                product: action.data
             }
         case ProductsActionTypes.LOAD_PRODUCT_ERROR:
             return ErrorActionState(state, action.error)
