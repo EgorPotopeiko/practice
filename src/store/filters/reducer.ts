@@ -5,7 +5,7 @@ import { FiltersActionTypes } from './action-types';
 const initialState: TFiltersState = {
     search: "",
     price: [0, 5000],
-    category: [1]
+    category: [2]
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
@@ -30,7 +30,7 @@ export default function filtersReducer(state: TFiltersState = initialState, acti
                 ...state,
                 search: "",
                 price: [0, 5000],
-                category: [1]
+                category: [2]
             }
         default:
             return state

@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
@@ -49,10 +50,8 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                             validateOnBlur
                             validationSchema={RegistrationSchema}
                             onSubmit={async (values) => {
-                                isAdmin ?
-                                    await dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret))
-                                    :
-                                    await dispatch(GetRegistrationStartAction(values.name, values.email, values.password))
+                                { !!isAdmin && await dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret)) }
+                                { !isAdmin && await dispatch(GetRegistrationStartAction(values.name, values.email, values.password)) }
                             }}>
                             {(formic) => (
                                 <Form >
