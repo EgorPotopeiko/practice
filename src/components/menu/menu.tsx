@@ -61,7 +61,7 @@ const Menu: React.FC = () => {
 
     return (
         <div className="menu__catalog">
-            {user.role.toLowerCase() === "admin" &&
+            {user.role === "ADMIN" &&
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
                         <ProductsFilter handlerFilter={handlerFilter} />
@@ -81,13 +81,13 @@ const Menu: React.FC = () => {
                     </TabPane>
                 </Tabs>
             }
-            {(user.role.toLowerCase() === "user" || user.role.toLowerCase() === "guest") &&
+            {(user.role === "USER" || user.role === "GUEST") &&
                 <Tabs
                     defaultActiveKey="1"
                     type="card"
                     onChange={(categories: string) => handler(categories)}>
                     {userTabs.map((item: TCategory) => (
-                        <TabPane tab={item.title.toUpperCase()} key={item.title.toLowerCase()} />
+                        <TabPane tab={item.title} key={item.title} />
                     ))}
                 </Tabs>
             }

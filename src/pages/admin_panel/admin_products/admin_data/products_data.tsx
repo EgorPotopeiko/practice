@@ -80,9 +80,9 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
-    let newData = data.filter((item: TProduct) => item.title.toLowerCase().includes(searchName.toLowerCase()));
+    let newData = data.filter((item: TProduct) => item.title.includes(searchName));
     newData = newData.filter((item: TProduct) => item.id.toString().includes(searchArticle));
-    newData = newData.filter((item: TProduct) => item.categories.find((element: TCategory) => element.title === searchCategory.toLowerCase()))
+    newData = newData.filter((item: TProduct) => item.categories.find((element: TCategory) => element.title === searchCategory))
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {

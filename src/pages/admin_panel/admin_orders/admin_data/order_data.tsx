@@ -78,8 +78,8 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
     })
     const [data, setData] = useState(orders);
     const [editingKey, setEditingKey] = useState('');
-    let filteredData = data.filter((item: TOrder) => item.user.toLowerCase().includes(searchUser.toLowerCase()))
-    filteredData = filteredData.filter((item: TOrder) => item.id.toLowerCase().includes(searchNumber.toLowerCase()))
+    let filteredData = data.filter((item: TOrder) => item.user.includes(searchUser))
+    filteredData = filteredData.filter((item: TOrder) => item.id.includes(searchNumber))
     filteredData = filteredData.filter((item: TOrder) => item.status === chooseStatus)
     const isEditing = (record: TOrder) => record.key === editingKey;
 

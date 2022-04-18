@@ -51,14 +51,14 @@ const Header: React.FC = () => {
                                 dispatch(OpenModalAction("Auth"))
                                 :
                                 dispatch(GetLogout({
-                                    role: "guest"
+                                    role: "GUEST"
                                 }))
                         }}>{isAuth ? 'Выйти' : 'Войти'}
                         </Button>
                         <Link to={USER_PATH.CART}><UserOutlined hidden={!isAuth} /></Link>
                     </div>
                 </div>
-                {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
+                {(user.role === "GUEST" || user.role === "USER") && (history.location.pathname === "/auth" || history.location.pathname === "/")
                     ?
                     <div className='header__filters'>
                         <>
