@@ -18,10 +18,6 @@ const { Title, Text } = Typography;
 
 const { Option } = Select;
 
-const { APP } = PUBLIC_PATH;
-
-const { CART } = USER_PATH;
-
 export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
 
 const Header: React.FC = () => {
@@ -40,7 +36,7 @@ const Header: React.FC = () => {
                         dispatch(RemoveAllFilters())
                         dispatch(GetPage(1, pageSize))
                     }}>
-                        <Link to={APP}>Shop</Link></Title>
+                        <Link to={PUBLIC_PATH.APP}>Shop</Link></Title>
                     <div className='header__user'>
                         {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
                             ?
@@ -61,7 +57,7 @@ const Header: React.FC = () => {
                                 }))
                         }}>{isAuth ? 'Выйти' : 'Войти'}
                         </Button>
-                        <Link to={CART}><UserOutlined hidden={isAuth ? false : true} /></Link>
+                        <Link to={USER_PATH.CART}><UserOutlined hidden={isAuth ? false : true} /></Link>
                     </div>
                 </div>
                 {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")

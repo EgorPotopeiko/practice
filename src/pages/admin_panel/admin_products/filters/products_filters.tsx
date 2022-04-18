@@ -3,10 +3,9 @@ import React from 'react';
 import './products_filters.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectListCategories } from '../../../../store/category/selectors';
-
 import { OpenModalAction } from '../../../../store/modals/actions';
 import { TCategory } from '../../../../models/category';
-import {TMenuState} from "../../../../components/menu/menu";
+import { TMenuState } from "../../../../components/menu/menu";
 
 type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
