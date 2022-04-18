@@ -169,9 +169,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
     ];
 
     const mergedColumns = columns.map(col => {
-        if (!col.editable) {
-            return col;
-        }
+        if (!col.editable) return col;
         return {
             ...col,
             onCell: (record: TOrder) => ({

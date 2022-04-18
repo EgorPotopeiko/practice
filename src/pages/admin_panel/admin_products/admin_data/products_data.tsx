@@ -172,9 +172,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize))
 
     const mergedColumns = columns.map(col => {
-        if (!col.editable) {
-            return col;
-        }
+        if (!col.editable) return col;
         return {
             ...col,
             onCell: (record: TProduct) => ({
