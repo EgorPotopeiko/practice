@@ -17,9 +17,7 @@ function* login({ email, password }: ReturnType<typeof GetAuthorizationStartActi
         yield put(GetAuthorizationSuccessAction(tryLogin.data.user))
         yield put(CloseModalAction())
     }
-    catch (error) {
-        yield put(GetAuthorizationErrorAction(error))
-    }
+    catch (error) { yield put(GetAuthorizationErrorAction(error)) }
 }
 
 export default login

@@ -3,9 +3,7 @@ import { call } from 'redux-saga/effects';
 import CartDB from '../../services/cart_service';
 
 function* add({ products }: ReturnType<typeof GetAddedCartAction>) {
-    try {
-        yield call(CartDB.addToCart, products)
-    }
+    try { yield call(CartDB.addToCart, products) }
     catch (error) { console.log(error) }
 }
 

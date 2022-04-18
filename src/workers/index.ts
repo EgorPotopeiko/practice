@@ -2,7 +2,7 @@ import { all, fork } from 'redux-saga/effects';
 import { cartSaga } from './cart';
 import { categoriesSaga } from './category';
 import { loginSaga } from './login';
-import pageLoader from './pageLoader';
+import { pageLoader } from './pageLoader';
 import { productsSaga } from './products';
 
 export default function* rootSaga() {
