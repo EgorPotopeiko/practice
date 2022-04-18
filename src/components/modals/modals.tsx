@@ -28,9 +28,7 @@ const Modals: React.FC = () => {
             case "CreateCategory":
                 return <ModalCreateCategory onCancel={() => closeActions()} visible={modalParams.isOpen} />
             default:
-                return (
-                    null
-                )
+                return null
         }
     }
 }

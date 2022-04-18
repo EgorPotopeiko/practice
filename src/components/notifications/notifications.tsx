@@ -33,9 +33,7 @@ const Notifications: React.FC = () => {
                     <NotificationSuccess message='Успешное создание заказа' description='Ваш заказ создан' />
                 )
             default:
-                return (
-                    null
-                )
+                return null
         }
     }
     else {

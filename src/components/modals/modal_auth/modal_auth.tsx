@@ -19,7 +19,7 @@ const { Title } = Typography
 
 const SignupSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(3, 'Too Short!').required('Required'),
+    password: Yup.string().min(3, 'Too Short!').required('Required')
 });
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {

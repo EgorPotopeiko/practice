@@ -67,8 +67,12 @@ const Header: React.FC = () => {
                 {(user.role.toLowerCase() === "guest" || user.role.toLowerCase() === "user") && (history.location.pathname === "/auth" || history.location.pathname === "/")
                     ?
                     <div className='header__filters'>
-                        <>price
-                            <Input suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, price, category))} />} placeholder="Поиск по названию" onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        <>
+                            <Input
+                                suffix={<SearchOutlined
+                                    onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
+                                placeholder="Поиск по названию"
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple">
                                 {selectValues.map((item) => (<Option key={item} value={item}>{item.toUpperCase()}</Option>))}
                             </Select>

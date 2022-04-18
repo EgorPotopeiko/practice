@@ -3,7 +3,7 @@ import React from 'react';
 
 type Props = {
     message: string,
-    description: string,
+    description: string
 }
 
 const NotificationSuccess: React.FC<Props> = ({ message, description }) => {
@@ -14,7 +14,7 @@ const NotificationSuccess: React.FC<Props> = ({ message, description }) => {
                     message: `${message}`,
                     type: 'success',
                     description:
-                        `${description}`,
+                        `${description}`
                 })
             }
         </>

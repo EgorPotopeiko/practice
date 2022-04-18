@@ -28,9 +28,6 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
     const { isLoading } = useSelector(selectStatus);
     const [isAdmin, setIsAdmin] = useState(false);
     const dispatch = useDispatch();
-    // const btn = (
-    //     <Button type='primary' onClick={() => dispatch(OpenModalAction('Auth'))}>Перейти к авторизации</Button>
-    // )
     const initialValues = {
         email: '',
         password: '',
