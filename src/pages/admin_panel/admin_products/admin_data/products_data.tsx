@@ -44,7 +44,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
     const listCategories = useSelector(selectListCategories);
-    const filterCategories = listCategories.filter((item: string) => item !== 'test');
+    const filterCategories = listCategories.filter((item: string) => item !== '');
     const categoryNode = <Select>
         {filterCategories.map((item: string) => (
             <Option key={item} value={item}>{item}</Option>

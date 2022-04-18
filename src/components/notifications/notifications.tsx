@@ -28,6 +28,10 @@ const Notifications: React.FC = () => {
                 return (
                     <NotificationSuccess message='Успешная регистрация администратора' description='Администратор зарегистрирован' />
                 )
+            case 'Success_order':
+                return (
+                    <NotificationSuccess message='Успешное создание заказа' description='Ваш заказ создан' />
+                )
             default:
                 return (
                     null

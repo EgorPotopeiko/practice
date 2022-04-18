@@ -11,6 +11,8 @@ import { selectUser } from '../../../../store/login/selectors';
 import { RemoveAllFilters } from '../../../../store/filters/actions';
 import { GetPage } from '../../../../store/products/actions';
 import { selectPageSize } from '../../../../store/products/selectors';
+import { SetSuccess } from '../../../../store/login/actions';
+import { GetClearCartAction } from '../../../../store/cart/actions';
 
 type Props = {
     visible: boolean,
@@ -70,17 +72,17 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             createFilter("loading")(true)
             setSubmitting(true)
             setTimeout(() => {
-                values.id = nanoid()
-                values.delivery = filter.delivery
-                values.count = filter.length
-                values.payment = total
-                const newOrder = values
-                const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
-                localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
-                createFilter("loading")(false)
-                setSubmitting(false)
-                setVisible(false)
-                createFilter("orderVisible")(true)
+                values.id = nanoid();
+                values.delivery = filter.delivery;
+                values.count = filter.length;
+                values.payment = total;
+                const newOrder = values;
+                const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
+                localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]));
+                createFilter("loading")(false);
+                setSubmitting(false);
+                setVisible(false);
+                createFilter("orderVisible")(true);
             }, 3000)
         }
 
@@ -90,7 +92,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
 
     const onClose = () => {
         setVisible(false);
-        createFilter("orderVisible")(false)
+        createFilter("orderVisible")(false);
     };
 
     const onChange = (e: RadioChangeEvent) => { createFilter("delivery")(e.target.value) };
@@ -98,15 +100,17 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const finishOrder = () => {
         createFilter("loading")(true)
         setTimeout(() => {
-            values.status = "оплачен"
-            const newOrder = values
-            const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!)
-            orders.pop()
-            localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]))
-            dispatch(RemoveAllFilters())
+            values.status = "оплачен";
+            const newOrder = values;
+            const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
+            orders.pop();
+            localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]));
+            dispatch(SetSuccess('Success_order'));
+            dispatch(RemoveAllFilters());
+            dispatch(GetClearCartAction());
             dispatch(GetPage(1, pageSize));
-            createFilter("loading")(false)
-            createFilter("orderVisible")(false)
+            createFilter("loading")(false);
+            createFilter("orderVisible")(false);
         }, 3000)
     }
 
@@ -114,8 +118,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
         orders.pop();
         localStorage.setItem(`orders ${authUser.name}`, JSON.stringify(orders));
-        createFilter("orderVisible")(false)
-        setVisible(true)
+        createFilter("orderVisible")(false);
+        setVisible(true);
     }
 
     useEffect(() => {
@@ -125,8 +129,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             ttl += +el.total;
             len += +el.amount;
         });
-        setTotal(+ttl.toFixed(2))
-        createFilter("length")(len)
+        setTotal(+ttl.toFixed(2));
+        createFilter("length")(len);
     }, [cartItems]);
     return (
         <>

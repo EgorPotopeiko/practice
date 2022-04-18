@@ -28,7 +28,7 @@ const CardTile: React.FC<Props> = ({ id, title, price, categories, img }) => {
                 <Title onClick={isAuth ? () => dispatch(GetProductStartAction(id)) : undefined} level={4}>{isAuth ? <Link to={`/auth/product/${id}`}>{title}</Link> : title}</Title>
             )}>
                 <p>{price} руб.</p>
-                <ShoppingCartOutlined hidden={isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction([{ id: id }]))} />
+                <ShoppingCartOutlined hidden={isAuth ? false : true} onClick={() => dispatch(GetAddedCartAction([{ id: id }], { id, title, price, categories, img }))} />
             </Card>
         </div>
     );

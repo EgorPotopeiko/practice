@@ -1,20 +1,20 @@
 /* eslint-disable array-callback-return */
 import { DeleteOutlined } from '@ant-design/icons';
 import { Space, Spin, Table } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './cart_items.less';
 import { TProduct } from '../../../../models/product';
 import { selectUser } from '../../../../store/login/selectors';
 import { GetRemovedCartAction } from '../../../../store/cart/actions';
-import ProductsDB from '../../../../services/products_service';
+import { selectCart } from '../../../../store/cart/selectors';
 
 type Props = {
     idProduct: number | undefined
 }
 
 const CartItems: React.FC<Props> = ({ idProduct }) => {
-    const [cartData, setCartData]: any[] = useState([]);
+    const cartData = useSelector(selectCart)
     cartData.map((item: any) => {
         item['key'] = item.id
     })
@@ -42,34 +42,24 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
             title: 'Количество',
             dataIndex: 'amount',
             key: 'amount',
-            render: () => (
-                <span>1</span>
-            )
         },
         {
             title: 'Цена',
-            dataIndex: 'price',
-            key: 'price'
+            dataIndex: 'total',
+            key: 'total'
         },
         {
             title: 'Action',
             key: 'action',
             render: (record: TProduct) => (
                 <Space size="middle">
-                    <DeleteOutlined onClick={() => dispatch(GetRemovedCartAction([{ id: record.id }]))} />
+                    <DeleteOutlined onClick={() => dispatch(GetRemovedCartAction([{ id: record.id }], { id: record.id, title: record.title, price: record.price, categories: record.categories, img: record.img }))} />
                 </Space>
             )
         },
     ];
     if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) { localStorage.setItem(`orders ${user.name}`, JSON.stringify([])) }
     else { localStorage.getItem(`orders ${user.name}`) }
-    useEffect(() => {
-        if (idProduct !== undefined) {
-            ProductsDB.getProduct(idProduct)
-                .then((response: any) => response.data)
-                .then((data: any) => setCartData([{ ...data }]))
-        }
-    }, [idProduct])
     return (
         <Spin spinning={idProduct === undefined ? true : false}>
             <Table
