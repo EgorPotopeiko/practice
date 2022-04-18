@@ -44,7 +44,7 @@ const Menu: React.FC = () => {
         })
     }
     const user = useSelector(selectUser);
-    const pageSize = useSelector(selectPageSize)
+    const pageSize = useSelector(selectPageSize);
     const userTabs = useSelector(selectListCategories);
     const dispatch = useDispatch();
     const filters = useSelector(selectAllFilters);
@@ -52,7 +52,7 @@ const Menu: React.FC = () => {
     return (
         <div className="menu__catalog">
             {user.role.toLowerCase() === "admin"
-                ?
+                &&
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
                         <ProductsFilter handlerFilter={handlerFilter} />
@@ -71,16 +71,17 @@ const Menu: React.FC = () => {
                             searchNumber={filter.searchNumber} />
                     </TabPane>
                 </Tabs>
-                :
+            }
+            {(user.role.toLowerCase() === "user" || user.role.toLowerCase() === "guest") &&
                 <Tabs
                     defaultActiveKey="1"
                     type="card"
                     onChange={(categories: string) => {
                         const putCategory = [];
-                        const findCategory = userTabs.find((category: TCategory) => category.title === categories)
-                        putCategory.push(findCategory.id)
-                        dispatch(GetPage(1, pageSize))
-                        dispatch(GetFilters(search, price, putCategory))
+                        const findCategory = userTabs.find((category: TCategory) => category.title === categories);
+                        putCategory.push(findCategory.id);
+                        dispatch(GetPage(1, pageSize));
+                        dispatch(GetFilters(search, price, putCategory));
                     }}>
                     {
                         userTabs.map((item: TCategory) => (
