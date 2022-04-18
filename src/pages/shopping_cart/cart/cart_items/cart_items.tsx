@@ -59,8 +59,8 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
             )
         },
     ];
-    if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) { localStorage.setItem(`orders ${user.name}`, JSON.stringify([])) }
-    else { localStorage.getItem(`orders ${user.name}`) }
+    if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) localStorage.setItem(`orders ${user.name}`, JSON.stringify([]))
+    else localStorage.getItem(`orders ${user.name}`)
     return (
         <Spin spinning={idProduct === undefined ? true : false}>
             <Table
