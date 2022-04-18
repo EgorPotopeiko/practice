@@ -12,7 +12,7 @@ export default class ProductsDB {
             pageSize: pageSize,
             filterData: {}
         })
-    }
+    };
 
     static getProducts(page: number, pageSize: number, filters?: TFilters): Promise<AxiosResponse<ProductResponse>> {
         return $api.post(`/product/search`, {
@@ -25,7 +25,7 @@ export default class ProductsDB {
                 // price: filters.price
             }
         })
-    }
+    };
 
     static getProduct = async (id: number): Promise<AxiosResponse<TProduct>> => {
         return $api.get(`/product/${id}`, {})
