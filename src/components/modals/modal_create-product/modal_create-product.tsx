@@ -126,9 +126,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                     onChange={(value) => {
                                         value.map((valuesId: string) => {
                                             categoryValues.map((item: TCategory) => {
-                                                if (item.title === valuesId) {
-                                                    setFieldValue('categories', [...values.categories, { id: item.id }])
-                                                }
+                                                if (item.title === valuesId) setFieldValue('categories', [...values.categories, { id: item.id }])
                                             })
                                         })
 

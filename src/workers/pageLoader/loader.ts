@@ -11,7 +11,7 @@ function* loaderWorker({ payload }: LocationChangeAction) {
             yield put(GetProductsStartAction())
             yield put(GetCategoriesStartAction())
         }
-        if (pathname === '/admin') { yield put(GetAllProductsStartAction()) }
+        if (pathname === '/admin') yield put(GetAllProductsStartAction())
     }
     catch (error: any) { console.log(error) }
 }

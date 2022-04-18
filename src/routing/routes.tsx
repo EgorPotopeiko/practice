@@ -25,11 +25,7 @@ export type TRoutesHook = {
     redirect: string
 }
 export const useRoutes = (isAuth: boolean, role: string): TRoutesHook => {
-    if (isAuth && role.toLowerCase() === "user") {
-        return { routes: userRoutes, redirect: USER_PATH.AUTH }
-    }
-    if (isAuth && role.toLowerCase() === "admin") {
-        return { routes: adminRoutes, redirect: ADMIN_PATH.ADMIN }
-    }
+    if (isAuth && role.toLowerCase() === "user") return { routes: userRoutes, redirect: USER_PATH.AUTH }
+    if (isAuth && role.toLowerCase() === "admin") return { routes: adminRoutes, redirect: ADMIN_PATH.ADMIN }
     return { routes: guestRoutes, redirect: PUBLIC_PATH.APP }
 }
