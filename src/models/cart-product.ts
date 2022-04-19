@@ -5,7 +5,5 @@ export type TCartProduct = {
     id: number,
     title: string,
     price: number,
-    categories: Array<TCategory>,
-    amount: number,
-    total: number
+    categories: Array<TCategory>
 }

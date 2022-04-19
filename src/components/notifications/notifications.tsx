@@ -5,16 +5,13 @@ import { selectNotificationStatus } from '../../store/notifications/selectors';
 
 const Notifications: React.FC = () => {
     const { view, message, description } = useSelector(selectNotificationStatus);
-    notification.config({
-        duration: 3
-    });
+    notification.config({ duration: 3 });
     return (
         <>
             {
                 notification[view]({
                     message: `${message}`,
-                    description:
-                        `${description}`
+                    description: `${description}`
                 })
             }
         </>

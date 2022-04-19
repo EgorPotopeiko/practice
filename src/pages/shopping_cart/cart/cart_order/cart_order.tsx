@@ -18,7 +18,6 @@ type Props = {
 }
 
 type TMenuState = {
-    length: number,
     loading: boolean,
     orderVisible: boolean,
     delivery: string
@@ -33,7 +32,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const { user } = useSelector(selectUserStatus);
     const [total, setTotal] = useState(0);
     const [filter, setFilter] = useState<TMenuState>({
-        length: 0,
         loading: false,
         orderVisible: false,
         delivery: 'курьером'
@@ -61,7 +59,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             email: user.email,
             user: `${user.name}`,
             comment: '',
-            count: filter.length,
             payment: total
         },
         enableReinitialize: false,
@@ -71,7 +68,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             setTimeout(() => {
                 values.id = nanoid();
                 values.delivery = filter.delivery;
-                values.count = filter.length;
                 values.payment = total;
                 const newOrder = values;
                 const orders = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
@@ -120,13 +116,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
 
     useEffect(() => {
         let ttl = 0;
-        let len = 0;
         cartItems.forEach((el: any) => {
-            ttl += +el.total;
-            len += +el.amount;
+            ttl += +el.price
         });
         setTotal(+ttl.toFixed(2));
-        createFilter("length")(len);
     }, [cartItems]);
     return (
         <>
@@ -140,7 +133,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 <div className='create__modal'>
                     <Form onFinish={handleSubmit}>
                         <Row gutter={16}>
-                            <Col span={18}><Form.Item><Title level={3}>Выбрано {filter.length} товара(-ов)</Title></Form.Item></Col>
+                            <Col span={18}><Form.Item><Title level={3}>Выбрано {cartItems.length} товара(-ов)</Title></Form.Item></Col>
                             <Col span={6}><Form.Item><Text>{total} руб</Text></Form.Item></Col>
                         </Row>
                         <Text>Способ доставки</Text>

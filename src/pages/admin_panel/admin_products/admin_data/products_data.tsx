@@ -145,11 +145,6 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
             render: () => (<span>Есть на складе</span>)
         },
         {
-            title: 'Количество на складе',
-            dataIndex: 'amount',
-            key: 'amount'
-        },
-        {
             title: 'Изменение',
             dataIndex: 'operation',
             render: (_: any, record: any) => {

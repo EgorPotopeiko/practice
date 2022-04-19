@@ -73,7 +73,10 @@ const Header: React.FC = () => {
                         </>
                         <>
                             <Text>Цена</Text>
-                            <Slider range max={5000} defaultValue={[0, 5000]} onAfterChange={(newPrice: Array<number>) => dispatch(GetFilters(search, newPrice, category))} />
+                            <Slider
+                                range max={5000}
+                                defaultValue={[0, 5000]}
+                                onAfterChange={(newPrice: Array<number>) => dispatch(GetFilters(search, newPrice, category))} />
                         </>
                     </div>
                 }
