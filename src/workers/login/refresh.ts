@@ -5,8 +5,8 @@ import AuthService from '../../services/auth_service';
 
 function* refresh(_action: ReturnType<typeof GetRefreshStartAction>) {
     try {
-        const refreshResponse: AxiosResponse = yield call(AuthService.checkAuth);
-        yield put(GetRefreshSuccessAction(refreshResponse.data))
+        const { data }: AxiosResponse = yield call(AuthService.checkAuth);
+        yield put(GetRefreshSuccessAction(data))
     }
     catch (error) {
         yield put(GetRefreshErrorAction(error))

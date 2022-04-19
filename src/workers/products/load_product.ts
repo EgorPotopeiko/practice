@@ -6,8 +6,8 @@ import { AxiosResponse } from 'axios';
 
 function* loadProduct({ id }: ReturnType<typeof GetProductStartAction>) {
     try {
-        const data: AxiosResponse = yield call(ProductsDB.getProduct, id);
-        yield put(GetProductSuccessAction(data.data))
+        const { data }: AxiosResponse = yield call(ProductsDB.getProduct, id);
+        yield put(GetProductSuccessAction(data))
         yield put(GetNotificationOpenAction('success', 'Получение продукта', 'Продукт загружен успешно'))
     }
     catch (error) {

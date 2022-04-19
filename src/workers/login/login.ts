@@ -11,11 +11,11 @@ import AuthService from '../../services/auth_service';
 function* login({ email, password }: ReturnType<typeof GetAuthorizationStartAction>) {
     try {
         const { pageSize }: { page: number, pageSize: number } = yield select(selectPageStatus);
-        const tryLogin: AxiosResponse = yield call(AuthService.login, email, password);
-        localStorage.setItem('token', tryLogin.data.token)
+        const { data }: AxiosResponse = yield call(AuthService.login, email, password);
+        localStorage.setItem('token', data.token)
         yield put(GetPage(1, pageSize))
         yield put(RemoveAllFilters())
-        yield put(GetAuthorizationSuccessAction(tryLogin.data.user))
+        yield put(GetAuthorizationSuccessAction(data.user))
         yield put(CloseModalAction())
         yield put(GetNotificationOpenAction('success', 'Авторизация', 'Авторизация прошла успешно'))
     }

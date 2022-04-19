@@ -9,8 +9,8 @@ function* logout(_action: ReturnType<typeof GetLogout>) {
         yield localStorage.removeItem('token')
         yield put(GetNotificationOpenAction('success', 'Выход из аккаунта', 'Произошел выход из аккаунта'))
     }
-    catch (e) {
-        console.log(e)
+    catch (error) {
+        console.log(error)
         yield put(GetNotificationOpenAction('error', 'Выход из аккаунта', 'Не удалось выйти из аккаунта'))
     }
 

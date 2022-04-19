@@ -11,9 +11,9 @@ import { AxiosResponse } from 'axios';
 function* loadAllProductList(_action: ReturnType<typeof GetProductsStartAction>) {
     try {
         const { page, pageSize }: { page: number, pageSize: number } = yield select(selectPageStatus);
-        const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize);
-        const total = data.data.totalCount;
-        let newData = data.data.content.map((product: TProduct) => {
+        const { data }: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize);
+        const { totalCount } = data;
+        let newData = data.content.map((product: TProduct) => {
             return {
                 id: product.id,
                 title: product.title,
@@ -22,7 +22,7 @@ function* loadAllProductList(_action: ReturnType<typeof GetProductsStartAction>)
                 price: product.price
             }
         });
-        yield put(GetProductsSuccessAction(newData, total))
+        yield put(GetProductsSuccessAction(newData, totalCount))
         yield put(GetNotificationOpenAction('success', 'Получение продуктов', 'Продукты загружены успешно'))
     }
     catch (error) {

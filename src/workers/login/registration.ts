@@ -6,8 +6,8 @@ import AuthService from '../../services/auth_service';
 
 function* registration({ name, email, password }: ReturnType<typeof GetRegistrationStartAction>) {
     try {
-        const { data: tryRegister }: AxiosResponse = yield AuthService.registration(name, email, password);
-        yield put(GetRegistrationSuccessAction(tryRegister))
+        const { data }: AxiosResponse = yield AuthService.registration(name, email, password);
+        yield put(GetRegistrationSuccessAction(data))
         yield put(GetNotificationOpenAction('success', 'Регистрация пользователя', 'Регистрация пользователя прошла успешно'))
     }
     catch (error) {
