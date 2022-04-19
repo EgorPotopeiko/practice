@@ -36,7 +36,7 @@ const ProductPage: React.FC = () => {
                             </div>
                             <div className='product__page-info-add'>
                                 <Text strong >{product.price} руб.</Text>
-                                <Button onClick={() => dispatch(GetAddedCartAction([{ id: product.id }], { id: product.id, title: product.title, price: product.price, categories: product.categories, img: product.img }))}>Добавить в корзину</Button>
+                                <Button onClick={() => dispatch(GetAddedCartAction([{ id: product.id }]))}>Добавить в корзину</Button>
                             </div>
                         </div>
                         <Divider />

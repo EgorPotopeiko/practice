@@ -8,7 +8,6 @@ import { TProduct } from '../../../../models/product';
 import { selectUserStatus } from '../../../../store/login/selectors';
 import { GetRemovedCartAction } from '../../../../store/cart/actions';
 import { selectCart } from '../../../../store/cart/selectors';
-import { TCategory } from '../../../../models/category';
 
 type Props = {
     idProduct: number | undefined
@@ -28,33 +27,18 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
             key: 'title'
         },
         {
-            title: 'Категория',
-            dataIndex: 'categories',
-            key: 'categories',
-            render: (_: any, record: TProduct) => (
-                <Space size='middle'>
-                    <span>{record.categories.map((category: TCategory) => {
-                        return category.title + ' '
-                    })}</span>
-                </Space>
-            )
-        },
-        {
-            title: 'Количество',
-            dataIndex: 'amount',
-            key: 'amount',
-        },
-        {
             title: 'Цена',
-            dataIndex: 'total',
-            key: 'total'
+            dataIndex: 'price',
+            key: 'price'
         },
         {
             title: 'Action',
             key: 'action',
             render: (record: TProduct) => (
                 <Space size="middle">
-                    <DeleteOutlined onClick={() => dispatch(GetRemovedCartAction([{ id: record.id }], { id: record.id, title: record.title, price: record.price, categories: record.categories, img: record.img }))} />
+                    <DeleteOutlined onClick={() => {
+                        dispatch(GetRemovedCartAction([{ id: record.id }]))
+                    }} />
                 </Space>
             )
         },
