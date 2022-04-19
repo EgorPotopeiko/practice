@@ -9,7 +9,8 @@ export const selectView = createSelector(stateProducts, (state) => state.view);
 
 export const selectProductsStatus = createSelector(stateProducts, (state) => ({
     products: state.products,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
+    error: state.error
 }));
 
 export const selectPageStatus = createSelector(stateProducts, (state) => ({

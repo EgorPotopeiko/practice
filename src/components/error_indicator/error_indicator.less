@@ -1,0 +1,28 @@
+.error__indicator {
+    .ant-card-head-title {
+        font-size: 30px;
+    }
+
+    .error__img-block {
+        .ant-image {
+            width: 100%;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .ant-image {
+                animation: ant-image-spin infinite 3s linear;
+            }
+        }
+
+        @keyframes ant-image-spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
