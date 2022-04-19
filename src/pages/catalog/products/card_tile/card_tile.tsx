@@ -19,7 +19,7 @@ type Props = {
     img: string
 }
 
-const CardTile: React.FC<Props> = ({ id, title, price, categories, img }) => {
+const CardTile: React.FC<Props> = ({ id, title, price }) => {
     const { isAuth } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
     return (

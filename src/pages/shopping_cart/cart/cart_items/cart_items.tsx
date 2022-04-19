@@ -17,9 +17,7 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
     const cartData = useSelector(selectCart);
     const { user } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
-    cartData.map((cartProduct: any) => {
-        cartProduct['key'] = cartProduct.id
-    })
+    cartData.map((cartProduct: any) => cartProduct['key'] = cartProduct.id)
     const columns = [
         {
             title: 'Название',
@@ -36,9 +34,7 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
             key: 'action',
             render: (record: TProduct) => (
                 <Space size="middle">
-                    <DeleteOutlined onClick={() => {
-                        dispatch(GetRemovedCartAction([{ id: record.id }]))
-                    }} />
+                    <DeleteOutlined onClick={() => dispatch(GetRemovedCartAction([{ id: record.id }]))} />
                 </Space>
             )
         },

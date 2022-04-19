@@ -46,9 +46,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     const listCategories = useSelector(selectListCategories);
     const filterCategories = listCategories.filter((category: string) => category !== '');
     const categoryNode = <Select>
-        {filterCategories.map((category: string) => (
-            <Option key={category} value={category}>{category}</Option>
-        ))}
+        {filterCategories.map((category: string) => <Option key={category} value={category}>{category}</Option>)}
     </Select>
     return (
         <td {...restProps}>

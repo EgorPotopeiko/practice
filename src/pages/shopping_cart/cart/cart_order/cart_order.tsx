@@ -116,9 +116,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
 
     useEffect(() => {
         let ttl = 0;
-        cartItems.forEach((el: any) => {
-            ttl += +el.price
-        });
+        cartItems.forEach((el: any) => ttl += +el.price);
         setTotal(+ttl.toFixed(2));
     }, [cartItems]);
     return (
@@ -304,9 +302,10 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Form.Item><Text><b>По адресу:</b> {values.town}, {values.street}, {values.house}</Text></Form.Item>
                         <Form.Item><Text><b>Получатель:</b> {values.name}</Text></Form.Item>
                         <Form.Item><Text>{values.number}</Text></Form.Item>
-                        <Button type='primary' loading={filter.loading} onClick={() => {
-                            finishOrder()
-                        }}>Оплатить</Button>
+                        <Button
+                            type='primary'
+                            loading={filter.loading}
+                            onClick={() => finishOrder()}>Оплатить</Button>
                         <Button type='link' onClick={() => backToOrder()}>Вернуться к заказу</Button>
                     </Form>
                 </div>

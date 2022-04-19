@@ -154,12 +154,8 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
-                        <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <span>Cancel</span>
-                        </Popconfirm>
+                        <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>Save</Typography.Link>
+                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}><span>Cancel</span></Popconfirm>
                     </span>
                 ) : (
                     <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>Edit</EditOutlined>
