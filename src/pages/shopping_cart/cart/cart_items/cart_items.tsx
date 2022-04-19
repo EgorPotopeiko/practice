@@ -15,12 +15,12 @@ type Props = {
 }
 
 const CartItems: React.FC<Props> = ({ idProduct }) => {
-    const cartData = useSelector(selectCart)
+    const cartData = useSelector(selectCart);
+    const { user } = useSelector(selectUserStatus);
+    const dispatch = useDispatch();
     cartData.map((cartProduct: any) => {
         cartProduct['key'] = cartProduct.id
     })
-    const { user } = useSelector(selectUserStatus);
-    const dispatch = useDispatch();
     const columns = [
         {
             title: 'Название',

@@ -29,6 +29,8 @@ const { Title, Text } = Typography;
 const nanoid = customAlphabet('1234567890', 10);
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
+    const cartItems = useSelector(selectCart);
+    const { user } = useSelector(selectUserStatus);
     const [total, setTotal] = useState(0);
     const [filter, setFilter] = useState<TMenuState>({
         length: 0,
@@ -42,8 +44,6 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             [type]: value
         })
     }
-    const cartItems = useSelector(selectCart);
-    const { user } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {

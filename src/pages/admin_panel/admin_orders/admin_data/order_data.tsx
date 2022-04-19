@@ -63,8 +63,10 @@ const EditableCell: React.FC<EditableCellProps> = ({
 };
 
 const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) => {
-    const [form] = Form.useForm();
     let orders: Array<TOrder> = [];
+    const [data, setData] = useState(orders);
+    const [editingKey, setEditingKey] = useState('');
+    const [form] = Form.useForm();
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i) || "";
         if (key.includes("orders")) {
@@ -76,8 +78,6 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         order['key'] = order.id;
         order['payment'] = `${order.payment}`;
     })
-    const [data, setData] = useState(orders);
-    const [editingKey, setEditingKey] = useState('');
     let filteredData = data.filter((order: TOrder) => order.user.includes(searchUser))
     filteredData = filteredData.filter((order: TOrder) => order.id.includes(searchNumber))
     filteredData = filteredData.filter((order: TOrder) => order.status === chooseStatus)

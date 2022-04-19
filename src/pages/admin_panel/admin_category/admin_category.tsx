@@ -11,8 +11,8 @@ import { TCategory } from '../../../models/category';
 const { Title } = Typography;
 
 const AdminCategory: React.FC = () => {
-    const dispatch = useDispatch();
     const categories = useSelector(selectListCategories);
+    const dispatch = useDispatch();
     return (
         <div className='admin__category'>
             <Form>

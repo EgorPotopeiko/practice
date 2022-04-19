@@ -20,8 +20,8 @@ type Props = {
 }
 
 const CardTile: React.FC<Props> = ({ id, title, price, categories, img }) => {
-    const dispatch = useDispatch();
     const { isAuth } = useSelector(selectUserStatus);
+    const dispatch = useDispatch();
     return (
         <div className='card__tile'>
             <Card size="small" title={(

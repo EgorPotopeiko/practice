@@ -14,8 +14,8 @@ type Props = {
 const { Option } = Select;
 
 const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
-    const dispatch = useDispatch();
     const categoryValues = useSelector(selectListCategories);
+    const dispatch = useDispatch();
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>

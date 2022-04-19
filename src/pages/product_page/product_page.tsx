@@ -10,9 +10,9 @@ import { TProduct } from '../../models/product';
 const { Title, Text } = Typography;
 
 const ProductPage: React.FC = () => {
-    const dispatch = useDispatch();
     const product: TProduct | null = useSelector(selectProduct);
     const { isLoading } = useSelector(selectProductsStatus);
+    const dispatch = useDispatch();
     return (
         <Spin spinning={isLoading}>
             <div className='product__page'>

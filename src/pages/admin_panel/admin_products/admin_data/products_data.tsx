@@ -73,13 +73,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
 };
 
 const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName }) => {
-    const [form] = Form.useForm();
-    const dispatch = useDispatch();
     const { products } = useSelector(selectProductsStatus);
-    products.map((product: TProduct) => { product['key'] = product.id.toString() });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
+    const dispatch = useDispatch();
+    const [form] = Form.useForm();
+    products.map((product: TProduct) => { product['key'] = product.id.toString() });
     let newData = data.filter((product: TProduct) => product.title.includes(searchName));
     newData = newData.filter((product: TProduct) => product.id.toString().includes(searchArticle));
     newData = newData.filter((product: TProduct) => product.categories.find((element: TCategory) => element.title === searchCategory))

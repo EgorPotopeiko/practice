@@ -12,8 +12,8 @@ import { TProduct } from '../../../../models/product';
 const { Title, Text } = Typography;
 
 const CardProduct: React.FC<TProduct> = ({ id, title, price, categories, img }) => {
-    const dispatch = useDispatch();
     const { isAuth } = useSelector(selectUserStatus);
+    const dispatch = useDispatch();
     let mas: Array<string> = [];
     (function func() { for (const elements of categories) { mas.push(elements.title + ' ') } })()
     return (
