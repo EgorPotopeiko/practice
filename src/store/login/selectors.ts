@@ -11,5 +11,3 @@ export const selectUserStatus = createSelector(stateAuth, (state) => ({
     user: state.user,
     isAuth: state.isAuth
 }))
-
-export const selectSuccess = createSelector(stateAuth, (state) => state.isSuccess);

@@ -1,3 +1,4 @@
+import { GetNotificationOpenAction } from './../../store/notifications/actions';
 import { CloseModalAction } from './../../store/modals/actions';
 import { RemoveAllFilters } from './../../store/filters/actions';
 import { selectPageStatus } from './../../store/products/selectors';
@@ -16,8 +17,12 @@ function* login({ email, password }: ReturnType<typeof GetAuthorizationStartActi
         yield put(RemoveAllFilters())
         yield put(GetAuthorizationSuccessAction(tryLogin.data.user))
         yield put(CloseModalAction())
+        yield put(GetNotificationOpenAction('success', 'Авторизация', 'Авторизация прошла успешно'))
     }
-    catch (error) { yield put(GetAuthorizationErrorAction(error)) }
+    catch (error) {
+        yield put(GetAuthorizationErrorAction(error))
+        yield put(GetNotificationOpenAction('error', 'Авторизация', 'Не удалось авторизироваться'))
+    }
 }
 
 export default login

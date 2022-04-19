@@ -1,10 +1,19 @@
+import { GetNotificationOpenAction } from './../../store/notifications/actions';
 import { GetLogout } from './../../store/login/actions';
-import { call } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import AuthService from '../../services/auth_service';
 
 function* logout(_action: ReturnType<typeof GetLogout>) {
-    yield call(AuthService.logout)
-    yield localStorage.removeItem('token')
+    try {
+        yield call(AuthService.logout)
+        yield localStorage.removeItem('token')
+        yield put(GetNotificationOpenAction('success', 'Выход из аккаунта', 'Произошел выход из аккаунта'))
+    }
+    catch (e) {
+        console.log(e)
+        yield put(GetNotificationOpenAction('error', 'Выход из аккаунта', 'Не удалось выйти из аккаунта'))
+    }
+
 }
 
 export default logout

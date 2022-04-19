@@ -7,7 +7,6 @@ import { TUser } from "../../models/user";
 const initialState: TLoginState = {
     user: { role: "GUEST" } as TUser,
     isAuth: !!localStorage.getItem('token'),
-    isSuccess: '',
     error: null,
     isLoading: false
 };
@@ -17,7 +16,6 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 export type TLoginState = {
     user: TUser,
     isAuth: boolean,
-    isSuccess: string,
     error: any,
     isLoading: boolean
 }
@@ -40,56 +38,47 @@ export default function loginReducer(state: TLoginState = initialState, action: 
         case LoginActionTypes.LOAD_AUTHORIZATION_START:
             return {
                 ...StartActionState(state),
-                isSuccess: ''
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_SUCCESS:
             return {
                 ...SuccessActionState(state),
                 isAuth: true,
                 user: action.data,
-                isSuccess: 'Success_auth'
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_ERROR:
             return {
                 ...state,
                 error: action.error,
                 isLoading: false,
-                isSuccess: 'Error',
                 user: { ...state.user, role: "GUEST" }
             }
         case LoginActionTypes.LOAD_REGISTRATION_START:
             return {
                 ...StartActionState(state),
-                isSuccess: ''
             }
         case LoginActionTypes.LOAD_REGISTRATION_SUCCESS:
             return {
                 ...SuccessActionState(state),
-                isSuccess: 'Success_registration'
             }
         case LoginActionTypes.LOAD_REGISTRATION_ERROR:
             return {
                 ...state,
                 error: action.error,
                 isLoading: false,
-                isSuccess: 'Error'
             }
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_START:
             return {
                 ...StartActionState(state),
-                isSuccess: ''
             }
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_SUCCESS:
             return {
                 ...SuccessActionState(state),
-                isSuccess: 'Success_admin_registration'
             }
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_ERROR:
             return {
                 ...state,
                 error: action.error,
                 isLoading: false,
-                isSuccess: 'Error'
             }
         case LoginActionTypes.LOGOUT:
             return {
@@ -101,7 +90,6 @@ export default function loginReducer(state: TLoginState = initialState, action: 
             return {
                 ...state,
                 error: null,
-                isSuccess: action.success
             }
         default:
             return state

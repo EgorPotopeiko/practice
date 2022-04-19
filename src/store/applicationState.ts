@@ -1,3 +1,4 @@
+import { TNotificationState } from './notifications/reducer';
 import { TCategoryState } from './category/reducer';
 import { TModalsState } from './modals/reducer';
 import { TCartState } from './cart/reducer';
@@ -13,5 +14,6 @@ export type TApplicationState = Readonly<{
     login: TLoginState,
     cart: TCartState,
     modals: TModalsState,
-    category: TCategoryState
+    category: TCategoryState,
+    notifications: TNotificationState
 }>

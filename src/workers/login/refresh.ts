@@ -8,7 +8,9 @@ function* refresh(_action: ReturnType<typeof GetRefreshStartAction>) {
         const refreshResponse: AxiosResponse = yield call(AuthService.checkAuth);
         yield put(GetRefreshSuccessAction(refreshResponse.data))
     }
-    catch (error) { yield put(GetRefreshErrorAction(error)) }
+    catch (error) {
+        yield put(GetRefreshErrorAction(error))
+    }
 }
 
 export default refresh

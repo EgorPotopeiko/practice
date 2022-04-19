@@ -8,6 +8,7 @@ import loginReducer from './login/reducer';
 import cartReducer from './cart/reducer';
 import modalsReducer from './modals/reducer';
 import categoryReducer from './category/reducer';
+import notificationsReducer from './notifications/reducer';
 
 const store = (history: History) => combineReducers<TApplicationState>({
     router: connectRouter(history),
@@ -16,7 +17,8 @@ const store = (history: History) => combineReducers<TApplicationState>({
     login: loginReducer,
     cart: cartReducer,
     modals: modalsReducer,
-    category: categoryReducer
+    category: categoryReducer,
+    notifications: notificationsReducer
 });
 
 export default store;
