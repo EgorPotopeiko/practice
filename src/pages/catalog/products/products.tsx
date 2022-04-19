@@ -27,10 +27,8 @@ const Products: React.FC = () => {
     const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize));
     return (
         <div className="products">
-            {error
-                ?
-                <ErrorIndicator />
-                :
+            {error && <ErrorIndicator />}
+            {!error &&
                 <>
                     <div className="products__menu">
                         <Title level={1}>Найдено {totalCount} товара(-ов)</Title>
@@ -82,9 +80,8 @@ const Products: React.FC = () => {
                             )}>
                         </List>
                     )}
-                </>
-            }
-        </div >
+                </>}
+        </div>
     );
 }
 

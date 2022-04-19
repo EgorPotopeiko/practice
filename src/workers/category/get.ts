@@ -9,7 +9,6 @@ function* get(_action: ReturnType<typeof GetCategoriesStartAction>) {
     try {
         const { data }: AxiosResponse = yield CategoryDB.getCategories()
         yield put(GetCategoriesSuccessAction(data))
-        yield put(GetNotificationOpenAction('success', 'Получение категории', 'Категории получены успешно'))
     }
     catch (error: AxiosError | any) {
         yield put(GetCategoriesErrorAction(error))

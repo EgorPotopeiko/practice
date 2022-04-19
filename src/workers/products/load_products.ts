@@ -1,4 +1,3 @@
-import { GetNotificationOpenAction } from './../../store/notifications/actions';
 import { TProduct } from '../../models/product';
 import { TFilters } from '../../models/filters';
 import { selectFilters } from '../../store/filters/selectors';
@@ -26,11 +25,9 @@ function* loadProductList(_action: ReturnType<typeof GetProductsStartAction>) {
             }
         });
         yield put(GetProductsSuccessAction(newData, totalCount))
-        yield put(GetNotificationOpenAction('success', 'Получение продуктов', 'Продукты загружены успешно'))
     }
     catch (error) {
         yield put(GetProductsErrorAction(error))
-        yield put(GetNotificationOpenAction('error', 'Получение продуктов', 'Не удалось загрузить продукты'))
     }
 }
 
