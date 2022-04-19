@@ -56,3 +56,6 @@ export const GetView = (view: string) => ({
     type: ProductsActionTypes.SET_VIEW,
     view
 })
+export const ResetProducts = () => ({
+    type: ProductsActionTypes.RESET_PRODUCTS
+})

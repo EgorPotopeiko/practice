@@ -8,10 +8,8 @@ import { useFormik } from 'formik';
 import { customAlphabet } from 'nanoid';
 import { selectCart } from '../../../../store/cart/selectors';
 import { selectUserStatus } from '../../../../store/login/selectors';
-import { RemoveAllFilters } from '../../../../store/filters/actions';
-import { GetPage } from '../../../../store/products/actions';
-import { selectPageStatus } from '../../../../store/products/selectors';
-import { SetSuccess } from '../../../../store/login/actions';
+import { ResetProducts } from '../../../../store/products/actions';
+import { SetStatus } from '../../../../store/login/actions';
 import { GetClearCartAction } from '../../../../store/cart/actions';
 
 type Props = {
@@ -32,7 +30,6 @@ const nanoid = customAlphabet('1234567890', 10);
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [total, setTotal] = useState(0);
-    const { pageSize } = useSelector(selectPageStatus)
     const [filter, setFilter] = useState<TMenuState>({
         length: 0,
         loading: false,
@@ -105,10 +102,9 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             const orders = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
             orders.pop();
             localStorage.setItem(`orders ${user.name}`, JSON.stringify([...orders, { ...newOrder }]));
-            dispatch(SetSuccess('Success_order'));
-            dispatch(RemoveAllFilters());
+            dispatch(SetStatus('Success_order'));
             dispatch(GetClearCartAction());
-            dispatch(GetPage(1, pageSize));
+            dispatch(ResetProducts())
             createFilter("loading")(false);
             createFilter("orderVisible")(false);
         }, 3000)

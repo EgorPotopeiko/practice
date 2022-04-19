@@ -7,7 +7,7 @@ import './modal_auth.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStateStatus } from '../../../store/login/selectors';
 import * as Yup from 'yup';
-import { GetAuthorizationStartAction, SetError, SetSuccess } from '../../../store/login/actions';
+import { GetAuthorizationStartAction, SetStatus } from '../../../store/login/actions';
 import { OpenModalAction } from '../../../store/modals/actions';
 
 type Props = {
@@ -62,8 +62,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                                     </Button.Group>
                                     <Button type='link' onClick={() => {
                                         dispatch(OpenModalAction("Registration"))
-                                        dispatch(SetError())
-                                        dispatch(SetSuccess(''))
+                                        dispatch(SetStatus(''))
                                     }}>Зарегистрироваться</Button>
                                 </Form>
                             )}

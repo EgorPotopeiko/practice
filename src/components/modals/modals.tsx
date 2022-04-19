@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SetError, SetSuccess } from '../../store/login/actions';
+import { SetStatus } from '../../store/login/actions';
 import { CloseModalAction } from '../../store/modals/actions';
 import { selectCredentialsModal } from '../../store/modals/selectors';
 import ModalAuth from './modal_auth';
@@ -13,8 +13,7 @@ const Modals: React.FC = () => {
     const modalParams = useSelector(selectCredentialsModal);
     const closeActions = () => {
         dispatch(CloseModalAction())
-        dispatch(SetError())
-        dispatch(SetSuccess(''))
+        dispatch(SetStatus(''))
     }
     if (!modalParams.isOpen) return null
     else {

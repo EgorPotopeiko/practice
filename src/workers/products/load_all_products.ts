@@ -9,8 +9,7 @@ import { AxiosResponse } from 'axios';
 
 function* loadAllProductList(_action: ReturnType<typeof GetProductsStartAction>) {
     try {
-        const pageStatus: { page: number, pageSize: number } = yield select(selectPageStatus);
-        const { page, pageSize } = pageStatus;
+        const { page, pageSize }: { page: number, pageSize: number } = yield select(selectPageStatus);
         const data: AxiosResponse = yield call(ProductsDB.getAllProducts, page, pageSize);
         const total = data.data.totalCount;
         let newData = data.data.content.map((product: TProduct) => {

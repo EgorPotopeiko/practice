@@ -17,7 +17,6 @@ export const LoginActionTypes = {
 
     LOGOUT: '[Authorization] LOGOUT',
 
-    SET_ERROR: '[Error] SET_ERROR',
-    SET_SUCCESS: '[Success] SET_SUCCESS',
+    SET_STATUS: '[Status] SET_STATUS',
     REFRESH_SET_USER: '[User] REFRESH_SET_USER'
 } as const;

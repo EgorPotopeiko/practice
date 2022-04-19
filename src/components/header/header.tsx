@@ -5,13 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 import { PUBLIC_PATH, USER_PATH } from '../../routing/names';
-import { GetFilters, RemoveAllFilters } from '../../store/filters/actions';
+import { GetFilters } from '../../store/filters/actions';
 import { selectFilters } from '../../store/filters/selectors';
 import { GetLogout } from '../../store/login/actions';
 import { selectUserStatus } from '../../store/login/selectors';
 import { OpenModalAction } from '../../store/modals/actions';
-import { GetPage, RemoveProductAction } from '../../store/products/actions';
-import { selectPageStatus } from '../../store/products/selectors';
+import { RemoveProductAction, ResetProducts } from '../../store/products/actions';
 import './header.less';
 
 const { Title, Text } = Typography;
@@ -22,7 +21,6 @@ export const selectValues = ["Рога и копыта", "ZooParadise", "Purina"
 
 const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
-    const { pageSize } = useSelector(selectPageStatus);
     const dispatch = useDispatch();
     const { category, price, search } = useSelector(selectFilters);
     const { user, isAuth } = useSelector(selectUserStatus);
@@ -32,8 +30,7 @@ const Header: React.FC = () => {
                 <div className='header__wrap'>
                     <Title onClick={() => {
                         dispatch(RemoveProductAction())
-                        dispatch(RemoveAllFilters())
-                        dispatch(GetPage(1, pageSize))
+                        dispatch(ResetProducts())
                     }}>
                         <Link to={PUBLIC_PATH.APP}>Shop</Link></Title>
                     <div className='header__user'>
@@ -57,8 +54,8 @@ const Header: React.FC = () => {
                         <Link to={USER_PATH.CART}><UserOutlined hidden={!isAuth} /></Link>
                     </div>
                 </div>
-                {(user.role === "GUEST" || user.role === "USER") && (history.location.pathname === "/auth" || history.location.pathname === "/")
-                    ?
+                {user.role !== "ADMIN" &&
+                    (history.location.pathname === "/auth" || history.location.pathname === "/") &&
                     <div className='header__filters'>
                         <>
                             <Input
@@ -79,8 +76,6 @@ const Header: React.FC = () => {
                             <Slider range max={5000} defaultValue={[0, 5000]} onAfterChange={(newPrice: Array<number>) => dispatch(GetFilters(search, newPrice, category))} />
                         </>
                     </div>
-                    :
-                    null
                 }
             </PageHeader>
         </div>

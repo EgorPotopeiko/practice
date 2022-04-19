@@ -10,6 +10,8 @@ export const ProductsActionTypes = {
 
     SET_VIEW: '[Products] SET_VIEW',
 
+    RESET_PRODUCTS: '[Products] RESET_PRODUCTS',
+
     CREATE_PRODUCT_START: '[Products] CREATE_PRODUCT_START',
     CREATE_PRODUCT_SUCCESS: '[Products] CREATE_PRODUCT_SUCCESS',
     CREATE_PRODUCT_ERROR: '[Products] CREATE_PRODUCT_ERROR',
@@ -17,5 +19,5 @@ export const ProductsActionTypes = {
     REMOVE_PRODUCT: '[Products] REMOVE_PRODUCT',
     DELETE_PRODUCT: '[Products] DELETE_PRODUCT',
 
-    SET_PAGE: '[Pagination] SET_PAGE'
+    SET_PAGE: '[Pagination] SET_PAGE',
 } as const;
