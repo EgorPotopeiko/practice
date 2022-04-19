@@ -2,25 +2,21 @@ import { Form, Input, SubmitButton } from 'formik-antd';
 import React, { ChangeEvent, useState } from 'react';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { CloseModalAction } from '../../../store/modals/actions';
 import './modal_create-category.less'
 import { Button } from 'antd';
 import { CreateCategoryStartAction } from '../../../store/category/actions';
+import createCategorySchema from './schema';
 
 type Props = {
     visible: boolean,
     onCancel: () => void
 }
 
-const CreateCategorySchema = Yup.object().shape({
-    name: Yup.string().min(3, 'Too Short!').required('Required')
-});
-
 const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
-    const dispatch = useDispatch();
     const [categoryName, setCategoryName] = useState<string>('');
+    const dispatch = useDispatch();
     const addCategory = () => {
         setTimeout(() => {
             dispatch(CreateCategoryStartAction(categoryName))
@@ -39,7 +35,7 @@ const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
                 <Formik
                     initialValues={{ name: '' }}
                     validateOnBlur
-                    validationSchema={CreateCategorySchema}
+                    validationSchema={createCategorySchema}
                     onSubmit={() => { addCategory() }}>
                     <Form>
                         <Form.Item name='name'>

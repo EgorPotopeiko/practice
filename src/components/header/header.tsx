@@ -18,10 +18,10 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const Header: React.FC = () => {
-    const [searchInput, setSearchInput] = useState("");
-    const dispatch = useDispatch();
     const { category, price, search } = useSelector(selectFilters);
     const { user, isAuth } = useSelector(selectUserStatus);
+    const [searchInput, setSearchInput] = useState("");
+    const dispatch = useDispatch();
     return (
         <div className="header">
             <PageHeader>

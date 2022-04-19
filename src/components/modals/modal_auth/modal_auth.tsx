@@ -6,9 +6,9 @@ import { Button, Spin, Typography } from 'antd';
 import './modal_auth.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStateStatus } from '../../../store/login/selectors';
-import * as Yup from 'yup';
 import { GetAuthorizationStartAction, SetStatus } from '../../../store/login/actions';
 import { OpenModalAction } from '../../../store/modals/actions';
+import signupSchema from './schema';
 
 type Props = {
     visible: boolean,
@@ -16,11 +16,6 @@ type Props = {
 }
 
 const { Title } = Typography
-
-const SignupSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(3, 'Too Short!').required('Required')
-});
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
@@ -38,7 +33,7 @@ const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
                         <Formik
                             initialValues={{ email: '', password: '' }}
                             validateOnBlur
-                            validationSchema={SignupSchema}
+                            validationSchema={signupSchema}
                             onSubmit={async (values) => dispatch(GetAuthorizationStartAction(values.email, values.password))}>
                             {(formic) => (
                                 <Form >

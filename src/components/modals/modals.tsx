@@ -9,8 +9,8 @@ import ModalCreateProduct from './modal_create-product';
 import ModalRegistration from './modal_registration';
 
 const Modals: React.FC = () => {
-    const dispatch = useDispatch();
     const modalParams = useSelector(selectCredentialsModal);
+    const dispatch = useDispatch();
     const closeActions = () => {
         dispatch(CloseModalAction())
         dispatch(SetStatus(''))

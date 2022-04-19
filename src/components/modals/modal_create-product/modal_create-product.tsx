@@ -5,7 +5,6 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import Modal from 'antd/lib/modal/Modal';
 import ImgCrop from 'antd-img-crop';
-import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectListCategories } from '../../../store/category/selectors';
 import { CreateProductStartAction } from '../../../store/products/actions';
@@ -13,6 +12,7 @@ import { getBase64 } from '../../../services/getBase64';
 import './modal_create-product.less';
 import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
 import { TCategory } from '../../../models/category';
+import createProductSchema from './schema';
 
 type Props = {
     visible: boolean,
@@ -33,16 +33,10 @@ type TCreateProductState = {
 
 const { Option } = Select;
 
-const CreateProductSchema = Yup.object().shape({
-    title: Yup.string().min(2, 'Too Short!').required('Required'),
-    price: Yup.number().positive().required('Required').max(99999, 'Too Large '),
-    category: Yup.array(),
-    img: Yup.string()
-});
-
 const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
 
 const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
+    const categoryValues = useSelector(selectListCategories);
     const [testImg, setTestImg] = useState('');
     const [filter, setFilter] = useState<TCreateProductState>({
         loading: false,
@@ -56,7 +50,6 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
         })
     };
     const dispatch = useDispatch();
-    const categoryValues = useSelector(selectListCategories);
     const createProduct = (values: TValues) => {
         createFilter("loading")(true)
         setTimeout(() => {
@@ -99,7 +92,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                 <Formik
                     initialValues={{ title: '', price: 0, categories: [], img: testImg }}
                     validateOnBlur
-                    validationSchema={CreateProductSchema}
+                    validationSchema={createProductSchema}
                     onSubmit={(values) => { createProduct(values) }}>
                     {({ values, setFieldValue }) => (
                         <Form>

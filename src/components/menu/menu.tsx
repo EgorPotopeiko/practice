@@ -31,7 +31,6 @@ const Menu: React.FC = () => {
     const { user } = useSelector(selectUserStatus);
     const { pageSize } = useSelector(selectPageStatus);
     const userTabs = useSelector(selectListCategories);
-    const dispatch = useDispatch();
     const { price, search } = useSelector(selectFilters);
     const [filter, setFilter] = useState<TMenuState>({
         searchName: '',
@@ -42,6 +41,7 @@ const Menu: React.FC = () => {
         searchUser: "",
         searchNumber: "",
     });
+    const dispatch = useDispatch();
     const handlerFilter = (type: keyof TMenuState) => (value: any) => {
         setFilter({
             ...filter,

@@ -17,7 +17,6 @@ type Props = {
     onCancel: () => void
 }
 
-
 const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
     const { isLoading } = useSelector(selectStateStatus);
     const [isAdmin, setIsAdmin] = useState(false);
