@@ -7,7 +7,7 @@ type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
 }
 
-const selectValues = ["оплачен", "доставлен", "в пути", "оформлен"];
+const statusValues = ["оплачен", "доставлен", "в пути", "оформлен"];
 
 const { Option } = Select;
 
@@ -15,7 +15,7 @@ const OrderFilters: React.FC<Props> = ({ handlerFilter }) => {
     return (
         <div className="order__filters">
             <Select placeholder="Статус" onChange={(status) => handlerFilter("chooseStatus")(status)}>
-                {selectValues.map((status) => (
+                {statusValues.map((status) => (
                     <Option key={status} value={status}>{status}</Option>
                 ))}
             </Select>

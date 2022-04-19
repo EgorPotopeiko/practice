@@ -17,8 +17,6 @@ const { Title, Text } = Typography;
 
 const { Option } = Select;
 
-export const selectValues = ["Рога и копыта", "ZooParadise", "Purina", "RoyalConin", "Дружок", "Fisherman"];
-
 const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
     const dispatch = useDispatch();
@@ -64,7 +62,9 @@ const Header: React.FC = () => {
                                 placeholder="Поиск по названию"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple">
-                                {selectValues.map((maker) => (<Option key={maker} value={maker}>{maker.toUpperCase()}</Option>))}
+                                <Option>1</Option>
+                                <Option>2</Option>
+                                <Option>3</Option>
                             </Select>
                         </>
                         <>
