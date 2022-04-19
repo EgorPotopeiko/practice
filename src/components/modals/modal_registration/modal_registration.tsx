@@ -1,12 +1,12 @@
+/* eslint-disable no-lone-blocks */
 import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
-import {Formik, FormikValues} from 'formik';
+import { Formik, FormikValues } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button, Checkbox, Spin, Typography } from 'antd';
 import './modal_registration.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectStatus } from '../../../store/login/selectors';
-import * as Yup from 'yup';
+import { selectStateStatus } from '../../../store/login/selectors';
 import { GetRegistrationAdminStartAction, GetRegistrationStartAction } from '../../../store/login/actions';
 import { useState } from 'react';
 import registrationSchema from "./schema";
@@ -19,7 +19,7 @@ type Props = {
 
 
 const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
-    const { isLoading } = useSelector(selectStatus);
+    const { isLoading } = useSelector(selectStateStatus);
     const [isAdmin, setIsAdmin] = useState(false);
     const dispatch = useDispatch();
     const initialValues = {

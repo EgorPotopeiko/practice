@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
 import './products_data.less';
-import { selectProducts, selectTotal } from '../../../../store/products/selectors';
+import { selectProductsStatus, selectTotal } from '../../../../store/products/selectors';
 import { selectListCategories } from '../../../../store/category/selectors';
 import { DeleteProductAction, GetPage } from '../../../../store/products/actions';
 import { TCategory } from '../../../../models/category';
@@ -75,7 +75,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName }) => {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const products = useSelector(selectProducts);
+    const { products } = useSelector(selectProductsStatus);
     products.map((product: TProduct) => { product['key'] = product.id.toString() });
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);

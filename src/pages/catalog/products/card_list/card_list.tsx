@@ -4,7 +4,7 @@ import './card_list.less';
 import { Link } from 'react-router-dom';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAuth } from '../../../../store/login/selectors';
+import { selectUserStatus } from '../../../../store/login/selectors';
 import { GetProductStartAction } from '../../../../store/products/actions';
 import { GetAddedCartAction } from '../../../../store/cart/actions';
 import { TProduct } from '../../../../models/product';
@@ -13,7 +13,7 @@ const { Title, Text } = Typography;
 
 const CardProduct: React.FC<TProduct> = ({ id, title, price, categories, img }) => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(selectAuth);
+    const { isAuth } = useSelector(selectUserStatus);
     let mas: Array<string> = [];
     (function func() { for (const elements of categories) { mas.push(elements.title + ' ') } })()
     return (

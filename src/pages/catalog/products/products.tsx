@@ -5,9 +5,9 @@ import { Select } from 'antd';
 import './products.less';
 import CardList from './card_list';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProductsLoading, selectProducts, selectTotal } from '../../../store/products/selectors';
+import { selectProductsStatus, selectTotal } from '../../../store/products/selectors';
 import Loader from '../../../components/loader';
-import { selectPage, selectPageSize } from '../../../store/products/selectors';
+import { selectPageStatus } from '../../../store/products/selectors';
 import CardTile from './card_tile';
 import { TProduct } from '../../../models/product';
 import { GetPage, GetView } from '../../../store/products/actions';
@@ -17,14 +17,12 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const Products: React.FC = () => {
-    const products = useSelector(selectProducts);
-    const pageNumber = useSelector(selectPage);
-    const pageSize = useSelector(selectPageSize);
-    const loading = useSelector(selectProductsLoading);
+    const { isLoading, products } = useSelector(selectProductsStatus);
+    const { page, pageSize } = useSelector(selectPageStatus);
     const totalCount = useSelector(selectTotal);
     const [view, setView] = useState("list");
     const dispatch = useDispatch();
-    const spinner = loading ? <Loader /> : null;
+    const spinner = isLoading ? <Loader /> : null;
     const pagination = (page: number, pageSize: number) => dispatch(GetPage(page, pageSize));
     return (
         <div className="products">
@@ -39,13 +37,13 @@ const Products: React.FC = () => {
                 <Option key="low_price" value="low_price">по возрастанию цены</Option>
                 <Option key="high_price" value="high_price">по убыванию цены</Option>
             </Select>
-            {!!loading && (<List>{spinner}</List>)}
-            {!loading && (
+            {isLoading && (<List>{spinner}</List>)}
+            {!isLoading && (
                 <List grid={view === "tile" ? { gutter: 8 } : undefined}
                     dataSource={products}
                     pagination={{
                         showSizeChanger: true,
-                        defaultCurrent: pageNumber,
+                        defaultCurrent: page,
                         pageSize: pageSize,
                         pageSizeOptions: [6, 10, 20],
                         total: totalCount,

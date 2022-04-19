@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import './app.less';
 import { useRoutes } from './routing/routes';
 import { GetRefreshStartAction } from './store/login/actions';
-import { selectAuth, selectUser } from './store/login/selectors';
+import { selectUserStatus } from './store/login/selectors';
 import { Redirect, Route, Switch } from "react-router";
 
 function App() {
+    const { user, isAuth } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
-    const user = useSelector(selectUser);
-    const isAuth = useSelector(selectAuth);
     const routes = useRoutes(isAuth, user.role);
     useEffect(() => {
         if (localStorage.getItem('token')) dispatch(GetRefreshStartAction())

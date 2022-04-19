@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './cart_items.less';
 import { TProduct } from '../../../../models/product';
-import { selectUser } from '../../../../store/login/selectors';
+import { selectUserStatus } from '../../../../store/login/selectors';
 import { GetRemovedCartAction } from '../../../../store/cart/actions';
 import { selectCart } from '../../../../store/cart/selectors';
 import { TCategory } from '../../../../models/category';
@@ -19,7 +19,7 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
     cartData.map((cartProduct: any) => {
         cartProduct['key'] = cartProduct.id
     })
-    const user = useSelector(selectUser);
+    const { user } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
     const columns = [
         {

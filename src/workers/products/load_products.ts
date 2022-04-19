@@ -1,8 +1,8 @@
 import { TProduct } from '../../models/product';
 import { TFilters } from '../../models/filters';
-import { selectAllFilters } from '../../store/filters/selectors';
+import { selectFilters } from '../../store/filters/selectors';
 import { GetProductsStartAction } from '../../store/products/actions';
-import { selectPage, selectPageSize } from '../../store/products/selectors';
+import { selectPageStatus } from '../../store/products/selectors';
 import { select } from 'redux-saga/effects';
 import { call, put } from 'redux-saga/effects';
 import ProductsDB from '../../services/products_service';
@@ -11,9 +11,8 @@ import { AxiosResponse } from 'axios';
 
 function* loadProductList(_action: ReturnType<typeof GetProductsStartAction>) {
     try {
-        const page: number = yield select(selectPage);
-        const pageSize: number = yield select(selectPageSize);
-        const filters: TFilters = yield select(selectAllFilters);
+        const { page, pageSize }: { page: number, pageSize: number } = yield select(selectPageStatus);
+        const filters: TFilters = yield select(selectFilters);
         const data: AxiosResponse = yield call(ProductsDB.getProducts, page, pageSize, filters);
         const total = data.data.totalCount;
         let newData = data.data.content.map((product: TProduct) => {

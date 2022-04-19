@@ -1,6 +1,6 @@
 import { CloseModalAction } from './../../store/modals/actions';
 import { RemoveAllFilters } from './../../store/filters/actions';
-import { selectPageSize } from './../../store/products/selectors';
+import { selectPageStatus } from './../../store/products/selectors';
 import { GetPage } from './../../store/products/actions';
 import { AxiosResponse } from 'axios';
 import { GetAuthorizationErrorAction, GetAuthorizationSuccessAction, GetAuthorizationStartAction } from './../../store/login/actions';
@@ -9,7 +9,7 @@ import AuthService from '../../services/auth_service';
 
 function* login({ email, password }: ReturnType<typeof GetAuthorizationStartAction>) {
     try {
-        const pageSize: number = yield select(selectPageSize);
+        const { pageSize }: { page: number, pageSize: number } = yield select(selectPageStatus);
         const tryLogin: AxiosResponse = yield call(AuthService.login, email, password);
         localStorage.setItem('token', tryLogin.data.token)
         yield put(GetPage(1, pageSize))

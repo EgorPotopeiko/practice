@@ -5,7 +5,7 @@ import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button, Spin, Typography } from 'antd';
 import './modal_auth.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectStatus } from '../../../store/login/selectors';
+import { selectStateStatus } from '../../../store/login/selectors';
 import * as Yup from 'yup';
 import { GetAuthorizationStartAction, SetError, SetSuccess } from '../../../store/login/actions';
 import { OpenModalAction } from '../../../store/modals/actions';
@@ -24,7 +24,7 @@ const SignupSchema = Yup.object().shape({
 
 const ModalAuth: React.FC<Props> = ({ visible, onCancel }) => {
     const dispatch = useDispatch();
-    const { isLoading } = useSelector(selectStatus);
+    const { isLoading } = useSelector(selectStateStatus);
     return (
         <>
             <Modal

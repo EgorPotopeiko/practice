@@ -2,7 +2,7 @@ import { Button, Card, Divider, Empty, Image, Spin, Typography } from 'antd';
 import React from 'react';
 import './product_page.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProduct, selectProductsLoading } from '../../store/products/selectors';
+import { selectProduct, selectProductsStatus } from '../../store/products/selectors';
 import Header from '../../components/header';
 import { GetAddedCartAction } from '../../store/cart/actions';
 import { TProduct } from '../../models/product';
@@ -12,9 +12,9 @@ const { Title, Text } = Typography;
 const ProductPage: React.FC = () => {
     const dispatch = useDispatch();
     const product: TProduct | null = useSelector(selectProduct);
-    const loading = useSelector(selectProductsLoading);
+    const { isLoading } = useSelector(selectProductsStatus);
     return (
-        <Spin spinning={loading}>
+        <Spin spinning={isLoading}>
             <div className='product__page'>
                 <Header />
                 {!product && (<Card><Empty /></Card>)}

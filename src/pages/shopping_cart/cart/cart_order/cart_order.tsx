@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { customAlphabet } from 'nanoid';
 import { selectCart } from '../../../../store/cart/selectors';
-import { selectUser } from '../../../../store/login/selectors';
+import { selectUserStatus } from '../../../../store/login/selectors';
 import { RemoveAllFilters } from '../../../../store/filters/actions';
 import { GetPage } from '../../../../store/products/actions';
-import { selectPageSize } from '../../../../store/products/selectors';
+import { selectPageStatus } from '../../../../store/products/selectors';
 import { SetSuccess } from '../../../../store/login/actions';
 import { GetClearCartAction } from '../../../../store/cart/actions';
 
@@ -32,7 +32,7 @@ const nanoid = customAlphabet('1234567890', 10);
 
 const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     const [total, setTotal] = useState(0);
-    const pageSize = useSelector(selectPageSize)
+    const { pageSize } = useSelector(selectPageStatus)
     const [filter, setFilter] = useState<TMenuState>({
         length: 0,
         loading: false,
@@ -46,7 +46,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         })
     }
     const cartItems = useSelector(selectCart);
-    const authUser = useSelector(selectUser);
+    const { user } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
@@ -61,8 +61,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
             number: '',
             name: '',
             status: 'оформлен',
-            email: authUser.email,
-            user: `${authUser.name}`,
+            email: user.email,
+            user: `${user.name}`,
             comment: '',
             count: filter.length,
             payment: total
@@ -77,8 +77,8 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                 values.count = filter.length;
                 values.payment = total;
                 const newOrder = values;
-                const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
-                localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]));
+                const orders = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
+                localStorage.setItem(`orders ${user.name}`, JSON.stringify([...orders, { ...newOrder }]));
                 createFilter("loading")(false);
                 setSubmitting(false);
                 setVisible(false);
@@ -102,9 +102,9 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
         setTimeout(() => {
             values.status = "оплачен";
             const newOrder = values;
-            const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
+            const orders = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
             orders.pop();
-            localStorage.setItem(`orders ${authUser.name}`, JSON.stringify([...orders, { ...newOrder }]));
+            localStorage.setItem(`orders ${user.name}`, JSON.stringify([...orders, { ...newOrder }]));
             dispatch(SetSuccess('Success_order'));
             dispatch(RemoveAllFilters());
             dispatch(GetClearCartAction());
@@ -115,9 +115,9 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
     }
 
     const backToOrder = () => {
-        const orders = JSON.parse(localStorage.getItem(`orders ${authUser.name}`)!);
+        const orders = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
         orders.pop();
-        localStorage.setItem(`orders ${authUser.name}`, JSON.stringify(orders));
+        localStorage.setItem(`orders ${user.name}`, JSON.stringify(orders));
         createFilter("orderVisible")(false);
         setVisible(true);
     }

@@ -4,7 +4,7 @@ import './card_tile.less';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectAuth } from '../../../../store/login/selectors';
+import { selectUserStatus } from '../../../../store/login/selectors';
 import { GetProductStartAction } from '../../../../store/products/actions';
 import { GetAddedCartAction } from '../../../../store/cart/actions';
 import { TCategory } from '../../../../models/category';
@@ -21,7 +21,7 @@ type Props = {
 
 const CardTile: React.FC<Props> = ({ id, title, price, categories, img }) => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(selectAuth);
+    const { isAuth } = useSelector(selectUserStatus);
     return (
         <div className='card__tile'>
             <Card size="small" title={(

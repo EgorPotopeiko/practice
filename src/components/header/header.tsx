@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 import history from '../../history';
 import { PUBLIC_PATH, USER_PATH } from '../../routing/names';
 import { GetFilters, RemoveAllFilters } from '../../store/filters/actions';
-import { selectAllFilters } from '../../store/filters/selectors';
+import { selectFilters } from '../../store/filters/selectors';
 import { GetLogout } from '../../store/login/actions';
-import { selectAuth, selectUser } from '../../store/login/selectors';
+import { selectUserStatus } from '../../store/login/selectors';
 import { OpenModalAction } from '../../store/modals/actions';
 import { GetPage, RemoveProductAction } from '../../store/products/actions';
-import { selectPageSize } from '../../store/products/selectors';
+import { selectPageStatus } from '../../store/products/selectors';
 import './header.less';
 
 const { Title, Text } = Typography;
@@ -22,11 +22,10 @@ export const selectValues = ["Рога и копыта", "ZooParadise", "Purina"
 
 const Header: React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
-    const pageSize = useSelector(selectPageSize);
+    const { pageSize } = useSelector(selectPageStatus);
     const dispatch = useDispatch();
-    const { category, price, search } = useSelector(selectAllFilters);
-    const user = useSelector(selectUser);
-    const isAuth = useSelector(selectAuth);
+    const { category, price, search } = useSelector(selectFilters);
+    const { user, isAuth } = useSelector(selectUserStatus);
     return (
         <div className="header">
             <PageHeader>

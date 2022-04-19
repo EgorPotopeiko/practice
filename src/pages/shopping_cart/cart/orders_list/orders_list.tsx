@@ -4,10 +4,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../../../../components/header';
 import { TOrder } from '../../../../models/order';
-import { selectUser } from '../../../../store/login/selectors';
+import { selectUserStatus } from '../../../../store/login/selectors';
 
 const OrdersList: React.FC = () => {
-    const user = useSelector(selectUser);
+    const { user } = useSelector(selectUserStatus);
     const ordersItems = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
     const columns = [
         {
