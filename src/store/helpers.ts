@@ -12,10 +12,3 @@ export const SuccessActionState = function (state: any) {
         isLoading: false
     }
 }
-export const ErrorActionState = function (state: any, action: any) {
-    return {
-        ...state,
-        isLoading: false,
-        error: action.error
-    }
-}

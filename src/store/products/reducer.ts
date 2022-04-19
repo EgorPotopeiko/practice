@@ -1,7 +1,7 @@
 import { TProduct } from './../../models/product';
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions'
-import { ErrorActionState, StartActionState, SuccessActionState } from '../helpers';
+import { StartActionState, SuccessActionState } from '../helpers';
 import { ProductsActionTypes } from './action-types';
 
 const initialState: TProductsState = {
@@ -46,7 +46,11 @@ export default function productsReducer(state: TProductsState = initialState, ac
                 totalCount: action.total
             }
         case ProductsActionTypes.LOAD_PRODUCTS_ERROR:
-            return ErrorActionState(state, action.error)
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false
+            }
         case ProductsActionTypes.LOAD_PRODUCT_START:
             return StartActionState(state)
         case ProductsActionTypes.LOAD_PRODUCT_SUCCESS:
@@ -55,13 +59,21 @@ export default function productsReducer(state: TProductsState = initialState, ac
                 product: action.data
             }
         case ProductsActionTypes.LOAD_PRODUCT_ERROR:
-            return ErrorActionState(state, action.error)
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false
+            }
         case ProductsActionTypes.CREATE_PRODUCT_START:
             return StartActionState(state)
         case ProductsActionTypes.CREATE_PRODUCT_SUCCESS:
             return SuccessActionState(state)
         case ProductsActionTypes.CREATE_PRODUCT_ERROR:
-            return ErrorActionState(state, action.error)
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false
+            }
         case ProductsActionTypes.REMOVE_PRODUCT:
             return {
                 ...state,

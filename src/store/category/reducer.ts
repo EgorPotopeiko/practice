@@ -1,16 +1,20 @@
 import { InferValueTypes } from '../../models/common';
 import * as actions from './actions';
-import { ErrorActionState, StartActionState, SuccessActionState } from '../helpers';
+import { StartActionState, SuccessActionState } from '../helpers';
 import { CategoryActionTypes } from './action-types';
 
 const initialState: TCategoryState = {
-    listCategories: []
+    listCategories: [],
+    error: null,
+    isLoading: false
 };
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TCategoryState = {
-    listCategories: Array<any> // ошибка при типизации на TCategory
+    listCategories: Array<any>
+    error: any
+    isLoading: boolean // ошибка при типизации на TCategory
 }
 
 export default function categoryReducer(state: TCategoryState = initialState, action: ActionTypes): TCategoryState {
@@ -23,13 +27,21 @@ export default function categoryReducer(state: TCategoryState = initialState, ac
                 listCategories: action.data
             }
         case CategoryActionTypes.LOAD_CATEGORY_ERROR:
-            return ErrorActionState(state, action.error)
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false
+            }
         case CategoryActionTypes.CREATE_CATEGORY_START:
             return StartActionState(state)
         case CategoryActionTypes.CREATE_CATEGORY_SUCCESS:
             return SuccessActionState(state)
         case CategoryActionTypes.CREATE_CATEGORY_ERROR:
-            return ErrorActionState(state, action.error)
+            return {
+                ...state,
+                error: action.error,
+                isLoading: false
+            }
         case CategoryActionTypes.DELETE_CATEGORY:
             return {
                 ...state
