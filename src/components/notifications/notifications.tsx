@@ -8,12 +8,10 @@ const Notifications: React.FC = () => {
     notification.config({ duration: 3 });
     return (
         <>
-            {
-                notification[view]({
-                    message: `${message}`,
-                    description: `${description}`
-                })
-            }
+            {view && notification[view]({
+                message: `${message}`,
+                description: `${description}`
+            })}
         </>
     )
 }

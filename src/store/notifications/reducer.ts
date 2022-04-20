@@ -4,7 +4,7 @@ import * as actions from './actions';
 import { NotificationActionTypes } from './action-types';
 
 const initialState: TNotificationState = {
-    view: 'success',
+    view: null,
     message: '',
     description: ''
 };
@@ -12,7 +12,7 @@ const initialState: TNotificationState = {
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export type TNotificationState = {
-    view: IconType,
+    view: IconType | null,
     message: string,
     description: string
 }
