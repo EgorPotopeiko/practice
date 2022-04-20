@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
@@ -272,6 +271,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                                 onChange={handleChange}
                             />
                         </Form.Item>
+                        <Divider />
                         <Button
                             type="primary"
                             htmlType="submit"
@@ -302,6 +302,7 @@ const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
                         <Form.Item><Text><b>По адресу:</b> {values.town}, {values.street}, {values.house}</Text></Form.Item>
                         <Form.Item><Text><b>Получатель:</b> {values.name}</Text></Form.Item>
                         <Form.Item><Text>{values.number}</Text></Form.Item>
+                        <Divider />
                         <Button
                             type='primary'
                             loading={filter.loading}
