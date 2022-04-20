@@ -12,10 +12,7 @@ import './products_data.less';
 const { Option } = Select;
 
 type Props = {
-    searchName: string,
-    searchArticle: string,
-    searchCategory: string,
-    searchStatus: boolean
+    searchArticle: string
 }
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
@@ -68,7 +65,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     );
 };
 
-const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName }) => {
+const ProductsData: React.FC<Props> = ({ searchArticle }) => {
     const { products, isLoading } = useSelector(selectProductsStatus);
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);

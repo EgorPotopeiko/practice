@@ -18,9 +18,7 @@ import './menu.less';
 const { TabPane } = Tabs;
 
 export type TMenuState = {
-    searchName: string,
     searchArticle: string,
-    searchCategory: '' | string,
     searchStatus: boolean,
     chooseStatus: "оплачен" | string,
     searchUser: string,
@@ -33,9 +31,7 @@ const Menu: React.FC = () => {
     const userTabs = useSelector(selectListCategories);
     const { price, search } = useSelector(selectFilters);
     const [filter, setFilter] = useState<TMenuState>({
-        searchName: '',
         searchArticle: '',
-        searchCategory: '',
         searchStatus: true,
         chooseStatus: "оплачен",
         searchUser: "",
@@ -63,11 +59,7 @@ const Menu: React.FC = () => {
                 <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
                         <ProductsFilter handlerFilter={handlerFilter} />
-                        <ProductsData
-                            searchName={filter.searchName}
-                            searchArticle={filter.searchArticle}
-                            searchCategory={filter.searchCategory}
-                            searchStatus={filter.searchStatus} />
+                        <ProductsData searchArticle={filter.searchArticle} />
                     </TabPane>
                     <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ"><AdminCategory /></TabPane>
                     <TabPane tab="ЗАКАЗЫ" key="ЗАКАЗЫ">
