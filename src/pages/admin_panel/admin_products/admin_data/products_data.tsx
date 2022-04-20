@@ -69,7 +69,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 };
 
 const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchName }) => {
-    const { products } = useSelector(selectProductsStatus);
+    const { products, isLoading } = useSelector(selectProductsStatus);
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
@@ -180,6 +180,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
             <Form form={form} component={false}>
                 <Table
                     components={{ body: { cell: EditableCell } }}
+                    loading={isLoading}
                     bordered
                     dataSource={newData}
                     columns={mergedColumns}
