@@ -6,6 +6,8 @@ import { OpenModalAction } from '../../../../store/modals/actions';
 import { TCategory } from '../../../../models/category';
 import { TMenuState } from "../../../../components/menu/menu";
 import './products_filters.less';
+import { selectFilters } from '../../../../store/filters/selectors';
+import { GetFilters } from '../../../../store/filters/actions';
 
 type Props = {
     handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
@@ -15,17 +17,23 @@ const { Option } = Select;
 
 const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
     const categoryValues = useSelector(selectListCategories);
+    const { category, price, search } = useSelector(selectFilters);
     const dispatch = useDispatch();
+    const handleSubmit = (categoryFilter: string) => {
+        const result = categoryValues.find((category: TCategory) => category.title === categoryFilter)
+        dispatch(GetFilters(search, price, [result.id]))
+    }
     return (
         <div className="admin__filters">
             <div className='admin__filters-block'>
-                <Input placeholder="Название" onChange={(e) => handlerFilter("searchName")(e.target.value)} />
+                <Input placeholder="Название" onChange={(e) => dispatch(GetFilters(e.target.value, price, category))} />
                 <Input
                     type='number'
                     placeholder="Артикул"
                     onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
-                <Select placeholder="Категория" onChange={(category) => handlerFilter("searchCategory")(category)}>
-                    {categoryValues.map((category: TCategory) => <Option key={category.title} value={category.title}>{category.title}</Option>)}
+                <Select placeholder="Категория" onChange={handleSubmit}>
+                    {categoryValues.map((category: TCategory) =>
+                        <Option key={category.title} value={category.title}>{category.title}</Option>)}
                 </Select>
             </div>
             <div className='admin__filters-btns'>
