@@ -1,12 +1,12 @@
-import { DeleteOutlined } from '@ant-design/icons';
-import { Button, Col, Form, List, Row, Typography } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './admin_category.less';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Button, Col, Form, List, Row, Typography } from 'antd';
 import { OpenModalAction } from '../../../store/modals/actions';
 import { selectListCategories } from '../../../store/category/selectors';
 import { DeleteCategoryAction } from '../../../store/category/actions';
 import { TCategory } from '../../../models/category';
+import './admin_category.less';
 
 const { Title } = Typography;
 

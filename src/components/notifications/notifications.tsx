@@ -1,6 +1,6 @@
-import { notification } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { notification } from 'antd';
 import { selectNotificationStatus } from '../../store/notifications/selectors';
 
 const Notifications: React.FC = () => {

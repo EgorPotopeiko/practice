@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
@@ -74,6 +73,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
             orders = [...orders, ...result];
         }
     }
+    /* eslint-disable array-callback-return */
     orders.map((order: TOrder) => {
         order['key'] = order.id;
         order['payment'] = `${order.payment}`;

@@ -1,13 +1,13 @@
-import { Form, Input, SubmitButton } from 'formik-antd';
 import React, { ChangeEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Form, Input, SubmitButton } from 'formik-antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
 import { CloseModalAction } from '../../../store/modals/actions';
-import './modal_create-category.less'
 import { Button } from 'antd';
 import { CreateCategoryStartAction } from '../../../store/category/actions';
 import createCategorySchema from './schema';
+import './modal_create-category.less';
 
 type Props = {
     visible: boolean,

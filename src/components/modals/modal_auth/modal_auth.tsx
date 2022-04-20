@@ -1,14 +1,14 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button, Spin, Typography } from 'antd';
-import './modal_auth.less';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectStateStatus } from '../../../store/login/selectors';
 import { GetAuthorizationStartAction, SetStatus } from '../../../store/login/actions';
 import { OpenModalAction } from '../../../store/modals/actions';
 import signupSchema from './schema';
+import './modal_auth.less';
 
 type Props = {
     visible: boolean,

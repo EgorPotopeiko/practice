@@ -1,13 +1,12 @@
-/* eslint-disable array-callback-return */
 import { DeleteOutlined } from '@ant-design/icons';
 import { Space, Spin, Table } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './cart_items.less';
 import { TProduct } from '../../../../models/product';
 import { selectUserStatus } from '../../../../store/login/selectors';
 import { GetRemovedCartAction } from '../../../../store/cart/actions';
 import { selectCart } from '../../../../store/cart/selectors';
+import './cart_items.less';
 
 type Props = {
     idProduct: number | undefined

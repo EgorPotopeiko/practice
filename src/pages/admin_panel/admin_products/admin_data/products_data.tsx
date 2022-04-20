@@ -1,15 +1,13 @@
-/* eslint-disable no-self-assign */
-/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
-import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input, Space } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { TProduct } from '../../../../models/product';
-import './products_data.less';
 import { selectProductsStatus, selectTotal } from '../../../../store/products/selectors';
 import { selectListCategories } from '../../../../store/category/selectors';
 import { DeleteProductAction, GetPage } from '../../../../store/products/actions';
 import { TCategory } from '../../../../models/category';
+import './products_data.less';
 
 const { Option } = Select;
 
@@ -77,6 +75,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     const [editingKey, setEditingKey] = useState('');
     const dispatch = useDispatch();
     const [form] = Form.useForm();
+    /* eslint-disable array-callback-return */
     products.map((product: TProduct) => { product['key'] = product.id.toString() });
     let newData = data.filter((product: TProduct) => product.title.includes(searchName));
     newData = newData.filter((product: TProduct) => product.id.toString().includes(searchArticle));

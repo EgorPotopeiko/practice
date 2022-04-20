@@ -1,6 +1,6 @@
-import { Tabs } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Tabs } from 'antd';
 import AdminCategory from '../../pages/admin_panel/admin_category';
 import OrderData from '../../pages/admin_panel/admin_orders/admin_data';
 import OrderFilters from '../../pages/admin_panel/admin_orders/filters';
@@ -10,10 +10,10 @@ import { GetFilters } from '../../store/filters/actions';
 import { selectFilters } from '../../store/filters/selectors';
 import { selectListCategories } from '../../store/category/selectors';
 import { selectUserStatus } from '../../store/login/selectors';
-import './menu.less';
 import { GetPage } from '../../store/products/actions';
 import { selectPageStatus } from '../../store/products/selectors';
 import { TCategory } from '../../models/category';
+import './menu.less';
 
 const { TabPane } = Tabs;
 

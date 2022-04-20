@@ -1,19 +1,18 @@
-/* eslint-disable array-callback-return */
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
 import { Formik } from 'formik';
-import React, { useState } from 'react';
 import Modal from 'antd/lib/modal/Modal';
 import ImgCrop from 'antd-img-crop';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectListCategories } from '../../../store/category/selectors';
 import { CreateProductStartAction } from '../../../store/products/actions';
 import { getBase64 } from '../../../services/getBase64';
-import './modal_create-product.less';
 import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
 import { TCategory } from '../../../models/category';
-import createProductSchema from './schema';
 import { TValues } from '../../../models/create-values';
+import createProductSchema from './schema';
+import './modal_create-product.less';
 
 type Props = {
     visible: boolean,
@@ -111,6 +110,7 @@ const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
                                     placeholder='Категории'
                                     mode='multiple'
                                     onChange={(value) => {
+                                        /* eslint-disable array-callback-return */
                                         value.map((valuesId: string) => {
                                             categoryValues.map((category: TCategory) => {
                                                 if (category.title === valuesId) setFieldValue('categories', [...values.categories, { id: category.id }])

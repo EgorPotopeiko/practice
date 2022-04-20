@@ -1,11 +1,11 @@
-import { Button, Card, Divider, Empty, Image, Spin, Typography } from 'antd';
 import React from 'react';
-import './product_page.less';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Card, Divider, Empty, Image, Spin, Typography } from 'antd';
 import { selectProduct, selectProductsStatus } from '../../store/products/selectors';
 import Header from '../../components/header';
 import { GetAddedCartAction } from '../../store/cart/actions';
 import { TProduct } from '../../models/product';
+import './product_page.less';
 
 const { Title, Text } = Typography;
 

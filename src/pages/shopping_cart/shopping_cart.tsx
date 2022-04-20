@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Header from '../../components/header';
@@ -12,6 +11,7 @@ const ShoppingCart: React.FC = () => {
         CartDB.getCart()
             .then((response: any) => response.data)
             .then((data: any) => dispatch(GetCartAction(data.products)))
+        /* eslint-disable react-hooks/exhaustive-deps */
     }, []);
     return (
         <div className="shopping__cart">

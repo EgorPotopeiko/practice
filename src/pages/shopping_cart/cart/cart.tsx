@@ -1,11 +1,11 @@
-import { Button } from 'antd';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import './cart.less';
+import { Link } from 'react-router-dom';
+import { Button } from 'antd';
 import CartItems from './cart_items';
 import CartOrder from './cart_order';
 import { USER_PATH } from '../../../routing/names';
-import { Link } from 'react-router-dom';
 import CartDB from '../../../services/cart_service';
+import './cart.less';
 
 const Cart: React.FC = () => {
     const [visible, setVisible] = useState(false);

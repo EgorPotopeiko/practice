@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './app.less';
+import { Redirect, Route, Switch } from "react-router";
 import { useRoutes } from './routing/routes';
 import { GetRefreshStartAction } from './store/login/actions';
 import { selectUserStatus } from './store/login/selectors';
-import { Redirect, Route, Switch } from "react-router";
+import './app.less';
 
 function App() {
     const { user, isAuth } = useSelector(selectUserStatus);

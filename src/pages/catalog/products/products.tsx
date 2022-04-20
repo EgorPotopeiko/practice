@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { List, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
-import './products.less';
 import CardList from './card_list';
-import { useDispatch, useSelector } from 'react-redux';
+import CardTile from './card_tile';
 import { selectProductsStatus, selectTotal } from '../../../store/products/selectors';
 import Loader from '../../../components/loader';
 import { selectPageStatus } from '../../../store/products/selectors';
-import CardTile from './card_tile';
 import { TProduct } from '../../../models/product';
 import { GetPage, GetView } from '../../../store/products/actions';
 import ErrorIndicator from '../../../components/error_indicator/error_indicator';
+import './products.less';
 
 const { Title } = Typography;
 

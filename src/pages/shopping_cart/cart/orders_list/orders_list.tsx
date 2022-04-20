@@ -1,7 +1,6 @@
-/* eslint-disable array-callback-return */
-import { Table } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Table } from 'antd';
 import Header from '../../../../components/header';
 import { TOrder } from '../../../../models/order';
 import { selectUserStatus } from '../../../../store/login/selectors';
@@ -36,6 +35,7 @@ const OrdersList: React.FC = () => {
             key: 'payment'
         },
     ];
+    /* eslint-disable array-callback-return */
     ordersItems.map((order: TOrder) => {
         order['key'] = order.id;
         order['address'] = `${order.town}, ул.${order.street}, ${order.house}`;

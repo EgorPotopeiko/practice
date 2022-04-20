@@ -1,5 +1,5 @@
-import { GetNotificationOpenAction } from '../../store/notifications/actions';
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { GetNotificationOpenAction } from '../../store/notifications/actions';
 import { GetCategoriesErrorAction, GetCategoriesSuccessAction, GetCategoriesStartAction } from '../../store/category/actions';
 import { put } from 'redux-saga/effects';
 import CategoryDB from '../../services/category_service';

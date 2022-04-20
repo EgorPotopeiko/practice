@@ -1,16 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
+
 import React, { useEffect, useState } from 'react';
-import MaskedInput from 'antd-mask-input';
-import './cart_order.less';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import { useFormik } from 'formik';
 import { customAlphabet } from 'nanoid';
+import MaskedInput from 'antd-mask-input';
 import { selectCart } from '../../../../store/cart/selectors';
 import { selectUserStatus } from '../../../../store/login/selectors';
 import { ResetProducts } from '../../../../store/products/actions';
 import { SetStatus } from '../../../../store/login/actions';
 import { GetClearCartAction } from '../../../../store/cart/actions';
+import './cart_order.less';
 
 type Props = {
     visible: boolean,

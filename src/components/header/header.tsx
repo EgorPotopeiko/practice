@@ -1,8 +1,8 @@
-import { SearchOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { SearchOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Input, PageHeader, Select, Slider, Switch, Typography } from 'antd';
 import history from '../../history';
 import { PUBLIC_PATH, USER_PATH } from '../../routing/names';
 import { GetFilters } from '../../store/filters/actions';

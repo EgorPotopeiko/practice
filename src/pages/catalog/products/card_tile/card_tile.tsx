@@ -1,13 +1,13 @@
 import React from 'react';
-import { Card, Typography } from 'antd';
-import './card_tile.less';
-import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Card, Typography } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 import { selectUserStatus } from '../../../../store/login/selectors';
 import { GetProductStartAction } from '../../../../store/products/actions';
 import { GetAddedCartAction } from '../../../../store/cart/actions';
 import { TCategory } from '../../../../models/category';
+import './card_tile.less';
 
 const { Title } = Typography;
 
