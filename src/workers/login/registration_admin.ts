@@ -7,11 +7,11 @@ import AuthService from '../../services/auth_service';
 function* registrationAdmin({ name, email, password, secret }: ReturnType<typeof GetRegistrationAdminStartAction>) {
     try {
         const { data }: AxiosResponse = yield AuthService.registrationAdmin(name, email, password, secret);
-        yield put(GetRegistrationAdminSuccessAction(data))
+        yield put(GetRegistrationAdminSuccessAction(data));
         yield put(GetNotificationOpenAction('success', 'Регистрация админа', 'Регистрация администратора прошла успешно'))
     }
     catch (error) {
-        yield put(GetRegistrationAdminErrorAction(error))
+        yield put(GetRegistrationAdminErrorAction(error));
         yield put(GetNotificationOpenAction('error', 'Регистрация админа', 'Не удалось зарегистрировать администратора'))
     }
 }

@@ -8,8 +8,8 @@ function* loaderWorker({ payload }: LocationChangeAction) {
     try {
         const pathname = payload.location.pathname;
         if (pathname === '/') {
-            yield put(GetProductsStartAction())
-            yield put(GetCategoriesStartAction())
+            yield put(GetProductsStartAction());
+            yield put(GetCategoriesStartAction());
         }
         if (pathname === '/admin') yield put(GetAllProductsStartAction())
     }

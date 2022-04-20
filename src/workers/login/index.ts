@@ -11,5 +11,5 @@ export function* loginSaga() {
     yield takeLatest(LoginActionTypes.LOAD_AUTHORIZATION_START, login);
     yield takeLatest(LoginActionTypes.LOAD_REGISTRATION_START, registration);
     yield takeLatest(LoginActionTypes.LOAD_REGISTRATION_ADMIN_START, registrationAdmin);
-    yield takeLatest(LoginActionTypes.LOGOUT, logout);
+    yield takeLatest(LoginActionTypes.LOGOUT, logout)
 }

@@ -12,15 +12,15 @@ function* login({ email, password }: ReturnType<typeof GetAuthorizationStartActi
     try {
         const { pageSize }: { page: number, pageSize: number } = yield select(selectPageStatus);
         const { data }: AxiosResponse = yield call(AuthService.login, email, password);
-        localStorage.setItem('token', data.token)
-        yield put(GetPage(1, pageSize))
-        yield put(RemoveAllFilters())
-        yield put(GetAuthorizationSuccessAction(data.user))
-        yield put(CloseModalAction())
+        localStorage.setItem('token', data.token);
+        yield put(GetPage(1, pageSize));
+        yield put(RemoveAllFilters());
+        yield put(GetAuthorizationSuccessAction(data.user));
+        yield put(CloseModalAction());
         yield put(GetNotificationOpenAction('success', 'Авторизация', 'Авторизация прошла успешно'))
     }
     catch (error) {
-        yield put(GetAuthorizationErrorAction(error))
+        yield put(GetAuthorizationErrorAction(error));
         yield put(GetNotificationOpenAction('error', 'Авторизация', 'Не удалось авторизироваться'))
     }
 }

@@ -5,7 +5,7 @@ import { put, select } from 'redux-saga/effects';
 
 function* resetProducts(_action: ReturnType<typeof ResetProducts>) {
     const { pageSize }: { page: number, pageSize: number } = yield select(selectPageStatus);
-    yield put(RemoveAllFilters())
+    yield put(RemoveAllFilters());
     yield put(GetPage(1, pageSize))
 }
 

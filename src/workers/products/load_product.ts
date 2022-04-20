@@ -7,11 +7,11 @@ import { AxiosResponse } from 'axios';
 function* loadProduct({ id }: ReturnType<typeof GetProductStartAction>) {
     try {
         const { data }: AxiosResponse = yield call(ProductsDB.getProduct, id);
-        yield put(GetProductSuccessAction(data))
+        yield put(GetProductSuccessAction(data));
         yield put(GetNotificationOpenAction('success', 'Получение продукта', 'Продукт загружен успешно'))
     }
     catch (error) {
-        yield put(GetProductErrorAction(error))
+        yield put(GetProductErrorAction(error));
         yield put(GetNotificationOpenAction('error', 'Получение продукта', 'Не удалось получить продукт'))
     }
 }

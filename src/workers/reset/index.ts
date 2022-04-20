@@ -3,5 +3,5 @@ import { takeLatest } from 'redux-saga/effects';
 import resetProducts from './reset_products';
 
 export function* resetSaga() {
-    yield takeLatest(ProductsActionTypes.RESET_PRODUCTS, resetProducts);
+    yield takeLatest(ProductsActionTypes.RESET_PRODUCTS, resetProducts)
 }
