@@ -1,3 +1,4 @@
+import { TValues } from '../../models/create-values';
 import { TProduct } from './../../models/product';
 import { ProductsActionTypes } from './action-types';
 
@@ -28,7 +29,7 @@ export const GetProductErrorAction = (error: any) => ({
     type: ProductsActionTypes.LOAD_PRODUCT_ERROR,
     error
 })
-export const CreateProductStartAction = (product: any) => ({
+export const CreateProductStartAction = (product: TValues) => ({
     type: ProductsActionTypes.CREATE_PRODUCT_START,
     product
 })

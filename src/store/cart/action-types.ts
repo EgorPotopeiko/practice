@@ -3,5 +3,5 @@ export const CartActionTypes = {
     CLEAR_CART: '[Cart] CLEAR_CART',
 
     PRODUCT_ADDED: '[Cart] PRODUCT_ADDED',
-    PRODUCT_REMOVED: '[Cart] PRODUCT_REMOVED',
+    PRODUCT_REMOVED: '[Cart] PRODUCT_REMOVED'
 } as const;

@@ -14,10 +14,10 @@ type Props = {
 }
 
 const CartItems: React.FC<Props> = ({ idProduct }) => {
-    const cartData = useSelector(selectCart);
+    const cartData: Array<TProduct> = useSelector(selectCart);
     const { user } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
-    cartData.map((cartProduct: any) => cartProduct['key'] = cartProduct.id)
+    cartData.map((cartProduct: TProduct) => cartProduct['key'] = cartProduct.id.toString());
     const columns = [
         {
             title: 'Название',
@@ -42,7 +42,7 @@ const CartItems: React.FC<Props> = ({ idProduct }) => {
     if (JSON.parse(localStorage.getItem(`orders ${user.name}`)!) === null) localStorage.setItem(`orders ${user.name}`, JSON.stringify([]))
     else localStorage.getItem(`orders ${user.name}`)
     return (
-        <Spin spinning={idProduct === undefined ? true : false}>
+        <Spin spinning={idProduct === undefined}>
             <Table
                 bordered
                 dataSource={cartData}

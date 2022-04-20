@@ -22,9 +22,9 @@ export default function cartReducer(state: TCartState = initialState, action: Ac
                 cartProducts: action.products
             }
         case CartActionTypes.PRODUCT_ADDED:
-            return SuccessActionState(state);
+            return SuccessActionState(state)
         case CartActionTypes.PRODUCT_REMOVED:
-            return SuccessActionState(state);
+            return SuccessActionState(state)
         case CartActionTypes.CLEAR_CART:
             return {
                 ...state,

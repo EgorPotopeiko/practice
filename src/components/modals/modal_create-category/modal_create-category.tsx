@@ -46,7 +46,7 @@ const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setCategoryName(e.target.value)} />
                         </Form.Item>
                         <div className='modal__create-category-btns'>
-                            <SubmitButton disabled={categoryName.length === 0 ? true : false}>Создать</SubmitButton>
+                            <SubmitButton disabled={!categoryName.length}>Создать</SubmitButton>
                             <Button type='dashed' onClick={() => setCategoryName('')}>Clear</Button>
                         </div>
                     </Form>

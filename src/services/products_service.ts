@@ -1,3 +1,4 @@
+import { TValues } from './../models/create-values';
 import { TFilters } from './../models/filters';
 import { TProduct } from './../models/product';
 import { AxiosResponse } from 'axios';
@@ -31,7 +32,7 @@ export default class ProductsDB {
         return $api.get(`/product/${id}`, {})
     };
 
-    static createProduct = async (product: TProduct): Promise<void> => {
+    static createProduct = async (product: TValues): Promise<void> => {
         const { title, price, img, categories } = product;
         return $api.post(`/product`, {
             title,

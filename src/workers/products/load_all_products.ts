@@ -23,9 +23,7 @@ function* loadAllProductList(_action: ReturnType<typeof GetProductsStartAction>)
         });
         yield put(GetProductsSuccessAction(newData, totalCount))
     }
-    catch (error) {
-        yield put(GetProductsErrorAction(error))
-    }
+    catch (error) { yield put(GetProductsErrorAction(error)) }
 }
 
 export default loadAllProductList

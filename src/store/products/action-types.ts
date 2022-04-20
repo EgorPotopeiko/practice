@@ -9,7 +9,6 @@ export const ProductsActionTypes = {
     LOAD_PRODUCT_ERROR: '[Products] LOAD_PRODUCT_ERROR',
 
     SET_VIEW: '[Products] SET_VIEW',
-
     RESET_PRODUCTS: '[Products] RESET_PRODUCTS',
 
     CREATE_PRODUCT_START: '[Products] CREATE_PRODUCT_START',
@@ -19,5 +18,5 @@ export const ProductsActionTypes = {
     REMOVE_PRODUCT: '[Products] REMOVE_PRODUCT',
     DELETE_PRODUCT: '[Products] DELETE_PRODUCT',
 
-    SET_PAGE: '[Pagination] SET_PAGE',
+    SET_PAGE: '[Pagination] SET_PAGE'
 } as const;

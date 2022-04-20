@@ -13,17 +13,11 @@ import './modal_create-product.less';
 import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions';
 import { TCategory } from '../../../models/category';
 import createProductSchema from './schema';
+import { TValues } from '../../../models/create-values';
 
 type Props = {
     visible: boolean,
     onCancel: () => void
-}
-
-export type TValues = {
-    title: string,
-    price: number,
-    categories: Array<{ id: number }>,
-    img: string | null
 }
 
 type TCreateProductState = {

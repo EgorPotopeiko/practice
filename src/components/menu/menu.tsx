@@ -18,12 +18,12 @@ import { TCategory } from '../../models/category';
 const { TabPane } = Tabs;
 
 export type TMenuState = {
-    searchName: string
-    searchArticle: string
-    searchCategory: '' | string
-    searchStatus: boolean
-    chooseStatus: "оплачен" | string
-    searchUser: string
+    searchName: string,
+    searchArticle: string,
+    searchCategory: '' | string,
+    searchStatus: boolean,
+    chooseStatus: "оплачен" | string,
+    searchUser: string,
     searchNumber: string
 }
 
@@ -39,7 +39,7 @@ const Menu: React.FC = () => {
         searchStatus: true,
         chooseStatus: "оплачен",
         searchUser: "",
-        searchNumber: "",
+        searchNumber: ""
     });
     const dispatch = useDispatch();
     const handlerFilter = (type: keyof TMenuState) => (value: any) => {

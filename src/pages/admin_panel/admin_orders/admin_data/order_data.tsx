@@ -119,17 +119,17 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         {
             title: 'Номер заказа',
             dataIndex: 'id',
-            key: 'id',
+            key: 'id'
         },
         {
             title: 'Пользователь',
             dataIndex: 'user',
-            key: 'user',
+            key: 'user'
         },
         {
             title: 'Сумма заказа (руб.)',
             dataIndex: 'payment',
-            key: 'payment',
+            key: 'payment'
         },
         {
             title: 'Статус',
@@ -140,12 +140,12 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
         {
             title: 'Доставка',
             dataIndex: 'delivery',
-            key: 'delivery',
+            key: 'delivery'
         },
         {
             title: 'Email',
             dataIndex: 'email',
-            key: 'email',
+            key: 'email'
         },
         {
             title: 'Изменение',
@@ -160,7 +160,7 @@ const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) 
                 ) : (
                     <EditOutlined disabled={editingKey !== ''} onClick={() => edit(record)}>Edit</EditOutlined>
                 );
-            },
+            }
         },
     ];
 

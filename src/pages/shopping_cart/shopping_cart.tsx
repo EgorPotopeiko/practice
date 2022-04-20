@@ -12,7 +12,7 @@ const ShoppingCart: React.FC = () => {
         CartDB.getCart()
             .then((response: any) => response.data)
             .then((data: any) => dispatch(GetCartAction(data.products)))
-    }, [])
+    }, []);
     return (
         <div className="shopping__cart">
             <Header />

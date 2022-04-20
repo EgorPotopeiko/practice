@@ -37,7 +37,7 @@ export default function loginReducer(state: TLoginState = initialState, action: 
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_START:
             return {
-                ...StartActionState(state),
+                ...StartActionState(state)
             }
         case LoginActionTypes.LOAD_AUTHORIZATION_SUCCESS:
             return {
@@ -54,31 +54,31 @@ export default function loginReducer(state: TLoginState = initialState, action: 
             }
         case LoginActionTypes.LOAD_REGISTRATION_START:
             return {
-                ...StartActionState(state),
+                ...StartActionState(state)
             }
         case LoginActionTypes.LOAD_REGISTRATION_SUCCESS:
             return {
-                ...SuccessActionState(state),
+                ...SuccessActionState(state)
             }
         case LoginActionTypes.LOAD_REGISTRATION_ERROR:
             return {
                 ...state,
                 error: action.error,
-                isLoading: false,
+                isLoading: false
             }
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_START:
             return {
-                ...StartActionState(state),
+                ...StartActionState(state)
             }
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_SUCCESS:
             return {
-                ...SuccessActionState(state),
+                ...SuccessActionState(state)
             }
         case LoginActionTypes.LOAD_REGISTRATION_ADMIN_ERROR:
             return {
                 ...state,
                 error: action.error,
-                isLoading: false,
+                isLoading: false
             }
         case LoginActionTypes.LOGOUT:
             return {
@@ -89,7 +89,7 @@ export default function loginReducer(state: TLoginState = initialState, action: 
         case LoginActionTypes.SET_STATUS:
             return {
                 ...state,
-                error: null,
+                error: null
             }
         default:
             return state

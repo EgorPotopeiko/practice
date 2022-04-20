@@ -80,7 +80,7 @@ const ProductsData: React.FC<Props> = ({ searchArticle, searchCategory, searchNa
     products.map((product: TProduct) => { product['key'] = product.id.toString() });
     let newData = data.filter((product: TProduct) => product.title.includes(searchName));
     newData = newData.filter((product: TProduct) => product.id.toString().includes(searchArticle));
-    newData = newData.filter((product: TProduct) => product.categories.find((element: TCategory) => element.title === searchCategory))
+    newData = newData.filter((product: TProduct) => product.categories.find((element: TCategory) => element.title === searchCategory));
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {
