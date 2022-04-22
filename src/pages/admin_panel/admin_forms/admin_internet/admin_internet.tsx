@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import './admin_internet.less';
 
 const AdminInternet: React.FC = () => {
-    const [channels, setChannels]: any = useState([])
+    const [channels, setChannels]: any = useState([]);
     const [kpis, setKpis]: any = useState([]);
     return (
         <div className='admin__internet'>

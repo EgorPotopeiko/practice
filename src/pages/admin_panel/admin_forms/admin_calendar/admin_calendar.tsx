@@ -1,10 +1,11 @@
-import React from 'react';
-import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, Radio, Row, Select, Upload } from 'antd';
+import React, { useState } from 'react';
+import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Descriptions, Input, List, Radio, Row, Select } from 'antd';
 import { Formik } from 'formik';
 import './admin_calendar.less';
 
 const AdminCalendar: React.FC = () => {
+    const [contents, setContents]: any = useState([]);
     return (
         <div className='admin__calendar'>
             <Formik
@@ -27,9 +28,16 @@ const AdminCalendar: React.FC = () => {
                             </Radio.Group>
                         </Descriptions.Item>
                         <Descriptions.Item label="Формат контента*">
-                            <Upload>
-                                <Button type='link' icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
-                            </Upload>
+                            <List style={{ display: contents.length === 0 ? 'none' : 'block' }}>
+                                {contents.map((select: any) => (
+                                    <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setContents(contents.filter((content: any) => content.id !== select.id))} />]}>
+                                        <Select placeholder={select.info}></Select>
+                                        <Input type='number' placeholder={select.num}></Input>
+                                        <Select placeholder={select.type}></Select>
+                                    </List.Item>
+                                ))}
+                            </List>
+                            <Button onClick={() => setContents([...contents, { id: Math.random(), info: 'Выберите контент', num: 'Введите число', type: 'Выберите тип' }])} type='link' icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
                         </Descriptions.Item>
                     </Descriptions>
                 </Row>
