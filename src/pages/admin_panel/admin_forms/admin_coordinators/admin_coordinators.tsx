@@ -20,8 +20,7 @@ const AdminCoordinators: React.FC = () => {
                 <Row>
                     <Descriptions column={1} bordered>
                         <Descriptions.Item label="Подрядчик*">
-                            <Select placeholder='Выберите подрядчика'>
-                            </Select>
+                            <Select placeholder='Выберите подрядчика'></Select>
                         </Descriptions.Item>
                         <Descriptions.Item label="Продюсер*">
                             <List style={{ display: producers.length === 0 ? 'none' : 'block' }}>
