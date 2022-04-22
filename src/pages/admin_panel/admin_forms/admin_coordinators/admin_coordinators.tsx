@@ -1,10 +1,12 @@
-import React from 'react';
-import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, Row, Select, Upload } from 'antd';
+import React, { useState } from 'react';
+import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Descriptions, List, Row, Select } from 'antd';
 import { Formik } from 'formik';
 import './admin_coordinators.less';
 
 const AdminCoordinators: React.FC = () => {
+    const [producers, setProducers]: any = useState([]);
+    const [coordinators, setCoordinators]: any = useState([]);
     return (
         <div className='admin__coordinators'>
             <Formik
@@ -22,14 +24,20 @@ const AdminCoordinators: React.FC = () => {
                             </Select>
                         </Descriptions.Item>
                         <Descriptions.Item label="Продюсер*">
-                            <Upload>
-                                <Button type='link' icon={<PlusCircleOutlined />}>Добавить продюсера</Button>
-                            </Upload>
+                            <List style={{ display: producers.length === 0 ? 'none' : 'block' }}>
+                                {producers.map((select: any) => (
+                                    <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setProducers(producers.filter((producer: any) => producer.id !== select.id))} />]}><Select placeholder={select.title}></Select></List.Item>
+                                ))}
+                            </List>
+                            <Button type='link' onClick={() => setProducers([...producers, { id: Math.random(), title: 'Добавить продюсера' }])} icon={<PlusCircleOutlined />}>Добавить продюсера</Button>
                         </Descriptions.Item>
                         <Descriptions.Item label="Координатор*">
-                            <Upload>
-                                <Button type='link' icon={<PlusCircleOutlined />}>Добавить координатора</Button>
-                            </Upload>
+                            <List style={{ display: coordinators.length === 0 ? 'none' : 'block' }}>
+                                {coordinators.map((select: any) => (
+                                    <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setCoordinators(coordinators.filter((coordinator: any) => coordinator.id !== select.id))} />]}><Select placeholder={select.title}></Select></List.Item>
+                                ))}
+                            </List>
+                            <Button type='link' onClick={() => setCoordinators([...coordinators, { id: Math.random(), title: 'Добавить координатора' }])} icon={<PlusCircleOutlined />}>Добавить координатора</Button>
                         </Descriptions.Item>
                     </Descriptions>
                 </Row>
