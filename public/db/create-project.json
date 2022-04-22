@@ -1,0 +1,59 @@
+{
+  "project": {
+    "name": "string",
+    "requestNumber": "string",
+    "contractNumber": "string",
+    "contractDate": "2022-02-02",
+    "advancePayment": true,
+    "igk": "string",
+    "budget": 0,
+    "sessionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "goal": "string",
+    "description": "string",
+    "completionDate": "2022-02-02",
+    "statusId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "contentThematicIds": [
+      "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    ],
+    "contentDirectionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "contentFormats": [
+      {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "contentCount": 0,
+        "typeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "submissionFormId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    ],
+    "channels": [
+      {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "string",
+        "link": "string",
+        "planPublicationCount": 0,
+        "internetResourceId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    ],
+    "kpis": [
+      {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "planCount": 0,
+        "typeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    ],
+    "ownerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "producerIds": [
+      "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    ],
+    "coordinatorIds": [
+      "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    ],
+    "fileIds": [
+      "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    ],
+    "imageId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "image": "string",
+  "files": [
+    "string"
+  ]
+}

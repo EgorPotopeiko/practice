@@ -14,6 +14,7 @@ import { GetPage } from '../../store/products/actions';
 import { selectPageStatus } from '../../store/products/selectors';
 import { TCategory } from '../../models/category';
 import './menu.less';
+import AdminForms from '../../pages/admin_panel/admin_forms/admin_forms';
 
 const { TabPane } = Tabs;
 
@@ -69,6 +70,7 @@ const Menu: React.FC = () => {
                             searchUser={filter.searchUser}
                             searchNumber={filter.searchNumber} />
                     </TabPane>
+                    <TabPane tab="ПРОЕКТЫ" key="ПРОЕКТЫ"><AdminForms /></TabPane>
                 </Tabs>
             }
             {(user.role === "USER" || user.role === "GUEST") &&

@@ -1,0 +1,195 @@
+{
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "name": "string",
+    "owner": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "lastName": "string",
+        "firstName": "string",
+        "middleName": "string",
+        "role": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string",
+            "ruName": "string"
+        },
+        "username": "string",
+        "email": "string",
+        "contactPhone": "string",
+        "telegram": "string",
+        "status": "string",
+        "organization": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string"
+        },
+        "image": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "compressedId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "scaledId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string",
+            "type": "PDF"
+        },
+        "isMain": true
+    },
+    "status": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "code": "string",
+        "name": "string"
+    },
+    "producers": [{
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "lastName": "string",
+        "firstName": "string",
+        "middleName": "string",
+        "role": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string",
+            "ruName": "string"
+        },
+        "username": "string",
+        "email": "string",
+        "contactPhone": "string",
+        "telegram": "string",
+        "status": "string",
+        "organization": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string"
+        },
+        "image": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "compressedId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "scaledId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string",
+            "type": "PDF"
+        },
+        "isMain": true
+    }],
+    "coordinators": [{
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "lastName": "string",
+        "firstName": "string",
+        "middleName": "string",
+        "role": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string",
+            "ruName": "string"
+        },
+        "username": "string",
+        "email": "string",
+        "contactPhone": "string",
+        "telegram": "string",
+        "status": "string",
+        "organization": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string"
+        },
+        "image": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "compressedId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "scaledId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string",
+            "type": "PDF"
+        },
+        "isMain": true
+    }],
+    "contractNumber": "string",
+    "requestNumber": "string",
+    "contractDate": "2022-02-02",
+    "advancePayment": true,
+    "igk": "string",
+    "budget": 0,
+    "session": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "string",
+        "year": 0,
+        "contest": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "code": "string",
+            "startDate": "2022-02-02",
+            "endDate": "2022-02-02"
+        }
+    },
+    "goal": "string",
+    "description": "string",
+    "completionDate": "2022-02-02",
+    "files": [{
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "compressedId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "scaledId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "string",
+        "type": "PDF"
+    }],
+    "contentThematics": [{
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "code": "string",
+        "name": "string",
+        "hidden": true
+    }],
+    "contentDirection": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "code": "string",
+        "name": "string",
+        "hidden": true,
+        "image": "string"
+    },
+    "contentFormats": [{
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "contentCount": 0,
+        "type": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "code": "string",
+            "name": "string",
+            "submissionForms": [{
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "code": "string",
+                "name": "string",
+                "hidden": true,
+                "requirements": "string"
+            }],
+            "hidden": true
+        },
+        "submissionForm": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "code": "string",
+            "name": "string",
+            "hidden": true,
+            "requirements": "string"
+        }
+    }],
+    "channels": [{
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "string",
+        "link": "string",
+        "planPublicationCount": 0,
+        "internetResource": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "name": "string",
+            "domainLink": "string",
+            "hidden": true,
+            "image": "string"
+        }
+    }],
+    "kpis": [{
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "planCount": 0,
+        "type": {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "code": "string",
+            "name": "string",
+            "hidden": true
+        }
+    }],
+    "actualKpi": 0,
+    "taskStageProgress": {
+        "additionalProp1": 0,
+        "additionalProp2": 0,
+        "additionalProp3": 0
+    },
+    "image": {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "compressedId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "scaledId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "name": "string",
+        "type": "PDF"
+    },
+    "defaultImage": "string",
+    "tasksExist": true
+}

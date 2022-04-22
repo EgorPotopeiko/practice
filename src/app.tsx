@@ -6,7 +6,7 @@ import { GetRefreshStartAction } from './store/login/actions';
 import { selectUserStatus } from './store/login/selectors';
 import './app.less';
 
-function App() {
+const App: React.FC = () => {
     const { user, isAuth } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
     const routes = useRoutes(isAuth, user.role);
