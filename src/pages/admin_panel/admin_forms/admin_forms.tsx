@@ -7,7 +7,7 @@ import AdminCalendar from './admin_calendar/admin_calendar';
 import AdminInternet from './admin_internet/admin_internet';
 import AdminCoordinators from './admin_coordinators/admin_coordinators';
 import { Formik } from 'formik';
-import { SubmitButton, Form } from 'formik-antd';
+import { Form } from 'formik-antd';
 
 const { TabPane } = Tabs;
 
@@ -53,10 +53,9 @@ const AdminForms: React.FC = () => {
                                 <AdminInternet />
                             </TabPane>
                             <TabPane key='coordinator' tab={<UserOutlined />}>
-                                <AdminCoordinators />
+                                <AdminCoordinators formik={formik} />
                             </TabPane>
                         </Tabs>
-                        <SubmitButton>Submit</SubmitButton>
                     </Form>
                 )}
             </Formik>

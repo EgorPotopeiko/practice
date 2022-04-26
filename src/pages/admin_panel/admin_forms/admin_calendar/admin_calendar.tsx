@@ -1,47 +1,116 @@
 import React, { useState } from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, Input, List, Radio, Row, Select } from 'antd';
-import { Formik } from 'formik';
+import { Button, Descriptions, List, Row } from 'antd';
+import FormikControl from '../components/formik_control/formik_control';
+import { nanoid } from 'nanoid';
 import './admin_calendar.less';
 
 const AdminCalendar: React.FC = () => {
     const [contents, setContents]: any = useState([]);
+    console.log(contents)
     return (
         <div className='admin__calendar'>
-            <Formik
-                initialValues={{
-                    contentThematicIds: [],
-                    contentDirectionId: '',
-                    contentFormats: [],
-                }}
-                validateOnBlur
-                onSubmit={async (values) => console.log(values)}>
-                <Row>
-                    <Descriptions column={1} bordered>
-                        <Descriptions.Item label="Тематика контента*"><Select mode='multiple' placeholder='Выберите тематику контента'></Select></Descriptions.Item>
-                        <Descriptions.Item label="Направление контента*">
-                            <Radio.Group defaultValue={1}>
-                                <Radio value={1}>Мультиформат</Radio>
-                                <Radio value={2}>Видеоконтент</Radio>
-                                <Radio value={3}>Контент в блогосфере</Radio>
-                                <Radio value={4}>Программные продукты</Radio>
-                            </Radio.Group>
-                        </Descriptions.Item>
-                        <Descriptions.Item label="Формат контента*">
-                            <List style={{ display: contents.length === 0 ? 'none' : 'block' }}>
-                                {contents.map((select: any) => (
-                                    <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setContents(contents.filter((content: any) => content.id !== select.id))} />]}>
-                                        <Select placeholder={select.info}></Select>
-                                        <Input type='number' placeholder={select.num}></Input>
-                                        <Select placeholder={select.type}></Select>
-                                    </List.Item>
-                                ))}
-                            </List>
-                            <Button onClick={() => setContents([...contents, { id: Math.random(), info: 'Выберите контент', num: 'Введите число', type: 'Выберите тип' }])} type='link' icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
-                        </Descriptions.Item>
-                    </Descriptions>
-                </Row>
-            </Formik>
+            <Row>
+                <Descriptions column={1} bordered>
+                    <Descriptions.Item label="Тематика контента*">
+                        <FormikControl
+                            control='select'
+                            name='contentThematicIds'
+                            placeholder='Выберите тематику контента'
+                            mode='multiple'
+                            required={true}
+                            options={[
+                                {
+                                    id: nanoid(),
+                                    value: 'Content 1'
+                                },
+                                {
+                                    id: nanoid(),
+                                    value: 'Content 2'
+                                },
+                                {
+                                    id: nanoid(),
+                                    value: 'Content 3'
+                                }
+                            ]} />
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Направление контента*">
+                        <FormikControl
+                            control='radio'
+                            name='contentDirectionId'
+                            placeholder='Выберите направление контента'
+                            required={true}
+                            radioData={[
+                                {
+                                    id: 1,
+                                    value: 'Мультиформат'
+                                },
+                                {
+                                    id: 2,
+                                    value: 'Видеоконтент'
+                                },
+                                {
+                                    id: 3,
+                                    value: 'Контент в блогосфере'
+                                },
+                                {
+                                    id: 4,
+                                    value: 'Программные продукты'
+                                }
+                            ]} />
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Формат контента*">
+                        <List style={{ display: contents.length === 0 ? 'none' : 'block' }}>
+                            {contents.map((select: any) => (
+                                <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setContents(contents.filter((content: any) => content.id !== select.id))} />]}>
+                                    <FormikControl
+                                        control='select'
+                                        name='info'
+                                        placeholder='Info'
+                                        options={[
+                                            {
+                                                id: nanoid(),
+                                                value: 'Info 1'
+                                            },
+                                            {
+                                                id: nanoid(),
+                                                value: 'Info 2'
+                                            },
+                                            {
+                                                id: nanoid(),
+                                                value: 'Info 3'
+                                            }
+                                        ]} />
+                                    <FormikControl
+                                        control='input'
+                                        name='num'
+                                        type='number'
+                                        placeholder='Введите количество' />
+                                    <FormikControl
+                                        control='select'
+                                        name='type'
+                                        placeholder='Type'
+                                        options={[
+                                            {
+                                                id: nanoid(),
+                                                value: 'Type 1'
+                                            },
+                                            {
+                                                id: nanoid(),
+                                                value: 'Type 2'
+                                            },
+                                            {
+                                                id: nanoid(),
+                                                value: 'Type 3'
+                                            }
+                                        ]} />
+                                </List.Item>
+                            ))}
+                        </List>
+                        <Button onClick={() => setContents([...contents, { id: Math.random(), info: 'Выберите контент', num: 'Введите число', type: 'Выберите тип' }])} type='link' icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
+                    </Descriptions.Item>
+                </Descriptions>
+            </Row>
         </div >
     );
 }
