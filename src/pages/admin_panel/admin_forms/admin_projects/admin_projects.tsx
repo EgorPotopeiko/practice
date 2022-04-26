@@ -11,36 +11,66 @@ type Props = {
 const { Text } = Typography;
 
 const AdminProjects: React.FC<Props> = ({ formik }) => {
-    const { values, setFieldValue, handleChange } = formik;
+    const { values, setFieldValue, handleChange, getFieldProps } = formik;
     return (
         <div className='admin__projects'>
             <Row>
                 <Descriptions column={1} bordered>
-                    <Descriptions.Item label="Название проекта*"><Input placeholder='Введите название проекта' name='name' onChange={handleChange}></Input></Descriptions.Item>
+                    <Descriptions.Item label="Название проекта*">
+                        <Input
+                            required={true}
+                            placeholder='Введите название проекта'
+                            name='name'
+                            {...getFieldProps('name')}>
+                        </Input>
+                    </Descriptions.Item>
                     <Descriptions.Item label="Номер заявки*">
                         <div className='request'>
                             <Col flex={2}>
-                                <Input value={values.requestNumber} placeholder='Введите номер заявки' name='requestNumber' onChange={handleChange}></Input>
+                                <Input
+                                    required={true}
+                                    placeholder='Введите номер заявки'
+                                    name='requestNumber'
+                                    {...getFieldProps('requestNumber')}>
+
+                                </Input>
                             </Col>
                             <Col flex={1} style={{ display: 'flex' }}>
                                 <Text>Бюджет*</Text>
-                                <Input value={values.budget} type='number' placeholder='Введите бюджет проекта' name='budget' onChange={handleChange}></Input>
+                                <Input
+                                    required={true}
+                                    type='number'
+                                    placeholder='Введите бюджет проекта'
+                                    name='budget'
+                                    {...getFieldProps('budget')}>
+                                </Input>
                             </Col>
                         </div>
                     </Descriptions.Item>
                     <Descriptions.Item label="Договор*">
                         <div className='contract'>
                             <Col flex={1}>
-                                <Input value={values.contractNumber} type='number' placeholder='Введите номер договора' name='contractNumber' onChange={handleChange}></Input>
+                                <Input
+                                    required={true}
+                                    type='number'
+                                    placeholder='Введите номер договора'
+                                    name='contractNumber'
+                                    {...getFieldProps('contractNumber')}>
+                                </Input>
                             </Col>
                             <Col flex={1}>
                                 <Text>От*</Text>
-                                <DatePicker placeholder='Выберите дату' format='YYYY-MM-DD' name='contractDate' onChange={handleChange} />
+                                <DatePicker placeholder='Выберите дату' format='YYYY-MM-DD' name='contractDate' />
                             </Col>
                             <Col flex={1} style={{ display: 'flex' }}>
                                 <Text>Авансирование</Text>
                                 <Checkbox name='advancePayment' onChange={handleChange} />
-                                <Input disabled={!values.advancePayment} placeholder='Введите № ИГК' name='advancePayment' onChange={handleChange}></Input>
+                                <Input
+                                    disabled={!values.advancePayment}
+                                    placeholder='Введите № ИГК'
+                                    name='advancePayment'
+                                    {...getFieldProps('advancePayment')}>
+                                </Input>
                             </Col>
                         </div>
                     </Descriptions.Item>
@@ -55,15 +85,26 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             </Col>
                             <Col flex={2} style={{ display: 'flex' }}>
                                 <Text>Сессия*</Text>
-                                <Select value={values.sessionId} placeholder='Выберите сессию' onChange={(e: any) => setFieldValue('sessionId', e.target.value)} />
+                                <Select
+                                    value={values.sessionId}
+                                    placeholder='Выберите сессию'
+                                    onChange={(e: any) => setFieldValue('sessionId', e.target.value)} />
                             </Col>
                         </div>
                     </Descriptions.Item>
                     <Descriptions.Item label="Цель проекта">
-                        <TextArea value={values.goal} placeholder='Введите цель проекта' name='goal' onChange={handleChange}></TextArea>
+                        <TextArea
+                            placeholder='Введите цель проекта'
+                            name='goal'
+                            {...getFieldProps('goal')}>
+                        </TextArea>
                     </Descriptions.Item>
                     <Descriptions.Item label="Описание проекта">
-                        <TextArea value={values.description} placeholder='Введите описание проекта' name='description' onChange={handleChange}></TextArea>
+                        <TextArea
+                            placeholder='Введите описание проекта'
+                            name='description'
+                            {...getFieldProps('description')}>
+                        </TextArea>
                     </Descriptions.Item>
                     <Descriptions.Item label="Статус">
                         <div className='draft'>
@@ -72,7 +113,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             </Col>
                             <Col flex={2} style={{ display: 'flex', justifyContent: 'end' }}>
                                 <Text>Дата завершения проекта</Text>
-                                <DatePicker placeholder='Выберите дату' format='YYYY-MM-DD' name='completionDate' onChange={handleChange} />
+                                <DatePicker placeholder='Выберите дату' format='YYYY-MM-DD' name='completionDate' />
                             </Col>
                         </div>
                     </Descriptions.Item>

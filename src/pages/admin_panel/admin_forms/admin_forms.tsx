@@ -38,7 +38,8 @@ const AdminForms: React.FC = () => {
                 fileIds: [],
                 imageId: ''
             }}
-                onSubmit={(values) => console.log(values)}>
+                onSubmit={(values) => console.log(values)}
+                validateOnBlur>
                 {(formik) => (
                     <Form>
                         <Tabs tabPosition='left'>
