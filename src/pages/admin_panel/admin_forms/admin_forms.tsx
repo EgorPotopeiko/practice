@@ -39,11 +39,11 @@ const AdminForms: React.FC = () => {
                 imageId: ''
             }}
                 onSubmit={(values) => console.log(values)}>
-                {({ values }) => (
+                {(formik) => (
                     <Form>
                         <Tabs tabPosition='left'>
                             <TabPane key='projects' tab={<AppstoreAddOutlined />}>
-                                <AdminProjects />
+                                <AdminProjects formik={formik} />
                             </TabPane>
                             <TabPane key='calendar' tab={<CalendarOutlined />}>
                                 <AdminCalendar />
