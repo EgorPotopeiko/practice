@@ -2,10 +2,10 @@ import React from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row } from 'antd';
 import { SubmitButton } from 'formik-antd';
-import FormikControl from '../components/formik_control/formik_control';
 import { nanoid } from 'nanoid';
 import { FieldArray } from 'formik';
 import './admin_coordinators.less';
+import FormikSelect from '../components/select/select';
 
 type Props = {
     formik: any
@@ -18,8 +18,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Подрядчик*">
-                        <FormikControl
-                            control='select'
+                        <FormikSelect
                             name='ownerId'
                             placeholder='Выберите подрядчика'
                             required={true}
@@ -44,8 +43,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.producerIds.map((_producer: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikControl
-                                                control='select'
+                                            <FormikSelect
                                                 name={`producerIds.${index}.name`}
                                                 placeholder='Выберите продюсера'
                                                 options={[
@@ -78,8 +76,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.coordinatorIds.map((_coordinator: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikControl
-                                                control='select'
+                                            <FormikSelect
                                                 name={`coordinatorIds.${index}.name`}
                                                 placeholder='Выберите координатора'
                                                 options={[

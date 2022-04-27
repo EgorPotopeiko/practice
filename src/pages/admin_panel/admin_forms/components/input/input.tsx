@@ -2,7 +2,7 @@ import React from "react";
 import { Input as FormInput } from "formik-antd";
 import './input.less';
 
-const Input = (props: any) => {
+const FormikInput = (props: any) => {
     const { name, ...rest } = props
     return (
         <div className="formik__input">
@@ -11,4 +11,4 @@ const Input = (props: any) => {
     )
 }
 
-export default Input
+export default FormikInput

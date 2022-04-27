@@ -2,7 +2,7 @@ import React from "react";
 import { DatePicker as FormDate } from "formik-antd";
 import './datepicker.less';
 
-const DatePicker = (props: any) => {
+const FormikDatePicker = (props: any) => {
     const { name, format, ...rest } = props;
     return (
         <div className="formik__datepicker">
@@ -11,4 +11,4 @@ const DatePicker = (props: any) => {
     )
 }
 
-export default DatePicker
+export default FormikDatePicker

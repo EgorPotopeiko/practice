@@ -2,8 +2,11 @@ import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Col, Descriptions, Row, Typography, Upload } from 'antd';
 import './admin_projects.less';
-import FormikControl from '../components/formik_control/formik_control';
 import { nanoid } from 'nanoid';
+import FormikInput from '../components/input/input';
+import FormikDatePicker from '../components/datepicker/datepicker';
+import FormikSelect from '../components/select/select';
+import FormikTextArea from '../components/textarea/textarea';
 
 type Props = {
     formik: any
@@ -18,8 +21,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Название проекта*">
-                        <FormikControl
-                            control='input'
+                        <FormikInput
                             name='name'
                             placeholder='Введите название проекта'
                             required={true} />
@@ -27,16 +29,14 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                     <Descriptions.Item label="Номер заявки*">
                         <div className='request'>
                             <Col flex={2}>
-                                <FormikControl
-                                    control='input'
+                                <FormikInput
                                     name='requestNumber'
                                     placeholder='Введите номер заявки'
                                     required={true} />
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>Бюджет*</Text>
-                                <FormikControl
-                                    control='input'
+                                <FormikInput
                                     type='number'
                                     name='budget'
                                     placeholder='Введите бюджет проекта'
@@ -47,8 +47,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                     <Descriptions.Item label="Договор*">
                         <div className='contract'>
                             <Col flex={1}>
-                                <FormikControl
-                                    control='input'
+                                <FormikInput
                                     type='number'
                                     name='contractNumber'
                                     placeholder='Введите номер договора'
@@ -56,8 +55,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>От*</Text>
-                                <FormikControl
-                                    control='date'
+                                <FormikDatePicker
                                     name='contractDate'
                                     format='YYYY-MM-DD'
                                     placeholder='Выберите дату' />
@@ -65,8 +63,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>Авансирование</Text>
                                 <Checkbox name='advancePayment' onChange={handleChange} />
-                                <FormikControl
-                                    control='input'
+                                <FormikInput
                                     disabled={!values.advancePayment}
                                     name='igk'
                                     placeholder='Введите №ИГК' />
@@ -76,8 +73,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                     <Descriptions.Item label="Конкурс*">
                         <div className='contest'>
                             <Col flex={2}>
-                                <FormikControl
-                                    control='select'
+                                <FormikSelect
                                     name='conc'
                                     placeholder='Выберите конкурс'
                                     options={[
@@ -97,8 +93,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>Год*</Text>
-                                <FormikControl
-                                    control='select'
+                                <FormikSelect
                                     name='year'
                                     placeholder='Выберите год'
                                     options={[
@@ -118,8 +113,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             </Col>
                             <Col flex={2} style={{ display: 'contents' }}>
                                 <Text>Сессия*</Text>
-                                <FormikControl
-                                    control='select'
+                                <FormikSelect
                                     name='sessionId'
                                     placeholder='Выберите сессию'
                                     options={[
@@ -140,22 +134,19 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                         </div>
                     </Descriptions.Item>
                     <Descriptions.Item label="Цель проекта">
-                        <FormikControl
-                            control='textarea'
+                        <FormikTextArea
                             name='goal'
                             placeholder='Введите цель проекта' />
                     </Descriptions.Item>
                     <Descriptions.Item label="Описание проекта">
-                        <FormikControl
-                            control='textarea'
+                        <FormikTextArea
                             name='description'
                             placeholder='Введите описание проекта' />
                     </Descriptions.Item>
                     <Descriptions.Item label="Статус">
                         <div className='draft'>
                             <Col flex={4}>
-                                <FormikControl
-                                    control='select'
+                                <FormikSelect
                                     name='statusId'
                                     placeholder='Черновик'
                                     options={[
@@ -175,8 +166,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             </Col>
                             <Col flex={2} style={{ display: 'flex', justifyContent: 'end' }}>
                                 <Text>Дата завершения проекта</Text>
-                                <FormikControl
-                                    control='date'
+                                <FormikDatePicker
                                     name='completionDate'
                                     format='YYYY-MM-DD'
                                     placeholder='Выберите дату' />

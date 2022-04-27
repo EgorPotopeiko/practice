@@ -1,7 +1,7 @@
 import React from "react";
 import { Radio } from "formik-antd";
 
-const RadioGroup = (props: any) => {
+const FormikRadioGroup = (props: any) => {
     const { name, radioData, ...rest } = props
     return (
         <div className="formik__radio">
@@ -14,4 +14,4 @@ const RadioGroup = (props: any) => {
     )
 }
 
-export default RadioGroup
+export default FormikRadioGroup

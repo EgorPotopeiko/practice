@@ -1,10 +1,11 @@
 import React from 'react';
 import { DeleteOutlined, LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row, Upload } from 'antd';
-import FormikControl from '../components/formik_control/formik_control';
 import { FieldArray } from 'formik';
 import { nanoid } from 'nanoid';
 import './admin_internet.less';
+import FormikSelect from '../components/select/select';
+import FormikInput from '../components/input/input';
 
 type Props = {
     formik: any
@@ -22,8 +23,7 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.channels.map((_channel: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikControl
-                                                control='select'
+                                            <FormikSelect
                                                 name={`channels.${index}.internetResourceId`}
                                                 placeholder='Выберите интернет-ресурс'
                                                 required={true}
@@ -41,18 +41,15 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                                         value: 'Twitter'
                                                     }
                                                 ]} />
-                                            <FormikControl
-                                                control='input'
+                                            <FormikInput
                                                 name={`channels.${index}.name`}
                                                 type='number'
                                                 placeholder='Введите название' />
-                                            <FormikControl
-                                                control='input'
+                                            <FormikInput
                                                 name={`channels.${index}.link`}
                                                 type='number'
                                                 placeholder='Введите ссылки' />
-                                            <FormikControl
-                                                control='input'
+                                            <FormikInput
                                                 name={`channels.${index}.planPublicationCount`}
                                                 type='number'
                                                 placeholder='Введите количество публикаций' />
@@ -78,13 +75,11 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.kpis.map((_kpi: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikControl
-                                                control='input'
+                                            <FormikInput
                                                 name={`kpis.${index}.planCount`}
                                                 type='number'
                                                 placeholder='Введите показатель просмотров' />
-                                            <FormikControl
-                                                control='select'
+                                            <FormikSelect
                                                 name={`kpis.${index}.typeId`}
                                                 placeholder='Выберите меру измерения КПЭ'
                                                 required={true}

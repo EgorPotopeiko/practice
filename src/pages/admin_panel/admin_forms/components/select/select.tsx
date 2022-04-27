@@ -4,7 +4,7 @@ import './select.less';
 
 const { Option } = FormSelect;
 
-const Select = (props: any) => {
+const FormikSelect = (props: any) => {
     const { name, options, mode, ...rest } = props
     return (
         <div className="formik__select">
@@ -19,4 +19,4 @@ const Select = (props: any) => {
     )
 }
 
-export default Select
+export default FormikSelect

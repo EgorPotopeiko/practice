@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "formik-antd";
 
-const TextArea = (props: any) => {
+const FormikTextArea = (props: any) => {
     const { name, ...rest } = props
     return (
         <div className="formik__textarea">
@@ -10,4 +10,4 @@ const TextArea = (props: any) => {
     )
 }
 
-export default TextArea
+export default FormikTextArea
