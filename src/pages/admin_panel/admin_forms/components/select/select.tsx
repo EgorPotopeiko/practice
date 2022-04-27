@@ -1,5 +1,6 @@
 import React from "react";
 import { Select as FormSelect } from "formik-antd";
+import './select.less';
 
 const { Option } = FormSelect;
 
