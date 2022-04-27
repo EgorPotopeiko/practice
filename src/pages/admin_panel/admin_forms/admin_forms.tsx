@@ -8,6 +8,7 @@ import AdminInternet from './admin_internet/admin_internet';
 import AdminCoordinators from './admin_coordinators/admin_coordinators';
 import { Formik } from 'formik';
 import { Form } from 'formik-antd';
+import { nanoid } from 'nanoid';
 
 const { TabPane } = Tabs;
 
@@ -31,7 +32,7 @@ const AdminForms: React.FC = () => {
                 contentDirectionId: '',
                 contentFormats: [
                     {
-                        id: '',
+                        id: nanoid(),
                         info: '',
                         num: 0,
                         type: ''
