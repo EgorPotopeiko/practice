@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 const projectSchema = Yup.object().shape({
-    name: Yup.string().required('Название проекта обязательно для заполнения'),
+    name: Yup.number().required('Название проекта обязательно для заполнения'),
     requestNumber: Yup.string().required('Номер заявки обязателен для заполнения'),
-    contractNumber: Yup.string().required('Номер контракта обязателен для заполнения'),
+    contractNumber: Yup.string().required('Номер контракта обязателен'),
     contractDate: Yup.string().required('Дата контракта обязательна для заполнения'),
     advancePayment: Yup.boolean(),
     igk: Yup.string(),
