@@ -12,7 +12,6 @@ type Props = {
 
 const AdminCalendar: React.FC<Props> = ({ formik }) => {
     const { values } = formik;
-    console.log(values.contentFormats)
     return (
         <div className='admin__calendar'>
             <Row>
@@ -67,59 +66,57 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                     <Descriptions.Item label="Формат контента*">
                         <FieldArray name='contentFormats'>
                             {({ push }) => (
-                                <>
-                                    <List>
-                                        {values.contentFormats.map((contentFormat: any, index: any) => (
-                                            <List.Item key={index}>
-                                                <FormikControl
-                                                    control='select'
-                                                    name={`contentFormats.${index}.info`}
-                                                    placeholder='Info'
-                                                    options={[
-                                                        {
-                                                            id: nanoid(),
-                                                            value: 'Info 1'
-                                                        },
-                                                        {
-                                                            id: nanoid(),
-                                                            value: 'Info 2'
-                                                        },
-                                                        {
-                                                            id: nanoid(),
-                                                            value: 'Info 3'
-                                                        }
-                                                    ]} />
-                                                <FormikControl
-                                                    control='input'
-                                                    name={`contentFormats.${index}.num`}
-                                                    type='number'
-                                                    placeholder='Введите количество' />
-                                                <FormikControl
-                                                    control='select'
-                                                    name={`contentFormats.${index}.type`}
-                                                    placeholder='Type'
-                                                    options={[
-                                                        {
-                                                            id: nanoid(),
-                                                            value: 'Type 1'
-                                                        },
-                                                        {
-                                                            id: nanoid(),
-                                                            value: 'Type 2'
-                                                        },
-                                                        {
-                                                            id: nanoid(),
-                                                            value: 'Type 3'
-                                                        }
-                                                    ]} />
-                                            </List.Item>
-                                        ))}
-                                        <Button
-                                            onClick={() => push({ id: nanoid(), info: '', num: 0, type: '' })}
-                                            type='link'
-                                            icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
-                                    </List>
-                                </>
+                                <List>
+                                    {values.contentFormats.map((_contentFormat: any, index: any) => (
+                                        <List.Item key={index}>
+                                            <FormikControl
+                                                control='select'
+                                                name={`contentFormats.${index}.info`}
+                                                placeholder='Info'
+                                                options={[
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Info 1'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Info 2'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Info 3'
+                                                    }
+                                                ]} />
+                                            <FormikControl
+                                                control='input'
+                                                name={`contentFormats.${index}.num`}
+                                                type='number'
+                                                placeholder='Введите количество' />
+                                            <FormikControl
+                                                control='select'
+                                                name={`contentFormats.${index}.type`}
+                                                placeholder='Type'
+                                                options={[
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Type 1'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Type 2'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Type 3'
+                                                    }
+                                                ]} />
+                                        </List.Item>
+                                    ))}
+                                    <Button
+                                        onClick={() => push({ id: nanoid(), info: '', num: 0, type: '' })}
+                                        type='link'
+                                        icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
+                                </List>
                             )}
                         </FieldArray>
                     </Descriptions.Item>

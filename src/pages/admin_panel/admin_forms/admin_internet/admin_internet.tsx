@@ -1,38 +1,116 @@
-import React, { useState } from 'react';
-import { DeleteOutlined, LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, Input, List, Row, Select, Upload } from 'antd';
+import React from 'react';
+import { LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Descriptions, List, Row, Upload } from 'antd';
 import './admin_internet.less';
+import FormikControl from '../components/formik_control/formik_control';
+import { FieldArray } from 'formik';
+import { nanoid } from 'nanoid';
 
-const AdminInternet: React.FC = () => {
-    const [channels, setChannels]: any = useState([]);
-    const [kpis, setKpis]: any = useState([]);
+type Props = {
+    formik: any
+}
+
+const AdminInternet: React.FC<Props> = ({ formik }) => {
+    const { values } = formik;
     return (
         <div className='admin__internet'>
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Добавить интернет-ресурс">
-                        <List style={{ display: channels.length === 0 ? 'none' : 'block' }}>
-                            {channels.map((select: any) => (
-                                <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setChannels(channels.filter((channel: any) => channel.id !== select.id))} />]}>
-                                    <Select placeholder={select.resource}></Select>
-                                    <Input placeholder={select.title}></Input>
-                                    <Input placeholder={select.description}></Input>
-                                    <Input type='number' placeholder={select.amount}></Input>
-                                </List.Item>
-                            ))}
-                        </List>
-                        <Button type='link' onClick={() => setChannels([...channels, { id: Math.random(), resource: 'Добавить ресурс', title: 'Выберите заголовок', description: 'Выберите описание', amount: 0 }])} icon={<PlusCircleOutlined />}>Добавить интернет-ресурс</Button>
+                        <FieldArray name='channels'>
+                            {({ push }) => (
+                                <List>
+                                    {values.channels.map((_channel: any, index: any) => (
+                                        <List.Item key={index}>
+                                            <FormikControl
+                                                control='select'
+                                                name={`channels.${index}.internetResourceId`}
+                                                placeholder='Выберите интернет-ресурс'
+                                                required={true}
+                                                options={[
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Instagram'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Facebook'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Twitter'
+                                                    }
+                                                ]} />
+                                            <FormikControl
+                                                control='input'
+                                                name={`channels.${index}.name`}
+                                                type='number'
+                                                placeholder='Введите название' />
+                                            <FormikControl
+                                                control='input'
+                                                name={`channels.${index}.link`}
+                                                type='number'
+                                                placeholder='Введите ссылки' />
+                                            <FormikControl
+                                                control='input'
+                                                name={`channels.${index}.planPublicationCount`}
+                                                type='number'
+                                                placeholder='Введите количество публикаций' />
+                                        </List.Item>
+                                    ))}
+                                    <Button
+                                        onClick={() => push({
+                                            id: nanoid(),
+                                            name: '',
+                                            link: '',
+                                            planPublicationCount: 0,
+                                            internetResourceId: ''
+                                        })}
+                                        type='link'
+                                        icon={<PlusCircleOutlined />}>Добавить интернет-ресурс</Button>
+                                </List>
+                            )}
+                        </FieldArray>
                     </Descriptions.Item>
                     <Descriptions.Item label="Плановый КПЭ*">
-                        <List style={{ display: kpis.length === 0 ? 'none' : 'block' }}>
-                            {kpis.map((select: any) => (
-                                <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setKpis(kpis.filter((kpis: any) => kpis.id !== select.id))} />]}>
-                                    <Input placeholder={select.views}></Input>
-                                    <Select placeholder={select.amount}></Select>
-                                </List.Item>
-                            ))}
-                        </List>
-                        <Button onClick={() => setKpis([...kpis, { id: Math.random(), views: 'Показатель просмотров', amount: 0 }])} type='link' icon={<PlusCircleOutlined />}>Добавить плановый КПЭ</Button>
+                        <FieldArray name='kpis'>
+                            {({ push }) => (
+                                <List>
+                                    {values.kpis.map((_kpi: any, index: any) => (
+                                        <List.Item key={index}>
+                                            <FormikControl
+                                                control='input'
+                                                name={`kpis.${index}.planCount`}
+                                                type='number'
+                                                placeholder='Введите показатель просмотров' />
+                                            <FormikControl
+                                                control='select'
+                                                name={`kpis.${index}.typeId`}
+                                                placeholder='Выберите меру измерения КПЭ'
+                                                required={true}
+                                                options={[
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Просмотров'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Прослушиваний'
+                                                    },
+                                                    {
+                                                        id: nanoid(),
+                                                        value: 'Скачиваний'
+                                                    }
+                                                ]} />
+                                        </List.Item>
+                                    ))}
+                                    <Button
+                                        onClick={() => push({ id: nanoid(), planCount: 0, typeId: '' })}
+                                        type='link'
+                                        icon={<PlusCircleOutlined />}>Добавить плановый КПЭ</Button>
+                                </List>
+                            )}
+                        </FieldArray>
                     </Descriptions.Item>
                     <Descriptions.Item label="Изображение проекта">
                         <Upload>

@@ -38,11 +38,35 @@ const AdminForms: React.FC = () => {
                         type: ''
                     }
                 ],
-                channels: [],
-                kpis: [],
+                channels: [
+                    {
+                        id: nanoid(),
+                        name: '',
+                        link: '',
+                        planPublicationCount: 0,
+                        internetResourceId: ''
+                    }
+                ],
+                kpis: [
+                    {
+                        id: nanoid(),
+                        planCount: 0,
+                        typeId: ''
+                    }
+                ],
                 ownerId: '',
-                producerIds: [],
-                coordinatorIds: [],
+                producerIds: [
+                    {
+                        id: nanoid(),
+                        name: ''
+                    }
+                ],
+                coordinatorIds: [
+                    {
+                        id: nanoid(),
+                        name: ''
+                    }
+                ],
                 fileIds: [],
                 imageId: ''
             }}
@@ -58,7 +82,7 @@ const AdminForms: React.FC = () => {
                                 <AdminCalendar formik={formik} />
                             </TabPane>
                             <TabPane key='internet' tab={<GlobalOutlined />}>
-                                <AdminInternet />
+                                <AdminInternet formik={formik} />
                             </TabPane>
                             <TabPane key='coordinator' tab={<UserOutlined />}>
                                 <AdminCoordinators formik={formik} />
