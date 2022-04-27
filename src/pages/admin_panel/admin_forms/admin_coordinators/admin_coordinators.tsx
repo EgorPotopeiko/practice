@@ -42,7 +42,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                         <FieldArray name='producerIds'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.producerIds.map((_producer: any, index: any) => (
+                                    {values.producerIds.map((_producer: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='select'
@@ -73,10 +73,10 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                         </FieldArray>
                     </Descriptions.Item>
                     <Descriptions.Item label="Координатор*">
-                        <FieldArray name='producerIds'>
+                        <FieldArray name='coordinatorIds'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.coordinatorIds.map((_coordinator: any, index: any) => (
+                                    {values.coordinatorIds.map((_coordinator: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='select'
@@ -107,7 +107,9 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                         </FieldArray>
                     </Descriptions.Item>
                 </Descriptions>
-                <SubmitButton onSubmit={handleSubmit}>Создать</SubmitButton>
+                <div className='submit__btn'>
+                    <SubmitButton onSubmit={handleSubmit}>Создать</SubmitButton>
+                </div>
             </Row>
         </div >
     );

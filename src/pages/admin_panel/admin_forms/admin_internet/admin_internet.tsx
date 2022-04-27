@@ -20,7 +20,7 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                         <FieldArray name='channels'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.channels.map((_channel: any, index: any) => (
+                                    {values.channels.map((_channel: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='select'
@@ -76,7 +76,7 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                         <FieldArray name='kpis'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.kpis.map((_kpi: any, index: any) => (
+                                    {values.kpis.map((_kpi: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='input'

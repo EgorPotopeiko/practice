@@ -8,6 +8,7 @@ import AdminProjects from './admin_projects/admin_projects';
 import AdminCalendar from './admin_calendar/admin_calendar';
 import AdminInternet from './admin_internet/admin_internet';
 import AdminCoordinators from './admin_coordinators/admin_coordinators';
+import projectSchema from './schema';
 import './admin_forms.less';
 
 const { TabPane } = Tabs;
@@ -71,6 +72,7 @@ const AdminForms: React.FC = () => {
                 imageId: ''
             }}
                 onSubmit={(values) => console.log(values)}
+                validationSchema={projectSchema}
                 validateOnBlur>
                 {(formik) => (
                     <Form>

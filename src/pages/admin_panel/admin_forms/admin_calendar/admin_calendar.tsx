@@ -67,7 +67,7 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                         <FieldArray name='contentFormats'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.contentFormats.map((_contentFormat: any, index: any) => (
+                                    {values.contentFormats.map((_contentFormat: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='select'
