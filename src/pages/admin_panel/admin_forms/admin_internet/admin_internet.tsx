@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 import './admin_internet.less';
 import FormikSelect from '../components/select/select';
 import FormikInput from '../components/input/input';
+import { Form } from 'formik-antd';
 
 type Props = {
     formik: any
@@ -23,36 +24,44 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.channels.map((_channel: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikSelect
-                                                name={`channels.${index}.internetResourceId`}
-                                                placeholder='Выберите интернет-ресурс'
-                                                required={true}
-                                                options={[
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Instagram'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Facebook'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Twitter'
-                                                    }
-                                                ]} />
-                                            <FormikInput
-                                                name={`channels.${index}.name`}
-                                                type='number'
-                                                placeholder='Введите название' />
-                                            <FormikInput
-                                                name={`channels.${index}.link`}
-                                                type='number'
-                                                placeholder='Введите ссылки' />
-                                            <FormikInput
-                                                name={`channels.${index}.planPublicationCount`}
-                                                type='number'
-                                                placeholder='Введите количество публикаций' />
+                                            <Form.Item name={`channels.${index}.internetResourceId`}>
+                                                <FormikSelect
+                                                    name={`channels.${index}.internetResourceId`}
+                                                    placeholder='Выберите интернет-ресурс'
+                                                    required={true}
+                                                    options={[
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Instagram'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Facebook'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Twitter'
+                                                        }
+                                                    ]} />
+                                            </Form.Item>
+                                            <Form.Item name={`channels.${index}.name`}>
+                                                <FormikInput
+                                                    name={`channels.${index}.name`}
+                                                    type='number'
+                                                    placeholder='Введите название' />
+                                            </Form.Item>
+                                            <Form.Item name={`channels.${index}.link`}>
+                                                <FormikInput
+                                                    name={`channels.${index}.link`}
+                                                    type='number'
+                                                    placeholder='Введите ссылки' />
+                                            </Form.Item>
+                                            <Form.Item name={`channels.${index}.planPublicationCount`}>
+                                                <FormikInput
+                                                    name={`channels.${index}.planPublicationCount`}
+                                                    type='number'
+                                                    placeholder='Введите количество публикаций' />
+                                            </Form.Item>
                                         </List.Item>
                                     ))}
                                     <Button
@@ -75,28 +84,32 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.kpis.map((_kpi: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikInput
-                                                name={`kpis.${index}.planCount`}
-                                                type='number'
-                                                placeholder='Введите показатель просмотров' />
-                                            <FormikSelect
-                                                name={`kpis.${index}.typeId`}
-                                                placeholder='Выберите меру измерения КПЭ'
-                                                required={true}
-                                                options={[
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Просмотров'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Прослушиваний'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Скачиваний'
-                                                    }
-                                                ]} />
+                                            <Form.Item name={`kpis.${index}.planCount`}>
+                                                <FormikInput
+                                                    name={`kpis.${index}.planCount`}
+                                                    type='number'
+                                                    placeholder='Введите показатель просмотров' />
+                                            </Form.Item>
+                                            <Form.Item name={`kpis.${index}.typeId`}>
+                                                <FormikSelect
+                                                    name={`kpis.${index}.typeId`}
+                                                    placeholder='Выберите меру измерения КПЭ'
+                                                    required={true}
+                                                    options={[
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Просмотров'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Прослушиваний'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Скачиваний'
+                                                        }
+                                                    ]} />
+                                            </Form.Item>
                                         </List.Item>
                                     ))}
                                     <Button

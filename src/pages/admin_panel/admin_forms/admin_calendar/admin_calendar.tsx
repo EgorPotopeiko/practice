@@ -7,6 +7,7 @@ import './admin_calendar.less';
 import FormikSelect from '../components/select/select';
 import FormikRadioGroup from '../components/radiogroup/radiogroup';
 import FormikInput from '../components/input/input';
+import { Form } from 'formik-antd';
 
 type Props = {
     formik: any
@@ -19,49 +20,53 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Тематика контента*">
-                        <FormikSelect
-                            name='contentThematicIds'
-                            placeholder='Выберите тематику контента'
-                            mode='multiple'
-                            required={true}
-                            options={[
-                                {
-                                    id: nanoid(),
-                                    value: 'Content 1'
-                                },
-                                {
-                                    id: nanoid(),
-                                    value: 'Content 2'
-                                },
-                                {
-                                    id: nanoid(),
-                                    value: 'Content 3'
-                                }
-                            ]} />
+                        <Form.Item name='contentThematicIds'>
+                            <FormikSelect
+                                name='contentThematicIds'
+                                placeholder='Выберите тематику контента'
+                                mode='multiple'
+                                required={true}
+                                options={[
+                                    {
+                                        id: nanoid(),
+                                        value: 'Content 1'
+                                    },
+                                    {
+                                        id: nanoid(),
+                                        value: 'Content 2'
+                                    },
+                                    {
+                                        id: nanoid(),
+                                        value: 'Content 3'
+                                    }
+                                ]} />
+                        </Form.Item>
                     </Descriptions.Item>
                     <Descriptions.Item label="Направление контента*">
-                        <FormikRadioGroup
-                            name='contentDirectionId'
-                            placeholder='Выберите направление контента'
-                            required={true}
-                            radioData={[
-                                {
-                                    id: 1,
-                                    value: 'Мультиформат'
-                                },
-                                {
-                                    id: 2,
-                                    value: 'Видеоконтент'
-                                },
-                                {
-                                    id: 3,
-                                    value: 'Контент в блогосфере'
-                                },
-                                {
-                                    id: 4,
-                                    value: 'Программные продукты'
-                                }
-                            ]} />
+                        <Form.Item name='contentDirectionId'>
+                            <FormikRadioGroup
+                                name='contentDirectionId'
+                                placeholder='Выберите направление контента'
+                                required={true}
+                                radioData={[
+                                    {
+                                        id: 1,
+                                        value: 'Мультиформат'
+                                    },
+                                    {
+                                        id: 2,
+                                        value: 'Видеоконтент'
+                                    },
+                                    {
+                                        id: 3,
+                                        value: 'Контент в блогосфере'
+                                    },
+                                    {
+                                        id: 4,
+                                        value: 'Программные продукты'
+                                    }
+                                ]} />
+                        </Form.Item>
                     </Descriptions.Item>
                     <Descriptions.Item label="Формат контента*">
                         <FieldArray name='contentFormats'>
@@ -69,44 +74,50 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.contentFormats.map((_contentFormat: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikSelect
-                                                name={`contentFormats.${index}.info`}
-                                                placeholder='Info'
-                                                options={[
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Info 1'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Info 2'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Info 3'
-                                                    }
-                                                ]} />
-                                            <FormikInput
-                                                name={`contentFormats.${index}.num`}
-                                                type='number'
-                                                placeholder='Введите количество' />
-                                            <FormikSelect
-                                                name={`contentFormats.${index}.type`}
-                                                placeholder='Type'
-                                                options={[
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Type 1'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Type 2'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Type 3'
-                                                    }
-                                                ]} />
+                                            <Form.Item name={`contentFormats.${index}.info`}>
+                                                <FormikSelect
+                                                    name={`contentFormats.${index}.info`}
+                                                    placeholder='Info'
+                                                    options={[
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Info 1'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Info 2'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Info 3'
+                                                        }
+                                                    ]} />
+                                            </Form.Item>
+                                            <Form.Item name={`contentFormats.${index}.num`}>
+                                                <FormikInput
+                                                    name={`contentFormats.${index}.num`}
+                                                    type='number'
+                                                    placeholder='Введите количество' />
+                                            </Form.Item>
+                                            <Form.Item name={`contentFormats.${index}.type`}>
+                                                <FormikSelect
+                                                    name={`contentFormats.${index}.type`}
+                                                    placeholder='Type'
+                                                    options={[
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Type 1'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Type 2'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Type 3'
+                                                        }
+                                                    ]} />
+                                            </Form.Item>
                                         </List.Item>
                                     ))}
                                     <Button

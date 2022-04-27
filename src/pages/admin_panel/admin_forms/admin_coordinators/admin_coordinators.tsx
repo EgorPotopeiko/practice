@@ -1,7 +1,7 @@
 import React from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row } from 'antd';
-import { SubmitButton } from 'formik-antd';
+import { Form, SubmitButton } from 'formik-antd';
 import { nanoid } from 'nanoid';
 import { FieldArray } from 'formik';
 import './admin_coordinators.less';
@@ -18,24 +18,26 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Подрядчик*">
-                        <FormikSelect
-                            name='ownerId'
-                            placeholder='Выберите подрядчика'
-                            required={true}
-                            options={[
-                                {
-                                    id: nanoid(),
-                                    value: 'Подрядчик 1'
-                                },
-                                {
-                                    id: nanoid(),
-                                    value: 'Подрядчик 2'
-                                },
-                                {
-                                    id: nanoid(),
-                                    value: 'Подрядчик 3'
-                                }
-                            ]} />
+                        <Form.Item name='ownerId'>
+                            <FormikSelect
+                                name='ownerId'
+                                placeholder='Выберите подрядчика'
+                                required={true}
+                                options={[
+                                    {
+                                        id: nanoid(),
+                                        value: 'Подрядчик 1'
+                                    },
+                                    {
+                                        id: nanoid(),
+                                        value: 'Подрядчик 2'
+                                    },
+                                    {
+                                        id: nanoid(),
+                                        value: 'Подрядчик 3'
+                                    }
+                                ]} />
+                        </Form.Item>
                     </Descriptions.Item>
                     <Descriptions.Item label="Продюсер*">
                         <FieldArray name='producerIds'>
@@ -43,23 +45,25 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.producerIds.map((_producer: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikSelect
-                                                name={`producerIds.${index}.name`}
-                                                placeholder='Выберите продюсера'
-                                                options={[
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Продюсер 1'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Продюсер 2'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Продюсер 3'
-                                                    }
-                                                ]} />
+                                            <Form.Item name={`producerIds.${index}.name`}>
+                                                <FormikSelect
+                                                    name={`producerIds.${index}.name`}
+                                                    placeholder='Выберите продюсера'
+                                                    options={[
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Продюсер 1'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Продюсер 2'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Продюсер 3'
+                                                        }
+                                                    ]} />
+                                            </Form.Item>
                                         </List.Item>
                                     ))}
                                     <Button
@@ -76,23 +80,25 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.coordinatorIds.map((_coordinator: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <FormikSelect
-                                                name={`coordinatorIds.${index}.name`}
-                                                placeholder='Выберите координатора'
-                                                options={[
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Координатор 1'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Координатор 2'
-                                                    },
-                                                    {
-                                                        id: nanoid(),
-                                                        value: 'Координатор 3'
-                                                    }
-                                                ]} />
+                                            <Form.Item name={`coordinatorIds.${index}.name`}>
+                                                <FormikSelect
+                                                    name={`coordinatorIds.${index}.name`}
+                                                    placeholder='Выберите координатора'
+                                                    options={[
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Координатор 1'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Координатор 2'
+                                                        },
+                                                        {
+                                                            id: nanoid(),
+                                                            value: 'Координатор 3'
+                                                        }
+                                                    ]} />
+                                            </Form.Item>
                                         </List.Item>
                                     ))}
                                     <Button
