@@ -1,14 +1,14 @@
 import React from 'react';
-import { AppstoreAddOutlined, CalendarOutlined, GlobalOutlined, UserOutlined } from '@ant-design/icons';
-import './admin_forms.less';
-import AdminProjects from './admin_projects/admin_projects';
+import { Formik } from 'formik';
 import { Tabs } from 'antd';
+import { Form } from 'formik-antd';
+import { nanoid } from 'nanoid';
+import { AppstoreAddOutlined, CalendarOutlined, GlobalOutlined, UserOutlined } from '@ant-design/icons';
+import AdminProjects from './admin_projects/admin_projects';
 import AdminCalendar from './admin_calendar/admin_calendar';
 import AdminInternet from './admin_internet/admin_internet';
 import AdminCoordinators from './admin_coordinators/admin_coordinators';
-import { Formik } from 'formik';
-import { Form } from 'formik-antd';
-import { nanoid } from 'nanoid';
+import './admin_forms.less';
 
 const { TabPane } = Tabs;
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import { LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row, Upload } from 'antd';
-import './admin_internet.less';
 import FormikControl from '../components/formik_control/formik_control';
 import { FieldArray } from 'formik';
 import { nanoid } from 'nanoid';
+import './admin_internet.less';
 
 type Props = {
     formik: any
@@ -18,10 +18,10 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Добавить интернет-ресурс">
                         <FieldArray name='channels'>
-                            {({ push }) => (
+                            {({ push, remove }) => (
                                 <List>
                                     {values.channels.map((_channel: any, index: any) => (
-                                        <List.Item key={index}>
+                                        <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='select'
                                                 name={`channels.${index}.internetResourceId`}
@@ -74,10 +74,10 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                     </Descriptions.Item>
                     <Descriptions.Item label="Плановый КПЭ*">
                         <FieldArray name='kpis'>
-                            {({ push }) => (
+                            {({ push, remove }) => (
                                 <List>
                                     {values.kpis.map((_kpi: any, index: any) => (
-                                        <List.Item key={index}>
+                                        <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='input'
                                                 name={`kpis.${index}.planCount`}

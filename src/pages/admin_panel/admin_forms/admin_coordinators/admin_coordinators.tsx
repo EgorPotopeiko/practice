@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row } from 'antd';
 import { SubmitButton } from 'formik-antd';
 import FormikControl from '../components/formik_control/formik_control';
@@ -40,10 +40,10 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                     </Descriptions.Item>
                     <Descriptions.Item label="Продюсер*">
                         <FieldArray name='producerIds'>
-                            {({ push }) => (
+                            {({ push, remove }) => (
                                 <List>
                                     {values.producerIds.map((_producer: any, index: any) => (
-                                        <List.Item key={index}>
+                                        <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='select'
                                                 name={`producerIds.${index}.name`}
@@ -74,10 +74,10 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                     </Descriptions.Item>
                     <Descriptions.Item label="Координатор*">
                         <FieldArray name='producerIds'>
-                            {({ push }) => (
+                            {({ push, remove }) => (
                                 <List>
                                     {values.coordinatorIds.map((_coordinator: any, index: any) => (
-                                        <List.Item key={index}>
+                                        <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikControl
                                                 control='select'
                                                 name={`coordinatorIds.${index}.name`}
