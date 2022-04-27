@@ -5,9 +5,12 @@ import FormikControl from '../components/formik_control/formik_control';
 import { nanoid } from 'nanoid';
 import './admin_calendar.less';
 
-const AdminCalendar: React.FC = () => {
-    const [contents, setContents]: any = useState([]);
-    console.log(contents)
+type Props = {
+    formik: any
+}
+
+const AdminCalendar: React.FC<Props> = ({ formik }) => {
+    const { values } = formik;
     return (
         <div className='admin__calendar'>
             <Row>
@@ -60,12 +63,12 @@ const AdminCalendar: React.FC = () => {
                             ]} />
                     </Descriptions.Item>
                     <Descriptions.Item label="Формат контента*">
-                        <List style={{ display: contents.length === 0 ? 'none' : 'block' }}>
-                            {contents.map((select: any) => (
-                                <List.Item key={select.id} actions={[<DeleteOutlined onClick={() => setContents(contents.filter((content: any) => content.id !== select.id))} />]}>
+                        <List>
+                            {values.contentFormats > 0 && values.contentFormats.map((contentFormat: any, index: any) => (
+                                <List.Item key={contentFormat.id}>
                                     <FormikControl
                                         control='select'
-                                        name='info'
+                                        name={`contentFormats.${index}.info`}
                                         placeholder='Info'
                                         options={[
                                             {
@@ -83,12 +86,12 @@ const AdminCalendar: React.FC = () => {
                                         ]} />
                                     <FormikControl
                                         control='input'
-                                        name='num'
+                                        name={`contentFormats.${index}.num`}
                                         type='number'
                                         placeholder='Введите количество' />
                                     <FormikControl
                                         control='select'
-                                        name='type'
+                                        name={`contentFormats.${index}.type`}
                                         placeholder='Type'
                                         options={[
                                             {
@@ -107,7 +110,10 @@ const AdminCalendar: React.FC = () => {
                                 </List.Item>
                             ))}
                         </List>
-                        <Button onClick={() => setContents([...contents, { id: Math.random(), info: 'Выберите контент', num: 'Введите число', type: 'Выберите тип' }])} type='link' icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
+                        <Button
+                            //onClick={() => push({ name: '', email: '' })}
+                            type='link'
+                            icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
                     </Descriptions.Item>
                 </Descriptions>
             </Row>

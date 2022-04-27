@@ -29,7 +29,14 @@ const AdminForms: React.FC = () => {
                 statusId: '',
                 contentThematicIds: [],
                 contentDirectionId: '',
-                contentFormats: [],
+                contentFormats: [
+                    {
+                        id: '',
+                        info: '',
+                        num: 0,
+                        type: ''
+                    }
+                ],
                 channels: [],
                 kpis: [],
                 ownerId: '',
@@ -47,7 +54,7 @@ const AdminForms: React.FC = () => {
                                 <AdminProjects formik={formik} />
                             </TabPane>
                             <TabPane key='calendar' tab={<CalendarOutlined />}>
-                                <AdminCalendar />
+                                <AdminCalendar formik={formik} />
                             </TabPane>
                             <TabPane key='internet' tab={<GlobalOutlined />}>
                                 <AdminInternet />
