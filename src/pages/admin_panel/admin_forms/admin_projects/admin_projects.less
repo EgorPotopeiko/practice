@@ -1,28 +1,30 @@
 .admin__projects {
     background-color: white;
 
-    .ant-descriptions-item-label {
-        width: 25%;
+    .ant {
+        &-descriptions-item-label {
+            width: 25%;
 
-        span {
+            span {
+                color: purple;
+                font-size: 20px;
+            }
+        }
+
+        &-row {
+            display: block;
+        }
+
+        &-typography {
             color: purple;
             font-size: 20px;
+            text-align: end;
         }
-    }
 
-    .ant-row {
-        display: block;
-    }
-
-    .ant-typography {
-        color: purple;
-        font-size: 20px;
-        text-align: end;
-    }
-
-    .ant-upload {
-        span {
-            font-size: 20px;
+        &-upload {
+            span {
+                font-size: 20px;
+            }
         }
     }
 
@@ -41,16 +43,18 @@
     .contract {
         display: flex;
 
-        span.ant-typography {
-            margin-top: 3px;
-            margin-right: 10px;
-            margin-left: 25px;
-            max-width: 145px;
-        }
+        span.ant {
+            &-typography {
+                margin-top: 3px;
+                margin-right: 10px;
+                margin-left: 25px;
+                max-width: 145px;
+            }
 
-        span.ant-checkbox {
-            margin-top: 9px;
-            margin-right: 10px;
+            &-checkbox {
+                margin-top: 9px;
+                margin-right: 10px;
+            }
         }
     }
 

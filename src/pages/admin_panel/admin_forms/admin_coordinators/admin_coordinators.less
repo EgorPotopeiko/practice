@@ -1,55 +1,57 @@
 .admin__coordinators {
     background-color: white;
 
-    .ant-descriptions-item-label {
-        width: 25%;
+    .ant {
+        &-descriptions-item-label {
+            width: 25%;
 
-        span {
-            color: purple;
-            font-size: 20px;
+            span {
+                color: purple;
+                font-size: 20px;
+            }
         }
-    }
 
-    .ant-row {
-        display: block;
-    }
+        &-row {
+            display: block;
+        }
 
-    .ant-list {
-        .ant-select {
+        &-list {
+            .ant-select {
+                padding-top: 1px;
+                padding-bottom: 5px;
+
+                &-selector {
+                    height: 44px !important;
+                    padding: 5px 11px !important;
+                }
+            }
+        }
+
+        &-select {
+            width: 100%;
+            font-size: 18px;
             padding-top: 1px;
-            padding-bottom: 5px;
 
             &-selector {
                 height: 44px !important;
                 padding: 5px 11px !important;
             }
         }
-    }
 
-    .ant-select {
-        width: 100%;
-        font-size: 18px;
-        padding-top: 1px;
-
-        &-selector {
-            height: 44px !important;
-            padding: 5px 11px !important;
+        &-typography {
+            color: purple;
+            font-size: 20px;
         }
-    }
 
-    .ant-typography {
-        color: purple;
-        font-size: 20px;
-    }
+        &-input {
+            padding: 10px 5px;
+        }
 
-    .ant-input {
-        padding: 10px 5px;
-    }
-
-    .ant-btn-link {
-        padding-left: 0;
-        color: purple;
-        font-size: 20px;
+        &-btn-link {
+            padding-left: 0;
+            color: purple;
+            font-size: 20px;
+        }
     }
 
     .submit__btn {

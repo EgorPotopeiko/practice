@@ -1,51 +1,53 @@
 .admin__calendar {
     background-color: white;
 
-    .ant-descriptions-item-label {
-        width: 25%;
+    .ant {
+        &-descriptions-item-label {
+            width: 25%;
 
-        span {
+            span {
+                color: purple;
+                font-size: 20px;
+            }
+        }
+
+        &-row {
+            display: block;
+        }
+
+        &-select {
+            width: 100%;
+            font-size: 18px;
+
+            &-selector {
+                height: 44px !important;
+                padding: 5px 11px !important;
+            }
+        }
+
+        &-typography {
             color: purple;
             font-size: 20px;
         }
-    }
 
-    .ant-row {
-        display: block;
-    }
-
-    .ant-select {
-        width: 100%;
-        font-size: 18px;
-
-        &-selector {
-            height: 44px !important;
-            padding: 5px 11px !important;
+        &-input {
+            padding: 10px 5px;
         }
-    }
 
-    .ant-typography {
-        color: purple;
-        font-size: 20px;
-    }
+        &-btn-link {
+            padding-left: 0;
+            font-size: 20px;
+            color: purple;
+        }
 
-    .ant-input {
-        padding: 10px 5px;
-    }
+        &-radio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
 
-    .ant-btn-link {
-        padding-left: 0;
-        font-size: 20px;
-        color: purple;
-    }
-
-    .ant-radio-group {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 10px;
-
-        span {
-            font-size: 17px;
+            span {
+                font-size: 17px;
+            }
         }
     }
 }

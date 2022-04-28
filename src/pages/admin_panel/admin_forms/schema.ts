@@ -20,7 +20,7 @@ const projectSchema = Yup.object().shape({
         info: Yup.string().required('Не выбрано info'),
         num: Yup.number().positive().required('Не выбрано num'),
         type: Yup.string().required('Не выбран type')
-    })),
+    })).min(1, 'Добавьте формам контента'),
     channels: Yup.array().of(Yup.object().shape({
         id: Yup.string(),
         name: Yup.string().required('Не выбрано name'),
@@ -32,17 +32,17 @@ const projectSchema = Yup.object().shape({
         id: Yup.string(),
         planCount: Yup.number().positive().required('Не выбрано planCount'),
         typeId: Yup.string().required('Не выбран typeId')
-    })),
+    })).min(1, 'Добавьте плановый КПЭ'),
     imageId: Yup.string(),
     ownerId: Yup.string().required('Не выбран подрядчик'),
     producerIds: Yup.array().of(Yup.object().shape({
         id: Yup.string(),
         name: Yup.string().required('Не выбран name')
-    })),
+    })).min(1, 'Добавьте продюсера'),
     coordinatorIds: Yup.array().of(Yup.object().shape({
         id: Yup.string(),
         name: Yup.string().required('Не выбран name')
-    })),
+    })).min(1, 'Добавьте координатора'),
     files: Yup.array()
 });
 
