@@ -51,7 +51,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                                     placeholder='Выберите продюсера'
                                                     options={[
                                                         {
-                                                            id: nanoid(),
+                                                            id: '40140_saklqdj_',
                                                             value: 'Продюсер 1'
                                                         },
                                                         {

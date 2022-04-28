@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DeleteOutlined, LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row, Upload } from 'antd';
 import { FieldArray } from 'formik';
@@ -12,8 +12,29 @@ type Props = {
     formik: any
 }
 
+const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
+
 const AdminInternet: React.FC<Props> = ({ formik }) => {
-    const { values } = formik;
+    const [fileList, setFileList] = useState([]);
+    const { values, setFieldValue } = formik;
+    const onChange = ({ fileList: newFileList }: { fileList: any }) => {
+        setFileList(newFileList);
+        setFieldValue('imageId', ...newFileList)
+    };
+    const onPreview = async (file: any) => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src)!;
+        imgWindow.document.write(image.outerHTML);
+    };
     return (
         <div className='admin__internet'>
             <Row>
@@ -47,13 +68,11 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                             <Form.Item name={`channels.${index}.name`}>
                                                 <FormikInput
                                                     name={`channels.${index}.name`}
-                                                    type='number'
                                                     placeholder='Введите название' />
                                             </Form.Item>
                                             <Form.Item name={`channels.${index}.link`}>
                                                 <FormikInput
                                                     name={`channels.${index}.link`}
-                                                    type='number'
                                                     placeholder='Введите ссылки' />
                                             </Form.Item>
                                             <Form.Item name={`channels.${index}.planPublicationCount`}>
@@ -121,9 +140,20 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                         </FieldArray>
                     </Descriptions.Item>
                     <Descriptions.Item label="Изображение проекта">
-                        <Upload>
-                            <Button type='link' icon={<LinkOutlined />}>Добавить изображение</Button>
-                        </Upload>
+                        <Form.Item name='imageId'>
+                            <Upload
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                accept='.png'
+                                listType="picture-card"
+                                fileList={fileList}
+                                onChange={onChange}
+                                onPreview={onPreview}
+                                disabled={fileList.length > 0}
+                                {...props}
+                            >
+                                {fileList.length < 5 && <><LinkOutlined />Добавить изображение</>}
+                            </Upload>
+                        </Form.Item>
                     </Descriptions.Item>
                 </Descriptions>
             </Row>

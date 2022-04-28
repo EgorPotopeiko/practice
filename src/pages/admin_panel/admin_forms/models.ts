@@ -41,7 +41,7 @@ export interface Project {
     producerIds: string[];
     coordinatorIds: string[];
     fileIds: string[];
-    imageId: string;
+    imageId: any;
 }
 
 export interface RootObject {

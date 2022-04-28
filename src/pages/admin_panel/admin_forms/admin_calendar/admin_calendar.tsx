@@ -74,9 +74,9 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.contentFormats.map((_contentFormat: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <Form.Item name={`contentFormats.${index}.info`}>
+                                            <Form.Item name={`contentFormats.${index}.typeId`}>
                                                 <FormikSelect
-                                                    name={`contentFormats.${index}.info`}
+                                                    name={`contentFormats.${index}.typeId`}
                                                     placeholder='Info'
                                                     options={[
                                                         {
@@ -93,15 +93,15 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                                         }
                                                     ]} />
                                             </Form.Item>
-                                            <Form.Item name={`contentFormats.${index}.num`}>
+                                            <Form.Item name={`contentFormats.${index}.contentCount`}>
                                                 <FormikInput
-                                                    name={`contentFormats.${index}.num`}
+                                                    name={`contentFormats.${index}.contentCount`}
                                                     type='number'
                                                     placeholder='Введите количество' />
                                             </Form.Item>
-                                            <Form.Item name={`contentFormats.${index}.type`}>
+                                            <Form.Item name={`contentFormats.${index}.submissionFormId`}>
                                                 <FormikSelect
-                                                    name={`contentFormats.${index}.type`}
+                                                    name={`contentFormats.${index}.submissionFormId`}
                                                     placeholder='Type'
                                                     options={[
                                                         {

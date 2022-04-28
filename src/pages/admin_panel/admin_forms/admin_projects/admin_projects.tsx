@@ -1,6 +1,5 @@
-import React from 'react';
-import { UploadOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Col, Descriptions, Row, Typography, Upload } from 'antd';
+import React, { useState } from 'react';
+import { Checkbox, Col, Descriptions, Row, Typography, Upload } from 'antd';
 import './admin_projects.less';
 import { nanoid } from 'nanoid';
 import FormikInput from '../components/input/input';
@@ -8,6 +7,7 @@ import FormikDatePicker from '../components/datepicker/datepicker';
 import FormikSelect from '../components/select/select';
 import FormikTextArea from '../components/textarea/textarea';
 import { Form } from 'formik-antd';
+import { LinkOutlined } from '@ant-design/icons';
 
 type Props = {
     formik: any
@@ -15,8 +15,29 @@ type Props = {
 
 const { Text } = Typography;
 
+const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
+
 const AdminProjects: React.FC<Props> = ({ formik }) => {
-    const { values, handleChange } = formik;
+    const [fileList, setFileList] = useState([]);
+    const { values, handleChange, setFieldValue } = formik;
+    const onChange = ({ fileList: newFileList }: { fileList: any }) => {
+        setFileList(newFileList);
+        setFieldValue('fileIds', newFileList)
+    };
+    const onPreview = async (file: any) => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src)!;
+        imgWindow.document.write(image.outerHTML);
+    };
     return (
         <div className='admin__projects'>
             <Row>
@@ -56,7 +77,6 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                             <Col flex={1}>
                                 <Form.Item name='contractNumber'>
                                     <FormikInput
-                                        type='number'
                                         name='contractNumber'
                                         placeholder='Введите номер договора'
                                         required={true} />
@@ -203,9 +223,20 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                         </div>
                     </Descriptions.Item>
                     <Descriptions.Item label="Дополнительные материалы">
-                        <Upload>
-                            <Button type='link' icon={<UploadOutlined />}>Добавить файл .pdf</Button>
-                        </Upload>
+                        <Form.Item name='fileIds'>
+                            <Upload
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                accept='.pdf'
+                                listType="picture-card"
+                                fileList={fileList}
+                                onChange={onChange}
+                                onPreview={onPreview}
+                                disabled={fileList.length > 0}
+                                {...props}
+                            >
+                                {fileList.length < 5 && <><LinkOutlined />Добавить файл .pdf</>}
+                            </Upload>
+                        </Form.Item>
                     </Descriptions.Item>
                 </Descriptions>
             </Row>
