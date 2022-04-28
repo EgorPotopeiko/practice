@@ -12,7 +12,7 @@ export default class CreateProductDTO {
     goal: string;
     description: string;
     completionDate: string;
-    statusId: string;
+    statusId: any;
     contentThematicIds: string[];
     contentDirectionId: string;
     contentFormats: ContentFormat[];

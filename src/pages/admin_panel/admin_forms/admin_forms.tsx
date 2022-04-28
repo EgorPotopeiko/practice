@@ -43,7 +43,8 @@ const AdminForms: React.FC = () => {
                             </TabPane>
                         </Tabs>
                     </Form>
-                )}
+                )
+                }
             </Formik>
         </div >
     );

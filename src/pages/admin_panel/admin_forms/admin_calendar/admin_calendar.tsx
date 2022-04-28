@@ -121,7 +121,7 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                         </List.Item>
                                     ))}
                                     <Button
-                                        onClick={() => push({ id: nanoid(), info: '', num: 0, type: '' })}
+                                        onClick={() => push({ id: nanoid(), typeId: '', contentCount: 0, submissionFormId: '' })}
                                         type='link'
                                         icon={<PlusCircleOutlined />}>Добавить тип контента</Button>
                                 </List>

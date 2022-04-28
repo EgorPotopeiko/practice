@@ -12,7 +12,7 @@ export default class ValuesDTO {
     goal: string;
     description: string;
     completionDate: string;
-    statusId: string;
+    statusId: any;
     contentThematicIds: string[];
     contentDirectionId: string;
     contentFormats: ContentFormat[];
@@ -35,7 +35,7 @@ export default class ValuesDTO {
         this.goal = data?.goal || ''
         this.description = data?.description || ''
         this.completionDate = data?.completionDate || ''
-        this.statusId = data?.statusId || ''
+        this.statusId = data?.statusId || null
         this.contentThematicIds = data?.contentThematicIds || []
         this.contentDirectionId = data?.contentDirectionId || ''
         this.contentFormats = data?.contentFormats || []

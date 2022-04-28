@@ -33,7 +33,7 @@ const projectSchema = Yup.object().shape({
     //     planCount: Yup.number().positive().required('Не выбрано planCount'),
     //     typeId: Yup.string().required('Не выбран typeId')
     // })).min(1, 'Добавьте плановый КПЭ'),
-    // imageId: Yup.array(),
+    // imageId: Yup.object(),
     // ownerId: Yup.string().required('Не выбран подрядчик'),
     // producerIds: Yup.array().of(Yup.object().shape({
     //     id: Yup.string(),
