@@ -18,10 +18,10 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const Header: React.FC = () => {
+    const dispatch = useDispatch();
     const { category, price, search } = useSelector(selectFilters);
     const { user, isAuth } = useSelector(selectUserStatus);
     const [searchInput, setSearchInput] = useState("");
-    const dispatch = useDispatch();
     return (
         <div className="header">
             <PageHeader>
@@ -40,14 +40,11 @@ const Header: React.FC = () => {
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                         }
                         <Button onClick={() => {
-                            user.role === "GUEST" && !isAuth
-                                ?
-                                dispatch(OpenModalAction("Auth"))
-                                :
-                                dispatch(GetLogout({
-                                    role: "GUEST"
-                                }))
-                        }}>{isAuth ? 'Выйти' : 'Войти'}
+                            user.role === "GUEST" && !isAuth ?
+                                dispatch(OpenModalAction("Auth")) :
+                                dispatch(GetLogout({role: "GUEST"}))
+                        }}>
+                            {isAuth ? 'Выйти' : 'Войти'}
                         </Button>
                         <Link to={USER_PATH.CART}><UserOutlined hidden={!isAuth} /></Link>
                     </div>
@@ -58,7 +55,7 @@ const Header: React.FC = () => {
                         <>
                             <Input
                                 suffix={<SearchOutlined
-                                    onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
+                                onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
                                 placeholder="Поиск по названию"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
                             <Select placeholder="Производитель" mode="multiple">

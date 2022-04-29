@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { GetNotificationOpenAction } from './../../store/notifications/actions';
-import { GetAddedCartAction, GetCartAction } from './../../store/cart/actions';
+import { GetNotificationOpenAction } from '../../store/notifications/actions';
+import { GetAddedCartAction, GetCartAction } from '../../store/cart/actions';
 import { call, put } from 'redux-saga/effects';
 import CartDB from '../../services/cart_service';
 

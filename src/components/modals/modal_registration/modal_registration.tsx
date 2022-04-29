@@ -28,8 +28,7 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
         secret: ''
     }
     const handlerSubmit = (values: FormikValues) => {
-        /* eslint-disable no-lone-blocks */
-        { !!isAdmin && dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret)) }
+        { isAdmin && dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret)) }
         { !isAdmin && dispatch(GetRegistrationStartAction(values.name, values.email, values.password)) }
     }
     return (
@@ -75,7 +74,7 @@ const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
                                     <FormItem name='password'>
                                         <Checkbox onChange={() => setIsAdmin(!isAdmin)}>Регистрация админа</Checkbox>
                                     </FormItem>
-                                    <FormItem name='secret' hidden={isAdmin ? false : true}>
+                                    <FormItem name='secret' hidden={!isAdmin}>
                                         <FormInput
                                             name='secret'
                                             placeholder='Secret'

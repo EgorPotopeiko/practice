@@ -32,12 +32,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
     children,
     ...restProps
 }) => {
-    const inputNode = <Select defaultValue="оплачен">
-        <Option value="оплачен">оплачен</Option>
-        <Option value="в пути">в пути</Option>
-        <Option value="доставлен">доставлен</Option>
-        <Option value="оформлен">оформлен</Option>
-    </Select>;
+    const inputNode = (
+        <Select defaultValue="оплачен">
+            <Option value="оплачен">оплачен</Option>
+            <Option value="в пути">в пути</Option>
+            <Option value="доставлен">доставлен</Option>
+            <Option value="оформлен">оформлен</Option>
+        </Select>
+    );
 
     return (
         <td {...restProps}>

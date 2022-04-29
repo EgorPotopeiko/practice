@@ -15,20 +15,17 @@ const Modals: React.FC = () => {
         dispatch(CloseModalAction())
         dispatch(SetStatus(''))
     }
-    if (!modalParams.isOpen) return null
-    else {
-        switch (modalParams.typeModal) {
-            case "Auth":
-                return <ModalAuth onCancel={() => closeActions()} visible={modalParams.isOpen} />
-            case "Registration":
-                return <ModalRegistration onCancel={() => closeActions()} visible={modalParams.isOpen} />
-            case "CreateProduct":
-                return <ModalCreateProduct onCancel={() => closeActions()} visible={modalParams.isOpen} />
-            case "CreateCategory":
-                return <ModalCreateCategory onCancel={() => closeActions()} visible={modalParams.isOpen} />
-            default:
-                return null
-        }
+    switch (modalParams.typeModal) {
+        case "Auth":
+            return <ModalAuth onCancel={() => closeActions()} visible={modalParams.isOpen} />
+        case "Registration":
+            return <ModalRegistration onCancel={() => closeActions()} visible={modalParams.isOpen} />
+        case "CreateProduct":
+            return <ModalCreateProduct onCancel={() => closeActions()} visible={modalParams.isOpen} />
+        case "CreateCategory":
+            return <ModalCreateCategory onCancel={() => closeActions()} visible={modalParams.isOpen} />
+        default:
+            return null
     }
 }
 export default Modals
