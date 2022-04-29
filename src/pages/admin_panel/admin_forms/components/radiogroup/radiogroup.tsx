@@ -6,7 +6,10 @@ const FormikRadioGroup = (props: any) => {
     return (
         <div className="formik__radio">
             <Radio.Group name={name} {...rest}>
-                {radioData.map((radio: any) => (
+                {radioData.map((radio: {
+                    id: string,
+                    value: string
+                }) => (
                     <Radio name={radio.value} key={radio.id} value={radio.id}>{radio.value}</Radio>
                 ))}
             </Radio.Group>

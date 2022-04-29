@@ -15,12 +15,12 @@ export interface Channel {
 
 export interface Producer {
     id: string;
-    value: string;
+    name: string;
 }
 
 export interface Coordinator {
     id: string;
-    value: string;
+    name: string;
 }
 
 export interface Kpi {

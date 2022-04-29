@@ -10,7 +10,10 @@ const FormikSelect = (props: any) => {
         <div className="formik__select">
             <FormSelect name={name} mode={mode} {...rest}>
                 {
-                    options.map((option: any) => (
+                    options.map((option: {
+                        key: string,
+                        value: string
+                    }) => (
                         <Option key={option.value} value={option.value}>{option.key}</Option>
                     ))
                 }

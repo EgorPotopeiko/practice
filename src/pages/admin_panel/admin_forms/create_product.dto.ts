@@ -1,4 +1,4 @@
-import { Project, ContentFormat, Channel, Kpi } from './models';
+import { Project, ContentFormat, Channel, Kpi, Producer, Coordinator } from './models';
 
 export default class CreateProductDTO {
     name: string;
@@ -42,10 +42,10 @@ export default class CreateProductDTO {
         this.channels = data.channels
         this.kpis = data.kpis
         this.ownerId = data.ownerId
-        this.producerIds = data.producerIds.map((producer: any) => {
+        this.producerIds = data.producerIds.map((producer: Producer) => {
             return producer.name
         }) || data.producerIds
-        this.coordinatorIds = data.coordinatorIds.map((coordinator: any) => {
+        this.coordinatorIds = data.coordinatorIds.map((coordinator: Coordinator) => {
             return coordinator.name
         }) || data.coordinatorIds
         this.fileIds = data.fileIds
