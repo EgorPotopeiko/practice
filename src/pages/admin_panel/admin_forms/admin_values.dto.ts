@@ -1,4 +1,4 @@
-import { Project, ContentFormat, Channel, Kpi } from './models';
+import { Project, ContentFormat, Channel, Kpi, Producer, Coordinator } from './models';
 
 export default class ValuesDTO {
     name: string;
@@ -12,15 +12,15 @@ export default class ValuesDTO {
     goal: string;
     description: string;
     completionDate: string;
-    statusId: any;
+    statusId: string;
     contentThematicIds: string[];
     contentDirectionId: string;
     contentFormats: ContentFormat[];
     channels: Channel[];
     kpis: Kpi[];
     ownerId: string;
-    producerIds: any[];
-    coordinatorIds: any[];
+    producerIds: Producer[];
+    coordinatorIds: Coordinator[];
     fileIds: string[];
     imageId: any;
     constructor(data?: Project) {
@@ -35,7 +35,7 @@ export default class ValuesDTO {
         this.goal = data?.goal || ''
         this.description = data?.description || ''
         this.completionDate = data?.completionDate || ''
-        this.statusId = data?.statusId || null
+        this.statusId = data?.statusId || ''
         this.contentThematicIds = data?.contentThematicIds || []
         this.contentDirectionId = data?.contentDirectionId || ''
         this.contentFormats = data?.contentFormats || []

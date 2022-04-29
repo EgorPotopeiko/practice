@@ -52,16 +52,16 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                                     required={true}
                                                     options={[
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Instagram'
+                                                            key: 'Instagram',
+                                                            value: '1139095093901'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Facebook'
+                                                            key: 'Facebook',
+                                                            value: '403094801'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Twitter'
+                                                            key: 'Twitter',
+                                                            value: '490-3294-596'
                                                         }
                                                     ]} />
                                             </Form.Item>
@@ -116,16 +116,16 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                                     required={true}
                                                     options={[
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Просмотров'
+                                                            key: 'Просмотров',
+                                                            value: '121890318909310'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Прослушиваний'
+                                                            key: 'Прослушиваний',
+                                                            value: '1213901913'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Скачиваний'
+                                                            key: 'Скачиваний',
+                                                            value: '3131584064'
                                                         }
                                                     ]} />
                                             </Form.Item>

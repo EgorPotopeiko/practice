@@ -25,16 +25,16 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                 required={true}
                                 options={[
                                     {
-                                        id: nanoid(),
-                                        value: 'Подрядчик 1'
+                                        key: 'Подрядчик 1',
+                                        value: '8130909859015'
                                     },
                                     {
-                                        id: nanoid(),
-                                        value: 'Подрядчик 2'
+                                        key: 'Подрядчик 2',
+                                        value: '31-013-490141'
                                     },
                                     {
-                                        id: nanoid(),
-                                        value: 'Подрядчик 3'
+                                        key: 'Подрядчик 3',
+                                        value: '31-901894480592'
                                     }
                                 ]} />
                         </Form.Item>
@@ -51,16 +51,16 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                                     placeholder='Выберите продюсера'
                                                     options={[
                                                         {
-                                                            id: '40140_saklqdj_',
-                                                            value: 'Продюсер 1'
+                                                            key: 'Продюсер 1',
+                                                            value: '42908412412'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Продюсер 2'
+                                                            key: 'Продюсер 2',
+                                                            value: '24109495'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Продюсер 3'
+                                                            key: 'Продюсер 3',
+                                                            value: '31940091'
                                                         }
                                                     ]} />
                                             </Form.Item>
@@ -86,21 +86,22 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                                     placeholder='Выберите координатора'
                                                     options={[
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Координатор 1'
+                                                            key: 'Координатор 1',
+                                                            value: '13095931'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Координатор 2'
+                                                            key: 'Координатор 2',
+                                                            value: '1331_31090931'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Координатор 3'
+                                                            key: 'Координатор 3',
+                                                            value: '1400-4-14141'
                                                         }
                                                     ]} />
                                             </Form.Item>
                                         </List.Item>
-                                    ))}
+                                    )
+                                    )}
                                     <Button
                                         onClick={() => push({ id: nanoid(), name: '' })}
                                         type='link'

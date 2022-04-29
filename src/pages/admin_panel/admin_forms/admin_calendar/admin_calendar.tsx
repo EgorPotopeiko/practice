@@ -28,16 +28,16 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                 required={true}
                                 options={[
                                     {
-                                        id: nanoid(),
-                                        value: 'Content 1'
+                                        key: 'Content 1',
+                                        value: '5903109100941'
                                     },
                                     {
-                                        id: nanoid(),
-                                        value: 'Content 2'
+                                        key: 'Content 2',
+                                        value: '0-148949053'
                                     },
                                     {
-                                        id: nanoid(),
-                                        value: 'Content 3'
+                                        key: 'Content 3',
+                                        value: '14069-4184'
                                     }
                                 ]} />
                         </Form.Item>
@@ -80,16 +80,16 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                                     placeholder='Info'
                                                     options={[
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Info 1'
+                                                            key: 'Info 1',
+                                                            value: '1890598039014'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Info 2'
+                                                            key: 'Info 2',
+                                                            value: '1094-3-315531'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Info 3'
+                                                            key: 'Info 3',
+                                                            value: '319509314'
                                                         }
                                                     ]} />
                                             </Form.Item>
@@ -105,16 +105,16 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                                     placeholder='Type'
                                                     options={[
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Type 1'
+                                                            key: 'Type 1',
+                                                            value: '503919849_3819'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Type 2'
+                                                            key: 'Type 2',
+                                                            value: '146885252'
                                                         },
                                                         {
-                                                            id: nanoid(),
-                                                            value: 'Type 3'
+                                                            key: 'Type 3',
+                                                            value: '242689'
                                                         }
                                                     ]} />
                                             </Form.Item>

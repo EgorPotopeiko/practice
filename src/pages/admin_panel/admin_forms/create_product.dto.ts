@@ -12,15 +12,15 @@ export default class CreateProductDTO {
     goal: string;
     description: string;
     completionDate: string;
-    statusId: any;
+    statusId: string;
     contentThematicIds: string[];
     contentDirectionId: string;
     contentFormats: ContentFormat[];
     channels: Channel[];
     kpis: Kpi[];
     ownerId: string;
-    producerIds: any[];
-    coordinatorIds: any[];
+    producerIds: string[];
+    coordinatorIds: string[];
     fileIds: string[];
     imageId: string | object;
     constructor(data: Project) {
@@ -43,10 +43,10 @@ export default class CreateProductDTO {
         this.kpis = data.kpis
         this.ownerId = data.ownerId
         this.producerIds = data.producerIds.map((producer: any) => {
-            return producer.id
+            return producer.name
         }) || data.producerIds
         this.coordinatorIds = data.coordinatorIds.map((coordinator: any) => {
-            return coordinator.id
+            return coordinator.name
         }) || data.coordinatorIds
         this.fileIds = data.fileIds
         this.imageId = data.imageId.uid || data.imageId

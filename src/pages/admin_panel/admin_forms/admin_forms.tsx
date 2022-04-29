@@ -12,11 +12,12 @@ import projectSchema from './schema';
 import ValuesDTO from './admin_values.dto';
 import CreateProductDTO from './create_product.dto';
 import './admin_forms.less';
+import { Project } from './models';
 
 const { TabPane } = Tabs;
 
 const AdminForms: React.FC = () => {
-    const onSubmit = (values: any) => {
+    const onSubmit = (values: Project) => {
         const finishedValues = new CreateProductDTO(values);
         console.log(finishedValues)
     }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox, Col, Descriptions, Row, Typography, Upload } from 'antd';
 import './admin_projects.less';
-import { nanoid } from 'nanoid';
 import FormikInput from '../components/input/input';
 import FormikDatePicker from '../components/datepicker/datepicker';
 import FormikSelect from '../components/select/select';
@@ -114,16 +113,16 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                         placeholder='Выберите конкурс'
                                         options={[
                                             {
-                                                id: nanoid(),
-                                                value: 'Конкурс 1'
+                                                key: 'Конкурс 1',
+                                                value: '3290813874031'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: 'Конкурс 2'
+                                                key: 'Конкурс 2',
+                                                value: '19013894874893189'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: 'Конкурс 3'
+                                                key: 'Конкурс 3',
+                                                value: '13903905-0139854'
                                             }
                                         ]} />
                                 </Form.Item>
@@ -136,16 +135,16 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                         placeholder='Выберите год'
                                         options={[
                                             {
-                                                id: nanoid(),
-                                                value: '2018'
+                                                key: '2018',
+                                                value: '129133187589031910'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: '2019'
+                                                key: '2019',
+                                                value: '219045901-4'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: '2020'
+                                                key: '2020',
+                                                value: '1903905031-94'
                                             }
                                         ]} />
                                 </Form.Item>
@@ -158,16 +157,16 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                         placeholder='Выберите сессию'
                                         options={[
                                             {
-                                                id: nanoid(),
-                                                value: 'A1'
+                                                key: 'A1',
+                                                value: '4930-4750930'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: 'B1'
+                                                key: 'B1',
+                                                value: '359494384'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: 'C1'
+                                                key: 'C1',
+                                                value: '34309309409505'
                                             }
                                         ]} />
                                 </Form.Item>
@@ -197,16 +196,16 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                         placeholder='Черновик'
                                         options={[
                                             {
-                                                id: nanoid(),
-                                                value: 'Выполнено'
+                                                key: 'Выполнено',
+                                                value: '12345'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: 'В процессе реализации'
+                                                key: 'В процессе реализации',
+                                                value: '164231'
                                             },
                                             {
-                                                id: nanoid(),
-                                                value: 'Отклонено'
+                                                key: 'Отклонено',
+                                                value: '8492194'
                                             }
                                         ]} />
                                 </Form.Item>

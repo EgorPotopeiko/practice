@@ -13,6 +13,16 @@ export interface Channel {
     internetResourceId: string;
 }
 
+export interface Producer {
+    id: string;
+    value: string;
+}
+
+export interface Coordinator {
+    id: string;
+    value: string;
+}
+
 export interface Kpi {
     id: string;
     planCount: number;
@@ -38,8 +48,8 @@ export interface Project {
     channels: Channel[];
     kpis: Kpi[];
     ownerId: string;
-    producerIds: string[];
-    coordinatorIds: string[];
+    producerIds: Producer[];
+    coordinatorIds: Coordinator[];
     fileIds: string[];
     imageId: any;
 }
