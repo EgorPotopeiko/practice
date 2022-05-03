@@ -23,62 +23,60 @@ const Header: React.FC = () => {
     const { user, isAuth } = useSelector(selectUserStatus);
     const [searchInput, setSearchInput] = useState("");
     return (
-        <div className="header">
-            <PageHeader>
-                <div className='header__wrap'>
-                    <Title onClick={() => {
-                        dispatch(RemoveProductAction())
-                        dispatch(ResetProducts())
+        <PageHeader>
+            <div className='header__wrap'>
+                <Title onClick={() => {
+                    dispatch(RemoveProductAction())
+                    dispatch(ResetProducts())
+                }}>
+                    <Link to={PUBLIC_PATH.APP}>Shop</Link></Title>
+                <div className='header__user'>
+                    {user.role !== "ADMIN" &&
+                        (history.location.pathname === "/auth" || history.location.pathname === "/") &&
+                        <Input
+                            suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
+                            placeholder="Поиск по названию"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                    }
+                    <Button onClick={() => {
+                        user.role === "GUEST" && !isAuth ?
+                            dispatch(OpenModalAction("Auth")) :
+                            dispatch(GetLogout({ role: "GUEST" }))
                     }}>
-                        <Link to={PUBLIC_PATH.APP}>Shop</Link></Title>
-                    <div className='header__user'>
-                        {user.role !== "ADMIN" &&
-                            (history.location.pathname === "/auth" || history.location.pathname === "/") &&
-                            <Input
-                                suffix={<SearchOutlined onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
-                                placeholder="Поиск по названию"
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
-                        }
-                        <Button onClick={() => {
-                            user.role === "GUEST" && !isAuth ?
-                                dispatch(OpenModalAction("Auth")) :
-                                dispatch(GetLogout({role: "GUEST"}))
-                        }}>
-                            {isAuth ? 'Выйти' : 'Войти'}
-                        </Button>
-                        <Link to={USER_PATH.CART}><UserOutlined hidden={!isAuth} /></Link>
-                    </div>
+                        {isAuth ? 'Выйти' : 'Войти'}
+                    </Button>
+                    <Link to={USER_PATH.CART}><UserOutlined hidden={!isAuth} /></Link>
                 </div>
-                {user.role !== "ADMIN" &&
-                    (history.location.pathname === "/auth" || history.location.pathname === "/") &&
-                    <div className='header__filters'>
-                        <>
-                            <Input
-                                suffix={<SearchOutlined
+            </div>
+            {user.role !== "ADMIN" &&
+                (history.location.pathname === "/auth" || history.location.pathname === "/") &&
+                <div className='header__filters'>
+                    <>
+                        <Input
+                            suffix={<SearchOutlined
                                 onClick={() => dispatch(GetFilters(searchInput, price, category))} />}
-                                placeholder="Поиск по названию"
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
-                            <Select placeholder="Производитель" mode="multiple">
-                                <Option>1</Option>
-                                <Option>2</Option>
-                                <Option>3</Option>
-                            </Select>
-                        </>
-                        <>
-                            <Text>В наличии</Text>
-                            <Switch defaultChecked />
-                        </>
-                        <>
-                            <Text>Цена</Text>
-                            <Slider
-                                range max={5000}
-                                defaultValue={[0, 5000]}
-                                onAfterChange={(newPrice: Array<number>) => dispatch(GetFilters(search, newPrice, category))} />
-                        </>
-                    </div>
-                }
-            </PageHeader>
-        </div>
+                            placeholder="Поиск по названию"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)} />
+                        <Select placeholder="Производитель" mode="multiple">
+                            <Option>1</Option>
+                            <Option>2</Option>
+                            <Option>3</Option>
+                        </Select>
+                    </>
+                    <>
+                        <Text>В наличии</Text>
+                        <Switch defaultChecked />
+                    </>
+                    <>
+                        <Text>Цена</Text>
+                        <Slider
+                            range max={5000}
+                            defaultValue={[0, 5000]}
+                            onAfterChange={(newPrice: Array<number>) => dispatch(GetFilters(search, newPrice, category))} />
+                    </>
+                </div>
+            }
+        </PageHeader>
     );
 }
 

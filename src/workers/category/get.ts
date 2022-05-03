@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { GetNotificationOpenAction } from '../../store/notifications/actions';
+import { NotificationOpenAction } from '../../store/notifications/actions';
 import { GetCategoriesErrorAction, GetCategoriesSuccessAction, GetCategoriesStartAction } from '../../store/category/actions';
 import { put } from 'redux-saga/effects';
 import CategoryDB from '../../services/category_service';
@@ -12,7 +12,7 @@ function* get(_action: ReturnType<typeof GetCategoriesStartAction>) {
     }
     catch (error: AxiosError | any) {
         yield put(GetCategoriesErrorAction(error));
-        yield put(GetNotificationOpenAction('error', 'Получение категории', 'Не удалось загрузить категории'))
+        yield put(NotificationOpenAction('error', 'Получение категории', 'Не удалось загрузить категории'))
     }
 }
 

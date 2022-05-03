@@ -2,147 +2,146 @@
 
 @border-radius: 6px;
 
-.header {
-    &__wrap {
-        display: flex;
-        justify-content: space-between;
-
-        h1.ant-typography {
-            font-size: 45px;
-
-            a {
-                color: white;
-            }
-        }
+.ant-page-header {
+    &-content {
+        max-width: 1500px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    &__filters {
-        display: flex;
-        align-items: center;
+    &-ghost {
+        background-color: @header-color  !important;
+        padding: 10px 50px !important;
 
-        .ant-input-affix-wrapper {
-            display: none;
-        }
+        .header {
+            &__wrap {
+                display: flex;
+                justify-content: space-between;
 
-        span {
-            margin-right: 10px;
-            font-size: 20px;
-            margin-top: 0px;
-        }
-    }
+                h1.ant-typography {
+                    font-size: 45px;
 
-    .ant {
-        &-modal-body {
-            .modal__inputs {
-                margin-left: auto;
-                margin-right: auto;
-                max-width: 250px;
+                    a {
+                        color: white;
+                    }
+                }
+            }
+
+            &__filters {
+                display: flex;
+                align-items: center;
+
+                .ant {
+                    &-input-affix-wrapper {
+                        display: none;
+                    }
+
+                    &-select {
+                        width: 330px;
+                        margin-right: 40px;
+                    }
+
+                    &-slider {
+                        max-width: 200px;
+                        width: 100%;
+                        min-width: 150px;
+
+                        &-track {
+                            background-color: @antd-primary-color;
+                        }
+
+                        span {
+                            color: white;
+                        }
+                    }
+
+                    &-switch {
+                        margin-right: 40px;
+                        background-color: rgba(170, 165, 165, 0.856);
+
+                        &-checked {
+                            background-color: @antd-primary-color;
+                        }
+                    }
+
+                    &-typography {
+                        color: white;
+                    }
+                }
+
+                span {
+                    margin-right: 10px;
+                    font-size: 20px;
+                    margin-top: 0px;
+                }
+            }
+
+            &__user {
+                display: flex;
+                max-height: 50px;
+                margin-top: 12px;
+
+                h4.ant-typography {
+                    margin-left: 10px;
+                }
+
+                .ant-input-affix-wrapper>input.ant-input {
+                    padding-left: 3px;
+                    font-size: 22px;
+                    margin-top: -2px;
+                }
+
+                .anticon-user {
+                    color: white;
+                    font-size: 45px;
+                }
+
+                .ant-btn {
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    border-radius: 5px;
+                    max-width: 95px;
+                    line-height: 0;
+                    padding: 23px 18px;
+                    font-size: 20px;
+                }
+
+                .ant-input {
+                    width: 400px;
+                    font-size: 18px;
+
+                    &-suffix {
+                        font-size: 22px;
+                    }
+
+                    &-affix-wrapper {
+                        padding: 5px 10px;
+                        margin-right: 15px;
+                        margin-left: 15px;
+                        border-radius: 10px;
+                    }
+                }
             }
         }
 
-        &-input-password {
-            margin-bottom: 5px;
-        }
-
-        &-page {
-            &-header-content {
-                max-width: 1500px;
-                margin-left: auto;
-                margin-right: auto;
+        .ant {
+            &-modal-body {
+                .modal__inputs {
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: 250px;
+                }
             }
 
-            &-header-ghost {
-                background-color: @header-color;
-                padding: 10px 50px;
+            &-input-password {
+                margin-bottom: 5px;
             }
-        }
-
-        &-typography {
-            color: white;
-        }
-
-        &-input {
-            width: 400px;
-            font-size: 18px;
-
-            &-suffix {
-                font-size: 22px;
-            }
-
-            &-affix-wrapper {
-                padding: 5px 10px;
-                margin-right: 15px;
-                margin-left: 15px;
-                border-radius: 10px;
-            }
-        }
-
-        &-btn {
-            border-radius: 5px;
-            max-width: 95px;
-            line-height: 0;
-            padding: 23px 18px;
-            font-size: 20px;
-        }
-
-        &-select {
-            width: 330px;
-            margin-right: 40px;
-        }
-
-        &-slider {
-            max-width: 200px;
-            width: 100%;
-            min-width: 150px;
-
-            &-track {
-                background-color: @antd-primary-color;
-            }
-
-            span {
-                color: white;
-            }
-        }
-
-        &-switch {
-            margin-right: 40px;
-            background-color: rgba(170, 165, 165, 0.856);
-
-            &-checked {
-                background-color: @antd-primary-color;
-            }
-        }
-    }
-
-    &__user {
-        display: flex;
-        max-height: 50px;
-        margin-top: 12px;
-
-        h4.ant-typography {
-            margin-left: 10px;
-        }
-
-        .ant-input-affix-wrapper>input.ant-input {
-            padding-left: 3px;
-            font-size: 22px;
-            margin-top: -2px;
-        }
-
-        .anticon-user {
-            color: white;
-            font-size: 45px;
-        }
-
-        .ant-btn {
-            margin-left: 10px;
-            margin-right: 10px;
         }
     }
 }
 
 @media (max-width: 750px) {
-    .header {
+    .ant-page-header {
         .ant {
             &-input-affix-wrapper {
                 max-width: 300px;
@@ -153,8 +152,8 @@
 }
 
 @media (max-width: 650px) {
-    .header {
-        &__filters {
+    .ant-page-header {
+        .header__filters {
             display: inline-grid;
             max-width: 330px;
             width: 100%;
@@ -198,7 +197,7 @@
 }
 
 @media (min-width: 551px) and (max-width: 650px) {
-    .header {
+    .ant-page-header {
         .ant {
             &-page-header-ghost {
                 text-align: center;
@@ -212,14 +211,14 @@
 }
 
 @media (max-width: 550px) {
-    .header {
-        &__user {
+    .ant-page-header {
+        .header__user {
             .ant-input-affix-wrapper {
                 display: none;
             }
         }
 
-        &__filters {
+        .header__filters {
             max-width: 500px;
 
             .ant {
@@ -243,6 +242,7 @@
 
                 &-select {
                     max-width: 500px;
+                    width: 100%;
                 }
 
                 &-slider {
@@ -254,15 +254,15 @@
 }
 
 @media (max-width: 350px) {
-    .header {
-        &__wrap {
+    .ant-page-header {
+        .header__wrap {
             h1.ant-typography {
                 font-size: 32px;
                 margin-top: 12px;
             }
         }
 
-        &__user {
+        .header__user {
             .ant-btn {
                 padding: 20px 10px;
             }

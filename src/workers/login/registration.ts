@@ -1,4 +1,4 @@
-import { GetNotificationOpenAction } from './../../store/notifications/actions';
+import { NotificationOpenAction } from './../../store/notifications/actions';
 import { AxiosResponse } from 'axios';
 import { GetRegistrationSuccessAction, GetRegistrationErrorAction, GetRegistrationStartAction } from './../../store/login/actions';
 import { put } from 'redux-saga/effects';
@@ -8,11 +8,11 @@ function* registration({ name, email, password }: ReturnType<typeof GetRegistrat
     try {
         const { data }: AxiosResponse = yield AuthService.registration(name, email, password);
         yield put(GetRegistrationSuccessAction(data));
-        yield put(GetNotificationOpenAction('success', 'Регистрация пользователя', 'Регистрация пользователя прошла успешно'))
+        yield put(NotificationOpenAction('success', 'Регистрация пользователя', 'Регистрация пользователя прошла успешно'))
     }
     catch (error) {
         yield put(GetRegistrationErrorAction(error));
-        yield put(GetNotificationOpenAction('error', 'Регистрация пользователя', 'Не удалось зарегистрировать пользователя'))
+        yield put(NotificationOpenAction('error', 'Регистрация пользователя', 'Не удалось зарегистрировать пользователя'))
     }
 }
 
