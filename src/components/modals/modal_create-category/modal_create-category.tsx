@@ -36,7 +36,7 @@ const ModalCreateCategory: FC<Props> = ({ visible, onCancel }) => {
                     initialValues={{ name: '' }}
                     validateOnBlur
                     validationSchema={createCategorySchema}
-                    onSubmit={() => { addCategory() }}>
+                    onSubmit={() => addCategory()}>
                     <Form>
                         <Form.Item name='name'>
                             <Input

@@ -41,6 +41,22 @@ const CartOrder: FC<Props> = ({ visible, setVisible }) => {
             [type]: value
         })
     }
+    const formikSubmit = (values: any, setSubmitting: any) => {
+        createFilter("loading")(true)
+        setSubmitting(true)
+        setTimeout(() => {
+            values.id = nanoid();
+            values.delivery = filter.delivery;
+            values.payment = total;
+            const newOrder = values;
+            const orders = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
+            localStorage.setItem(`orders ${user.name}`, JSON.stringify([...orders, { ...newOrder }]));
+            createFilter("loading")(false);
+            setSubmitting(false);
+            setVisible(false);
+            createFilter("orderVisible")(true);
+        }, 3000)
+    }
     const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
@@ -61,23 +77,7 @@ const CartOrder: FC<Props> = ({ visible, setVisible }) => {
             payment: total
         },
         enableReinitialize: false,
-        onSubmit: (values, { setSubmitting }) => {
-            createFilter("loading")(true)
-            setSubmitting(true)
-            setTimeout(() => {
-                values.id = nanoid();
-                values.delivery = filter.delivery;
-                values.payment = total;
-                const newOrder = values;
-                const orders = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
-                localStorage.setItem(`orders ${user.name}`, JSON.stringify([...orders, { ...newOrder }]));
-                createFilter("loading")(false);
-                setSubmitting(false);
-                setVisible(false);
-                createFilter("orderVisible")(true);
-            }, 3000)
-        }
-
+        onSubmit: (values, { setSubmitting }) => formikSubmit(values, setSubmitting)
     });
 
     const { handleSubmit, handleChange, isSubmitting, values } = formik;

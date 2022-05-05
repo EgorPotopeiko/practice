@@ -86,7 +86,7 @@ const ModalCreateProduct: FC<Props> = ({ visible, onCancel }) => {
                     initialValues={{ title: '', price: 0, categories: [], img: testImg }}
                     validateOnBlur
                     validationSchema={createProductSchema}
-                    onSubmit={(values) => { createProduct(values) }}>
+                    onSubmit={(values) => createProduct(values)}>
                     {({ values, setFieldValue }) => (
                         <Form>
                             <Form.Item name='title'>
