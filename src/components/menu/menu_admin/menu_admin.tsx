@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { FC } from 'react';
 import { Tabs } from 'antd';
 import AdminCategory from '../../../pages/admin_panel/admin_category';
 import OrderData from '../../../pages/admin_panel/admin_orders/admin_data';
@@ -19,33 +19,16 @@ export type TMenuState = {
 }
 
 const MenuAdmin: FC = () => {
-    const [filter, setFilter] = useState<TMenuState>({
-        searchArticle: '',
-        searchStatus: true,
-        chooseStatus: "оплачен",
-        searchUser: "",
-        searchNumber: ""
-    });
-    const handlerFilter = (type: keyof TMenuState) => (value: any) => {
-        setFilter({
-            ...filter,
-            [type]: value
-        })
-    }
-
     return (
         <Tabs defaultActiveKey="1" type="card">
             <TabPane tab="ТОВАРЫ" key="ТОВАРЫ">
-                <ProductsFilter handlerFilter={handlerFilter} />
-                <ProductsData searchArticle={filter.searchArticle} />
+                <ProductsFilter />
+                <ProductsData />
             </TabPane>
             <TabPane tab="КАТЕГОРИИ" key="КАТЕГОРИИ"><AdminCategory /></TabPane>
             <TabPane tab="ЗАКАЗЫ" key="ЗАКАЗЫ">
-                <OrderFilters handlerFilter={handlerFilter} />
-                <OrderData
-                    chooseStatus={filter.chooseStatus}
-                    searchUser={filter.searchUser}
-                    searchNumber={filter.searchNumber} />
+                <OrderFilters />
+                <OrderData />
             </TabPane>
             <TabPane tab="ПРОЕКТЫ" key="ПРОЕКТЫ"><AdminForms /></TabPane>
         </Tabs>

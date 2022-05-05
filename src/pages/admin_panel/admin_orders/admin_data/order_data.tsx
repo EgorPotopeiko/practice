@@ -3,14 +3,10 @@ import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { TOrder } from '../../../../models/order';
 import './order_data.less';
+import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
-
-type Props = {
-    chooseStatus: string,
-    searchUser: string,
-    searchNumber: string
-}
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     editing: boolean;
@@ -63,7 +59,8 @@ const EditableCell: FC<EditableCellProps> = ({
     );
 };
 
-const OrderData: FC<Props> = ({ chooseStatus, searchNumber, searchUser }) => {
+const OrderData: FC = () => {
+    const { chooseStatus, searchNumber, searchUser } = useSelector(selectFiltersAdmin);
     let orders: Array<TOrder> = [];
     const [data, setData] = useState(orders);
     const [editingKey, setEditingKey] = useState('');

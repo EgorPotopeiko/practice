@@ -9,11 +9,13 @@ import cartReducer from './cart/reducer';
 import modalsReducer from './modals/reducer';
 import categoryReducer from './category/reducer';
 import notificationsReducer from './notifications/reducer';
+import filtersAdminReducer from './filters_admin/reducer';
 
 const store = (history: History) => combineReducers<TApplicationState>({
     router: connectRouter(history),
     products: productsReducer,
     filters: filtersReducer,
+    filtersAdmin: filtersAdminReducer,
     login: loginReducer,
     cart: cartReducer,
     modals: modalsReducer,

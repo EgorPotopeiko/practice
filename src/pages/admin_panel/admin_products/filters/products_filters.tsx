@@ -4,20 +4,18 @@ import { Button, Input, Select } from 'antd';
 import { selectListCategories } from '../../../../store/category/selectors';
 import { OpenModalAction } from '../../../../store/modals/actions';
 import { TCategory } from '../../../../models/category';
-import { TMenuState } from "../../../../components/menu/menu";
 import './products_filters.less';
 import { selectFilters } from '../../../../store/filters/selectors';
 import { GetFilters } from '../../../../store/filters/actions';
-
-type Props = {
-    handlerFilter: (type: keyof TMenuState) => (value: string | boolean) => void
-}
+import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
+import { GetFiltersAdmin } from '../../../../store/filters_admin/actions';
 
 const { Option } = Select;
 
-const ProductsFilter: FC<Props> = ({ handlerFilter }) => {
+const ProductsFilter: FC = () => {
     const categoryValues = useSelector(selectListCategories);
     const { category, price, search } = useSelector(selectFilters);
+    const { chooseStatus, searchNumber, searchStatus, searchUser } = useSelector(selectFiltersAdmin);
     const dispatch = useDispatch();
     const handleSubmit = (categoryFilter: string) => {
         const result = categoryValues.find((category: TCategory) => category.title === categoryFilter)
@@ -30,7 +28,7 @@ const ProductsFilter: FC<Props> = ({ handlerFilter }) => {
                 <Input
                     type='number'
                     placeholder="Артикул"
-                    onChange={(e) => handlerFilter("searchArticle")(e.target.value)} />
+                    onChange={(e) => GetFiltersAdmin(e.target.value, searchStatus, chooseStatus, searchUser, searchNumber)} />
                 <Select placeholder="Категория" onChange={handleSubmit}>
                     {categoryValues.map((category: TCategory) =>
                         <Option key={category.title} value={category.title}>{category.title}</Option>)}

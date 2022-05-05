@@ -1,3 +1,4 @@
+import { TFiltersAdminState } from './filters_admin/reducer';
 import { TNotificationState } from './notifications/reducer';
 import { TCategoryState } from './category/reducer';
 import { TModalsState } from './modals/reducer';
@@ -11,6 +12,7 @@ export type TApplicationState = Readonly<{
     router: RouterState,
     products: TProductsState,
     filters: TFiltersState,
+    filtersAdmin: TFiltersAdminState,
     login: TLoginState,
     cart: TCartState,
     modals: TModalsState,

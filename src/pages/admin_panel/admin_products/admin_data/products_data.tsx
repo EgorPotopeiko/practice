@@ -8,12 +8,9 @@ import { selectListCategories } from '../../../../store/category/selectors';
 import { DeleteProductAction, GetPage } from '../../../../store/products/actions';
 import { TCategory } from '../../../../models/category';
 import './products_data.less';
+import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
 
 const { Option } = Select;
-
-type Props = {
-    searchArticle: string
-}
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     editing: boolean;
@@ -65,9 +62,10 @@ const EditableCell: FC<EditableCellProps> = ({
     );
 };
 
-const ProductsData: FC<Props> = ({ searchArticle }) => {
+const ProductsData: FC = () => {
     const { products, isLoading } = useSelector(selectProductsStatus);
     const totalCount = useSelector(selectTotal);
+    const { searchArticle } = useSelector(selectFiltersAdmin);
     const [data, setData] = useState(products);
     const [editingKey, setEditingKey] = useState('');
     const dispatch = useDispatch();
