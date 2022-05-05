@@ -12,6 +12,66 @@ type Props = {
     formik: any
 }
 
+const optionsConc = [
+    {
+        key: 'Конкурс 1',
+        value: '3290813874031'
+    },
+    {
+        key: 'Конкурс 2',
+        value: '19013894874893189'
+    },
+    {
+        key: 'Конкурс 3',
+        value: '13903905-0139854'
+    }
+]
+
+const optionsYear = [
+    {
+        key: '2018',
+        value: '129133187589031910'
+    },
+    {
+        key: '2019',
+        value: '219045901-4'
+    },
+    {
+        key: '2020',
+        value: '1903905031-94'
+    }
+]
+
+const optionsSessionId = [
+    {
+        key: 'A1',
+        value: '4930-4750930'
+    },
+    {
+        key: 'B1',
+        value: '359494384'
+    },
+    {
+        key: 'C1',
+        value: '34309309409505'
+    }
+]
+
+const optionsStatusId = [
+    {
+        key: 'Выполнено',
+        value: '12345'
+    },
+    {
+        key: 'В процессе реализации',
+        value: '164231'
+    },
+    {
+        key: 'Отклонено',
+        value: '8492194'
+    }
+]
+
 const { Text } = Typography;
 
 const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
@@ -111,20 +171,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                     <FormikSelect
                                         name='conc'
                                         placeholder='Выберите конкурс'
-                                        options={[
-                                            {
-                                                key: 'Конкурс 1',
-                                                value: '3290813874031'
-                                            },
-                                            {
-                                                key: 'Конкурс 2',
-                                                value: '19013894874893189'
-                                            },
-                                            {
-                                                key: 'Конкурс 3',
-                                                value: '13903905-0139854'
-                                            }
-                                        ]} />
+                                        options={optionsConc} />
                                 </Form.Item>
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
@@ -133,20 +180,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                     <FormikSelect
                                         name='year'
                                         placeholder='Выберите год'
-                                        options={[
-                                            {
-                                                key: '2018',
-                                                value: '129133187589031910'
-                                            },
-                                            {
-                                                key: '2019',
-                                                value: '219045901-4'
-                                            },
-                                            {
-                                                key: '2020',
-                                                value: '1903905031-94'
-                                            }
-                                        ]} />
+                                        options={optionsYear} />
                                 </Form.Item>
                             </Col>
                             <Col flex={2} style={{ display: 'contents' }}>
@@ -155,20 +189,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                     <FormikSelect
                                         name='sessionId'
                                         placeholder='Выберите сессию'
-                                        options={[
-                                            {
-                                                key: 'A1',
-                                                value: '4930-4750930'
-                                            },
-                                            {
-                                                key: 'B1',
-                                                value: '359494384'
-                                            },
-                                            {
-                                                key: 'C1',
-                                                value: '34309309409505'
-                                            }
-                                        ]} />
+                                        options={optionsSessionId} />
                                 </Form.Item>
                             </Col>
                         </div>
@@ -194,20 +215,7 @@ const AdminProjects: React.FC<Props> = ({ formik }) => {
                                     <FormikSelect
                                         name='statusId'
                                         placeholder='Черновик'
-                                        options={[
-                                            {
-                                                key: 'Выполнено',
-                                                value: '12345'
-                                            },
-                                            {
-                                                key: 'В процессе реализации',
-                                                value: '164231'
-                                            },
-                                            {
-                                                key: 'Отклонено',
-                                                value: '8492194'
-                                            }
-                                        ]} />
+                                        options={optionsStatusId} />
                                 </Form.Item>
                             </Col>
                             <Col flex={2} style={{ display: 'flex', justifyContent: 'end' }}>

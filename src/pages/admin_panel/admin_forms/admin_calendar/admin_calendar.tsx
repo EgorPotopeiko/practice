@@ -13,6 +13,70 @@ type Props = {
     formik: any
 }
 
+const optionsThematics = [
+    {
+        key: 'Content 1',
+        value: '5903109100941'
+    },
+    {
+        key: 'Content 2',
+        value: '0-148949053'
+    },
+    {
+        key: 'Content 3',
+        value: '14069-4184'
+    }
+]
+
+const dataDirection = [
+    {
+        id: 1,
+        value: 'Мультиформат'
+    },
+    {
+        id: 2,
+        value: 'Видеоконтент'
+    },
+    {
+        id: 3,
+        value: 'Контент в блогосфере'
+    },
+    {
+        id: 4,
+        value: 'Программные продукты'
+    }
+]
+
+const optionsFormatsTypeId = [
+    {
+        key: 'Info 1',
+        value: '1890598039014'
+    },
+    {
+        key: 'Info 2',
+        value: '1094-3-315531'
+    },
+    {
+        key: 'Info 3',
+        value: '319509314'
+    }
+]
+
+const optionsFormatsSubmissionFormId = [
+    {
+        key: 'Type 1',
+        value: '503919849_3819'
+    },
+    {
+        key: 'Type 2',
+        value: '146885252'
+    },
+    {
+        key: 'Type 3',
+        value: '242689'
+    }
+]
+
 const AdminCalendar: React.FC<Props> = ({ formik }) => {
     const { values } = formik;
     return (
@@ -26,20 +90,7 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                 placeholder='Выберите тематику контента'
                                 mode='multiple'
                                 required={true}
-                                options={[
-                                    {
-                                        key: 'Content 1',
-                                        value: '5903109100941'
-                                    },
-                                    {
-                                        key: 'Content 2',
-                                        value: '0-148949053'
-                                    },
-                                    {
-                                        key: 'Content 3',
-                                        value: '14069-4184'
-                                    }
-                                ]} />
+                                options={optionsThematics} />
                         </Form.Item>
                     </Descriptions.Item>
                     <Descriptions.Item label="Направление контента*">
@@ -48,24 +99,7 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                 name='contentDirectionId'
                                 placeholder='Выберите направление контента'
                                 required={true}
-                                radioData={[
-                                    {
-                                        id: 1,
-                                        value: 'Мультиформат'
-                                    },
-                                    {
-                                        id: 2,
-                                        value: 'Видеоконтент'
-                                    },
-                                    {
-                                        id: 3,
-                                        value: 'Контент в блогосфере'
-                                    },
-                                    {
-                                        id: 4,
-                                        value: 'Программные продукты'
-                                    }
-                                ]} />
+                                radioData={dataDirection} />
                         </Form.Item>
                     </Descriptions.Item>
                     <Descriptions.Item label="Формат контента*">
@@ -78,20 +112,7 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                                 <FormikSelect
                                                     name={`contentFormats.${index}.typeId`}
                                                     placeholder='Info'
-                                                    options={[
-                                                        {
-                                                            key: 'Info 1',
-                                                            value: '1890598039014'
-                                                        },
-                                                        {
-                                                            key: 'Info 2',
-                                                            value: '1094-3-315531'
-                                                        },
-                                                        {
-                                                            key: 'Info 3',
-                                                            value: '319509314'
-                                                        }
-                                                    ]} />
+                                                    options={optionsFormatsTypeId} />
                                             </Form.Item>
                                             <Form.Item name={`contentFormats.${index}.contentCount`}>
                                                 <FormikInput
@@ -103,20 +124,7 @@ const AdminCalendar: React.FC<Props> = ({ formik }) => {
                                                 <FormikSelect
                                                     name={`contentFormats.${index}.submissionFormId`}
                                                     placeholder='Type'
-                                                    options={[
-                                                        {
-                                                            key: 'Type 1',
-                                                            value: '503919849_3819'
-                                                        },
-                                                        {
-                                                            key: 'Type 2',
-                                                            value: '146885252'
-                                                        },
-                                                        {
-                                                            key: 'Type 3',
-                                                            value: '242689'
-                                                        }
-                                                    ]} />
+                                                    options={optionsFormatsSubmissionFormId} />
                                             </Form.Item>
                                         </List.Item>
                                     ))}

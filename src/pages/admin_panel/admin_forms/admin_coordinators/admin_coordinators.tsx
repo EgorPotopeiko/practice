@@ -11,6 +11,51 @@ type Props = {
     formik: any
 }
 
+const optionsOwnerId = [
+    {
+        key: 'Подрядчик 1',
+        value: '8130909859015'
+    },
+    {
+        key: 'Подрядчик 2',
+        value: '31-013-490141'
+    },
+    {
+        key: 'Подрядчик 3',
+        value: '31-901894480592'
+    }
+]
+
+const optionsProducerIdsName = [
+    {
+        key: 'Продюсер 1',
+        value: '42908412412'
+    },
+    {
+        key: 'Продюсер 2',
+        value: '24109495'
+    },
+    {
+        key: 'Продюсер 3',
+        value: '31940091'
+    }
+]
+
+const optionsCoordinatorIdsName = [
+    {
+        key: 'Координатор 1',
+        value: '13095931'
+    },
+    {
+        key: 'Координатор 2',
+        value: '1331_31090931'
+    },
+    {
+        key: 'Координатор 3',
+        value: '1400-4-14141'
+    }
+]
+
 const AdminCoordinators: React.FC<Props> = ({ formik }) => {
     const { values, handleSubmit } = formik;
     return (
@@ -23,20 +68,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                 name='ownerId'
                                 placeholder='Выберите подрядчика'
                                 required={true}
-                                options={[
-                                    {
-                                        key: 'Подрядчик 1',
-                                        value: '8130909859015'
-                                    },
-                                    {
-                                        key: 'Подрядчик 2',
-                                        value: '31-013-490141'
-                                    },
-                                    {
-                                        key: 'Подрядчик 3',
-                                        value: '31-901894480592'
-                                    }
-                                ]} />
+                                options={optionsOwnerId} />
                         </Form.Item>
                     </Descriptions.Item>
                     <Descriptions.Item label="Продюсер*">
@@ -49,20 +81,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                                 <FormikSelect
                                                     name={`producerIds.${index}.name`}
                                                     placeholder='Выберите продюсера'
-                                                    options={[
-                                                        {
-                                                            key: 'Продюсер 1',
-                                                            value: '42908412412'
-                                                        },
-                                                        {
-                                                            key: 'Продюсер 2',
-                                                            value: '24109495'
-                                                        },
-                                                        {
-                                                            key: 'Продюсер 3',
-                                                            value: '31940091'
-                                                        }
-                                                    ]} />
+                                                    options={optionsProducerIdsName} />
                                             </Form.Item>
                                         </List.Item>
                                     ))}
@@ -84,20 +103,7 @@ const AdminCoordinators: React.FC<Props> = ({ formik }) => {
                                                 <FormikSelect
                                                     name={`coordinatorIds.${index}.name`}
                                                     placeholder='Выберите координатора'
-                                                    options={[
-                                                        {
-                                                            key: 'Координатор 1',
-                                                            value: '13095931'
-                                                        },
-                                                        {
-                                                            key: 'Координатор 2',
-                                                            value: '1331_31090931'
-                                                        },
-                                                        {
-                                                            key: 'Координатор 3',
-                                                            value: '1400-4-14141'
-                                                        }
-                                                    ]} />
+                                                    options={optionsCoordinatorIdsName} />
                                             </Form.Item>
                                         </List.Item>
                                     )

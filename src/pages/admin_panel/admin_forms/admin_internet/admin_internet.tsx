@@ -12,6 +12,36 @@ type Props = {
     formik: any
 }
 
+const optionsChannels = [
+    {
+        key: 'Instagram',
+        value: '1139095093901'
+    },
+    {
+        key: 'Facebook',
+        value: '403094801'
+    },
+    {
+        key: 'Twitter',
+        value: '490-3294-596'
+    }
+]
+
+const optionsKpis = [
+    {
+        key: 'Просмотров',
+        value: '121890318909310'
+    },
+    {
+        key: 'Прослушиваний',
+        value: '1213901913'
+    },
+    {
+        key: 'Скачиваний',
+        value: '3131584064'
+    }
+]
+
 const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
 
 const AdminInternet: React.FC<Props> = ({ formik }) => {
@@ -50,20 +80,7 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                                     name={`channels.${index}.internetResourceId`}
                                                     placeholder='Выберите интернет-ресурс'
                                                     required={true}
-                                                    options={[
-                                                        {
-                                                            key: 'Instagram',
-                                                            value: '1139095093901'
-                                                        },
-                                                        {
-                                                            key: 'Facebook',
-                                                            value: '403094801'
-                                                        },
-                                                        {
-                                                            key: 'Twitter',
-                                                            value: '490-3294-596'
-                                                        }
-                                                    ]} />
+                                                    options={optionsChannels} />
                                             </Form.Item>
                                             <Form.Item name={`channels.${index}.name`}>
                                                 <FormikInput
@@ -114,20 +131,7 @@ const AdminInternet: React.FC<Props> = ({ formik }) => {
                                                     name={`kpis.${index}.typeId`}
                                                     placeholder='Выберите меру измерения КПЭ'
                                                     required={true}
-                                                    options={[
-                                                        {
-                                                            key: 'Просмотров',
-                                                            value: '121890318909310'
-                                                        },
-                                                        {
-                                                            key: 'Прослушиваний',
-                                                            value: '1213901913'
-                                                        },
-                                                        {
-                                                            key: 'Скачиваний',
-                                                            value: '3131584064'
-                                                        }
-                                                    ]} />
+                                                    options={optionsKpis} />
                                             </Form.Item>
                                         </List.Item>
                                     ))}
