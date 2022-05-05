@@ -74,7 +74,6 @@ const ProductsData: FC<Props> = ({ searchArticle }) => {
     const [form] = Form.useForm();
     let newData = data.filter((product: TProduct) => product.id.toString().includes(searchArticle));
     /* eslint-disable array-callback-return */
-    products.map((product: TProduct) => { product['key'] = product.id.toString() });
     const isEditing = (record: TProduct) => record.key === editingKey;
 
     const edit = (record: Partial<TProduct> & { key: React.Key }) => {
