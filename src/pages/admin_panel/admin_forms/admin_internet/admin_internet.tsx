@@ -75,29 +75,21 @@ const AdminInternet: FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.channels.map((_channel: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <Form.Item name={`channels.${index}.internetResourceId`}>
-                                                <FormikSelect
-                                                    name={`channels.${index}.internetResourceId`}
-                                                    placeholder='Выберите интернет-ресурс'
-                                                    required={true}
-                                                    options={optionsChannels} />
-                                            </Form.Item>
-                                            <Form.Item name={`channels.${index}.name`}>
-                                                <FormikInput
-                                                    name={`channels.${index}.name`}
-                                                    placeholder='Введите название' />
-                                            </Form.Item>
-                                            <Form.Item name={`channels.${index}.link`}>
-                                                <FormikInput
-                                                    name={`channels.${index}.link`}
-                                                    placeholder='Введите ссылки' />
-                                            </Form.Item>
-                                            <Form.Item name={`channels.${index}.planPublicationCount`}>
-                                                <FormikInput
-                                                    name={`channels.${index}.planPublicationCount`}
-                                                    type='number'
-                                                    placeholder='Введите количество публикаций' />
-                                            </Form.Item>
+                                            <FormikSelect
+                                                name={`channels.${index}.internetResourceId`}
+                                                placeholder='Выберите интернет-ресурс'
+                                                required={true}
+                                                options={optionsChannels} />
+                                            <FormikInput
+                                                name={`channels.${index}.name`}
+                                                placeholder='Введите название' />
+                                            <FormikInput
+                                                name={`channels.${index}.link`}
+                                                placeholder='Введите ссылки' />
+                                            <FormikInput
+                                                name={`channels.${index}.planPublicationCount`}
+                                                type='number'
+                                                placeholder='Введите количество публикаций' />
                                         </List.Item>
                                     ))}
                                     <Button
@@ -120,19 +112,15 @@ const AdminInternet: FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.kpis.map((_kpi: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <Form.Item name={`kpis.${index}.planCount`}>
-                                                <FormikInput
-                                                    name={`kpis.${index}.planCount`}
-                                                    type='number'
-                                                    placeholder='Введите показатель просмотров' />
-                                            </Form.Item>
-                                            <Form.Item name={`kpis.${index}.typeId`}>
-                                                <FormikSelect
-                                                    name={`kpis.${index}.typeId`}
-                                                    placeholder='Выберите меру измерения КПЭ'
-                                                    required={true}
-                                                    options={optionsKpis} />
-                                            </Form.Item>
+                                            <FormikInput
+                                                name={`kpis.${index}.planCount`}
+                                                type='number'
+                                                placeholder='Введите показатель просмотров' />
+                                            <FormikSelect
+                                                name={`kpis.${index}.typeId`}
+                                                placeholder='Выберите меру измерения КПЭ'
+                                                required={true}
+                                                options={optionsKpis} />
                                         </List.Item>
                                     ))}
                                     <Button

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row } from 'antd';
-import { Form, SubmitButton } from 'formik-antd';
+import { SubmitButton } from 'formik-antd';
 import { nanoid } from 'nanoid';
 import { FieldArray } from 'formik';
 import './admin_coordinators.less';
@@ -63,13 +63,11 @@ const AdminCoordinators: FC<Props> = ({ formik }) => {
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Подрядчик*">
-                        <Form.Item name='ownerId'>
-                            <FormikSelect
-                                name='ownerId'
-                                placeholder='Выберите подрядчика'
-                                required={true}
-                                options={optionsOwnerId} />
-                        </Form.Item>
+                        <FormikSelect
+                            name='ownerId'
+                            placeholder='Выберите подрядчика'
+                            required={true}
+                            options={optionsOwnerId} />
                     </Descriptions.Item>
                     <Descriptions.Item label="Продюсер*">
                         <FieldArray name='producerIds'>
@@ -77,12 +75,10 @@ const AdminCoordinators: FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.producerIds.map((_producer: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <Form.Item name={`producerIds.${index}.name`}>
-                                                <FormikSelect
-                                                    name={`producerIds.${index}.name`}
-                                                    placeholder='Выберите продюсера'
-                                                    options={optionsProducerIdsName} />
-                                            </Form.Item>
+                                            <FormikSelect
+                                                name={`producerIds.${index}.name`}
+                                                placeholder='Выберите продюсера'
+                                                options={optionsProducerIdsName} />
                                         </List.Item>
                                     ))}
                                     <Button
@@ -99,12 +95,10 @@ const AdminCoordinators: FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.coordinatorIds.map((_coordinator: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <Form.Item name={`coordinatorIds.${index}.name`}>
-                                                <FormikSelect
-                                                    name={`coordinatorIds.${index}.name`}
-                                                    placeholder='Выберите координатора'
-                                                    options={optionsCoordinatorIdsName} />
-                                            </Form.Item>
+                                            <FormikSelect
+                                                name={`coordinatorIds.${index}.name`}
+                                                placeholder='Выберите координатора'
+                                                options={optionsCoordinatorIdsName} />
                                         </List.Item>
                                     )
                                     )}

@@ -102,130 +102,104 @@ const AdminProjects: FC<Props> = ({ formik }) => {
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Название проекта*">
-                        <Form.Item name='name'>
-                            <FormikInput
-                                name='name'
-                                placeholder='Введите название проекта'
-                                required={true} />
-                        </Form.Item>
+                        <FormikInput
+                            name='name'
+                            placeholder='Введите название проекта'
+                            required={true} />
                     </Descriptions.Item>
                     <Descriptions.Item label="Номер заявки*">
                         <div className='request'>
                             <Col flex={2}>
-                                <Form.Item name='requestNumber'>
-                                    <FormikInput
-                                        name='requestNumber'
-                                        placeholder='Введите номер заявки'
-                                        required={true} />
-                                </Form.Item>
+                                <FormikInput
+                                    name='requestNumber'
+                                    placeholder='Введите номер заявки'
+                                    required={true} />
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>Бюджет*</Text>
-                                <Form.Item name='budget'>
-                                    <FormikInput
-                                        type='number'
-                                        name='budget'
-                                        placeholder='Введите бюджет проекта'
-                                        required={true} />
-                                </Form.Item>
+                                <FormikInput
+                                    type='number'
+                                    name='budget'
+                                    placeholder='Введите бюджет проекта'
+                                    required={true} />
                             </Col>
                         </div>
                     </Descriptions.Item>
                     <Descriptions.Item label="Договор*">
                         <div className='contract'>
                             <Col flex={1}>
-                                <Form.Item name='contractNumber'>
-                                    <FormikInput
-                                        name='contractNumber'
-                                        placeholder='Введите номер договора'
-                                        required={true} />
-                                </Form.Item>
+                                <FormikInput
+                                    name='contractNumber'
+                                    placeholder='Введите номер договора'
+                                    required={true} />
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>От*</Text>
-                                <Form.Item name='contractDate'>
-                                    <FormikDatePicker
-                                        name='contractDate'
-                                        format='YYYY-MM-DD'
-                                        placeholder='Выберите дату' />
-                                </Form.Item>
+                                <FormikDatePicker
+                                    name='contractDate'
+                                    format='YYYY-MM-DD'
+                                    placeholder='Выберите дату' />
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>Авансирование</Text>
                                 <Form.Item name='advancePayment'>
                                     <Checkbox name='advancePayment' onChange={handleChange} />
                                 </Form.Item>
-                                <Form.Item name='igk'>
-                                    <FormikInput
-                                        disabled={!values.advancePayment}
-                                        name='igk'
-                                        placeholder='Введите №ИГК' />
-                                </Form.Item>
+                                <FormikInput
+                                    disabled={!values.advancePayment}
+                                    name='igk'
+                                    placeholder='Введите №ИГК' />
                             </Col>
                         </div>
                     </Descriptions.Item>
                     <Descriptions.Item label="Конкурс*">
                         <div className='contest'>
                             <Col flex={2}>
-                                <Form.Item name='conc'>
-                                    <FormikSelect
-                                        name='conc'
-                                        placeholder='Выберите конкурс'
-                                        options={optionsConc} />
-                                </Form.Item>
+                                <FormikSelect
+                                    name='conc'
+                                    placeholder='Выберите конкурс'
+                                    options={optionsConc} />
                             </Col>
                             <Col flex={1} style={{ display: 'contents' }}>
                                 <Text>Год*</Text>
-                                <Form.Item name='year'>
-                                    <FormikSelect
-                                        name='year'
-                                        placeholder='Выберите год'
-                                        options={optionsYear} />
-                                </Form.Item>
+                                <FormikSelect
+                                    name='year'
+                                    placeholder='Выберите год'
+                                    options={optionsYear} />
                             </Col>
                             <Col flex={2} style={{ display: 'contents' }}>
                                 <Text>Сессия*</Text>
-                                <Form.Item name='sessionId'>
-                                    <FormikSelect
-                                        name='sessionId'
-                                        placeholder='Выберите сессию'
-                                        options={optionsSessionId} />
-                                </Form.Item>
+                                <FormikSelect
+                                    name='sessionId'
+                                    placeholder='Выберите сессию'
+                                    options={optionsSessionId} />
                             </Col>
                         </div>
                     </Descriptions.Item>
                     <Descriptions.Item label="Цель проекта">
-                        <Form.Item name='goal'>
-                            <FormikTextArea
-                                name='goal'
-                                placeholder='Введите цель проекта' />
-                        </Form.Item>
+                        <FormikTextArea
+                            name='goal'
+                            placeholder='Введите цель проекта' />
                     </Descriptions.Item>
                     <Descriptions.Item label="Описание проекта">
-                        <Form.Item name='description'>
-                            <FormikTextArea
-                                name='description'
-                                placeholder='Введите описание проекта' />
-                        </Form.Item>
+                        <FormikTextArea
+                            name='description'
+                            placeholder='Введите описание проекта' />
                     </Descriptions.Item>
                     <Descriptions.Item label="Статус">
                         <div className='draft'>
                             <Col flex={4}>
-                                <Form.Item name='statusId'>
-                                    <FormikSelect
-                                        name='statusId'
-                                        placeholder='Черновик'
-                                        options={optionsStatusId} />
-                                </Form.Item>
+                                <FormikSelect
+                                    name='statusId'
+                                    placeholder='Черновик'
+                                    options={optionsStatusId} />
                             </Col>
                             <Col flex={2} style={{ display: 'flex', justifyContent: 'end' }}>
                                 <Text>Дата завершения проекта</Text>
-                                <Form.Item name='completionDate'>
-                                    <FormikDatePicker
-                                        name='completionDate'
-                                        format='YYYY-MM-DD'
-                                        placeholder='Выберите дату' />
-                                </Form.Item>
+                                <FormikDatePicker
+                                    name='completionDate'
+                                    format='YYYY-MM-DD'
+                                    placeholder='Выберите дату' />
                             </Col>
                         </div>
                     </Descriptions.Item>

@@ -7,7 +7,6 @@ import './admin_calendar.less';
 import FormikSelect from '../components/select/select';
 import FormikRadioGroup from '../components/radiogroup/radiogroup';
 import FormikInput from '../components/input/input';
-import { Form } from 'formik-antd';
 
 type Props = {
     formik: any
@@ -84,23 +83,19 @@ const AdminCalendar: FC<Props> = ({ formik }) => {
             <Row>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="Тематика контента*">
-                        <Form.Item name='contentThematicIds'>
-                            <FormikSelect
-                                name='contentThematicIds'
-                                placeholder='Выберите тематику контента'
-                                mode='multiple'
-                                required={true}
-                                options={optionsThematics} />
-                        </Form.Item>
+                        <FormikSelect
+                            name='contentThematicIds'
+                            placeholder='Выберите тематику контента'
+                            mode='multiple'
+                            required={true}
+                            options={optionsThematics} />
                     </Descriptions.Item>
                     <Descriptions.Item label="Направление контента*">
-                        <Form.Item name='contentDirectionId'>
-                            <FormikRadioGroup
-                                name='contentDirectionId'
-                                placeholder='Выберите направление контента'
-                                required={true}
-                                radioData={dataDirection} />
-                        </Form.Item>
+                        <FormikRadioGroup
+                            name='contentDirectionId'
+                            placeholder='Выберите направление контента'
+                            required={true}
+                            radioData={dataDirection} />
                     </Descriptions.Item>
                     <Descriptions.Item label="Формат контента*">
                         <FieldArray name='contentFormats'>
@@ -108,24 +103,18 @@ const AdminCalendar: FC<Props> = ({ formik }) => {
                                 <List>
                                     {values.contentFormats.map((_contentFormat: any, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
-                                            <Form.Item name={`contentFormats.${index}.typeId`}>
-                                                <FormikSelect
-                                                    name={`contentFormats.${index}.typeId`}
-                                                    placeholder='Info'
-                                                    options={optionsFormatsTypeId} />
-                                            </Form.Item>
-                                            <Form.Item name={`contentFormats.${index}.contentCount`}>
-                                                <FormikInput
-                                                    name={`contentFormats.${index}.contentCount`}
-                                                    type='number'
-                                                    placeholder='Введите количество' />
-                                            </Form.Item>
-                                            <Form.Item name={`contentFormats.${index}.submissionFormId`}>
-                                                <FormikSelect
-                                                    name={`contentFormats.${index}.submissionFormId`}
-                                                    placeholder='Type'
-                                                    options={optionsFormatsSubmissionFormId} />
-                                            </Form.Item>
+                                            <FormikSelect
+                                                name={`contentFormats.${index}.typeId`}
+                                                placeholder='Info'
+                                                options={optionsFormatsTypeId} />
+                                            <FormikInput
+                                                name={`contentFormats.${index}.contentCount`}
+                                                type='number'
+                                                placeholder='Введите количество' />
+                                            <FormikSelect
+                                                name={`contentFormats.${index}.submissionFormId`}
+                                                placeholder='Type'
+                                                options={optionsFormatsSubmissionFormId} />
                                         </List.Item>
                                     ))}
                                     <Button
