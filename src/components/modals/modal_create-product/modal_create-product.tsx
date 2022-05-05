@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Select, Upload } from 'antd';
 import { Form, SubmitButton, Input as FormInput } from 'formik-antd';
@@ -28,7 +28,7 @@ const { Option } = Select;
 
 const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
 
-const ModalCreateProduct: React.FC<Props> = ({ visible, onCancel }) => {
+const ModalCreateProduct: FC<Props> = ({ visible, onCancel }) => {
     const categoryValues = useSelector(selectListCategories);
     const [testImg, setTestImg] = useState('');
     const [filter, setFilter] = useState<TCreateProductState>({

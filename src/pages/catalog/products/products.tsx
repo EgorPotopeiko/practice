@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, Typography } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
@@ -17,7 +17,7 @@ const { Title } = Typography;
 
 const { Option } = Select;
 
-const Products: React.FC = () => {
+const Products: FC = () => {
     const { isLoading, products, error } = useSelector(selectProductsStatus);
     const { page, pageSize } = useSelector(selectPageStatus);
     const totalCount = useSelector(selectTotal);

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Header from '../../components/header';
 import Menu from '../../components/menu';
 
-const AdminPanel: React.FC = () => {
+const AdminPanel: FC = () => {
     return (
         <div className="admin__panel">
             <Header />

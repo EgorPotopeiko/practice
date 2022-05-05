@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import CartItems from './cart_items';
@@ -7,7 +7,7 @@ import { USER_PATH } from '../../../routing/names';
 import CartDB from '../../../services/cart_service';
 import './cart.less';
 
-const Cart: React.FC = () => {
+const Cart: FC = () => {
     const [visible, setVisible] = useState(false);
     const [idProduct, setIdProduct]: [number | null, Dispatch<SetStateAction<null>>] = useState(null);
     useEffect(() => {

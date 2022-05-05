@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tabs } from 'antd';
 import { GetFilters } from '../../../store/filters/actions';
@@ -19,7 +19,7 @@ export type TMenuState = {
     searchNumber: string
 }
 
-const MenuUser: React.FC = () => {
+const MenuUser: FC = () => {
     const { pageSize } = useSelector(selectPageStatus);
     const userTabs = useSelector(selectListCategories);
     const { price, search } = useSelector(selectFilters);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, Select } from 'antd';
 import { selectListCategories } from '../../../../store/category/selectors';
@@ -15,7 +15,7 @@ type Props = {
 
 const { Option } = Select;
 
-const ProductsFilter: React.FC<Props> = ({ handlerFilter }) => {
+const ProductsFilter: FC<Props> = ({ handlerFilter }) => {
     const categoryValues = useSelector(selectListCategories);
     const { category, price, search } = useSelector(selectFilters);
     const dispatch = useDispatch();

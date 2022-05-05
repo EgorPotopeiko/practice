@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
@@ -17,7 +17,7 @@ type Props = {
     onCancel: () => void
 }
 
-const ModalRegistration: React.FC<Props> = ({ visible, onCancel }) => {
+const ModalRegistration: FC<Props> = ({ visible, onCancel }) => {
     const { isLoading } = useSelector(selectStateStatus);
     const [isAdmin, setIsAdmin] = useState(false);
     const dispatch = useDispatch();

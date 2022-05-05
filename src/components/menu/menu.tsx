@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserStatus } from '../../store/login/selectors';
 import './menu.less';
@@ -13,7 +13,7 @@ export type TMenuState = {
     searchNumber: string
 }
 
-const Menu: React.FC = () => {
+const Menu: FC = () => {
     const { user } = useSelector(selectUserStatus);
 
     return (

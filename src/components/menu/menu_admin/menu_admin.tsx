@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { Tabs } from 'antd';
 import AdminCategory from '../../../pages/admin_panel/admin_category';
 import OrderData from '../../../pages/admin_panel/admin_orders/admin_data';
@@ -18,7 +18,7 @@ export type TMenuState = {
     searchNumber: string
 }
 
-const MenuAdmin: React.FC = () => {
+const MenuAdmin: FC = () => {
     const [filter, setFilter] = useState<TMenuState>({
         searchArticle: '',
         searchStatus: true,

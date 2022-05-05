@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import { useFormik } from 'formik';
@@ -26,7 +26,7 @@ const { Title, Text } = Typography;
 
 const nanoid = customAlphabet('1234567890', 10);
 
-const CartOrder: React.FC<Props> = ({ visible, setVisible }) => {
+const CartOrder: FC<Props> = ({ visible, setVisible }) => {
     const cartItems = useSelector(selectCart);
     const { user } = useSelector(selectUserStatus);
     const [total, setTotal] = useState(0);

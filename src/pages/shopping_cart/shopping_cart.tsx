@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import Header from '../../components/header';
 import CartDB from '../../services/cart_service';
 import { GetCartAction } from '../../store/cart/actions';
 import Cart from './cart';
 
-const ShoppingCart: React.FC = () => {
+const ShoppingCart: FC = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         CartDB.getCart()

@@ -1,7 +1,7 @@
+import React, { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Space, Spin, Table } from 'antd';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { TProduct } from '../../../../models/product';
 import { selectUserStatus } from '../../../../store/login/selectors';
 import { GetRemovedCartAction } from '../../../../store/cart/actions';
@@ -12,7 +12,7 @@ type Props = {
     idProduct: number | undefined
 }
 
-const CartItems: React.FC<Props> = ({ idProduct }) => {
+const CartItems: FC<Props> = ({ idProduct }) => {
     const cartData: Array<TProduct> = useSelector(selectCart);
     const { user } = useSelector(selectUserStatus);
     const dispatch = useDispatch();

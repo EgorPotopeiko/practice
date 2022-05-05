@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from "react-router";
 import { useRoutes } from './routing/routes';
@@ -6,7 +6,7 @@ import { GetRefreshStartAction } from './store/login/actions';
 import { selectUserStatus } from './store/login/selectors';
 import './app.less';
 
-const App: React.FC = () => {
+const App: FC = () => {
     const { user, isAuth } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
     const routes = useRoutes(isAuth, user.role);

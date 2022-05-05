@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Popconfirm, Form, Typography, Select, InputNumber, Input, Space } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
@@ -26,7 +26,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     children: React.ReactNode
 }
 
-const EditableCell: React.FC<EditableCellProps> = ({
+const EditableCell: FC<EditableCellProps> = ({
     editing,
     dataIndex,
     title,
@@ -65,7 +65,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     );
 };
 
-const ProductsData: React.FC<Props> = ({ searchArticle }) => {
+const ProductsData: FC<Props> = ({ searchArticle }) => {
     const { products, isLoading } = useSelector(selectProductsStatus);
     const totalCount = useSelector(selectTotal);
     const [data, setData] = useState(products);

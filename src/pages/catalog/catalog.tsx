@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Header from '../../components/header';
 import Menu from '../../components/menu';
 import Products from './products';
 
-const Catalog: React.FC = () => {
+const Catalog: FC = () => {
     return (
         <div className="catalog">
             <Header />

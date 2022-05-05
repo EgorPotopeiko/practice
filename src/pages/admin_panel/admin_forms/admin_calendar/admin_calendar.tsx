@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row } from 'antd';
 import { nanoid } from 'nanoid';
@@ -77,7 +77,7 @@ const optionsFormatsSubmissionFormId = [
     }
 ]
 
-const AdminCalendar: React.FC<Props> = ({ formik }) => {
+const AdminCalendar: FC<Props> = ({ formik }) => {
     const { values } = formik;
     return (
         <div className='admin__calendar'>

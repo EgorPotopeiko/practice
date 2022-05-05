@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Input, SubmitButton } from 'formik-antd';
 import Modal from 'antd/lib/modal/Modal';
@@ -14,7 +14,7 @@ type Props = {
     onCancel: () => void
 }
 
-const ModalCreateCategory: React.FC<Props> = ({ visible, onCancel }) => {
+const ModalCreateCategory: FC<Props> = ({ visible, onCancel }) => {
     const [categoryName, setCategoryName] = useState<string>('');
     const dispatch = useDispatch();
     const addCategory = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetStatus } from '../../store/login/actions';
 import { CloseModalAction } from '../../store/modals/actions';
@@ -8,7 +8,7 @@ import ModalCreateCategory from './modal_create-category';
 import ModalCreateProduct from './modal_create-product';
 import ModalRegistration from './modal_registration';
 
-const Modals: React.FC = () => {
+const Modals: FC = () => {
     const modalParams = useSelector(selectCredentialsModal);
     const dispatch = useDispatch();
     const closeActions = () => {

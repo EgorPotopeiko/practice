@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { SearchOutlined, UserOutlined } from '@ant-design/icons';
@@ -17,7 +17,7 @@ const { Title, Text } = Typography;
 
 const { Option } = Select;
 
-const Header: React.FC = () => {
+const Header: FC = () => {
     const dispatch = useDispatch();
     const { category, price, search } = useSelector(selectFilters);
     const { user, isAuth } = useSelector(selectUserStatus);

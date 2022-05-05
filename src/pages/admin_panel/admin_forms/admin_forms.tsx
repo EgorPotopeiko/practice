@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React from 'react';
+import React, { FC } from 'react';
 import { Formik } from 'formik';
 import { Tabs } from 'antd';
 import { Form } from 'formik-antd';
@@ -16,7 +16,7 @@ import { Project } from './models';
 
 const { TabPane } = Tabs;
 
-const AdminForms: React.FC = () => {
+const AdminForms: FC = () => {
     const onSubmit = (values: Project) => {
         const finishedValues = new CreateProductDTO(values);
         console.log(finishedValues)

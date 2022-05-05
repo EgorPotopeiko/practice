@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Card, Image } from 'antd';
 import { Typography } from 'antd';
 import './error_indicator.less';
 
 const { Title } = Typography;
 
-const ErrorIndicator: React.FC = () => {
+const ErrorIndicator: FC = () => {
     return (
         <div className='error__indicator'>
             <Card title='Упс!'>

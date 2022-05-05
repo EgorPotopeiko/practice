@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Table } from 'antd';
 import Header from '../../../../components/header';
 import { TOrder } from '../../../../models/order';
 import { selectUserStatus } from '../../../../store/login/selectors';
 
-const OrdersList: React.FC = () => {
+const OrdersList: FC = () => {
     const { user } = useSelector(selectUserStatus);
     const ordersItems = JSON.parse(localStorage.getItem(`orders ${user.name}`)!);
     const columns = [

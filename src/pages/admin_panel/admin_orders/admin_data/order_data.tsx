@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import { TOrder } from '../../../../models/order';
@@ -22,7 +22,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     children: React.ReactNode;
 }
 
-const EditableCell: React.FC<EditableCellProps> = ({
+const EditableCell: FC<EditableCellProps> = ({
     editing,
     dataIndex,
     title,
@@ -63,7 +63,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     );
 };
 
-const OrderData: React.FC<Props> = ({ chooseStatus, searchNumber, searchUser }) => {
+const OrderData: FC<Props> = ({ chooseStatus, searchNumber, searchUser }) => {
     let orders: Array<TOrder> = [];
     const [data, setData] = useState(orders);
     const [editingKey, setEditingKey] = useState('');

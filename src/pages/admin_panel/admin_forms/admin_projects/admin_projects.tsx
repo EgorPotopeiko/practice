@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { Checkbox, Col, Descriptions, Row, Typography, Upload } from 'antd';
 import './admin_projects.less';
 import FormikInput from '../components/input/input';
@@ -76,7 +76,7 @@ const { Text } = Typography;
 
 const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
 
-const AdminProjects: React.FC<Props> = ({ formik }) => {
+const AdminProjects: FC<Props> = ({ formik }) => {
     const [fileList, setFileList] = useState([]);
     const { values, handleChange, setFieldValue } = formik;
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {

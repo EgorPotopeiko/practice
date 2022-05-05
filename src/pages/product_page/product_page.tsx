@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Card, Divider, Empty, Image, Spin, Typography } from 'antd';
 import { selectProduct, selectProductsStatus } from '../../store/products/selectors';
@@ -9,7 +9,7 @@ import './product_page.less';
 
 const { Title, Text } = Typography;
 
-const ProductPage: React.FC = () => {
+const ProductPage: FC = () => {
     const product: TProduct | null = useSelector(selectProduct);
     const { isLoading } = useSelector(selectProductsStatus);
     const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row } from 'antd';
 import { Form, SubmitButton } from 'formik-antd';
@@ -56,7 +56,7 @@ const optionsCoordinatorIdsName = [
     }
 ]
 
-const AdminCoordinators: React.FC<Props> = ({ formik }) => {
+const AdminCoordinators: FC<Props> = ({ formik }) => {
     const { values, handleSubmit } = formik;
     return (
         <div className='admin__coordinators'>

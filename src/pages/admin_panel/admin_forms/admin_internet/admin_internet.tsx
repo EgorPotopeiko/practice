@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { DeleteOutlined, LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row, Upload } from 'antd';
 import { FieldArray } from 'formik';
@@ -44,7 +44,7 @@ const optionsKpis = [
 
 const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } };
 
-const AdminInternet: React.FC<Props> = ({ formik }) => {
+const AdminInternet: FC<Props> = ({ formik }) => {
     const [fileList, setFileList] = useState([]);
     const { values, setFieldValue } = formik;
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {

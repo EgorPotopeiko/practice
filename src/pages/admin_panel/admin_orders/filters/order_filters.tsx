@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Input, Select } from 'antd';
 import { TMenuState } from '../../../../components/menu/menu';
 import './order_filters.less';
@@ -11,7 +11,7 @@ const statusValues = ["оплачен", "доставлен", "в пути", "о
 
 const { Option } = Select;
 
-const OrderFilters: React.FC<Props> = ({ handlerFilter }) => {
+const OrderFilters: FC<Props> = ({ handlerFilter }) => {
     return (
         <div className="order__filters">
             <Select placeholder="Статус" onChange={(status) => handlerFilter("chooseStatus")(status)}>

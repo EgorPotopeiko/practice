@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Typography } from 'antd';
@@ -19,7 +19,7 @@ type Props = {
     img: string
 }
 
-const CardTile: React.FC<Props> = ({ id, title, price }) => {
+const CardTile: FC<Props> = ({ id, title, price }) => {
     const { isAuth } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
     return (

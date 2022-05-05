@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Col, Form, List, Row, Typography } from 'antd';
@@ -10,7 +10,7 @@ import './admin_category.less';
 
 const { Title } = Typography;
 
-const AdminCategory: React.FC = () => {
+const AdminCategory: FC = () => {
     const categories = useSelector(selectListCategories);
     const dispatch = useDispatch();
     return (
