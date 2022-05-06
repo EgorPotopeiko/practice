@@ -13,6 +13,8 @@ import { TCategory } from '../../../models/category';
 import { TValues } from '../../../models/create-values';
 import createProductSchema from './schema';
 import './modal_create-product.less';
+import ProductDTO from './product_values.dto';
+import CreateProductDTO from './create_product.dto';
 
 type Props = {
     visible: boolean,
@@ -30,7 +32,6 @@ const props = { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000
 
 const ModalCreateProduct: FC<Props> = ({ visible, onCancel }) => {
     const categoryValues = useSelector(selectListCategories);
-    const [testImg, setTestImg] = useState('');
     const [filter, setFilter] = useState<TCreateProductState>({
         loading: false,
         img64: null
@@ -47,9 +48,11 @@ const ModalCreateProduct: FC<Props> = ({ visible, onCancel }) => {
         createFilter("loading")(true)
         setTimeout(() => {
             values.img = filter.img64
-            dispatch(CreateProductStartAction(values))
+            const finishedValues = new CreateProductDTO(values)
+            dispatch(CreateProductStartAction(finishedValues))
             createFilter("loading")(false)
             dispatch(CloseModalAction())
+            console.log(finishedValues)
         }, 3000)
     };
     const onChange = ({ fileList: newFileList }: { fileList: any }) => {
@@ -57,7 +60,6 @@ const ModalCreateProduct: FC<Props> = ({ visible, onCancel }) => {
         const newFile = newFileList[newFileList.length - 1];
         getBase64(newFile.originFileObj, (imageURL: string) => {
             createFilter("img64")(imageURL)
-            setTestImg(imageURL)
         })
     };
     const onPreview = async (file: any) => {
@@ -83,7 +85,7 @@ const ModalCreateProduct: FC<Props> = ({ visible, onCancel }) => {
             width={700}>
             <div className='modal__create-product'>
                 <Formik
-                    initialValues={{ title: '', price: 0, categories: [], img: testImg }}
+                    initialValues={new ProductDTO()}
                     validateOnBlur
                     validationSchema={createProductSchema}
                     onSubmit={(values) => createProduct(values)}>

@@ -10,7 +10,7 @@ import AdminInternet from './admin_internet/admin_internet';
 import AdminCoordinators from './admin_coordinators/admin_coordinators';
 import projectSchema from './schema';
 import ValuesDTO from './admin_values.dto';
-import CreateProductDTO from './create_product.dto';
+import CreateProjectDTO from './create_project.dto';
 import './admin_forms.less';
 import { Project } from './models';
 
@@ -18,7 +18,7 @@ const { TabPane } = Tabs;
 
 const AdminForms: FC = () => {
     const onSubmit = (values: Project) => {
-        const finishedValues = new CreateProductDTO(values);
+        const finishedValues = new CreateProjectDTO(values);
         console.log(finishedValues)
     }
     return (

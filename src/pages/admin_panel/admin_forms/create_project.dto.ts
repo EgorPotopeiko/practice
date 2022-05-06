@@ -1,6 +1,6 @@
 import { Project, ContentFormat, Channel, Kpi, Producer, Coordinator } from './models';
 
-export default class CreateProductDTO {
+export default class CreateProjectDTO {
     name: string;
     requestNumber: string;
     contractNumber: string;
