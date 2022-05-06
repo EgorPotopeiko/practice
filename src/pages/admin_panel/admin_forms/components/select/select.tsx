@@ -5,11 +5,11 @@ import './select.less';
 const { Option } = FormSelect;
 
 const FormikSelect = (props: any) => {
-    const { name, options, mode, ...rest } = props
+    const { name, options, mode, placeholder, required } = props
     return (
         <div className="formik__select">
-            <Form.Item name={name}>
-                <FormSelect name={name} mode={mode} {...rest}>
+            <Form.Item name={name} required={required}>
+                <FormSelect name={name} mode={mode} placeholder={placeholder}>
                     {
                         options.map((option: {
                             key: string,

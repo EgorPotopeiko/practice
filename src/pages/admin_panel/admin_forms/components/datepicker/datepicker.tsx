@@ -3,11 +3,11 @@ import { DatePicker as FormDate, Form } from "formik-antd";
 import './datepicker.less';
 
 const FormikDatePicker = (props: any) => {
-    const { name, format, ...rest } = props;
+    const { name, format, placeholder } = props;
     return (
         <div className="formik__datepicker">
             <Form.Item name={name}>
-                <FormDate name={name} format={format} {...rest} />
+                <FormDate name={name} format={format} placeholder={placeholder} />
             </Form.Item>
         </div>
     )
