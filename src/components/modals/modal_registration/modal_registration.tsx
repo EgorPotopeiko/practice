@@ -30,10 +30,10 @@ const ModalRegistration: FC<Props> = ({ visible, onCancel }) => {
         secret: null
     }
     const handlerSubmit = (values: any) => {
-        if (values.secret !== null) {
+        if (isAdmin) {
             dispatch(GetRegistrationAdminStartAction(new AdminCreateDTO(values)))
         }
-        else {
+        if (!isAdmin) {
             dispatch(GetRegistrationStartAction(new UserCreateDTO(values)))
         }
     }
