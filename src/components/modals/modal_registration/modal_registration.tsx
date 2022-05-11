@@ -2,11 +2,13 @@ import { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MailOutlined, UserOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
-import { Formik, FormikValues } from 'formik';
+import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
 import { Button, Checkbox, Spin, Typography } from 'antd';
 import { selectStateStatus } from '../../../store/login/selectors';
 import { GetRegistrationAdminStartAction, GetRegistrationStartAction } from '../../../store/login/actions';
+import AdminCreateDTO from "./admin_create.dto";
+import UserCreateDTO from './user_create.dto';
 import registrationSchema from "./schema";
 import './modal_registration.less';
 
@@ -25,11 +27,15 @@ const ModalRegistration: FC<Props> = ({ visible, onCancel }) => {
         email: '',
         password: '',
         name: '',
-        secret: ''
+        secret: null
     }
-    const handlerSubmit = (values: FormikValues) => {
-        { isAdmin && dispatch(GetRegistrationAdminStartAction(values.name, values.email, values.password, values.secret)) }
-        { !isAdmin && dispatch(GetRegistrationStartAction(values.name, values.email, values.password)) }
+    const handlerSubmit = (values: any) => {
+        if (values.secret !== null) {
+            dispatch(GetRegistrationAdminStartAction(new AdminCreateDTO(values)))
+        }
+        else {
+            dispatch(GetRegistrationStartAction(new UserCreateDTO(values)))
+        }
     }
     return (
         <>

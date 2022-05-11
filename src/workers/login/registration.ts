@@ -4,9 +4,9 @@ import { GetRegistrationSuccessAction, GetRegistrationErrorAction, GetRegistrati
 import { put } from 'redux-saga/effects';
 import AuthService from '../../services/auth_service';
 
-function* registration({ name, email, password }: ReturnType<typeof GetRegistrationStartAction>) {
+function* registration({ values }: ReturnType<typeof GetRegistrationStartAction>) {
     try {
-        const { data }: AxiosResponse = yield AuthService.registration(name, email, password);
+        const { data }: AxiosResponse = yield AuthService.registration(values.name, values.email, values.password);
         yield put(GetRegistrationSuccessAction(data));
         yield put(NotificationOpenAction('success', 'Регистрация пользователя', 'Регистрация пользователя прошла успешно'))
     }

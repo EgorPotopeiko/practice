@@ -1,3 +1,4 @@
+import { TRegistration, TRegistrationAdmin } from './../../models/registration_data';
 import { TUser } from './../../models/user';
 import { LoginActionTypes } from './action-types';
 
@@ -25,11 +26,9 @@ export const GetAuthorizationErrorAction = (error: any) => ({
     type: LoginActionTypes.LOAD_AUTHORIZATION_ERROR,
     error
 })
-export const GetRegistrationStartAction = (name: string, email: string, password: string) => ({
+export const GetRegistrationStartAction = (values: TRegistration) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_START,
-    name,
-    email,
-    password
+    values
 })
 export const GetRegistrationSuccessAction = (data: TUser) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_SUCCESS,
@@ -39,12 +38,9 @@ export const GetRegistrationErrorAction = (error: any) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_ERROR,
     error
 })
-export const GetRegistrationAdminStartAction = (name: string, email: string, password: string, secret: string) => ({
+export const GetRegistrationAdminStartAction = (values: TRegistrationAdmin) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_ADMIN_START,
-    name,
-    email,
-    password,
-    secret
+    values
 })
 export const GetRegistrationAdminSuccessAction = (data: TUser) => ({
     type: LoginActionTypes.LOAD_REGISTRATION_ADMIN_SUCCESS,

@@ -4,9 +4,9 @@ import { GetRegistrationAdminSuccessAction, GetRegistrationAdminErrorAction, Get
 import { put } from 'redux-saga/effects';
 import AuthService from '../../services/auth_service';
 
-function* registrationAdmin({ name, email, password, secret }: ReturnType<typeof GetRegistrationAdminStartAction>) {
+function* registrationAdmin({ values }: ReturnType<typeof GetRegistrationAdminStartAction>) {
     try {
-        const { data }: AxiosResponse = yield AuthService.registrationAdmin(name, email, password, secret);
+        const { data }: AxiosResponse = yield AuthService.registrationAdmin(values.name, values.email, values.password, values.secret);
         yield put(GetRegistrationAdminSuccessAction(data));
         yield put(NotificationOpenAction('success', 'Регистрация админа', 'Регистрация администратора прошла успешно'))
     }
