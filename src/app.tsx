@@ -9,11 +9,12 @@ import './app.less';
 const App: FC = () => {
     const { user, isAuth } = useSelector(selectUserStatus);
     const dispatch = useDispatch();
-    const routes = useRoutes(isAuth, user.role);
-    useEffect(() => {
-        if (localStorage.getItem('token')) dispatch(GetRefreshStartAction())
-        /* eslint-disable react-hooks/exhaustive-deps */
-    }, [])
+    const routes = useRoutes(true, "ADMIN");
+    // const routes = useRoutes(isAuth, user.role);
+    // useEffect(() => {
+    //     if (localStorage.getItem('token')) dispatch(GetRefreshStartAction())
+    //     /* eslint-disable react-hooks/exhaustive-deps */
+    // }, [])
     return (
         <div className="App">
             <Switch>

@@ -14,16 +14,17 @@ export type TMenuState = {
 }
 
 const Menu: FC = () => {
-    const { user } = useSelector(selectUserStatus);
+    // const { user } = useSelector(selectUserStatus);
 
     return (
         <div className="menu__catalog">
-            {user.role === "ADMIN" &&
+            {/* {user.role === "ADMIN" &&
                 <MenuAdmin />
             }
             {(user.role === "USER" || user.role === "GUEST") &&
                 <MenuUser />
-            }
+            } */}
+            <MenuAdmin />
         </div>
     );
 }
