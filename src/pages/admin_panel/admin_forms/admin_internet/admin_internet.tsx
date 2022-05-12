@@ -1,13 +1,13 @@
 import React, { useState, FC } from 'react';
-import { DeleteOutlined, LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, List, Row, Upload } from 'antd';
 import { FieldArray } from 'formik';
+import { Form } from 'formik-antd';
+import { Button, Descriptions, List, Row, Upload } from 'antd';
+import { DeleteOutlined, LinkOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { nanoid } from 'nanoid';
-import './admin_internet.less';
 import FormikSelect from '../components/select/select';
 import FormikInput from '../components/input/input';
-import { Form } from 'formik-antd';
 import { Channel, Kpi } from '../models';
+import './admin_internet.less';
 
 type Props = {
     formik: any

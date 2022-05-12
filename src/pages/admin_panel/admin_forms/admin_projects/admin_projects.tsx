@@ -1,12 +1,12 @@
 import React, { useState, FC } from 'react';
 import { Checkbox, Col, Descriptions, Row, Typography, Upload } from 'antd';
-import './admin_projects.less';
+import { Form } from 'formik-antd';
 import FormikInput from '../components/input/input';
 import FormikDatePicker from '../components/datepicker/datepicker';
 import FormikSelect from '../components/select/select';
 import FormikTextArea from '../components/textarea/textarea';
-import { Form } from 'formik-antd';
 import { LinkOutlined } from '@ant-design/icons';
+import './admin_projects.less';
 
 type Props = {
     formik: any

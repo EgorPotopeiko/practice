@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { Input, Select } from 'antd';
-import './order_filters.less';
-import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
 import { useSelector } from 'react-redux';
+import { Input, Select } from 'antd';
+import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
 import { GetFiltersAdmin } from '../../../../store/filters_admin/actions';
+import './order_filters.less';
 
 const statusValues = ["оплачен", "доставлен", "в пути", "оформлен"];
 

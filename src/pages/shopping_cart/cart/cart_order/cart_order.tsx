@@ -1,9 +1,9 @@
 import React, { useEffect, useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import { useFormik } from 'formik';
-import { customAlphabet } from 'nanoid';
+import { Button, Col, Divider, Drawer, Form, Input, Radio, RadioChangeEvent, Row, Typography } from 'antd';
 import MaskedInput from 'antd-mask-input';
+import { customAlphabet } from 'nanoid';
 import { selectCart } from '../../../../store/cart/selectors';
 import { selectUserStatus } from '../../../../store/login/selectors';
 import { ResetProducts } from '../../../../store/products/actions';

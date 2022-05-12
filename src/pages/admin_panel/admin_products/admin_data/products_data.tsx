@@ -6,8 +6,8 @@ import { TProduct } from '../../../../models/product';
 import { selectProductsStatus, selectTotal } from '../../../../store/products/selectors';
 import { DeleteProductAction, GetPage } from '../../../../store/products/actions';
 import { TCategory } from '../../../../models/category';
-import './products_data.less';
 import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
+import './products_data.less';
 
 const ProductsData: FC = () => {
     const { products, isLoading } = useSelector(selectProductsStatus);

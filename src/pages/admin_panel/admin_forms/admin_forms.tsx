@@ -11,8 +11,8 @@ import AdminCoordinators from './admin_coordinators/admin_coordinators';
 import projectSchema from './schema';
 import ValuesDTO from './admin_values.dto';
 import CreateProjectDTO from './create_project.dto';
-import './admin_forms.less';
 import { Project } from './models';
+import './admin_forms.less';
 
 const { TabPane } = Tabs;
 

@@ -4,11 +4,11 @@ import { Button, Input, Select } from 'antd';
 import { selectListCategories } from '../../../../store/category/selectors';
 import { OpenModalAction } from '../../../../store/modals/actions';
 import { TCategory } from '../../../../models/category';
-import './products_filters.less';
 import { selectFilters } from '../../../../store/filters/selectors';
 import { GetFilters } from '../../../../store/filters/actions';
 import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
 import { GetFiltersAdmin } from '../../../../store/filters_admin/actions';
+import './products_filters.less';
 
 const { Option } = Select;
 

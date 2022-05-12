@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { Table, Form } from 'antd';
 import { TOrder } from '../../../../models/order';
-import './order_data.less';
 import { selectFiltersAdmin } from '../../../../store/filters_admin/selectors';
-import { useSelector } from 'react-redux';
+import './order_data.less';
 
 const OrderData: FC = () => {
     const { chooseStatus, searchNumber, searchUser } = useSelector(selectFiltersAdmin);
@@ -16,15 +16,9 @@ const OrderData: FC = () => {
             orders = [...orders, ...result];
         }
     }
-    /* eslint-disable array-callback-return */
-    orders.map((order: TOrder) => {
-        order['key'] = order.id;
-        order['payment'] = `${order.payment}`;
-    })
     let filteredData = orders.filter((order: TOrder) => order.user.includes(searchUser))
     filteredData = filteredData.filter((order: TOrder) => order.id.includes(searchNumber))
     filteredData = filteredData.filter((order: TOrder) => order.status === chooseStatus)
-
     const columns = [
         {
             title: 'Номер заказа',

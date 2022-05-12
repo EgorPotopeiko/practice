@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserStatus } from '../../store/login/selectors';
-import './menu.less';
 import MenuAdmin from './menu_admin/menu_admin';
 import MenuUser from './menu_user/menu_user';
+import './menu.less';
 
 export type TMenuState = {
     searchArticle: string,

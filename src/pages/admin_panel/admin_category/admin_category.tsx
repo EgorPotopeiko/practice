@@ -6,8 +6,8 @@ import { OpenModalAction } from '../../../store/modals/actions';
 import { selectErrorCategories, selectListCategories } from '../../../store/category/selectors';
 import { DeleteCategoryAction } from '../../../store/category/actions';
 import { TCategory } from '../../../models/category';
-import './admin_category.less';
 import ErrorIndicator from '../../../components/error_indicator/error_indicator';
+import './admin_category.less';
 
 const { Title } = Typography;
 

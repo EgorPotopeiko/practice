@@ -1,8 +1,7 @@
 import React, { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { List, Typography } from 'antd';
+import { List, Typography, Select } from 'antd';
 import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons';
-import { Select } from 'antd';
 import CardList from './card_list';
 import CardTile from './card_tile';
 import { selectProductsStatus, selectTotal } from '../../../store/products/selectors';

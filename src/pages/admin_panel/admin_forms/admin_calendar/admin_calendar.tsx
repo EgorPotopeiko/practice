@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, List, Row } from 'antd';
-import { nanoid } from 'nanoid';
 import { FieldArray } from 'formik';
+import { Button, Descriptions, List, Row } from 'antd';
+import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { nanoid } from 'nanoid';
 import FormikSelect from '../components/select/select';
 import FormikRadioGroup from '../components/radiogroup/radiogroup';
 import FormikInput from '../components/input/input';

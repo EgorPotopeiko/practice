@@ -1,9 +1,9 @@
 import { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MailOutlined, UserOutlined } from '@ant-design/icons';
-import Modal from 'antd/lib/modal/Modal';
 import { Formik } from 'formik';
 import { Form, FormItem, Input as FormInput, SubmitButton } from 'formik-antd';
+import { MailOutlined, UserOutlined } from '@ant-design/icons';
+import Modal from 'antd/lib/modal/Modal';
 import { Button, Checkbox, Spin, Typography } from 'antd';
 import { selectStateStatus } from '../../../store/login/selectors';
 import { GetRegistrationAdminStartAction, GetRegistrationStartAction } from '../../../store/login/actions';

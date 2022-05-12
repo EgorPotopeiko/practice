@@ -12,9 +12,9 @@ import { CloseModalAction, OpenModalAction } from '../../../store/modals/actions
 import { TCategory } from '../../../models/category';
 import { TValues } from '../../../models/create-values';
 import createProductSchema from './schema';
-import './modal_create-product.less';
 import ProductDTO from './product_values.dto';
 import CreateProductDTO from './create_product.dto';
+import './modal_create-product.less';
 
 type Props = {
     visible: boolean,

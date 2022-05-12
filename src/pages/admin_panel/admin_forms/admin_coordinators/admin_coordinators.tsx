@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, List, Row } from 'antd';
-import { SubmitButton } from 'formik-antd';
-import { nanoid } from 'nanoid';
 import { FieldArray } from 'formik';
-import './admin_coordinators.less';
+import { SubmitButton } from 'formik-antd';
+import { Button, Descriptions, List, Row } from 'antd';
+import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { nanoid } from 'nanoid';
 import FormikSelect from '../components/select/select';
 import { Coordinator, Producer } from '../models';
+import './admin_coordinators.less';
 
 type Props = {
     formik: any
