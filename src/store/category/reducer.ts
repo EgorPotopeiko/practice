@@ -14,7 +14,7 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 export type TCategoryState = {
     listCategories: Array<any>
     error: any
-    isLoading: boolean // ошибка при типизации на TCategory
+    isLoading: boolean
 }
 
 export default function categoryReducer(state: TCategoryState = initialState, action: ActionTypes): TCategoryState {

@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 import { FieldArray } from 'formik';
 import './admin_coordinators.less';
 import FormikSelect from '../components/select/select';
+import { Coordinator, Producer } from '../models';
 
 type Props = {
     formik: any
@@ -73,7 +74,7 @@ const AdminCoordinators: FC<Props> = ({ formik }) => {
                         <FieldArray name='producerIds'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.producerIds.map((_producer: any, index: number) => (
+                                    {values.producerIds.map((_producer: Producer, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikSelect
                                                 name={`producerIds.${index}.name`}
@@ -93,7 +94,7 @@ const AdminCoordinators: FC<Props> = ({ formik }) => {
                         <FieldArray name='coordinatorIds'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.coordinatorIds.map((_coordinator: any, index: number) => (
+                                    {values.coordinatorIds.map((_coordinator: Coordinator, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikSelect
                                                 name={`coordinatorIds.${index}.name`}

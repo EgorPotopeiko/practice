@@ -7,6 +7,7 @@ import './admin_internet.less';
 import FormikSelect from '../components/select/select';
 import FormikInput from '../components/input/input';
 import { Form } from 'formik-antd';
+import { Channel, Kpi } from '../models';
 
 type Props = {
     formik: any
@@ -73,7 +74,7 @@ const AdminInternet: FC<Props> = ({ formik }) => {
                         <FieldArray name='channels'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.channels.map((_channel: any, index: number) => (
+                                    {values.channels.map((_channel: Channel, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikSelect
                                                 name={`channels.${index}.internetResourceId`}
@@ -110,7 +111,7 @@ const AdminInternet: FC<Props> = ({ formik }) => {
                         <FieldArray name='kpis'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.kpis.map((_kpi: any, index: number) => (
+                                    {values.kpis.map((_kpi: Kpi, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikInput
                                                 name={`kpis.${index}.planCount`}

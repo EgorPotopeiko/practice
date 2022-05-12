@@ -3,10 +3,11 @@ import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, List, Row } from 'antd';
 import { nanoid } from 'nanoid';
 import { FieldArray } from 'formik';
-import './admin_calendar.less';
 import FormikSelect from '../components/select/select';
 import FormikRadioGroup from '../components/radiogroup/radiogroup';
 import FormikInput from '../components/input/input';
+import { ContentFormat } from '../models';
+import './admin_calendar.less';
 
 type Props = {
     formik: any
@@ -101,7 +102,7 @@ const AdminCalendar: FC<Props> = ({ formik }) => {
                         <FieldArray name='contentFormats'>
                             {({ push, remove }) => (
                                 <List>
-                                    {values.contentFormats.map((_contentFormat: any, index: number) => (
+                                    {values.contentFormats.map((_contentFormat: ContentFormat, index: number) => (
                                         <List.Item key={index} actions={[<DeleteOutlined onClick={() => remove(index)} />]}>
                                             <FormikSelect
                                                 name={`contentFormats.${index}.typeId`}
